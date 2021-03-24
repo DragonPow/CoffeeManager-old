@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MainProject"
         mc:Ignorable="d"
-        Title="Coffee Manager" Height="450" Width="800">
+        Title="Coffee Manager" Height="450" Width="800"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes">
     <Grid>
-        
     </Grid>
 </Window>
