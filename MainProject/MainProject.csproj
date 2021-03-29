@@ -64,7 +64,8 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="ViewModel\BaseViewModel.cs" />
-    <Compile Include="ViewModel\RelayingCommand.cs" />
+    <Compile Include="RelayingCommand.cs" />
+    <Compile Include="ViewModel\LoginFormViewModel.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

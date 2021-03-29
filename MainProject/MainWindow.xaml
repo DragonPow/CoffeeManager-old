@@ -6,7 +6,15 @@
         xmlns:local="clr-namespace:MainProject"
         mc:Ignorable="d"
         Title="Coffee Manager" Height="450" Width="800"
-        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes">
-    <Grid>
-    </Grid>
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        x:Name="LoginForm">
+    <StackPanel x:Name="Grid"
+                VerticalAlignment="Center">
+        <TextBlock Text="{Binding UserName}"/>
+        <TextBlock Text="{Binding PassWord}"/>
+        <Button Content="Click"
+                Command="{Binding LoginCommand}"
+                CommandParameter="{Binding ElementName=LoginForm}"
+                />
+    </StackPanel>
 </Window>

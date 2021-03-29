@@ -8,25 +8,13 @@ using System.Threading.Tasks;
 
 namespace MainProject.ViewModel
 {
-    abstract class BaseViewModel : INotifyPropertyChanged
+    abstract public class BaseViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
-        private void NotifyPropertyChanged([CallerMemberName] string propertyName = null)
+        public void NotifyPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChangedEventHandler handler = PropertyChanged;
             handler?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
-/*        event PropertyChangedEventHandler INotifyPropertyChanged.PropertyChanged
-        {
-            add
-            {
-                throw new NotImplementedException();
-            }
-
-            remove
-            {
-                throw new NotImplementedException();
-            }
-        }*/
     }
 }
