@@ -27,5 +27,6 @@ namespace MainProject
         InitializeComponent();
             this.DataContext = LoginFormVM = new LoginFormViewModel();
         }
+
     }
 }
