@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MainProject.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,11 @@ namespace MainProject
     /// </summary>
     public partial class MainWindow : Window
     {
+        public LoginFormViewModel LoginFormVM { get; set; }
         public MainWindow()
         {
-            InitializeComponent();
+        InitializeComponent();
+            this.DataContext = LoginFormVM = new LoginFormViewModel();
         }
 
     }
