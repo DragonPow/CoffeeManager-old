@@ -1,0 +1,48 @@
+﻿<Window x:Class="MainProject.ApplicationWorkSpace.ApplicationView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d"
+        xmlns:MainWorkSpace="clr-namespace:MainProject.MainWorkSpace"
+        xmlns:AccountWorkSpace="clr-namespace:MainProject.AccountWorkSpace"
+        xmlns:HistoryWorkSpace="clr-namespace:MainProject.HistoryWorkSpace"
+        xmlns:VoucherWorkSpace="clr-namespace:MainProject.VoucherWorkSpace"
+        xmlns:StatisticWorkSpace="clr-namespace:MainProject.StatisticWorkSpace"
+        Title="Coffee Manager">
+    <Window.Resources>
+        <Style TargetType="HeaderedContentControl">
+            <Setter Property="Header">
+                <Setter.Value>
+                    <Button Content="OK" />
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    <DockPanel>
+        <TabControl Style="{StaticResource MaterialDesignNavigatilRailTabControl}"
+                    materialDesign:ColorZoneAssist.Mode="PrimaryMid">
+            <TabItem Header="{materialDesign:PackIcon Kind=Food, Size=40}"
+                     Style="{StaticResource MaterialDesignNavigationRailTabItem}">
+                <MainWorkSpace:MainView />
+            </TabItem>
+            <TabItem Header="{materialDesign:PackIcon Kind=CardAccountDetailsOutline, Size=40}"
+                     Style="{StaticResource MaterialDesignNavigationRailTabItem}">
+                <AccountWorkSpace:AccountView />
+            </TabItem>
+            <TabItem Header="{materialDesign:PackIcon Kind=ClipboardTextSearchOutline, Size=40}"
+                     Style="{StaticResource MaterialDesignNavigationRailTabItem}">
+                <HistoryWorkSpace:HistoryView />
+            </TabItem>
+            <TabItem Header="{materialDesign:PackIcon Kind=Finance, Size=40}"
+                     Style="{StaticResource MaterialDesignNavigationRailTabItem}">
+                <StatisticWorkSpace:StatisticView />
+            </TabItem>
+            <TabItem Header="{materialDesign:PackIcon Kind=GiftOutline, Size=40}"
+                     Style="{StaticResource MaterialDesignNavigationRailTabItem}">
+                <VoucherWorkSpace:VoucherView />
+            </TabItem>
+        </TabControl>
+    </DockPanel>
+</Window>

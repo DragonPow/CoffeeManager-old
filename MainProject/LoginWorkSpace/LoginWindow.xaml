@@ -11,6 +11,6 @@
     <Window.Resources>
     </Window.Resources>
     <DockPanel>
-        <LoginWorkSpace:LoginView DockPanel.Dock="Bottom" />
+        <LoginWorkSpace:LoginView/>
     </DockPanel>
 </Window>

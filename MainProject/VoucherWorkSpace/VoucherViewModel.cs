@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MainProject.MainWorkSpace
+namespace MainProject.VoucherWorkSpace
 {
-    class MainViewModel : BaseViewModel
+    class VoucherViewModel : BaseViewModel
     {
     }
 }

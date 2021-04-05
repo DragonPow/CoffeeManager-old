@@ -1,4 +1,4 @@
-﻿using MainProject.MainWorkSpace;
+﻿using MainProject.ApplicationWorkSpace;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -18,8 +18,8 @@ namespace MainProject
         {
             base.OnStartup(e);
 
-            MainWindow view = new MainWindow();
-            MainViewModel VM = new MainViewModel();
+            ApplicationView view = new ApplicationView();
+            ApplicationViewModel VM = new ApplicationViewModel();
             view.DataContext = VM;
             view.Show();
         }

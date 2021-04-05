@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MainProject.MainWorkSpace
+namespace MainProject.AccountWorkSpace
 {
-    class MainViewModel : BaseViewModel
+    class AccountViewModel : BaseViewModel
     {
     }
 }

@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MainProject.MainWorkSpace
+namespace MainProject.HistoryWorkSpace
 {
-    class MainViewModel : BaseViewModel
+    class HistoryViewModel : BaseViewModel
     {
     }
 }
