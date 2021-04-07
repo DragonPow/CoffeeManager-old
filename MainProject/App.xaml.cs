@@ -17,7 +17,6 @@ namespace MainProject
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
-
             ApplicationView view = new ApplicationView();
             ApplicationViewModel VM = new ApplicationViewModel();
             view.DataContext = VM;

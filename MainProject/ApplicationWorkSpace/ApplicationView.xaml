@@ -12,19 +12,27 @@
         xmlns:StatisticWorkSpace="clr-namespace:MainProject.StatisticWorkSpace"
         Title="Coffee Manager">
     <Window.Resources>
-        <Style TargetType="HeaderedContentControl">
-            <Setter Property="Header">
-                <Setter.Value>
-                    <Button Content="OK" />
-                </Setter.Value>
-            </Setter>
-        </Style>
+        <DataTemplate DataType="{x:Type MainWorkSpace:MainViewModel}">
+            <MainWorkSpace:MainView />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type AccountWorkSpace:AccountViewModel}">
+            <AccountWorkSpace:AccountView />
+        </DataTemplate>
     </Window.Resources>
     <DockPanel>
-        <TabControl Style="{StaticResource MaterialDesignNavigatilRailTabControl}"
+        <!--<TabControl Style="{StaticResource MaterialDesignNavigatilRailTabControl}"
                     materialDesign:ColorZoneAssist.Mode="PrimaryMid">
-            <TabItem Header="{materialDesign:PackIcon Kind=Food, Size=40}"
+            <TabItem Width="150"
                      Style="{StaticResource MaterialDesignNavigationRailTabItem}">
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal"
+                                HorizontalAlignment="Stretch"
+                                VerticalAlignment="Stretch">
+                        <ContentPresenter Content="{materialDesign:PackIcon Kind=GiftOutline, Size=40}" />
+                        <TextBlock Text="Thach"
+                                   HorizontalAlignment="Center" />
+                    </StackPanel>
+                </TabItem.Header>
                 <MainWorkSpace:MainView />
             </TabItem>
             <TabItem Header="{materialDesign:PackIcon Kind=CardAccountDetailsOutline, Size=40}"
@@ -43,6 +51,36 @@
                      Style="{StaticResource MaterialDesignNavigationRailTabItem}">
                 <VoucherWorkSpace:VoucherView />
             </TabItem>
+        </TabControl>-->
+
+
+        <TabControl ItemsSource="{Binding WorkSpaces}"
+                    Style="{StaticResource MaterialDesignNavigatilRailTabControl}"
+                    materialDesign:ColorZoneAssist.Mode="PrimaryMid">
+            <TabControl.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal"
+                                Width="Auto">
+                        <ContentPresenter Content="{Binding IconDisplay}"
+                                          Margin="10,0" />
+                        <TextBlock Text="{Binding NameWorkSpace}"
+                                   VerticalAlignment="Center"
+                                   Margin="10,0" />
+                    </StackPanel>
+                </DataTemplate>
+            </TabControl.ItemTemplate>
+            
+            <TabControl.ItemContainerStyle>
+                <Style TargetType="TabItem"
+                       BasedOn="{StaticResource MaterialDesignNavigationRailTabItem}">
+                    <Setter Property="Width"
+                            Value="200" />
+                    <Setter Property="HorizontalAlignment"
+                            Value="Left" />
+                    <Setter Property="Height"
+                            Value="{Binding Height, RelativeSource={RelativeSource Mode=Self}}" />
+                </Style>
+            </TabControl.ItemContainerStyle>
         </TabControl>
     </DockPanel>
 </Window>

@@ -23,6 +23,7 @@ namespace MainProject.AccountWorkSpace
         public AccountView()
         {
             InitializeComponent();
+            Console.WriteLine("AccountView is created");
         }
     }
 }

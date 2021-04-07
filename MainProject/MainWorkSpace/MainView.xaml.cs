@@ -23,6 +23,7 @@ namespace MainProject.MainWorkSpace
         public MainView()
         {
             InitializeComponent();
+            Console.WriteLine("MainView is created");
         }
     }
 }

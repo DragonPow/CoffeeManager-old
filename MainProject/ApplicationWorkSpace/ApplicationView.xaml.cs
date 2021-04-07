@@ -24,6 +24,5 @@ namespace MainProject.ApplicationWorkSpace
         {
             InitializeComponent();
         }
-
     }
 }
