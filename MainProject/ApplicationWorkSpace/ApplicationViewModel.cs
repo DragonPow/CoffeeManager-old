@@ -31,13 +31,14 @@ namespace MainProject.ApplicationWorkSpace
             LoginView.ShowDialog();
 
             //Add list MainWorkSpace here
-            WorkSpaces.Add(new AccountViewModel());
             WorkSpaces.Add(new MainViewModel());
+            WorkSpaces.Add(new AccountViewModel());
             WorkSpaces.Add(new HistoryViewModel());
             WorkSpaces.Add(new StatisticViewModel());
             WorkSpaces.Add(new VoucherViewModel());
+
             //Define current workspace
-            CurrentWorkSpace = WorkSpaces[0];
+            //CurrentWorkSpace = WorkSpaces[0];
         }
         #endregion //Constructors
 

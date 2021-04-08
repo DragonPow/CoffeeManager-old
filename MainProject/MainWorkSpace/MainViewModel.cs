@@ -11,7 +11,7 @@ namespace MainProject.MainWorkSpace
     class MainViewModel : BaseViewModel, IMainWorkSpace
     {
         public string NameWorkSpace => "Home";
-        private const PackIconKind _iconDisplay = PackIconKind.GiftOutline;
+        private const PackIconKind _iconDisplay = PackIconKind.Home;
         public PackIcon IconDisplay
         {
             get
