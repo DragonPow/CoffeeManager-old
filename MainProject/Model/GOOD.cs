@@ -14,10 +14,10 @@ namespace MainProject.Model
     
     public partial class GOOD
     {
-        public long ID_Goods { get; set; }
+        public long ID { get; set; }
         public string Name { get; set; }
         public Nullable<long> Amount { get; set; }
         public Nullable<long> Price { get; set; }
-        public Nullable<System.DateTime> Exprite_date { get; set; }
+        public Nullable<System.DateTime> ExpriteTime { get; set; }
     }
 }

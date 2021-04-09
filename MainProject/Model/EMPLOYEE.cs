@@ -20,9 +20,9 @@ namespace MainProject.Model
             this.BILLs = new HashSet<BILL>();
         }
     
-        public long ID_EMPLOYEE { get; set; }
-        public Nullable<System.DateTime> Date_of_Birth { get; set; }
-        public string Phone_Number { get; set; }
+        public long ID { get; set; }
+        public Nullable<System.DateTime> Birthday { get; set; }
+        public string Phone { get; set; }
         public string Position { get; set; }
         public string Name { get; set; }
     

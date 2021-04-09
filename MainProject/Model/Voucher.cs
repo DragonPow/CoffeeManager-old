@@ -12,19 +12,19 @@ namespace MainProject.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class Voucher
+    public partial class VOUCHER
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Voucher()
+        public VOUCHER()
         {
             this.BILLs = new HashSet<BILL>();
         }
     
-        public long ID_Voucher { get; set; }
+        public long ID { get; set; }
         public Nullable<long> Percent { get; set; }
-        public Nullable<System.DateTime> Expiry_date { get; set; }
-        public Nullable<System.DateTime> Begin { get; set; }
-        public Nullable<System.DateTime> End { get; set; }
+        public Nullable<System.DateTime> ExpiryTime { get; set; }
+        public Nullable<System.DateTime> BeginTime { get; set; }
+        public Nullable<System.DateTime> EndTime { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<BILL> BILLs { get; set; }

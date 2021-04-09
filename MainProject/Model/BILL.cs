@@ -17,21 +17,21 @@ namespace MainProject.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public BILL()
         {
-            this.Detail_Bill = new HashSet<Detail_Bill>();
+            this.DETAILBILLs = new HashSet<DETAILBILL>();
         }
     
-        public long ID_Bill { get; set; }
-        public Nullable<long> TOTAL { get; set; }
-        public Nullable<long> ID_EMPLOYEE { get; set; }
-        public Nullable<long> ID_CUSTOMER { get; set; }
+        public long ID { get; set; }
+        public Nullable<long> TotalPrice { get; set; }
+        public Nullable<long> ID_Employee { get; set; }
+        public Nullable<long> ID_Customer { get; set; }
         public Nullable<long> ID_Voucher { get; set; }
         public Nullable<long> ID_Table { get; set; }
     
         public virtual TABLE TABLE { get; set; }
-        public virtual Voucher Voucher { get; set; }
         public virtual CUSTOMER CUSTOMER { get; set; }
+        public virtual VOUCHER VOUCHER { get; set; }
         public virtual EMPLOYEE EMPLOYEE { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Detail_Bill> Detail_Bill { get; set; }
+        public virtual ICollection<DETAILBILL> DETAILBILLs { get; set; }
     }
 }

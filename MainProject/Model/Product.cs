@@ -12,12 +12,12 @@ namespace MainProject.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class Product
+    public partial class PRODUCT
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Product()
+        public PRODUCT()
         {
-            this.Detail_Bill = new HashSet<Detail_Bill>();
+            this.DETAILBILLs = new HashSet<DETAILBILL>();
         }
     
         public long ID { get; set; }
@@ -27,6 +27,6 @@ namespace MainProject.Model
         public Nullable<long> Price { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Detail_Bill> Detail_Bill { get; set; }
+        public virtual ICollection<DETAILBILL> DETAILBILLs { get; set; }
     }
 }

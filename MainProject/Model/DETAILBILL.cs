@@ -12,13 +12,13 @@ namespace MainProject.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class Detail_Bill
+    public partial class DETAILBILL
     {
         public long ID_Product { get; set; }
         public long ID_Bill { get; set; }
         public Nullable<long> Amount { get; set; }
     
         public virtual BILL BILL { get; set; }
-        public virtual Product Product { get; set; }
+        public virtual PRODUCT PRODUCT { get; set; }
     }
 }
