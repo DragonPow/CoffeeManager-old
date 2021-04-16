@@ -28,7 +28,7 @@ namespace MainProject.LoginWorkSpace
         {
             if (this.DataContext != null)
             {
-                ((LoginViewModel)this.DataContext).CurrentAccount.Password = ((PasswordBox)sender).Password;
+                //((LoginViewModel)this.DataContext).CurrentAccount.User = ((PasswordBox)sender).Password;
             }
         }
     }

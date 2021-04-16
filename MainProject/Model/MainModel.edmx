@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="mainModel.Store" Provider="System.Data.SQLite.EF6" ProviderManifestToken="data source=D:\Major\CoffeeManager\MainProject\bin\Debug\ProjectDatabase.db" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="mainModel.Store" Provider="System.Data.SQLite.EF6" ProviderManifestToken="data source=D:\Major\CoffeeManager\MainProject\bin\Debug\ProjectDatabase.db" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="BILL">
           <Key>
             <PropertyRef Name="ID" />
@@ -44,6 +44,7 @@
           <Property Name="Phone" Type="nvarchar" MaxLength="2147483647" />
           <Property Name="Position" Type="nvarchar" MaxLength="2147483647" />
           <Property Name="Name" Type="nvarchar" MaxLength="2147483647" />
+          <Property Name="Password" Type="varchar" MaxLength="255" />
         </EntityType>
         <EntityType Name="GOOD">
           <Key>
@@ -189,8 +190,7 @@
             <End Role="DETAILBILL" EntitySet="DETAILBILL" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="mainModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -242,6 +242,7 @@
           <Property Name="Position" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
           <Property Name="Name" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="BILLs" Relationship="Self.FK_BILL_3_0" FromRole="EMPLOYEE" ToRole="BILL" />
+          <Property Name="Password" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="GOOD">
           <Key>
@@ -431,6 +432,7 @@
           <EntitySetMapping Name="EMPLOYEEs">
             <EntityTypeMapping TypeName="mainModel.EMPLOYEE">
               <MappingFragment StoreEntitySet="EMPLOYEE">
+                <ScalarProperty Name="Password" ColumnName="Password" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Birthday" ColumnName="Birthday" />
                 <ScalarProperty Name="Phone" ColumnName="Phone" />
