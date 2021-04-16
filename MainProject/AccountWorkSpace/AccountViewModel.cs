@@ -10,8 +10,13 @@ namespace MainProject.AccountWorkSpace
 {
     class AccountViewModel : BaseViewModel, IMainWorkSpace
     {
-        public string NameWorkSpace => "Tài khoản";
+        #region Fields
         private const PackIconKind _iconDisplay = PackIconKind.CardAccountDetailsOutline;
+        #endregion //Fields
+
+
+        #region Properties
+        public string NameWorkSpace => "Tài khoản";
         public PackIcon IconDisplay
         {
             get
@@ -20,5 +25,6 @@ namespace MainProject.AccountWorkSpace
                 return p;
             }
         }
+        #endregion //Properties
     }
 }

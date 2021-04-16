@@ -1,5 +1,7 @@
-﻿using System;
+﻿using MainProject.Model;
+using System;
 using System.Collections.Generic;
+using System.Data.SQLite;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,18 +13,9 @@ namespace MainProject.LoginWorkSpace
     public class LoginViewModel : BaseViewModel
     {
         #region Fields
-        private AccountModel _currentAccount;
+        private EMPLOYEE _currentAccount;
         private ICommand _loginCommand;
         #endregion //Fiedls
-
-
-
-        #region Constructors
-        public LoginViewModel()
-        {
-        }
-        #endregion //Constructors
-
 
 
         #region Properties
@@ -37,13 +30,13 @@ namespace MainProject.LoginWorkSpace
                 return _loginCommand;
             }
         }
-        public AccountModel CurrentAccount
+        public EMPLOYEE CurrentAccount
         {
             get
             {
                 if(_currentAccount==null)
                 {
-                    _currentAccount = new AccountModel();
+                    _currentAccount = new EMPLOYEE();
                 }
                 return _currentAccount;
             }
@@ -60,14 +53,15 @@ namespace MainProject.LoginWorkSpace
 
 
         #region Helper methods
+        /// <summary>
+        /// Check CurrentAccount is existing, if true close Login View
+        /// </summary>
         private void Login()
         {
-            //
-            //#ACCESS DATABASE TO FIND ACCOUNT
-            //#If find account => login MainView, else throw error
-            //
-            Console.WriteLine("UserName: " + CurrentAccount.UserName);
-            Console.WriteLine("Password: " + CurrentAccount.Password);
+            using (var context = new mainEntities())
+            {
+                
+            }
         }
         #endregion //Helper methods
     }

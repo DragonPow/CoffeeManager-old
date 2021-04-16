@@ -18,42 +18,18 @@
         <DataTemplate DataType="{x:Type AccountWorkSpace:AccountViewModel}">
             <AccountWorkSpace:AccountView />
         </DataTemplate>
+        <DataTemplate DataType="{x:Type HistoryWorkSpace:HistoryViewModel}">
+            <HistoryWorkSpace:HistoryView />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type VoucherWorkSpace:VoucherViewModel}">
+            <VoucherWorkSpace:VoucherView />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type StatisticWorkSpace:StatisticViewModel}">
+            <StatisticWorkSpace:StatisticView />
+        </DataTemplate>
     </Window.Resources>
+    
     <DockPanel>
-        <!--<TabControl Style="{StaticResource MaterialDesignNavigatilRailTabControl}"
-                    materialDesign:ColorZoneAssist.Mode="PrimaryMid">
-            <TabItem Width="150"
-                     Style="{StaticResource MaterialDesignNavigationRailTabItem}">
-                <TabItem.Header>
-                    <StackPanel Orientation="Horizontal"
-                                HorizontalAlignment="Stretch"
-                                VerticalAlignment="Stretch">
-                        <ContentPresenter Content="{materialDesign:PackIcon Kind=GiftOutline, Size=40}" />
-                        <TextBlock Text="Thach"
-                                   HorizontalAlignment="Center" />
-                    </StackPanel>
-                </TabItem.Header>
-                <MainWorkSpace:MainView />
-            </TabItem>
-            <TabItem Header="{materialDesign:PackIcon Kind=CardAccountDetailsOutline, Size=40}"
-                     Style="{StaticResource MaterialDesignNavigationRailTabItem}">
-                <AccountWorkSpace:AccountView />
-            </TabItem>
-            <TabItem Header="{materialDesign:PackIcon Kind=ClipboardTextSearchOutline, Size=40}"
-                     Style="{StaticResource MaterialDesignNavigationRailTabItem}">
-                <HistoryWorkSpace:HistoryView />
-            </TabItem>
-            <TabItem Header="{materialDesign:PackIcon Kind=Finance, Size=40}"
-                     Style="{StaticResource MaterialDesignNavigationRailTabItem}">
-                <StatisticWorkSpace:StatisticView />
-            </TabItem>
-            <TabItem Header="{materialDesign:PackIcon Kind=GiftOutline, Size=40}"
-                     Style="{StaticResource MaterialDesignNavigationRailTabItem}">
-                <VoucherWorkSpace:VoucherView />
-            </TabItem>
-        </TabControl>-->
-
-
         <TabControl ItemsSource="{Binding WorkSpaces}"
                     Style="{StaticResource MaterialDesignNavigatilRailTabControl}"
                     materialDesign:ColorZoneAssist.Mode="PrimaryMid">
@@ -69,16 +45,16 @@
                     </StackPanel>
                 </DataTemplate>
             </TabControl.ItemTemplate>
-            
+
             <TabControl.ItemContainerStyle>
                 <Style TargetType="TabItem"
                        BasedOn="{StaticResource MaterialDesignNavigationRailTabItem}">
                     <Setter Property="Width"
-                            Value="200" />
+                            Value="Auto" />
                     <Setter Property="HorizontalAlignment"
                             Value="Left" />
                     <Setter Property="Height"
-                            Value="{Binding Height, RelativeSource={RelativeSource Mode=Self}}" />
+                            Value="Auto" />
                 </Style>
             </TabControl.ItemContainerStyle>
         </TabControl>

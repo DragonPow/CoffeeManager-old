@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MainProject.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,32 +9,18 @@ namespace MainProject.LoginWorkSpace
 {
     public class AccountModel : BaseViewModel
     {
-        private string _userName;
-        private string _password;
+        private EMPLOYEE _user;
 
-        public string UserName
+        public EMPLOYEE User
         {
-            get => _userName;
-            set
-            {
-                if (value != _userName)
-                {
-                    _userName = value;
-                    OnPropertyChanged();
-                }
-            }
+            get => _user;
+            set => _user = value;
         }
-        public string Password
+
+        public bool isLoginSuccessfull()
         {
-            get => _password;
-            set
-            {
-                if (value!=_password)
-                {
-                    _password = value;
-                    OnPropertyChanged();
-                }
-            }
+            mainEntities db = new mainEntities();
+            return db.EMPLOYEEs.Contains(User);
         }
     }
 }
