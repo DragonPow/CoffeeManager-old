@@ -91,7 +91,7 @@
                      materialDesign:HintAssist.Foreground="#00C94A"
                      materialDesign:HintAssist.Hint="Tài khoản"
                      Grid.ColumnSpan="2"
-                     Text="{Binding CurrentAccount.UserName}" />
+                     Text="" />
 
             <PasswordBox Style="{StaticResource MaterialDesignOutlinedPasswordBox}"
                          MaxWidth="400"
