@@ -111,6 +111,7 @@
       <DependentUpon>AccountView.xaml</DependentUpon>
     </Compile>
     <Compile Include="AccountWorkSpace\AccountViewModel.cs" />
+    <Compile Include="BillViewModel.cs" />
     <Compile Include="DetailPro.cs" />
     <Compile Include="HistoryWorkSpace\HistoryViewModel.cs" />
     <Compile Include="MainWorkSpace\MainView.xaml.cs">
@@ -175,6 +176,7 @@
       <DependentUpon>StatisticView.xaml</DependentUpon>
     </Compile>
     <Compile Include="StatisticWorkSpace\StatisticViewModel.cs" />
+    <Compile Include="Store.cs" />
     <Compile Include="TableViewModel.cs" />
     <Compile Include="VoucherWorkSpace\VoucherView.xaml.cs">
       <DependentUpon>VoucherView.xaml</DependentUpon>
