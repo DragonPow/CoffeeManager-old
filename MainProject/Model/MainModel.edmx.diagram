@@ -9,10 +9,10 @@
         <EntityTypeShape EntityType="mainModel.CUSTOMER" Width="1.5" PointX="0.75" PointY="1.5" IsExpanded="true" />
         <EntityTypeShape EntityType="mainModel.DETAILBILL" Width="1.5" PointX="5.25" PointY="1.5" IsExpanded="true" />
         <EntityTypeShape EntityType="mainModel.EMPLOYEE" Width="1.5" PointX="0.75" PointY="5.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="mainModel.GOOD" Width="1.5" PointX="5.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="mainModel.GOOD" Width="1.5" PointX="8.875" PointY="1.25" IsExpanded="true" />
         <EntityTypeShape EntityType="mainModel.PRODUCT" Width="1.5" PointX="3" PointY="5.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="mainModel.TABLE" Width="1.5" PointX="0.75" PointY="8.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="mainModel.VOUCHER" Width="1.5" PointX="0.75" PointY="10.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="mainModel.TABLE" Width="1.5" PointX="8.625" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="mainModel.VOUCHER" Width="1.5" PointX="5.5" PointY="5.5" IsExpanded="true" />
         <AssociationConnector Association="mainModel.FK_BILL_0_0" ManuallyRouted="false" />
         <AssociationConnector Association="mainModel.FK_BILL_1_0" ManuallyRouted="false" />
         <AssociationConnector Association="mainModel.FK_BILL_2_0" ManuallyRouted="false" />

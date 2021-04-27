@@ -270,7 +270,7 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Status" Type="Int64" />
+          <Property Name="Status" Type="Int64" Nullable="false" DefaultValue="0" />
           <Property Name="Number" Type="Int64" />
           <NavigationProperty Name="BILLs" Relationship="Self.FK_BILL_0_0" FromRole="TABLE" ToRole="BILL" />
         </EntityType>
