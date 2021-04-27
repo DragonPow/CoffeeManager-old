@@ -16,6 +16,8 @@ namespace MainProject
     {
         protected override void OnStartup(StartupEventArgs e)
         {
+            AppDomain.CurrentDomain.SetData("DataDirectory", "../../");
+
             base.OnStartup(e);
             ApplicationView view = new ApplicationView();
             ApplicationViewModel VM = new ApplicationViewModel();

@@ -90,7 +90,8 @@
                                 Foreground="White"
                                 ToolTip="Login"
                                 x:Name="btnLogin"
-                                Content="Login">
+                                Content="Login"
+                                Command="{Binding LoginCommand}">
                         </Button>
                     </StackPanel>
                 </StackPanel>
