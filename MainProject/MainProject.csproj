@@ -83,6 +83,7 @@
     <Reference Include="System.Data.SQLite.Linq, Version=1.0.113.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
       <HintPath>packages\System.Data.SQLite.Linq.1.0.113.0\lib\net46\System.Data.SQLite.Linq.dll</HintPath>
     </Reference>
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Data.SqlServerCe, Version=4.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
       <HintPath>packages\Microsoft.SqlServer.Compact.4.0.8876.1\lib\net40\System.Data.SqlServerCe.dll</HintPath>
     </Reference>
@@ -133,6 +134,30 @@
     <Compile Include="LoginWorkSpace\LoginViewModel.cs" />
     <Compile Include="ApplicationWorkSpace\ApplicationViewModel.cs" />
     <Compile Include="MainWorkSpace\MainViewModel.cs" />
+    <Compile Include="MainWorkSpace\Product\AddProd_UC.xaml.cs">
+      <DependentUpon>AddProd_UC.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MainWorkSpace\Product\Pro_UC.xaml.cs">
+      <DependentUpon>Pro_UC.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MainWorkSpace\Table\AlreadyTable_UC.xaml.cs">
+      <DependentUpon>AlreadyTable_UC.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MainWorkSpace\Table\FreeTable_UC.xaml.cs">
+      <DependentUpon>FreeTable_UC.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MainWorkSpace\Table\Plus_UC.xaml.cs">
+      <DependentUpon>Plus_UC.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MainWorkSpace\Table\SelectTableView.xaml.cs">
+      <DependentUpon>SelectTableView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MainWorkSpace\Table\TableManager.xaml.cs">
+      <DependentUpon>TableManager.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MainWorkSpace\Table\TableView.xaml.cs">
+      <DependentUpon>TableView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Model\BILL.cs">
       <DependentUpon>MainModel.tt</DependentUpon>
     </Compile>
@@ -171,6 +196,11 @@
     </Compile>
     <Compile Include="Model\VOUCHER.cs">
       <DependentUpon>MainModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="StatisticWorkSpace\StatisticView.xaml.cs">
       <DependentUpon>StatisticView.xaml</DependentUpon>
@@ -218,6 +248,38 @@
       <DependentUpon>ApplicationView.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="MainWorkSpace\Product\AddProd_UC.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MainWorkSpace\Product\Pro_UC.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MainWorkSpace\Table\AlreadyTable_UC.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MainWorkSpace\Table\FreeTable_UC.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MainWorkSpace\Table\Plus_UC.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MainWorkSpace\Table\SelectTableView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MainWorkSpace\Table\TableManager.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MainWorkSpace\Table\TableView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="StatisticWorkSpace\StatisticView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -231,21 +293,11 @@
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
     <EntityDeploy Include="Model\MainModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>MainModel.Designer.cs</LastGenOutput>
@@ -277,7 +329,12 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
   <ItemGroup>
     <Content Include="Model\MainModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -289,6 +346,16 @@
       <DependentUpon>MainModel.edmx</DependentUpon>
       <LastGenOutput>MainModel.cs</LastGenOutput>
     </Content>
+    <Resource Include="Resources\alreadyTable.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\freetable.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <None Include="Resources\Coffee shop.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+     //something wrong here
     <Resource Include="Resources\Coffee shop.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -6,12 +6,9 @@
         xmlns:LoginWorkSpace="clr-namespace:MainProject.LoginWorkSpace"
         mc:Ignorable="d"
         Title="LoginWinDow"
-        Height="600"
-        Width="800"
+        Height="480" Width="730"
         Closed="Window_Closed">
     <Window.Resources>
     </Window.Resources>
-    <DockPanel>
-        <LoginWorkSpace:LoginView/>
-    </DockPanel>
+    <LoginWorkSpace:LoginView />
 </Window>

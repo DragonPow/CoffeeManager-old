@@ -4,10 +4,10 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MainProject"
+        mc:Ignorable="d"
+         Height="480" Width="730"
         xmlns:VM="clr-namespace:MainProject.LoginWorkSpace"
         mc:Ignorable="d"
-        Height="481.492"
-        Width="732.597"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         Background="#e0e0e0"
@@ -98,5 +98,4 @@
             </StackPanel>
         </StackPanel>
     </Grid>
-
 </UserControl>
