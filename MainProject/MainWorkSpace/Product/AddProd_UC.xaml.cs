@@ -10,25 +10,19 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace MainProject.LoginWorkSpace
+namespace MainProject.MainWorkSpace.Product
 {
     /// <summary>
-    /// Interaction logic for LoginWinDow.xaml
+    /// Interaction logic for AddProd_UC.xaml
     /// </summary>
-    public partial class LoginWinDow : Window
+    public partial class AddProd_UC : UserControl
     {
-        public LoginWinDow()
+        public AddProd_UC()
         {
             InitializeComponent();
         }
-
-        private void Window_Closed(object sender, EventArgs e)
-        {
-            Application.Current.Shutdown();
-        }
-
-    
     }
 }

@@ -10,25 +10,19 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace MainProject.LoginWorkSpace
+namespace MainProject.MainWorkSpace.Table
 {
     /// <summary>
-    /// Interaction logic for LoginWinDow.xaml
+    /// Interaction logic for FreeTable_UC.xaml
     /// </summary>
-    public partial class LoginWinDow : Window
+    public partial class FreeTable_UC : UserControl
     {
-        public LoginWinDow()
+        public FreeTable_UC()
         {
             InitializeComponent();
         }
-
-        private void Window_Closed(object sender, EventArgs e)
-        {
-            Application.Current.Shutdown();
-        }
-
-    
     }
 }
