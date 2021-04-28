@@ -17,11 +17,12 @@ namespace MainProject.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public TABLE()
         {
+            this.Status = 0;
             this.BILLs = new HashSet<BILL>();
         }
     
         public long ID { get; set; }
-        public Nullable<long> Status { get; set; }
+        public long Status { get; set; }
         public Nullable<long> Number { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
