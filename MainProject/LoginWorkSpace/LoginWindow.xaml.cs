@@ -28,7 +28,5 @@ namespace MainProject.LoginWorkSpace
         {
             Application.Current.Shutdown();
         }
-
-    
     }
 }
