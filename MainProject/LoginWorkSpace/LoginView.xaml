@@ -4,7 +4,6 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MainProject"
-        mc:Ignorable="d"
          Height="480" Width="730"
         xmlns:VM="clr-namespace:MainProject.LoginWorkSpace"
         mc:Ignorable="d"
@@ -39,14 +38,12 @@
         </Border>
         <StackPanel Orientation="Horizontal"
                     Grid.ColumnSpan="2">
-            <StackPanel Width="350">
-                <Image Source="/Resources/Coffee shop.jpg"
+            <Image Source="/Resources/Coffee shop.jpg"
                        Width="300"
                        Height="300"
                        VerticalAlignment="Top"
                        Margin="30,40,20,30"
                        Stretch="Fill" />
-            </StackPanel>
             <StackPanel Width="350">
                 <StackPanel Margin="20 50">
                     <TextBlock Text="Đăng nhập"

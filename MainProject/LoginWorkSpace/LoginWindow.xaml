@@ -8,7 +8,5 @@
         Title="LoginWinDow"
         Height="480" Width="730"
         Closed="Window_Closed">
-    <Window.Resources>
-    </Window.Resources>
-    <LoginWorkSpace:LoginView />
+    <LoginWorkSpace:LoginView/>
 </Window>
