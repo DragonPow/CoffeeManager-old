@@ -126,6 +126,14 @@ namespace MainProject
             ListPro.Add(pro);
         }
 
+        public void removeDetailPro(long id)
+        {
+            for (int i = ListPro.Count - 1; i > -1; i--)
+            {
+                if (ListPro[i].Pro.ID == id) { ListPro.RemoveAt(i); }
+            }
+        }
+
         #endregion
 
     }
