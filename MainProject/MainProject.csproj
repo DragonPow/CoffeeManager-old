@@ -197,6 +197,8 @@
     <Compile Include="Model\VOUCHER.cs">
       <DependentUpon>MainModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="ProductWorkSpace\ProductMenuViewModel.cs" />
+    <Compile Include="ProductWorkSpace\ProductViewModel.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -306,6 +308,7 @@
       <DependentUpon>MainModel.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
+    <None Include="ProjectDatabase.db" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
