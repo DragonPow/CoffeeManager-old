@@ -17,15 +17,19 @@ namespace MainProject.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public PRODUCT()
         {
+            this.BILLs = new HashSet<BILL>();
             this.DETAILBILLs = new HashSet<DETAILBILL>();
         }
     
         public long ID { get; set; }
-        public string Name { get; set; }
-        public string Detail { get; set; }
-        public string Image { get; set; }
-        public Nullable<long> Price { get; set; }
+        public string NAME { get; set; }
+        public string DETAIL { get; set; }
+        public string IMAGE { get; set; }
+        public Nullable<long> PRICE { get; set; }
+        public string TYPE { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<BILL> BILLs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DETAILBILL> DETAILBILLs { get; set; }
     }
