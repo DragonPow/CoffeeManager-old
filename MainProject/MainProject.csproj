@@ -206,6 +206,8 @@
     <Compile Include="Model\VOUCHER.cs">
       <DependentUpon>MainModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="ProductWorkSpace\ProductMenuViewModel.cs" />
+    <Compile Include="ProductWorkSpace\ProductViewModel.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -323,6 +325,7 @@
       <DependentUpon>MainModel.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
+    <None Include="ProjectDatabase.db" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -367,18 +370,12 @@
     <Resource Include="Resources\alreadyTable.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
-<<<<<<< Updated upstream
     <Resource Include="Resources\freetable.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
-    <None Include="Resources\Coffee shop.jpg">
-=======
     <Resource Include="Resources\Coffee shop.jpg">
->>>>>>> Stashed changes
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-     //something wrong here
-    <Resource Include="Resources\Coffee shop.jpg" />
+    </Resource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="packages\MaterialDesignThemes.4.0.0\build\MaterialDesignThemes.targets" Condition="Exists('packages\MaterialDesignThemes.4.0.0\build\MaterialDesignThemes.targets')" />
