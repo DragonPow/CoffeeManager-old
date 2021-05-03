@@ -8,21 +8,19 @@
              d:DesignHeight="480" d:DesignWidth="600">
     <Grid>
         <Grid.RowDefinitions>
-                <RowDefinition Height="120" />
-                <RowDefinitioc:\users\admin\desktop\cnpm\coffeemanager\mainproject\mainworkspace\product\prodview.xaml
-c:\users\admin\desktop\cnpm\coffeemanager\mainproject\mainworkspace\product\prodview.xaml.cs
-n Height="120" />
-                <RowDefinition Height="120" />
-                <RowDefinition Height="120" />
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="120" />
-                <ColumnDefinition Width="120" />
-                <ColumnDefinition Width="120" />
-                <ColumnDefinition Width="120" />
-                     <ColumnDefinition Width="120" />
+            <RowDefinition Height="120" />
+            <RowDefinition Height="120" />
+            <RowDefinition Height="120" />
+            <RowDefinition Height="120" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="120" />
+            <ColumnDefinition Width="120" />
+            <ColumnDefinition Width="120" />
+            <ColumnDefinition Width="120" />
+            <ColumnDefinition Width="120" />
         </Grid.ColumnDefinitions>
-        <local:Pro_UC Grid.Row="0" Grid.Column="0" Margin="5" ></local:Pro_UC>
+        <local:Pro_UC Grid.Row="0" Grid.Column="0" Margin="5"></local:Pro_UC>
         <local:AddProd_UC Grid.Column="1" Grid.Row="0" Margin="5"></local:AddProd_UC>
-        </Grid>
+    </Grid>
 </UserControl>
