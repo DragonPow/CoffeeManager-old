@@ -13,17 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace MainProject.MainWorkSpace.Table
+namespace MainProject.MainWorkSpace.Bill
 {
     /// <summary>
-    /// Interaction logic for SelectTableView.xaml
+    /// Interaction logic for BillDetail_UC.xaml
     /// </summary>
-    public partial class SelectTableView : UserControl
+    public partial class BillDetail_UC : UserControl
     {
-        public SelectTableView()
+        public BillDetail_UC()
         {
             InitializeComponent();
         }
-
     }
 }
