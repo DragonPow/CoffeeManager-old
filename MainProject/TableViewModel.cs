@@ -68,7 +68,7 @@ namespace MainProject
         public TableViewModel(int Number)
         {
             Table = new TABLE();
-            Table.Number = Number;
+            Table.NUMBER = Number;
             Total = 0;
             ListPro = new List<DetailPro>();
         }
@@ -104,7 +104,7 @@ namespace MainProject
         public long getTotal()
         {
             foreach (DetailPro p in ListPro)
-                Total += (long)p.Pro.Price * p.Quantity;
+                Total += (long)p.Pro.PRICE * p.Quantity;
             return Total;
         }
 

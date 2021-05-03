@@ -42,7 +42,7 @@ namespace MainProject.ProductWorkSpace
         public ICommand CommandSearch;
         public void Search(string keyword)
         {
-            List<ProductViewModel> rs = listProductVM.Where(prodVM => prodVM.Product.Name.Contains(keyword)).ToList();
+            List<ProductViewModel> rs = listProductVM.Where(prodVM => prodVM.Product.NAME.Contains(keyword)).ToList();
             this.ListProductVM = rs;
         }
 

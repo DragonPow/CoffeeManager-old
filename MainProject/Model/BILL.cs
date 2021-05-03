@@ -14,24 +14,18 @@ namespace MainProject.Model
     
     public partial class BILL
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public BILL()
-        {
-            this.DETAILBILLs = new HashSet<DETAILBILL>();
-        }
-    
         public long ID { get; set; }
         public Nullable<long> TotalPrice { get; set; }
-        public Nullable<long> ID_Employee { get; set; }
-        public Nullable<long> ID_Customer { get; set; }
-        public Nullable<long> ID_Voucher { get; set; }
-        public Nullable<long> ID_Table { get; set; }
+        public Nullable<long> ID_EMPLOYEE { get; set; }
+        public Nullable<long> ID_CUSTOMER { get; set; }
+        public Nullable<long> ID_PRODUCT { get; set; }
+        public Nullable<long> ID_TABLES { get; set; }
+        public Nullable<long> ID_VOUCHER { get; set; }
     
-        public virtual TABLE TABLE { get; set; }
-        public virtual CUSTOMER CUSTOMER { get; set; }
         public virtual VOUCHER VOUCHER { get; set; }
+        public virtual TABLE TABLE { get; set; }
+        public virtual PRODUCT PRODUCT { get; set; }
+        public virtual CUSTOMER CUSTOMER { get; set; }
         public virtual EMPLOYEE EMPLOYEE { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<DETAILBILL> DETAILBILLs { get; set; }
     }
 }
