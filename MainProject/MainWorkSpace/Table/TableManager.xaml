@@ -9,16 +9,59 @@
              mc:Ignorable="d" 
              d:DesignHeight="630" d:DesignWidth="900" Background="White">
     <Grid>
-
+        <Grid Height="45" VerticalAlignment="Top" Background="{DynamicResource MainColor}">
+            <Border BorderThickness="1" BorderBrush="#9393A1"></Border>
+            <Button
+                 Style="{StaticResource MaterialDesignFloatingActionMiniButton}"
+                 HorizontalAlignment="Left"
+                 Margin="10,0,0,0"
+                 Background="Transparent"
+                 BorderBrush="Transparent"
+                 ToolTip="MaterialDesignFloatingActionMiniButton">
+                <materialDesign:PackIcon
+                    Kind="ArrowLeft"
+                    Height="35"
+                    Width="35" />    
+            </Button>
+            <TextBlock
+             Style="{StaticResource MaterialDesignHeadline6TextBlock}"
+             Text="Quản lý bàn" FontSize="26" Foreground="White" Margin="380,0,0,0"/>
+            <Button
+                Height="40" Width="80" BorderBrush="Transparent"
+                Style="{StaticResource MaterialDesignOutlinedButton}"
+                ToolTip="MaterialDesignOutlinedButton" 
+                Content="SỬA" FontSize="20" Foreground="#E6FFED" Margin="780,0,0,0"  Visibility="Visible"/>
+            <Button Height="40" Width="80" BorderBrush="Transparent" 
+                Style="{StaticResource MaterialDesignOutlinedButton}"
+                ToolTip="MaterialDesignOutlinedButton"
+                Content="LƯU" FontSize="20" Background="#E6FFED" Foreground="#2BC48A" Margin="780,0,0,0" Visibility="Hidden"/>
+        </Grid>
         <ComboBox
             x:Name="OutlinedComboBox"
             Style="{StaticResource MaterialDesignOutlinedComboBox}"
-            IsEnabled="{Binding IsChecked, ElementName=OutlinedComboBoxEnabledCheckBox}"
             materialDesign:HintAssist.Hint="Tên khu vực"
             FontSize="18"
+            Foreground="#9393A1"
+            BorderBrush="#737373"
             ItemsSource="{Binding ShortStringList}"
             Width="700" Margin="30,70,170,500" />
-        <local:Plus_UC Height="60" Width="95" Margin="770,70,30,500" />
-        <local:TableView Height="480" Width="840" Margin="30,150"/>
+        <local:Plus_UC Height="61" Width="95" Margin="770,70,30,500" Visibility="Visible" />
+        <Grid  Margin="30,150,0,0">
+            <Canvas >
+                <local:TableView Height="480" Width="840"  BorderBrush="#9393A1" BorderThickness="2"/>
+                <Button
+                Background="{DynamicResource MainColor}"
+                BorderBrush="{DynamicResource MainColor}"
+                Visibility="Visible"
+                Style="{StaticResource MaterialDesignFloatingActionButton}"
+                ToolTip="MaterialDesignFloatingActionButton" Canvas.Left="760" Canvas.Top="400"   >
+                    <materialDesign:PackIcon
+                    Kind="Plus"
+                    Height="30"
+                    Width="30" 
+                    Foreground="White"/>
+                </Button>
+            </Canvas>
+        </Grid>
     </Grid>
 </UserControl>

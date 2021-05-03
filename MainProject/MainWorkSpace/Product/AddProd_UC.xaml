@@ -6,10 +6,10 @@
              xmlns:local="clr-namespace:MainProject.MainWorkSpace.Product"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
-             d:DesignHeight="90" d:DesignWidth="120"
+             d:DesignHeight="110" d:DesignWidth="110"
              BorderThickness="2"
              BorderBrush="Gray">
     <Grid>
-        <materialDesign:PackIcon Kind="Plus" Width="60" Height="60" Foreground="Gray"  Margin="30,15"></materialDesign:PackIcon>
+        <materialDesign:PackIcon Kind="Plus" Width="60" Height="60" Foreground="Gray"  VerticalAlignment="Center" HorizontalAlignment="Center"></materialDesign:PackIcon>
     </Grid>
 </UserControl>

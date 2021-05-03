@@ -48,7 +48,7 @@
                 <StackPanel Margin="20 50">
                     <TextBlock Text="Đăng nhập"
                                Margin="20"
-                               Foreground="#30BF7C"
+                               Foreground="#2BC48A"
                                TextAlignment="Center"
                                FontSize="38"></TextBlock>
                     <StackPanel Orientation="Horizontal"
@@ -75,21 +75,23 @@
                                      Width="250"
                                      materialDesign:TextFieldAssist.UnderlineBrush="#30BF7C" />
                     </StackPanel>
-                    <StackPanel Margin="10 30"
+                    <TextBlock
+                         Style="{StaticResource MaterialDesignCaptionTextBlock}"
+                         Text="Quên mật khẩu?" FontSize="14" Foreground="#009E77" FontStyle="Oblique" Margin="200,0,0,0"/>    
+                    <StackPanel Margin="15"
                                 HorizontalAlignment="Center">
                         <Button Width="100"
                                 Height="40"
                                 Style="{StaticResource MaterialDesignRaisedButton}"
                                 materialDesign:ButtonAssist.CornerRadius="10"
                                 BorderThickness="2"
-                                BorderBrush="#30BF7C"
-                                Background="#30BF7C"
+                                BorderBrush="#2BC48A"
+                                Background="#2BC48A"
                                 Foreground="White"
                                 ToolTip="Login"
                                 x:Name="btnLogin"
                                 Content="Login"
-                                Command="{Binding LoginCommand}">
-                        </Button>
+                                Command="{Binding LoginCommand}"/>
                     </StackPanel>
                 </StackPanel>
             </StackPanel>

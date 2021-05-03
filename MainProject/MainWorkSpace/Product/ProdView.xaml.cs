@@ -13,17 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace MainProject.MainWorkSpace.Table
+namespace MainProject.MainWorkSpace.Product
 {
     /// <summary>
-    /// Interaction logic for SelectTableView.xaml
+    /// Interaction logic for ProdView.xaml
     /// </summary>
-    public partial class SelectTableView : UserControl
+    public partial class ProdView : UserControl
     {
-        public SelectTableView()
+        public ProdView()
         {
             InitializeComponent();
         }
-
     }
 }

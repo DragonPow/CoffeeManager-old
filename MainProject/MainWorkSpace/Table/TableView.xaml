@@ -23,6 +23,6 @@
             <ColumnDefinition Width="140" />
         </Grid.ColumnDefinitions>
         <local:FreeTable_UC Grid.Column="0" Grid.Row="0" Margin="20,10"></local:FreeTable_UC>
-        <local:FreeTable_UC Grid.Column="1" Grid.Row="0" Margin="20,10"></local:FreeTable_UC>
+       
     </Grid>
 </UserControl>

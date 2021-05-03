@@ -5,11 +5,12 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:MainProject.MainWorkSpace.Product"
              mc:Ignorable="d" 
-             d:DesignHeight="120" d:DesignWidth="150">
+             d:DesignHeight="110" d:DesignWidth="110">
     <Grid>
+        <Border BorderThickness="2" BorderBrush="Gray"></Border>
         <Canvas >
-            <Image Source="C:\Users\Admin\Downloads\coffee.jpg" Stretch="Fill" Height="120" Width="150"/>
-            <TextBlock TextWrapping="Wrap" Height="35" Width="150" FontSize="18"   Canvas.Bottom="0" Text="Cà phê đen" Cursor="None" FontFamily="Tahoma" TextAlignment="Center"  >
+            <Image Source="C:\Users\Admin\Downloads\coffee.jpg" Stretch="Fill" Height="100" Width="110"/>
+            <TextBlock TextWrapping="Wrap" Height="30" Width="110" FontSize="16"   Canvas.Bottom="0" Text="Cà phê đen" Cursor="None" FontFamily="Tahoma" TextAlignment="Center"  >
                 <TextBlock.Background>
                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                         <GradientStop Color="Transparent" Offset="0"/>

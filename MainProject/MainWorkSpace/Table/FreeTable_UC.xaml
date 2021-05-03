@@ -8,6 +8,6 @@
              d:DesignHeight="100" d:DesignWidth="100">
     <Canvas>
         <Image Source="/Resources/freetable.png" Height="80" Width="80" Margin="10,10"></Image>
-        <TextBlock Text="001" FontSize="18" Foreground="#4BAD3D" Canvas.Left="36" Canvas.Top="37" TextAlignment="Center"  />
+        <TextBlock Text="001" FontSize="18" FontWeight="Light" Foreground="{DynamicResource MainColor}" Canvas.Left="38" Canvas.Top="37" TextAlignment="Center"  />
     </Canvas>
 </UserControl>

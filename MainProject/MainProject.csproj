@@ -54,6 +54,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Dragablz, Version=0.0.3.223, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\Dragablz.0.0.3.223\lib\net45\Dragablz.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>packages\EntityFramework.6.4.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -115,6 +118,9 @@
     <Compile Include="BillViewModel.cs" />
     <Compile Include="DetailPro.cs" />
     <Compile Include="HistoryWorkSpace\HistoryViewModel.cs" />
+    <Compile Include="MainWorkSpace\Bill\BillDetail_UC.xaml.cs">
+      <DependentUpon>BillDetail_UC.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MainWorkSpace\MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>
     </Compile>
@@ -136,6 +142,9 @@
     <Compile Include="MainWorkSpace\MainViewModel.cs" />
     <Compile Include="MainWorkSpace\Product\AddProd_UC.xaml.cs">
       <DependentUpon>AddProd_UC.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MainWorkSpace\Product\ProdView.xaml.cs">
+      <DependentUpon>ProdView.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainWorkSpace\Product\Pro_UC.xaml.cs">
       <DependentUpon>Pro_UC.xaml</DependentUpon>
@@ -222,6 +231,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="MainWorkSpace\Bill\BillDetail_UC.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWorkSpace\MainView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -251,6 +264,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="MainWorkSpace\Product\AddProd_UC.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MainWorkSpace\Product\ProdView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -349,6 +366,7 @@
       <DependentUpon>MainModel.edmx</DependentUpon>
       <LastGenOutput>MainModel.cs</LastGenOutput>
     </Content>
+    <Resource Include="Resources\freetable.png" />
     <Resource Include="Resources\alreadyTable.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
