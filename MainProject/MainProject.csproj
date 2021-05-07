@@ -134,7 +134,6 @@
     <Compile Include="LoginWorkSpace\LoginWindow.xaml.cs">
       <DependentUpon>LoginWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="LoginWorkSpace\AccountModel.cs" />
     <Compile Include="HelperClass\BaseViewModel.cs" />
     <Compile Include="HelperClass\RelayingCommand.cs" />
     <Compile Include="LoginWorkSpace\LoginViewModel.cs" />
