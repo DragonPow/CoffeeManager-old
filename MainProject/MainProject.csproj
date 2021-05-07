@@ -121,6 +121,9 @@
     <Compile Include="MainWorkSpace\Bill\BillDetail_UC.xaml.cs">
       <DependentUpon>BillDetail_UC.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MainWorkSpace\Bill\BillView.xaml.cs">
+      <DependentUpon>BillView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MainWorkSpace\MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>
     </Compile>
@@ -236,6 +239,10 @@
     <Page Include="MainWorkSpace\Bill\BillDetail_UC.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MainWorkSpace\Bill\BillView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="MainWorkSpace\MainView.xaml">
       <SubType>Designer</SubType>
