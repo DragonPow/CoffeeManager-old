@@ -27,6 +27,7 @@ namespace MainProject.Model
         public string IMAGE { get; set; }
         public Nullable<long> PRICE { get; set; }
         public string TYPE { get; set; }
+        public Nullable<int> DELETED { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<BILL> BILLs { get; set; }

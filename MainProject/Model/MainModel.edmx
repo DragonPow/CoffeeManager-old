@@ -26,6 +26,7 @@
           <Property Name="BIRTHDAY" Type="datetime" />
           <Property Name="PHONE" Type="nvarchar" MaxLength="2147483647" Nullable="false" />
           <Property Name="POINT_ACCUMULATION" Type="int" />
+          <Property Name="DELETED" Type="int" />
         </EntityType>
         <EntityType Name="DETAILBILL">
           <Key>
@@ -46,6 +47,7 @@
           <Property Name="Position" Type="nvarchar" MaxLength="2147483647" />
           <Property Name="Name" Type="nvarchar" MaxLength="2147483647" />
           <Property Name="Password" Type="varchar" MaxLength="255" />
+          <Property Name="DELETED" Type="int" />
         </EntityType>
         <EntityType Name="GOOD">
           <Key>
@@ -67,6 +69,7 @@
           <Property Name="IMAGE" Type="nvarchar" MaxLength="2147483647" />
           <Property Name="PRICE" Type="integer" />
           <Property Name="TYPE" Type="nvarchar" MaxLength="2147483647" />
+          <Property Name="DELETED" Type="int" />
         </EntityType>
         <EntityType Name="REGULATION">
           <Key>
@@ -84,6 +87,7 @@
           <Property Name="FLOORS" Type="int" />
           <Property Name="STATUS" Type="int" />
           <Property Name="NUMBER" Type="int" />
+          <Property Name="DELETED" Type="int" />
         </EntityType>
         <EntityType Name="VOUCHER">
           <Key>
@@ -93,6 +97,7 @@
           <Property Name="PERCENT" Type="int" />
           <Property Name="BEGINTIME" Type="datetime" />
           <Property Name="ENDTIME" Type="datetime" />
+          <Property Name="DELETED" Type="int" />
         </EntityType>
         <Association Name="FK_BILL_0_0">
           <End Role="VOUCHER" Type="Self.VOUCHER" Multiplicity="0..1" />
@@ -267,6 +272,7 @@
           <Property Name="PHONE" Type="String" Nullable="false" MaxLength="2147483647" FixedLength="false" Unicode="true" />
           <Property Name="POINT_ACCUMULATION" Type="Int32" />
           <NavigationProperty Name="BILLs" Relationship="mainModel.FK_BILL_3_0" FromRole="CUSTOMER" ToRole="BILL" />
+          <Property Name="DELETED" Type="Int32" />
         </EntityType>
         <EntityType Name="DETAILBILL">
           <Key>
@@ -289,6 +295,7 @@
           <Property Name="Name" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
           <Property Name="Password" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="BILLs" Relationship="mainModel.FK_BILL_4_0" FromRole="EMPLOYEE" ToRole="BILL" />
+          <Property Name="DELETED" Type="Int32" />
         </EntityType>
         <EntityType Name="GOOD">
           <Key>
@@ -312,6 +319,7 @@
           <Property Name="TYPE" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="BILLs" Relationship="mainModel.FK_BILL_2_0" FromRole="PRODUCT" ToRole="BILL" />
           <NavigationProperty Name="DETAILBILLs" Relationship="mainModel.FK_DETAILBILL_1_0" FromRole="PRODUCT" ToRole="DETAILBILL" />
+          <Property Name="DELETED" Type="Int32" />
         </EntityType>
         <EntityType Name="REGULATION">
           <Key>
@@ -330,6 +338,7 @@
           <Property Name="STATUS" Type="Int32" />
           <Property Name="NUMBER" Type="Int32" />
           <NavigationProperty Name="BILLs" Relationship="mainModel.FK_BILL_1_0" FromRole="TABLE" ToRole="BILL" />
+          <Property Name="DELETED" Type="Int32" />
         </EntityType>
         <EntityType Name="VOUCHER">
           <Key>
@@ -340,6 +349,7 @@
           <Property Name="BEGINTIME" Type="DateTime" />
           <Property Name="ENDTIME" Type="DateTime" />
           <NavigationProperty Name="BILLs" Relationship="mainModel.FK_BILL_0_0" FromRole="VOUCHER" ToRole="BILL" />
+          <Property Name="DELETED" Type="Int32" />
         </EntityType>
         <Association Name="FK_BILL_0_0">
           <End Type="mainModel.VOUCHER" Role="VOUCHER" Multiplicity="0..1" />
@@ -435,6 +445,7 @@
           <EntitySetMapping Name="CUSTOMERs">
             <EntityTypeMapping TypeName="mainModel.CUSTOMER">
               <MappingFragment StoreEntitySet="CUSTOMER">
+                <ScalarProperty Name="DELETED" ColumnName="DELETED" />
                 <ScalarProperty Name="POINT_ACCUMULATION" ColumnName="POINT_ACCUMULATION" />
                 <ScalarProperty Name="PHONE" ColumnName="PHONE" />
                 <ScalarProperty Name="BIRTHDAY" ColumnName="BIRTHDAY" />
@@ -455,6 +466,7 @@
           <EntitySetMapping Name="EMPLOYEEs">
             <EntityTypeMapping TypeName="mainModel.EMPLOYEE">
               <MappingFragment StoreEntitySet="EMPLOYEE">
+                <ScalarProperty Name="DELETED" ColumnName="DELETED" />
                 <ScalarProperty Name="Password" ColumnName="Password" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Position" ColumnName="Position" />
@@ -478,6 +490,7 @@
           <EntitySetMapping Name="PRODUCTs">
             <EntityTypeMapping TypeName="mainModel.PRODUCT">
               <MappingFragment StoreEntitySet="PRODUCT">
+                <ScalarProperty Name="DELETED" ColumnName="DELETED" />
                 <ScalarProperty Name="TYPE" ColumnName="TYPE" />
                 <ScalarProperty Name="PRICE" ColumnName="PRICE" />
                 <ScalarProperty Name="IMAGE" ColumnName="IMAGE" />
@@ -499,6 +512,7 @@
           <EntitySetMapping Name="TABLES">
             <EntityTypeMapping TypeName="mainModel.TABLE">
               <MappingFragment StoreEntitySet="TABLES">
+                <ScalarProperty Name="DELETED" ColumnName="DELETED" />
                 <ScalarProperty Name="NUMBER" ColumnName="NUMBER" />
                 <ScalarProperty Name="STATUS" ColumnName="STATUS" />
                 <ScalarProperty Name="FLOORS" ColumnName="FLOORS" />
@@ -509,6 +523,7 @@
           <EntitySetMapping Name="VOUCHERs">
             <EntityTypeMapping TypeName="mainModel.VOUCHER">
               <MappingFragment StoreEntitySet="VOUCHER">
+                <ScalarProperty Name="DELETED" ColumnName="DELETED" />
                 <ScalarProperty Name="ENDTIME" ColumnName="ENDTIME" />
                 <ScalarProperty Name="BEGINTIME" ColumnName="BEGINTIME" />
                 <ScalarProperty Name="PERCENT" ColumnName="PERCENT" />

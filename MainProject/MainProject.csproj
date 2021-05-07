@@ -115,7 +115,7 @@
       <DependentUpon>AccountView.xaml</DependentUpon>
     </Compile>
     <Compile Include="AccountWorkSpace\AccountViewModel.cs" />
-    <Compile Include="BillViewModel.cs" />
+    <Compile Include="DatabaseController\DatabaseController.cs" />
     <Compile Include="DetailPro.cs" />
     <Compile Include="HistoryWorkSpace\HistoryViewModel.cs" />
     <Compile Include="MainWorkSpace\Bill\BillDetail_UC.xaml.cs">
@@ -169,6 +169,7 @@
     <Compile Include="Model\BILL.cs">
       <DependentUpon>MainModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\Bill\BillViewModel.cs" />
     <Compile Include="Model\CUSTOMER.cs">
       <DependentUpon>MainModel.tt</DependentUpon>
     </Compile>
@@ -205,6 +206,8 @@
     <Compile Include="Model\TABLE.cs">
       <DependentUpon>MainModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\Table\TableListViewModel.cs" />
+    <Compile Include="Model\Table\TableViewModel.cs" />
     <Compile Include="Model\VOUCHER.cs">
       <DependentUpon>MainModel.tt</DependentUpon>
     </Compile>
@@ -220,7 +223,6 @@
     </Compile>
     <Compile Include="StatisticWorkSpace\StatisticViewModel.cs" />
     <Compile Include="Store.cs" />
-    <Compile Include="TableViewModel.cs" />
     <Compile Include="VoucherWorkSpace\VoucherView.xaml.cs">
       <DependentUpon>VoucherView.xaml</DependentUpon>
     </Compile>
@@ -368,7 +370,6 @@
       <DependentUpon>MainModel.edmx</DependentUpon>
       <LastGenOutput>MainModel.cs</LastGenOutput>
     </Content>
-    <Resource Include="Resources\freetable.png" />
     <Resource Include="Resources\alreadyTable.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
