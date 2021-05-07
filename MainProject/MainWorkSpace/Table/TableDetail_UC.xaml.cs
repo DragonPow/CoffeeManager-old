@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace MainProject.MainWorkSpace.Bill
+namespace MainProject.MainWorkSpace.Table
 {
     /// <summary>
-    /// Interaction logic for BillDetail_UC.xaml
+    /// Interaction logic for TableDetail_UC.xaml
     /// </summary>
-    public partial class BillDetail_UC : UserControl
+    public partial class TableDetail_UC : UserControl
     {
-        public BillDetail_UC()
+        public TableDetail_UC()
         {
             InitializeComponent();
         }
