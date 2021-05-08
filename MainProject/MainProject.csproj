@@ -124,6 +124,10 @@
     <Compile Include="MainWorkSpace\Bill\BillView.xaml.cs">
       <DependentUpon>BillView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MainWorkSpace\Bill\BillViewModel.cs" />
+    <Compile Include="MainWorkSpace\Bill\Bill_ProductTable.xaml.cs">
+      <DependentUpon>Bill_ProductTable.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MainWorkSpace\MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>
     </Compile>
@@ -224,6 +228,10 @@
     <Compile Include="StatisticWorkSpace\StatisticViewModel.cs" />
     <Compile Include="Store.cs" />
     <Compile Include="TableViewModel.cs" />
+    <Compile Include="TestingView.xaml.cs">
+      <DependentUpon>TestingView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TestingViewModel.cs" />
     <Compile Include="VoucherWorkSpace\VoucherView.xaml.cs">
       <DependentUpon>VoucherView.xaml</DependentUpon>
     </Compile>
@@ -243,6 +251,10 @@
     <Page Include="MainWorkSpace\Bill\BillView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MainWorkSpace\Bill\Bill_ProductTable.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="MainWorkSpace\MainView.xaml">
       <SubType>Designer</SubType>
@@ -309,6 +321,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="StatisticWorkSpace\StatisticView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TestingView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
