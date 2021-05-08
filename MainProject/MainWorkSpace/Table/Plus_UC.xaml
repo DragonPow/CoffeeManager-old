@@ -13,8 +13,7 @@
     <Grid>
         <materialDesign:PackIcon Kind="Plus" Width="40" Height="40" Foreground="Gray"  Margin="27,10" >
         </materialDesign:PackIcon>
-        <Border  BorderThickness="2"  BorderBrush="Gray" CornerRadius="5">
-        </Border>
+        <Border  BorderThickness="2"  BorderBrush="Gray" CornerRadius="5"></Border>
         
     </Grid>
 </UserControl>
