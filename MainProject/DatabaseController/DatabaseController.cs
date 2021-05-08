@@ -14,7 +14,7 @@ namespace MainProject.DatabaseController
             
             using (var db = new mainEntities())
             {
-                TABLE table = db.TABLES.Where(d => (d.NUMBER == Number && d.FLOORS == Floors) && (d.DELETED == 0)).First();
+                TABLE table = db.TABLES.Where(d => (d.NUMBER == Number && d.FLOORS == Floors) && (d.DELETED == 0)).FirstOrDefault();
 
                 if (table != null)
                 {
@@ -64,5 +64,47 @@ namespace MainProject.DatabaseController
                 }                    
             }
         }
+
+        public static void DeleteProduct(PRODUCT pro)
+        {
+            using (var db = new mainEntities())
+            {
+                PRODUCT product = db.PRODUCTs.Where(p => (p.NAME == pro.NAME) && (p.DELETED == 0)).FirstOrDefault();
+                if (product != null)
+                {
+                    product.DELETED = 1;
+                }
+                db.SaveChanges();
+            }
+
+        }
+
+        public static List<TABLE> LoadTable(int Floors)
+        {
+            
+            using (var db = new mainEntities())
+            {
+                List<TABLE> listtab = db.TABLES.Where(t => (t.FLOORS == Floors ) && (t.DELETED == 0)).ToList();
+                if (listtab != null)
+                {
+                    return listtab;
+                }
+            }
+            return null;
+        }
+
+        public static List<PRODUCT> SearchProByType(string Type)
+        {
+            using (var db = new mainEntities())
+            {
+                List<PRODUCT> listpro = db.PRODUCTs.Where(p => (p.TYPE == Type) && (p.DELETED == 0)).ToList();
+                if (listpro != null)
+                {
+                    return listpro;
+                }
+            }
+            return null;
+        }
+
     }
 }

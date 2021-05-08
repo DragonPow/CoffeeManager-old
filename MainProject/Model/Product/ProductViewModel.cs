@@ -14,6 +14,17 @@ namespace MainProject.Model.Product
         ICommand _UpdateProduct;
 
         #endregion
+        #region Init
+        public ProductViewModel(PRODUCT  p)
+        {
+            Prodduct = p;
+        }
+
+        public ProductViewModel()
+        {
+            Prodduct = new PRODUCT();
+        }
+        #endregion
 
         #region Properties
         public PRODUCT Prodduct 
