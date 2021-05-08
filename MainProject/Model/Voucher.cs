@@ -24,6 +24,7 @@ namespace MainProject.Model
         public Nullable<int> PERCENT { get; set; }
         public Nullable<System.DateTime> BEGINTIME { get; set; }
         public Nullable<System.DateTime> ENDTIME { get; set; }
+        public Nullable<int> DELETED { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<BILL> BILLs { get; set; }

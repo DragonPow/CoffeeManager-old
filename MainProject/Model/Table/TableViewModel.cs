@@ -1,9 +1,5 @@
 ﻿using MainProject.Model;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace MainProject
@@ -13,10 +9,14 @@ namespace MainProject
         #region Fields
         private TABLE _table;
         private List<DetailPro> _listPro;
+        private List<DetailPro> _listtemporaryPro;
         private long Total;
+
         private ICommand _getTotal;
         private ICommand _payCommand;
         private ICommand _addDetailPro;
+        private ICommand _saveDetailPro;
+        private ICommand _removeDetailPro;
 
         #endregion
 
@@ -42,7 +42,6 @@ namespace MainProject
             }
         }
 
-
         internal List<DetailPro> ListPro
         {
             get => _listPro;
@@ -56,6 +55,19 @@ namespace MainProject
             }
         }
 
+        internal List<DetailPro> ListtemporaryPro
+        {
+            get => _listtemporaryPro;
+            set
+            {
+                if (value != _listtemporaryPro)
+                {
+                    _listtemporaryPro = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
         #endregion
 
         #region Init
@@ -64,6 +76,7 @@ namespace MainProject
             Table = new TABLE();
             Total = 0;
             ListPro = new List<DetailPro>();
+            ListtemporaryPro = new List<DetailPro>();
         }
         public TableViewModel(int Number)
         {
@@ -87,6 +100,7 @@ namespace MainProject
         }
         public void Pay()
         {
+            SaveDetail();
             //Open BillWordSpace
 
         }
@@ -107,7 +121,7 @@ namespace MainProject
                 Total += (long)p.Pro.PRICE * p.Quantity;
             return Total;
         }
-
+// detailPro được thêm vào list tạm khi chưa click nút Save
         public ICommand AddDetailPro
         {
             get
@@ -123,15 +137,52 @@ namespace MainProject
 
         public void addDetailPro(DetailPro pro)
         {
-            ListPro.Add(pro);
+            ListtemporaryPro.Add(pro);
         }
 
-        public void removeDetailPro(long id)
+// thêm detail pro sau khi nhấn nút Save
+
+        public ICommand SaveDetailPro
         {
-            for (int i = ListPro.Count - 1; i > -1; i--)
+            get
             {
-                if (ListPro[i].Pro.ID == id) { ListPro.RemoveAt(i); }
+                if (_saveDetailPro != null)
+                {
+                    _saveDetailPro = new RelayingCommand<object>(a => SaveDetail());
+                }
+                return _saveDetailPro;
             }
+        }
+
+        public void SaveDetail()
+        {
+            if ( ListtemporaryPro != null)
+            {
+                ListPro.AddRange(ListtemporaryPro);
+            }
+        }
+
+// Xóa detailPro đã chọn
+
+        public ICommand RemoveDetailPro
+        {
+            get
+            {
+                if (_removeDetailPro == null)
+                {
+                    _removeDetailPro = new RelayingCommand<int>(a => RemoveDetail(a));
+                }
+                return _removeDetailPro;
+            }
+        }
+        public void RemoveDetail(int number)
+        {
+            if (number < ListPro.Count)
+            {
+                ListPro.RemoveAt(number - 1);
+            }
+            else
+                ListtemporaryPro.RemoveAt(number - ListPro.Count - 1);
         }
 
         #endregion

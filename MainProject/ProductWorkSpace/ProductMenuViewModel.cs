@@ -60,17 +60,17 @@ namespace MainProject.ProductWorkSpace
         }
 
         public ICommand CommandRemoveSelectedProduct;
-        public void RemoveSelectedProduct(TableViewModel tableViewModel)
+       /* public void RemoveSelectedProduct(TableViewModel tableViewModel)
         {
             tableViewModel.removeDetailPro(SelectedProduct.Product.ID);
-        }
+        }*/
 
         private void initCommand()
         {
             this.CommandSearch = new RelayingCommand<string>(Search);
             this.CommandGoDetail = new RelayingCommand<ProductViewModel>(GoDetail);
             this.CommandAddSelectedProduct = new RelayingCommand<TableViewModel>(AddSelectedProduct);
-            this.CommandRemoveSelectedProduct = new RelayingCommand<TableViewModel>(RemoveSelectedProduct);
+         /*   this.CommandRemoveSelectedProduct = new RelayingCommand<TableViewModel>(RemoveSelectedProduct);*/
         }
 
         public ProductMenuViewModel()
