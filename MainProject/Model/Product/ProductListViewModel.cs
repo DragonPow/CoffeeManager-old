@@ -113,8 +113,10 @@ namespace MainProject.Model.Product
 
         public void SearchName(string name)
         {
-          
-
+          for ( int i = 0; i < ListPoView.Count; ++i)
+            {
+                if (!ListPoView[i].Prodduct.NAME.Contains(name)) ListPoView.RemoveAt(i);
+            }
         }
 
         public ICommand SearchByType
@@ -131,6 +133,7 @@ namespace MainProject.Model.Product
         public void SearchType(string Type)
         {
             List<PRODUCT> ProList = DataController.SearchProByType(Type);
+            this.Type = Type;
             ListPoView = new List<ProductViewModel>(ProList.Count);
             foreach (PRODUCT p in ProList)
             {
