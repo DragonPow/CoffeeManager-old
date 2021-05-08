@@ -6,19 +6,19 @@
              xmlns:local="clr-namespace:MainProject.MainWorkSpace" 
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
-             d:DesignHeight="50" d:DesignWidth="170" BorderBrush="Gray">
+             d:DesignHeight="20" d:DesignWidth="60" BorderBrush="#f1f8e9" BorderThickness="1">
     <Grid >
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="50*"/>
-            <ColumnDefinition Width="70*"/>
-            <ColumnDefinition Width="50*"/>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="7*"/>
+            <ColumnDefinition Width="5*"/>
         </Grid.ColumnDefinitions>
-        <Button Grid.Column="0" Background="Gray" HorizontalAlignment="Left" VerticalAlignment="Stretch" Height="Auto" >
-            <materialDesign:PackIcon Kind="MinusThick" Width="auto" Height="auto" VerticalAlignment="Stretch" HorizontalAlignment="Center" />
+        <Button Grid.Column="0" Background="#f1f8e9" BorderBrush="#f1f8e9" HorizontalAlignment="Center" VerticalAlignment="Center" Height="Auto" Width="auto" >
+            <materialDesign:PackIcon Foreground="{StaticResource MainColor}" Kind="Minus"  />
         </Button>
-        <TextBlock Grid.Column="1" Text="1" TextAlignment="Center" FontSize="26" Padding="0,5" Foreground="Gray" VerticalAlignment="Stretch" HorizontalAlignment="Center" Height="Auto"/>
-        <Button Grid.Column="2" Background="Gray" BorderBrush="Gray" HorizontalAlignment="Right" VerticalAlignment="Stretch" Height="Auto" >
-            <materialDesign:PackIcon Kind="Plus" VerticalAlignment="Stretch" HorizontalAlignment="Center" />
+        <TextBlock Grid.Column="1" Text="1"  FontSize="16"  Foreground="Gray" VerticalAlignment="Stretch" HorizontalAlignment="Center" Height="Auto" />
+        <Button Grid.Column="2" Background="#f1f8e9" BorderBrush="#f1f8e9" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Height="Auto" Width="auto" >
+            <materialDesign:PackIcon Kind="Plus" Foreground="{StaticResource MainColor}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
         </Button>
     </Grid>
 </UserControl>
