@@ -118,8 +118,8 @@
     <Compile Include="DatabaseController\DatabaseController.cs" />
     <Compile Include="DetailPro.cs" />
     <Compile Include="HistoryWorkSpace\HistoryViewModel.cs" />
-    <Compile Include="MainWorkSpace\Bill\BillDetail_UC.xaml.cs">
-      <DependentUpon>BillDetail_UC.xaml</DependentUpon>
+    <Compile Include="MainWorkSpace\Bill\BillDetail.xaml.cs">
+      <DependentUpon>BillDetail.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainWorkSpace\MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>
@@ -139,8 +139,14 @@
     <Compile Include="LoginWorkSpace\LoginViewModel.cs" />
     <Compile Include="ApplicationWorkSpace\ApplicationViewModel.cs" />
     <Compile Include="MainWorkSpace\MainViewModel.cs" />
+    <Compile Include="MainWorkSpace\NumericUpdown.xaml.cs">
+      <DependentUpon>NumericUpdown.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MainWorkSpace\Product\AddProd_UC.xaml.cs">
       <DependentUpon>AddProd_UC.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MainWorkSpace\Product\Item_UC.xaml.cs">
+      <DependentUpon>Item_UC.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainWorkSpace\Product\ProdView.xaml.cs">
       <DependentUpon>ProdView.xaml</DependentUpon>
@@ -159,6 +165,9 @@
     </Compile>
     <Compile Include="MainWorkSpace\Table\SelectTableView.xaml.cs">
       <DependentUpon>SelectTableView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MainWorkSpace\Table\TableDetailView.xaml.cs">
+      <DependentUpon>TableDetailView.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainWorkSpace\Table\TableManager.xaml.cs">
       <DependentUpon>TableManager.xaml</DependentUpon>
@@ -237,9 +246,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="MainWorkSpace\Bill\BillDetail_UC.xaml">
-      <SubType>Designer</SubType>
+    <Page Include="MainWorkSpace\Bill\BillDetail.xaml">
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="MainWorkSpace\MainView.xaml">
       <SubType>Designer</SubType>
@@ -269,9 +278,17 @@
       <DependentUpon>ApplicationView.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="MainWorkSpace\NumericUpdown.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="MainWorkSpace\Product\AddProd_UC.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MainWorkSpace\Product\Item_UC.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="MainWorkSpace\Product\ProdView.xaml">
       <SubType>Designer</SubType>
@@ -296,6 +313,10 @@
     <Page Include="MainWorkSpace\Table\SelectTableView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MainWorkSpace\Table\TableDetailView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="MainWorkSpace\Table\TableManager.xaml">
       <SubType>Designer</SubType>

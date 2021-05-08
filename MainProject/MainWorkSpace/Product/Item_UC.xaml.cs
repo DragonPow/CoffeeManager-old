@@ -24,6 +24,5 @@ namespace MainProject.MainWorkSpace.Product
         {
             InitializeComponent();
         }
-        private void NumericUpdown_Loaded(object sender, RoutedEventArgs e)
     }
 }
