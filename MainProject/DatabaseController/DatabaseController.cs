@@ -43,5 +43,26 @@ namespace MainProject.DatabaseController
                 db.SaveChanges();
             }
         }
+
+        public static void UpdateProduct(PRODUCT product)
+        {
+            using ( var db = new mainEntities())
+            {
+                product.DELETED = 0;
+                PRODUCT pro = db.PRODUCTs.Where(p => (p.NAME == product.NAME) && (p.DELETED == 0)).FirstOrDefault();
+
+                if (pro != null)
+                {
+                    pro.DELETED = 1;
+                    db.PRODUCTs.Add(product);
+                    db.SaveChanges();
+                }
+                else
+                {
+                    db.PRODUCTs.Add(product);
+                    db.SaveChanges();
+                }                    
+            }
+        }
     }
 }

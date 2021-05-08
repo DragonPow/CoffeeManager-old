@@ -200,6 +200,8 @@
     <Compile Include="Model\PRODUCT.cs">
       <DependentUpon>MainModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\Product\ProductListViewModel.cs" />
+    <Compile Include="Model\Product\ProductViewModel.cs" />
     <Compile Include="Model\REGULATION.cs">
       <DependentUpon>MainModel.tt</DependentUpon>
     </Compile>
