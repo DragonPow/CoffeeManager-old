@@ -4,14 +4,37 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:MainProject.MainWorkSpace"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d"
              Background="White"
-             d:DesignHeight="450"
-             d:DesignWidth="800">
+             d:DesignHeight="630"
+             d:DesignWidth="1150">
     <UserControl.DataContext>
         <local:MainViewModel />
     </UserControl.DataContext>
-    <Grid>
-        <TextBlock Text="This is main workspace" />
-    </Grid>
+    <TabControl
+        Style="{StaticResource MaterialDesignNavigatilRailTabControl}"
+        materialDesign:ColorZoneAssist.Mode="PrimaryMid">
+        <TabItem
+            Header="{materialDesign:PackIcon Kind=Heart, Size=24}"
+            Style="{StaticResource MaterialDesignNavigationRailTabItem}">
+            <TextBlock>
+                    Tab1
+            </TextBlock>
+        </TabItem>
+        <TabItem
+            Header="{materialDesign:PackIcon Kind=Spade, Size=24}"
+            Style="{StaticResource MaterialDesignNavigationRailTabItem}">
+            <TextBlock>
+               Tab2
+            </TextBlock>
+        </TabItem>
+        <TabItem
+            Header="03" 
+            Style="{StaticResource MaterialDesignNavigationRailTabItem}">
+            <TextBlock>
+                Tab3
+            </TextBlock>
+        </TabItem>
+    </TabControl>
 </UserControl>
