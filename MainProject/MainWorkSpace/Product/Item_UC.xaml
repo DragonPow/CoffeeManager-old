@@ -17,11 +17,11 @@
         <Border BorderThickness="0,0,0,1" BorderBrush="Gray" Grid.ColumnSpan="3"></Border>
         <TextBlock Grid.Column="0" Text="1" Foreground="Gray" HorizontalAlignment="Left" Visibility="Hidden" ></TextBlock>
         <StackPanel Grid.Column="0">
-            <TextBlock Grid.Column="0" Text="Trà sữa Olong"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10,0,0,0" Foreground="#BD8722" FontSize="16" Padding="0,3,0,0" ></TextBlock>
-            <TextBlock Grid.Column="0" Text="Trân châu đường đen"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10,0,0,0" Foreground="#958360" FontSize="12" FontWeight="Light" FontStyle="Italic"  ></TextBlock>
+            <TextBlock Grid.Column="0" Text="Trà sữa Olong"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10,0,0,0" Foreground="#BD8722" FontSize="16" ></TextBlock>
+            <TextBlock Grid.Column="0" Text="Trân châu đường đen"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10,0,0,0" Foreground="#958360" FontSize="12" FontWeight="Light" FontStyle="Italic"></TextBlock>
         </StackPanel>
         <Main:NumericUpdown Grid.Column="1" Height="20" Width="auto" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="0,5"></Main:NumericUpdown>
-        <TextBlock Grid.Column="2" Text="25000đ" HorizontalAlignment="Stretch" VerticalAlignment="Center" TextAlignment="Right" Foreground="Gray" FontWeight="Light" FontStyle="Italic" FontSize="16" Margin="0,0,10,0" Padding="0,3,0,0" ></TextBlock>
+        <TextBlock Grid.Column="2" Text="25000đ" HorizontalAlignment="Stretch" VerticalAlignment="Center" TextAlignment="Right" Foreground="Gray" FontWeight="Light" FontStyle="Italic" FontSize="16" Margin="0,0,10,0" ></TextBlock>
 
     </Grid>
 </UserControl>

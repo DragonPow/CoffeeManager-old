@@ -20,12 +20,16 @@
             </Grid>
         </Border>
         <ScrollViewer materialDesign:ScrollBarAssist.ThumbHeight="50" materialDesign:ScrollBarAssist.ThumbWidth="5" materialDesign:ScrollBarAssist.ThumbCornerRadius="10">
-                <StackPanel Height="320" Margin="0,5" Width="290" >
-                    <Item:Item_UC></Item:Item_UC>
-                </StackPanel>
-            </ScrollViewer>
+            <StackPanel Height="320" Margin="0,5" Width="290" >
+                <Item:Item_UC></Item:Item_UC>
+            </StackPanel>
+        </ScrollViewer>
         <Grid Height="40" Width="300" >
-            <Border BorderBrush="Gray" BorderThickness="0,1,0,1"  ></Border>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="2*"/>
+            </Grid.ColumnDefinitions>
+            <Border BorderBrush="Gray" BorderThickness="0,1,0,1" Grid.ColumnSpan="2"  ></Border>
             <CheckBox
                  Style="{StaticResource MaterialDesignFilterChipAccentCheckBox}"
                  IsChecked="True"
@@ -33,31 +37,33 @@
                  Foreground="Gray">
                 Mang đi
             </CheckBox>
-            <TextBlock Text="Tổng tiền" FontSize="12" HorizontalAlignment="Right" VerticalAlignment="Top" TextAlignment="Left"  Foreground="Black" Padding="0" Margin="50,0"  />
+            <TextBlock Text="Tổng tiền" FontSize="12" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="Black" Margin="10,0" Grid.Column="1"  />
             <TextBlock Style="{StaticResource MaterialDesignHeadline6TextBlock}"
-                Text="25000" FontSize="22" FontWeight="DemiBold" FontStyle="Italic" HorizontalAlignment="Right" VerticalAlignment="Bottom" TextAlignment="Center" Foreground="#BD8722" Margin="10,0" Padding="0"></TextBlock>
+                       Text="25000" FontSize="22" FontWeight="DemiBold" FontStyle="Italic" HorizontalAlignment="Right" VerticalAlignment="Bottom" Foreground="#BD8722" Margin="0,0,10,0" Grid.Column="1"></TextBlock>
         </Grid>
         <Grid Height="40" VerticalAlignment="Bottom" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
             <Button
                 Style="{StaticResource MaterialDesignFlatAccentBgButton}"
                 ToolTip="MaterialDesignFlatAccentBackgroundButton"
                 Content="Lưu"
-                Width="150"  Height="Auto"
+                Width="Auto"  Height="Auto"
                 VerticalAlignment="Stretch"
-                HorizontalAlignment="Left"
                 IsEnabled="True"
                 Foreground="White" Background="{StaticResource MainColor}"
-                BorderThickness="0" />
+                BorderThickness="0" Grid.Column="0" />
             <Button
                 Style="{StaticResource MaterialDesignFlatAccentBgButton}"
                 ToolTip="MaterialDesignFlatAccentBackgroundButton"
                 Content="Thanh toán"
-                Width="150"  Height="Auto"
+                Width="Auto"  Height="Auto"
                 VerticalAlignment="Stretch"
-                HorizontalAlignment="Right" 
                 IsEnabled="False"
                 Foreground="White" Background="{StaticResource MainColor}"
-                BorderThickness="0"/>
+                BorderThickness="0" Grid.Column="1"/>
         </Grid>
     </StackPanel>
 </UserControl>
