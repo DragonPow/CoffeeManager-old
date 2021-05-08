@@ -241,11 +241,13 @@
     </Compile>
     <Compile Include="StatisticWorkSpace\StatisticViewModel.cs" />
     <Compile Include="Store.cs" />
-    <Compile Include="TableViewModel.cs" />
     <Compile Include="TestingView.xaml.cs">
       <DependentUpon>TestingView.xaml</DependentUpon>
     </Compile>
     <Compile Include="TestingViewModel.cs" />
+    <Compile Include="TestView.xaml.cs">
+      <DependentUpon>TestView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="VoucherWorkSpace\VoucherView.xaml.cs">
       <DependentUpon>VoucherView.xaml</DependentUpon>
     </Compile>
@@ -353,6 +355,10 @@
     <Page Include="TestingView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TestView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="VoucherWorkSpace\VoucherView.xaml">
       <SubType>Designer</SubType>

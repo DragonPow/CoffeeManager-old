@@ -60,40 +60,5 @@
                 </Grid>
             </Border>
         </Grid>
-        <!--SomeConflict here--!>
-
-        <Border BorderBrush="#737373" BorderThickness="2">
-            <materialDesign:ColorZone Mode="PrimaryMid" Height="50" Background="{DynamicResource MainColor}" Foreground="White">
-                <StackPanel
-                 Orientation="Horizontal"
-                Margin="4,0"  >
-                    <RadioButton
-                    Style="{StaticResource MaterialDesignTabRadioButton}"
-                    Margin="4,0"
-                    Height="50"
-                    IsChecked="True"
-                    Content="HÓA ĐƠN" 
-                    FontWeight="Bold"
-                    FontSize="18" />
-                    <TextBlock Text="|" FontSize="30" FontWeight="Light" Foreground="#737373"></TextBlock>
-                    <RadioButton
-                    Style="{StaticResource MaterialDesignTabRadioButton}"
-                    Margin="4"
-                    Content="TẦNG 1"
-                    FontSize="16"/>
-                    <RadioButton
-                    Style="{StaticResource MaterialDesignTabRadioButton}"
-                    Margin="4"  
-                    Content="TẦNG 2" 
-                    FontSize="16"/>
-
-                </StackPanel>
-            </materialDesign:ColorZone>
-        </Border>
-        <Grid VerticalAlignment="Stretch" Margin="0,55,0,0">
-            <Border Grid.Row="1" BorderThickness="1 0 1 1"  Padding="16">
-                <!--Bấm hóa đơn  -->
-               
-        </Border>
     </Grid>
 </UserControl>

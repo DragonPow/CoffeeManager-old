@@ -92,8 +92,8 @@
             </Canvas>
         </Grid>
     </DockPanel>
-    <!--Thach end--!>
-    <StackPanel>
+    <!--Thach end-->
+    <!--<StackPanel>
         <Grid Height="45" Background="{DynamicResource MainColor}">
             <Border BorderThickness="1" BorderBrush="#9393A1"></Border>
             <Button
@@ -155,5 +155,5 @@
                     Foreground="White"/>
             </Button>
         </Canvas>
-    </StackPanel>
+    </StackPanel>-->
 </UserControl>
