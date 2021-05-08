@@ -21,10 +21,11 @@ namespace MainProject.Model
         }
     
         public long ID { get; set; }
-        public string Name { get; set; }
-        public Nullable<System.DateTime> Birthday { get; set; }
-        public string Phone { get; set; }
-        public Nullable<long> Point_Accumulation { get; set; }
+        public string NAME { get; set; }
+        public Nullable<System.DateTime> BIRTHDAY { get; set; }
+        public string PHONE { get; set; }
+        public Nullable<int> POINT_ACCUMULATION { get; set; }
+        public Nullable<int> DELETED { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<BILL> BILLs { get; set; }

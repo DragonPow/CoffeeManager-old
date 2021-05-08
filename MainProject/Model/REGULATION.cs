@@ -12,12 +12,10 @@ namespace MainProject.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class DETAILBILL
+    public partial class REGULATION
     {
-        public long ID_PRODUCT { get; set; }
-        public long ID_BILL { get; set; }
-        public Nullable<int> AMOUNT { get; set; }
-    
-        public virtual PRODUCT PRODUCT { get; set; }
+        public long ID { get; set; }
+        public string NAME { get; set; }
+        public Nullable<int> LIMITED { get; set; }
     }
 }

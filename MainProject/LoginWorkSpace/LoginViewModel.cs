@@ -60,7 +60,7 @@ namespace MainProject.LoginWorkSpace
         {
             using (var context = new mainEntities())
             {
-                Console.WriteLine(context.EMPLOYEEs.Count<EMPLOYEE>());
+                Console.WriteLine(CurrentAccount.Name + " " + CurrentAccount.Password);
             }
         }
         #endregion //Helper methods
