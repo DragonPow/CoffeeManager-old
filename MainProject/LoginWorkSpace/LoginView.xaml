@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MainProject"
-         Height="480" Width="730"
+        Height="480" Width="730"
         xmlns:VM="clr-namespace:MainProject.LoginWorkSpace"
         mc:Ignorable="d"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
@@ -17,10 +17,6 @@
         <VM:LoginViewModel />
     </UserControl.DataContext>
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="546*" />
-            <ColumnDefinition Width="179*" />
-        </Grid.ColumnDefinitions>
         <Grid.Background>
             <LinearGradientBrush StartPoint="0.1,0"
                                  EndPoint="0.9,1">
@@ -33,8 +29,7 @@
         <Border Height="390"
                 VerticalAlignment="Top"
                 CornerRadius="0 0 180 0"
-                Background="White"
-                Grid.ColumnSpan="2">
+                Background="White">
         </Border>
         <StackPanel Orientation="Horizontal"
                     Grid.ColumnSpan="2">

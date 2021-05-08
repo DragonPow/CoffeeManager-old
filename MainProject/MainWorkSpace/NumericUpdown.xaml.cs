@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace MainProject.MainWorkSpace.Table
+namespace MainProject.MainWorkSpace
 {
     /// <summary>
-    /// Interaction logic for TableDetail_UC.xaml
+    /// Interaction logic for NumericUpdown.xaml
     /// </summary>
-    public partial class TableDetail_UC : UserControl
+    public partial class NumericUpdown : UserControl
     {
-        public TableDetail_UC()
+        public NumericUpdown()
         {
             InitializeComponent();
         }

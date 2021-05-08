@@ -10,20 +10,18 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace MainProject.MainWorkSpace.Product
+namespace MainProject
 {
     /// <summary>
-    /// Interaction logic for Item_UC.xaml
+    /// Interaction logic for TestView.xaml
     /// </summary>
-    public partial class Item_UC : UserControl
+    public partial class TestView : Window
     {
-        public Item_UC()
+        public TestView()
         {
             InitializeComponent();
         }
-        private void NumericUpdown_Loaded(object sender, RoutedEventArgs e)
     }
 }
