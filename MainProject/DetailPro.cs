@@ -17,10 +17,10 @@ namespace MainProject
         private ICommand _minusQuantity;
 
 
-        public DetailPro(PRODUCT pro, int quantity)
+        public DetailPro(PRODUCT pro, int quan = 0)
         {
             this.Pro = pro;
-            this.Quantity = quantity;
+            this.Quantity = quan;
         }
 
         public ICommand PlusQuantity
@@ -31,7 +31,6 @@ namespace MainProject
                     _plusQuantity = new RelayingCommand<object>(a => Plus());
                 return _plusQuantity;
             }
-
         }
 
         public ICommand MinusQuantity

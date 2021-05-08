@@ -56,7 +56,7 @@ namespace MainProject.ProductWorkSpace
         public void AddSelectedProduct(TableViewModel tableViewModel)
         {
             DetailPro detailPro = new DetailPro(SelectedProduct.Product, 1);
-            tableViewModel.addDetailPro(detailPro);
+            tableViewModel.addDetailPro(detailPro.Pro);
         }
 
         public ICommand CommandRemoveSelectedProduct;

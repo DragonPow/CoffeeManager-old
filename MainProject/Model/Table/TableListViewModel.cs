@@ -22,20 +22,25 @@ namespace MainProject
         private ICommand _InsertTable;
         private ICommand _UpdateStatusTable;
         private ICommand _SelectedTable;
+        private ICommand _LoadTableByFloors;
 
         #endregion
 
         #region Init
 
-        public int Floors { get => _floors; set => _floors = value; }
-        public TABLE SelectedTable { get => _selectedTable; set => _selectedTable = value; }
 
         public TableListViewModel()
         {
-            _listTable = new List<TableViewModel>();
+            Floors = 0;
+            ListTable = new List<TableViewModel>();
+            SelectedTable = new TABLE();          
         }
         #endregion
 
+        #region Properties
+
+        public int Floors { get => _floors; set => _floors = value; }
+        public TABLE SelectedTable { get => _selectedTable; set => _selectedTable = value; }
         public List<TableViewModel> ListTable
         {
             get
@@ -55,6 +60,7 @@ namespace MainProject
                 }
             }
         }
+        #endregion
 
         #region Command
 
@@ -95,8 +101,8 @@ namespace MainProject
 
         public void Insert()
         {
-            _listTable.Add(new TableViewModel(_listTable.Count + 1));
-            DataController.AddTable(Floors, _listTable.Count );
+            ListTable.Add(new TableViewModel(ListTable.Count + 1));
+            DataController.AddTable(Floors, ListTable.Count + 1 );
         }
 
         ICommand UpdateStatusTable
@@ -133,6 +139,28 @@ namespace MainProject
         public void Selected(TABLE table)
         {
             this._selectedTable = table;
+        }
+
+        public ICommand LoadTableByFloors
+        {
+            get
+            {
+                if (_LoadTableByFloors == null)
+                {
+                    _LoadTableByFloors = new RelayingCommand<int>(a => LoadTable(a));
+                }
+                return _LoadTableByFloors;
+            }
+        }
+
+        public void LoadTable(int Floors)
+        {
+            List<TABLE> TableList = DataController.LoadTable(Floors);
+            ListTable = new List<TableViewModel>(TableList.Count);
+            foreach (TABLE t in TableList)
+            {
+                ListTable.Add(new TableViewModel(t));
+            }
         }
         #endregion
     }
