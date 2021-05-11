@@ -19,11 +19,11 @@ namespace MainProject.Model
         public Nullable<long> ID_EMPLOYEE { get; set; }
         public Nullable<long> ID_CUSTOMER { get; set; }
         public Nullable<long> ID_PRODUCT { get; set; }
+        public string ID_VOUCHER { get; set; }
         public Nullable<long> ID_TABLES { get; set; }
-        public Nullable<long> ID_VOUCHER { get; set; }
     
-        public virtual VOUCHER VOUCHER { get; set; }
         public virtual TABLE TABLE { get; set; }
+        public virtual VOUCHER VOUCHER { get; set; }
         public virtual PRODUCT PRODUCT { get; set; }
         public virtual CUSTOMER CUSTOMER { get; set; }
         public virtual EMPLOYEE EMPLOYEE { get; set; }
