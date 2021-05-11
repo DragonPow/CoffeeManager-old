@@ -234,6 +234,14 @@
     </Compile>
     <Compile Include="StatisticWorkSpace\StatisticViewModel.cs" />
     <Compile Include="Store.cs" />
+    <Compile Include="ValidationRules\ExistVoucherValidationRule.cs" />
+    <Compile Include="ValidationRules\NotNullableValidationRule.cs" />
+    <Compile Include="VoucherWorkSpace\AddVoucherWindow.xaml.cs">
+      <DependentUpon>AddVoucherWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="VoucherWorkSpace\VoucherPreviewPanel.xaml.cs">
+      <DependentUpon>VoucherPreviewPanel.xaml</DependentUpon>
+    </Compile>
     <Compile Include="VoucherWorkSpace\VoucherView.xaml.cs">
       <DependentUpon>VoucherView.xaml</DependentUpon>
     </Compile>
@@ -327,6 +335,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="StatisticWorkSpace\StatisticView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="VoucherWorkSpace\AddVoucherWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="VoucherWorkSpace\VoucherPreviewPanel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
