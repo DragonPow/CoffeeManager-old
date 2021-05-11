@@ -13,19 +13,22 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace MainProject.ApplicationWorkSpace
+namespace MainProject.VoucherWorkSpace
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for VoucherPreviewPanel.xaml
     /// </summary>
-    public partial class ApplicationView : Window
+    public partial class VoucherPreviewPanel : UserControl
     {
-        public ApplicationView()
+        public VoucherPreviewPanel()
         {
             InitializeComponent();
+        }
 
-            VoucherWorkSpace.VoucherView view = new VoucherWorkSpace.VoucherView();
-            this.AddVisualChild(view);
+        private void btnTest_Click(object sender, RoutedEventArgs e)
+        {
+            AddVoucherWindow window = new AddVoucherWindow();
+            window.Show();
         }
     }
 }

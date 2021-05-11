@@ -25,6 +25,7 @@ namespace MainProject
             //LoginWorkSpace.LoginViewModel VM = new LoginWorkSpace.LoginViewModel();
             //view.DataContext = VM;
             view.Show();
+
         }
     }
 }
