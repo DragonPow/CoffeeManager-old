@@ -23,6 +23,7 @@ namespace MainProject
             ApplicationViewModel VM = new ApplicationViewModel();
             view.DataContext = VM;
             view.Show();
+
         }
     }
 }

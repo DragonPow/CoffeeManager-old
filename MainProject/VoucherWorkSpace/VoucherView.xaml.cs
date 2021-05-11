@@ -24,5 +24,12 @@ namespace MainProject.VoucherWorkSpace
         {
             InitializeComponent();
         }
+
+        private void txt_value_LostFocus(object sender, RoutedEventArgs e)
+        {
+            TextBox textBox = (TextBox)sender;
+            VoucherViewModel viewModel = (VoucherViewModel)textBox.DataContext;
+            textBox.Text = (viewModel.Value);
+        }
     }
 }

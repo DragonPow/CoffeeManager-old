@@ -393,6 +393,7 @@
       <DependentUpon>MainModel.edmx</DependentUpon>
       <LastGenOutput>MainModel.cs</LastGenOutput>
     </Content>
+    <Resource Include="Resources\sale_border.png" />
     <Resource Include="Resources\alreadyTable.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
