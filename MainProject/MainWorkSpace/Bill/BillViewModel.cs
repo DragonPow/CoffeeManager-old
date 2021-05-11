@@ -77,18 +77,24 @@ namespace MainProject.MainWorkSpace.Bill
 
 
         #region Commands
+        /// <summary>
+        /// Payment bill and quit the form
+        /// </summary>
         public ICommand PaymentCommand
         {
             get
             {
                 if (_paymentCommand == null)
                 {
-                    _paymentCommand = new RelayingCommand<Object>(para => Payment());
+                    _paymentCommand = new RelayingCommand<BillView>(para => Payment(para));
                 }
                 return _paymentCommand;
             }
         }
 
+        /// <summary>
+        /// Auto load discount percent when eligible
+        /// </summary>
         public ICommand LoadDiscountCommand
         {
             get
@@ -106,13 +112,18 @@ namespace MainProject.MainWorkSpace.Bill
         #region Constructors
         public BillViewModel()
         {
-            TableCheckout = new TableModel();
+            //Testing
+            ObservableCollection<FoodModel> foods = new ObservableCollection<FoodModel>()
+            {
+                new FoodModel(0, "Thachj", 10000, 2),
+                new FoodModel(1, "Nhuc", 20000, 3),
+                new FoodModel(2, "Bang", 10000, 1)
+            };
+            //Tesing
+
+            TableCheckout = new TableModel(0,"1",foods);
             TimeCheckout = DateTime.Now;
 
-            //Testing
-            TableCheckout.AddFood(new FoodModel(0,"Thachj",10000,2));
-            TableCheckout.AddFood(new FoodModel(1, "Nhuc", 20000, 3));
-            TableCheckout.AddFood(new FoodModel(2, "Bang", 10000, 1));
         }
 
         public BillViewModel(TableModel table, int ID = -1) : this()
@@ -128,14 +139,17 @@ namespace MainProject.MainWorkSpace.Bill
         }
         #endregion
 
-        private void Payment()
+        private void Payment(BillView view)
         {
             using (var db = new mainEntities())
             {
-                TableCheckout.Foods.Add(new FoodModel(0, "Thachj", 10000, 2));
-                //TableCheckout.AddFood(new FoodModel(0, "Thachj", 10000, 2));
-                //create new bill in database
+                BILL newBill = new BILL();
+                newBill.TotalPrice = TableCheckout.TotalPrice;
+                newBill.ID_TABLES = TableCheckout.ID;
+                db.BILLs.Add(newBill);
+                db.SaveChanges();
             }
+            view.Close();
         }
         private void LoadDiscount()
         {
