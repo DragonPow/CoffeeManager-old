@@ -5,24 +5,22 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:MainProject.MainWorkSpace.Table"
              mc:Ignorable="d" 
-             Height="480" Width="840" Background="White">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="120" />
-            <RowDefinition Height="120" />
-            <RowDefinition Height="120" />
-            <RowDefinition Height="120" />
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="140" />
-            <ColumnDefinition Width="140" />
-            <ColumnDefinition Width="140" />
-            <ColumnDefinition Width="140" />
-            <ColumnDefinition Width="140" />
-            <ColumnDefinition Width="140" />
-            <ColumnDefinition Width="140" />
-        </Grid.ColumnDefinitions>
-        <local:FreeTable_UC Grid.Column="0" Grid.Row="0" Margin="20,10"></local:FreeTable_UC>
-       
-    </Grid>
+             d:DesignHeight="480" d:DesignWidth="700" >
+    <ItemsControl ItemsSource="{Binding MyListTest}">
+        <ItemsControl.ItemTemplate>
+            <DataTemplate>
+                <local:FreeTable_UC DataContext="{Binding }"/>
+            </DataTemplate>
+        </ItemsControl.ItemTemplate>
+        <ItemsControl.ItemsPanel>
+            <ItemsPanelTemplate>
+                <StackPanel Orientation="Horizontal"/>
+            </ItemsPanelTemplate>
+        </ItemsControl.ItemsPanel>
+        <!--<ItemsControl.ItemContainerStyle>
+            <Style TargetType="ItemsPresenter">
+                <Setter Property="Margin" Value="10"/>
+            </Style>
+        </ItemsControl.ItemContainerStyle>-->
+    </ItemsControl>
 </UserControl>

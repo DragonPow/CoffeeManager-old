@@ -19,9 +19,11 @@ namespace MainProject
             AppDomain.CurrentDomain.SetData("DataDirectory", "../../");
 
             base.OnStartup(e);
-            ApplicationView view = new ApplicationView();
-            ApplicationViewModel VM = new ApplicationViewModel();
-            view.DataContext = VM;
+            TestingView view = new TestingView();
+            TestingViewModel viewModel = new TestingViewModel();
+            view.DataContext = viewModel;
+            //LoginWorkSpace.LoginViewModel VM = new LoginWorkSpace.LoginViewModel();
+            //view.DataContext = VM;
             view.Show();
 
         }

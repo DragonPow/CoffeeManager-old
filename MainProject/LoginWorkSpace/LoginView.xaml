@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MainProject"
-        Height="480" Width="730"
+        d:DesignHeight="480" d:DesignWidth="730"
         xmlns:VM="clr-namespace:MainProject.LoginWorkSpace"
         mc:Ignorable="d"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
@@ -34,9 +34,11 @@
                               Offset="0" />
             </LinearGradientBrush>
         </Grid.Background>
-        <Border Height="390"
-                VerticalAlignment="Top"
-                CornerRadius="0 0 180 0"
+        <Grid.RowDefinitions>
+            <RowDefinition Height="5*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        <Border CornerRadius="0 0 180 0"
                 Background="White">
             <Grid>
                 <Grid.ColumnDefinitions>

@@ -71,19 +71,25 @@ namespace MainProject
         #endregion
 
         #region Init
-        public TableViewModel()
+        public TableViewModel(int Number)
         {
-            Table = new TABLE();
+            Table = new TABLE() { NUMBER = Number };
             Total = 0;
             ListPro = new List<DetailPro>();
             ListtemporaryPro = new List<DetailPro>();
         }
-        public TableViewModel(int Number)
+        public TableViewModel(TABLE tab)
         {
-            Table = new TABLE();
-            Table.NUMBER = Number;
+            Table = tab;
             Total = 0;
             ListPro = new List<DetailPro>();
+        }
+        public TableViewModel()
+        {
+            Table = new TABLE() ;
+            Total = 0;
+            ListPro = new List<DetailPro>();
+            ListtemporaryPro = new List<DetailPro>();
         }
         #endregion
 
@@ -128,16 +134,16 @@ namespace MainProject
             {
                 if (_addDetailPro == null)
                 {
-                    _addDetailPro = new RelayingCommand<DetailPro>(a => addDetailPro(a));
+                    _addDetailPro = new RelayingCommand<PRODUCT>(a => addDetailPro(a));
                 }
                 return _addDetailPro;
             }
         }
 
 
-        public void addDetailPro(DetailPro pro)
+        public void addDetailPro(PRODUCT pro)
         {
-            ListtemporaryPro.Add(pro);
+            ListtemporaryPro.Add(new DetailPro(pro));
         }
 
 // thêm detail pro sau khi nhấn nút Save

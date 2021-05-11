@@ -111,15 +111,31 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AccountWorkSpace\AccountControl.xaml.cs">
+      <DependentUpon>AccountControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="AccountWorkSpace\AccountView.xaml.cs">
       <DependentUpon>AccountView.xaml</DependentUpon>
     </Compile>
     <Compile Include="AccountWorkSpace\AccountViewModel.cs" />
+    <Compile Include="AccountWorkSpace\AddAccountView.xaml.cs">
+      <DependentUpon>AddAccountView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AccountWorkSpace\ChangedPassword.xaml.cs">
+      <DependentUpon>ChangedPassword.xaml</DependentUpon>
+    </Compile>
     <Compile Include="DatabaseController\DatabaseController.cs" />
     <Compile Include="DetailPro.cs" />
     <Compile Include="HistoryWorkSpace\HistoryViewModel.cs" />
     <Compile Include="MainWorkSpace\Bill\BillDetail.xaml.cs">
       <DependentUpon>BillDetail.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MainWorkSpace\Bill\BillView.xaml.cs">
+      <DependentUpon>BillView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MainWorkSpace\Bill\BillViewModel.cs" />
+    <Compile Include="MainWorkSpace\Bill\Bill_ProductTable.xaml.cs">
+      <DependentUpon>Bill_ProductTable.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainWorkSpace\MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>
@@ -234,6 +250,7 @@
     </Compile>
     <Compile Include="StatisticWorkSpace\StatisticViewModel.cs" />
     <Compile Include="Store.cs" />
+
     <Compile Include="ValidationRules\ExistVoucherValidationRule.cs" />
     <Compile Include="ValidationRules\NotNullableValidationRule.cs" />
     <Compile Include="VoucherWorkSpace\AddVoucherWindow.xaml.cs">
@@ -242,13 +259,32 @@
     <Compile Include="VoucherWorkSpace\VoucherPreviewPanel.xaml.cs">
       <DependentUpon>VoucherPreviewPanel.xaml</DependentUpon>
     </Compile>
+    <Compile Include="TestingView.xaml.cs">
+      <DependentUpon>TestingView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TestingViewModel.cs" />
+    <Compile Include="TestView.xaml.cs">
+      <DependentUpon>TestView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="VoucherWorkSpace\VoucherView.xaml.cs">
       <DependentUpon>VoucherView.xaml</DependentUpon>
     </Compile>
     <Compile Include="VoucherWorkSpace\VoucherViewModel.cs" />
+    <Page Include="AccountWorkSpace\AccountControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="AccountWorkSpace\AccountView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AccountWorkSpace\AddAccountView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AccountWorkSpace\ChangedPassword.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -257,6 +293,14 @@
     <Page Include="MainWorkSpace\Bill\BillDetail.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MainWorkSpace\Bill\BillView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MainWorkSpace\Bill\Bill_ProductTable.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="MainWorkSpace\MainView.xaml">
       <SubType>Designer</SubType>
@@ -338,6 +382,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+
     <Page Include="VoucherWorkSpace\AddVoucherWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -345,6 +390,15 @@
     <Page Include="VoucherWorkSpace\VoucherPreviewPanel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TestingView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TestView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+
     </Page>
     <Page Include="VoucherWorkSpace\VoucherView.xaml">
       <SubType>Designer</SubType>
@@ -399,6 +453,14 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Resources\freetable.png" />
+    <Resource Include="AccountWorkSpace\user-1648810-1401302.png" />
+    <Resource Include="AccountWorkSpace\back-arrow.png" />
+    <Resource Include="AccountWorkSpace\icon_Add.png" />
+    <Resource Include="AccountWorkSpace\background.jpg" />
+    <Resource Include="AccountWorkSpace\images_Note.png" />
+    <Resource Include="AccountWorkSpace\button_cancel.svg.png" />
+    <Resource Include="AccountWorkSpace\Note.png" />
     <Content Include="Model\MainModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>MainModel.edmx</DependentUpon>
@@ -410,6 +472,7 @@
       <LastGenOutput>MainModel.cs</LastGenOutput>
     </Content>
     <Resource Include="Resources\sale_border.png" />
+    <Resource Include="Resources\coffee.jpg" />
     <Resource Include="Resources\alreadyTable.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>

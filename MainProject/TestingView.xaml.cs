@@ -8,22 +8,25 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
-//using System.Windows.Media;
+using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace MainProject.AccountWorkSpace
+namespace MainProject
 {
     /// <summary>
-    /// Interaction logic for AccountWorkSpace.xaml
+    /// Interaction logic for TestingView.xaml
     /// </summary>
-    public partial class AccountView : UserControl
+    public partial class TestingView : Window
     {
-        public AccountView()
+        public TestingView()
         {
             InitializeComponent();
-            Console.WriteLine("AccountView is created");
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            //Console.WriteLine(((MainProject.MainWorkSpace.Bill.BillViewModel)ListView.DataContext).Bills.Count());
         }
     }
 }
