@@ -8,22 +8,27 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
-//using System.Windows.Media;
+using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace MainProject.AccountWorkSpace
+namespace MainProject.VoucherWorkSpace
 {
     /// <summary>
-    /// Interaction logic for AccountWorkSpace.xaml
+    /// Interaction logic for VoucherPreviewPanel.xaml
     /// </summary>
-    public partial class AccountView : UserControl
+    public partial class VoucherPreviewPanel : UserControl
     {
-        public AccountView()
+        public VoucherPreviewPanel()
         {
             InitializeComponent();
-            Console.WriteLine("AccountView is created");
+        }
+
+        private void btnTest_Click(object sender, RoutedEventArgs e)
+        {
+            AddVoucherWindow window = new AddVoucherWindow();
+            window.Show();
         }
     }
 }

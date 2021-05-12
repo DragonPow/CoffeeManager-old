@@ -8,22 +8,21 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
-//using System.Windows.Media;
+using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace MainProject.AccountWorkSpace
+namespace MainProject.MainWorkSpace
 {
     /// <summary>
-    /// Interaction logic for AccountWorkSpace.xaml
+    /// Interaction logic for NumericUpdown.xaml
     /// </summary>
-    public partial class AccountView : UserControl
+    public partial class NumericUpdown : UserControl
     {
-        public AccountView()
+        public NumericUpdown()
         {
             InitializeComponent();
-            Console.WriteLine("AccountView is created");
         }
     }
 }

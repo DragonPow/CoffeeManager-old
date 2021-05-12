@@ -8,22 +8,21 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
-//using System.Windows.Media;
+using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace MainProject.AccountWorkSpace
+namespace MainProject.MainWorkSpace.Product
 {
     /// <summary>
-    /// Interaction logic for AccountWorkSpace.xaml
+    /// Interaction logic for Item_UC.xaml
     /// </summary>
-    public partial class AccountView : UserControl
+    public partial class Item_UC : UserControl
     {
-        public AccountView()
+        public Item_UC()
         {
             InitializeComponent();
-            Console.WriteLine("AccountView is created");
         }
     }
 }

@@ -24,7 +24,6 @@ namespace MainProject.Model
         public string ID_VOUCHER { get; set; }
         public Nullable<long> ID_TABLES { get; set; }
         public Nullable<long> ID_EMPLOYEE { get; set; }
-    
         public virtual EMPLOYEE EMPLOYEE { get; set; }
         public virtual TABLE TABLE { get; set; }
         public virtual VOUCHER VOUCHER { get; set; }

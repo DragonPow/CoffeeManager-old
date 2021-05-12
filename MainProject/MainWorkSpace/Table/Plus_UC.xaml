@@ -11,10 +11,14 @@
 
 
     <Grid>
-        <materialDesign:PackIcon Kind="Plus" Width="40" Height="40" Foreground="Gray"  Margin="27,10" >
-        </materialDesign:PackIcon>
-        <Border  BorderThickness="2"  BorderBrush="Gray" CornerRadius="5">
-        </Border>
-        
+        <materialDesign:PackIcon Kind="Plus"
+                                 Foreground="Gray"
+                                 HorizontalAlignment="Center"
+                                 VerticalAlignment="Center"
+                                 Width="50"
+                                 Height="50"/>
+        <Border BorderThickness="2"
+                BorderBrush="Gray"
+                CornerRadius="5"/>
     </Grid>
 </UserControl>

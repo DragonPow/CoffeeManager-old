@@ -37,6 +37,7 @@ namespace MainProject.LoginWorkSpace
                 if(_currentAccount==null)
                 {
                     _currentAccount = new EMPLOYEE();
+                    Console.WriteLine("Loaded");
                 }
                 return _currentAccount;
             }

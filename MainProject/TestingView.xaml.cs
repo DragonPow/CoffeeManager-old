@@ -10,19 +10,23 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace MainProject.MainWorkSpace.Bill
+namespace MainProject
 {
     /// <summary>
-    /// Interaction logic for BillDetail_UC.xaml
+    /// Interaction logic for TestingView.xaml
     /// </summary>
-    public partial class BillDetail_UC : UserControl
+    public partial class TestingView : Window
     {
-        public BillDetail_UC()
+        public TestingView()
         {
             InitializeComponent();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            //Console.WriteLine(((MainProject.MainWorkSpace.Bill.BillViewModel)ListView.DataContext).Bills.Count());
         }
     }
 }
