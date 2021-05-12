@@ -18,6 +18,7 @@ namespace MainProject.Model
         public long ID_BILL { get; set; }
         public Nullable<int> AMOUNT { get; set; }
     
+        public virtual BILL BILL { get; set; }
         public virtual PRODUCT PRODUCT { get; set; }
     }
 }

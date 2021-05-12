@@ -17,7 +17,6 @@ namespace MainProject.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public PRODUCT()
         {
-            this.BILLs = new HashSet<BILL>();
             this.DETAILBILLs = new HashSet<DETAILBILL>();
         }
     
@@ -29,8 +28,6 @@ namespace MainProject.Model
         public string TYPE { get; set; }
         public Nullable<int> DELETED { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<BILL> BILLs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DETAILBILL> DETAILBILLs { get; set; }
     }
