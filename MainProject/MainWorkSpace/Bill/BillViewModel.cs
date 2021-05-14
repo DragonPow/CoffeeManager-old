@@ -102,6 +102,13 @@ namespace MainProject.MainWorkSpace.Bill
                 if (_loadDiscountCommand==null)
                 {
                     _loadDiscountCommand = new RelayingCommand<Object>(para => LoadDiscount());
+                    //Test list bill
+                    _bills = new List<BILL>()
+                    {
+                        //new BILL(){ID=1,TotalPrice=1000},
+                        //new BILL(){ID=2,TotalPrice=2000},
+                        //new BILL(){ID=3,TotalPrice=3000},
+                    };
                 }
                 return _loadDiscountCommand;
             }

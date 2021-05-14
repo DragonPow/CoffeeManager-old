@@ -250,6 +250,15 @@
     </Compile>
     <Compile Include="StatisticWorkSpace\StatisticViewModel.cs" />
     <Compile Include="Store.cs" />
+    <Compile Include="ValidationRules\ExistVoucherValidationRule.cs" />
+    <Compile Include="ValidationRules\NotNullableValidationRule.cs" />
+    <Compile Include="ValidationRules\RangeNumberValidationRule.cs" />
+    <Compile Include="VoucherWorkSpace\AddVoucherWindow.xaml.cs">
+      <DependentUpon>AddVoucherWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="VoucherWorkSpace\VoucherPreviewPanel.xaml.cs">
+      <DependentUpon>VoucherPreviewPanel.xaml</DependentUpon>
+    </Compile>
     <Compile Include="TestingView.xaml.cs">
       <DependentUpon>TestingView.xaml</DependentUpon>
     </Compile>
@@ -369,6 +378,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="VoucherWorkSpace\AddVoucherWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="VoucherWorkSpace\VoucherPreviewPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="TestingView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -448,6 +465,7 @@
       <DependentUpon>MainModel.edmx</DependentUpon>
       <LastGenOutput>MainModel.cs</LastGenOutput>
     </Content>
+    <Resource Include="Resources\sale_border.png" />
     <Resource Include="Resources\coffee.jpg" />
     <Resource Include="Resources\alreadyTable.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

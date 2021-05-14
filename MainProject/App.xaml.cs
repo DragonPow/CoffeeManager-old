@@ -1,5 +1,6 @@
 ﻿using MainProject.ApplicationWorkSpace;
-using MainProject.MainWorkSpace.Bill;
+//using MainProject.MainWorkSpace.Bill;
+//using MainProject.Model;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -36,6 +37,16 @@ namespace MainProject
 
             view.DataContext = viewModel;
             view.ShowDialog();
+
+            //tesing database
+            //Để hay xóa dòng này không ảnh hưởng tới luồng chạy chương trình
+            using (var main = new mainEntities())
+            {
+                Console.WriteLine(main.EMPLOYEEs.Count());
+            }
+                //LoginWorkSpace.LoginViewModel VM = new LoginWorkSpace.LoginViewModel();
+                //view.DataContext = VM;
+            view.Show();
         }
     }
 }
