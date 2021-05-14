@@ -180,16 +180,16 @@ namespace MainProject.VoucherWorkSpace
             return builder.ToString();
         }
 
-        public void RandomCode()
+        public void GetAvaiableCode()
         {
             using (mainEntities db = new mainEntities())
             {
-                /*VOUCHER voucher = db.VOUCHERs.Where((v) => v.ID == this._code).First();
+                VOUCHER voucher = db.VOUCHERs.Where((v) => v.ID == this._code).First();
                 while (voucher != null)
                 {
                     _code = getRandomCode();
                     voucher = db.VOUCHERs.Where((v) => v.ID == _code).First();
-                }*/
+                }
             }
             OnPropertyChanged("Code");
         }

@@ -36,7 +36,7 @@ namespace MainProject.VoucherWorkSpace
 
             if (viewModel.IsAuto)
             {
-                viewModel.RandomCode();
+                viewModel.GetAvaiableCode();
             }
 
             Console.WriteLine(viewModel.Code);
