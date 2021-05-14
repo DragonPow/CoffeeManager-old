@@ -1,4 +1,5 @@
 ﻿using MainProject.ApplicationWorkSpace;
+using MainProject.Model;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -22,8 +23,15 @@ namespace MainProject
             TestingView view = new TestingView();
             TestingViewModel viewModel = new TestingViewModel();
             view.DataContext = viewModel;
-            //LoginWorkSpace.LoginViewModel VM = new LoginWorkSpace.LoginViewModel();
-            //view.DataContext = VM;
+
+            //tesing database
+            //Để hay xóa dòng này không ảnh hưởng tới luồng chạy chương trình
+            using (var main = new mainEntities())
+            {
+                Console.WriteLine(main.EMPLOYEEs.Count());
+            }
+                //LoginWorkSpace.LoginViewModel VM = new LoginWorkSpace.LoginViewModel();
+                //view.DataContext = VM;
             view.Show();
 
         }
