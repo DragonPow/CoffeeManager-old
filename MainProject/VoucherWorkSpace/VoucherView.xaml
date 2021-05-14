@@ -77,7 +77,6 @@
         <TextBox 
             Grid.Column="1" Grid.Row="1"
             x:Name="txt_value"
-            LostFocus="txt_value_LostFocus"
             MaxLength="2"
             materialDesign:HintAssist.Hint="Value (%)"
             Style="{StaticResource MaterialDesignFloatingHintTextBox}" InputScope="Number"
