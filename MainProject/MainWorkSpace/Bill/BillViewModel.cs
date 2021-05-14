@@ -14,7 +14,7 @@ namespace MainProject.MainWorkSpace.Bill
         #region Fields
         private int _id;
         private DateTime _timeCheckout;
-        private TableModel _tableCheckout;
+        private TABLE _tableCheckout;
         private ICommand _paymentCommand;
         private ICommand _loadDiscountCommand;
         #endregion
@@ -61,7 +61,7 @@ namespace MainProject.MainWorkSpace.Bill
             }
         }
 
-        public TableModel TableCheckout
+        public TABLE TableCheckout
         {
             get { return _tableCheckout; }
             set
@@ -112,21 +112,10 @@ namespace MainProject.MainWorkSpace.Bill
         #region Constructors
         public BillViewModel()
         {
-            //Testing
-            ObservableCollection<FoodModel> foods = new ObservableCollection<FoodModel>()
-            {
-                new FoodModel(0, "Thachj", 10000, 2),
-                new FoodModel(1, "Nhuc", 20000, 3),
-                new FoodModel(2, "Bang", 10000, 1)
-            };
-            //Tesing
-
-            TableCheckout = new TableModel(0,"1",foods);
-            TimeCheckout = DateTime.Now;
-
+            //Constructors missing
         }
 
-        public BillViewModel(TableModel table, int ID = -1) : this()
+        public BillViewModel(TABLE table, int ID = -1) : this()
         {
             this.ID = ID;
             this.TableCheckout = table;
@@ -143,11 +132,7 @@ namespace MainProject.MainWorkSpace.Bill
         {
             using (var db = new mainEntities())
             {
-                BILL newBill = new BILL();
-                newBill.TotalPrice = TableCheckout.TotalPrice;
-                newBill.ID_TABLES = TableCheckout.ID;
-                db.BILLs.Add(newBill);
-                db.SaveChanges();
+                //Payment missing
             }
             view.Close();
         }

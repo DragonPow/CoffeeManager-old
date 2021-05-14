@@ -14,7 +14,7 @@ namespace MainProject.LoginWorkSpace
     public class LoginViewModel : BaseViewModel
     {
         #region Fields
-        private AccountModel _currentAccount;
+        private EMPLOYEE _currentAccount;
         private bool _loginSuccess;
         private ICommand _loginCommand;
         #endregion //Fiedls
@@ -44,13 +44,13 @@ namespace MainProject.LoginWorkSpace
                 }
             }
         }
-        public AccountModel CurrentAccount
+        public EMPLOYEE CurrentAccount
         {
             get
             {
                 if(_currentAccount == null)
                 {
-                    _currentAccount = new AccountModel();
+                    _currentAccount = new EMPLOYEE();
                 }
                 return _currentAccount;
             }
@@ -72,7 +72,8 @@ namespace MainProject.LoginWorkSpace
         /// </summary>
         private void Login(LoginView view)
         {
-            if (!AccountModel.isContain(CurrentAccount))
+            //something missing here
+            //if (!AccountModel.isContain(CurrentAccount))
             {
                 isLoginSuccess = true;
                 view.Close();

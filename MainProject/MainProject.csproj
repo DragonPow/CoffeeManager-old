@@ -191,7 +191,6 @@
     <Compile Include="MainWorkSpace\Table\TableView.xaml.cs">
       <DependentUpon>TableView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Model\AccountModel.cs" />
     <Compile Include="Model\BILL.cs">
       <DependentUpon>MainModel.tt</DependentUpon>
     </Compile>
@@ -205,7 +204,6 @@
     <Compile Include="Model\EMPLOYEE.cs">
       <DependentUpon>MainModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\FoodModel.cs" />
     <Compile Include="Model\GOOD.cs">
       <DependentUpon>MainModel.tt</DependentUpon>
     </Compile>
@@ -235,7 +233,6 @@
     <Compile Include="Model\TABLE.cs">
       <DependentUpon>MainModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\TableModel.cs" />
     <Compile Include="Model\Table\TableListViewModel.cs" />
     <Compile Include="Model\Table\TableViewModel.cs" />
     <Compile Include="Model\VOUCHER.cs">
