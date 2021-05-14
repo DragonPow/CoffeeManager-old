@@ -18,9 +18,9 @@ namespace MainProject.MainWorkSpace.Bill
                 {
                     _bills = new List<BILL>()
                     {
-                        new BILL(){ID=1,TotalPrice=1000},
-                        new BILL(){ID=2,TotalPrice=2000},
-                        new BILL(){ID=3,TotalPrice=3000},
+                        //new BILL(){ID=1,TotalPrice=1000},
+                        //new BILL(){ID=2,TotalPrice=2000},
+                        //new BILL(){ID=3,TotalPrice=3000},
                     };
                 }
                 return _bills;
