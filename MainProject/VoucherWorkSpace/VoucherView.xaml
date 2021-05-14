@@ -61,11 +61,25 @@
             </Grid.ColumnDefinitions>
             <TextBox Grid.Column="0"
                      x:Name="txtCode"
-                     Text="{Binding Path=Code, Mode=TwoWay}"
+                     MaxLength="16"
                 materialDesign:HintAssist.Hint="CODE"
                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                 VerticalAlignment="Center"     
-                />
+                     Validation.Error="On_Validation_Error"
+                >
+                <TextBox.Text>
+                    <Binding Path="Code" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged" 
+                             NotifyOnValidationError="True">
+                        <Binding.ValidationRules>
+                            <rules:LengthRangeValidationRule Min="16" Max="17" 
+                                                             ErrorMessage="Code must has 16 character (A-Z || 0-9)"/>
+                            <rules:CharacterValidationRule ValidCharacterSet="QWERTYUIOPASDFGHJKLZXCVBNM1234567890"
+                                                           ErrorMessage="Code must has 16 character (A-Z || 0-9)"/>
+                            <rules:ExistVoucherValidationRule ErrorMsg="Code already existed"/>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
             <CheckBox Grid.Column="1"
                       x:Name="cbx_auto"
                       IsChecked="{Binding Path=IsAuto, Mode=TwoWay}"
@@ -77,13 +91,15 @@
         <TextBox 
             Grid.Column="1" Grid.Row="1"
             x:Name="txt_value"
+            Validation.Error="On_Validation_Error"
             MaxLength="2"
             materialDesign:HintAssist.Hint="Value (%)"
             Style="{StaticResource MaterialDesignFloatingHintTextBox}" InputScope="Number"
             VerticalAlignment="Center" Grid.ColumnSpan="2" Margin="44.6,0,369,0" HorizontalAlignment="Left" Width="120" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"
             >
             <TextBox.Text>
-                <Binding Mode="TwoWay" Path="Value" UpdateSourceTrigger="PropertyChanged">
+                <Binding Mode="TwoWay" Path="Value" UpdateSourceTrigger="PropertyChanged"
+                         NotifyOnValidationError="True">
                     <Binding.ValidationRules>
                         <rules:NotNullableValidationRule />
                     </Binding.ValidationRules>

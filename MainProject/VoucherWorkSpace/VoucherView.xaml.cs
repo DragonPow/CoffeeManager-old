@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,7 +19,7 @@ namespace MainProject.VoucherWorkSpace
     /// <summary>
     /// Interaction logic for VoucherView.xaml
     /// </summary>
-    public partial class VoucherView : UserControl
+    public partial class VoucherView : UserControl, System.ComponentModel.INotifyPropertyChanged
     {
         public VoucherView()
         {
@@ -38,5 +39,25 @@ namespace MainProject.VoucherWorkSpace
         {
             txtCode.IsEnabled = true;
         }
+
+        int errorCount = 0;
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private void On_Validation_Error(object sender, ValidationErrorEventArgs e)
+        {
+            if (e.Action == ValidationErrorEventAction.Added)
+            {
+                errorCount++;
+            }
+            else
+            {
+                errorCount--;
+            }
+            this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("IsValid"));
+        }
+
+        public bool IsValid { get => errorCount < 1; }
+
     }
 }

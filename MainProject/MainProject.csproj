@@ -250,7 +250,9 @@
     </Compile>
     <Compile Include="StatisticWorkSpace\StatisticViewModel.cs" />
     <Compile Include="Store.cs" />
+    <Compile Include="ValidationRules\CharacterValidationRule.cs" />
     <Compile Include="ValidationRules\ExistVoucherValidationRule.cs" />
+    <Compile Include="ValidationRules\LengthRangeValidationRule.cs" />
     <Compile Include="ValidationRules\NotNullableValidationRule.cs" />
     <Compile Include="ValidationRules\RangeNumberValidationRule.cs" />
     <Compile Include="VoucherWorkSpace\AddVoucherWindow.xaml.cs">

@@ -157,10 +157,12 @@ namespace MainProject.VoucherWorkSpace
 
         private bool isAuto;
 
+        public ValidationRules.LengthRangeValidationRule LengthRangeValidationRule = new ValidationRules.LengthRangeValidationRule();
+
         public VoucherViewModel()
         {
-
-            this.Code = "";
+            this._code = getRandomCode();
+            this.isAuto = true;
             this.Description = "Empty description";
             this.Value = "20";
 
@@ -182,13 +184,12 @@ namespace MainProject.VoucherWorkSpace
 
         public void GetAvaiableCode()
         {
+            this._code = getRandomCode();
             using (mainEntities db = new mainEntities())
             {
-                VOUCHER voucher = db.VOUCHERs.Where((v) => v.ID == this._code).First();
-                while (voucher != null)
+                while (db.VOUCHERs.Where((v) => v.ID == this._code).Any())
                 {
-                    _code = getRandomCode();
-                    voucher = db.VOUCHERs.Where((v) => v.ID == _code).First();
+                    this._code = getRandomCode();
                 }
             }
             OnPropertyChanged("Code");
@@ -197,10 +198,12 @@ namespace MainProject.VoucherWorkSpace
         public VOUCHER toDB_Voucher()
         {
             VOUCHER voucher = new VOUCHER();
-            //voucher.ID = this.Code;
+            voucher.ID = this.Code;
             voucher.BEGINTIME = this.DateStart;
             voucher.ENDTIME = this.dateEnd;
             voucher.PERCENT = this._value;
+            voucher.DELETED = 0;
+            voucher.DESCRIPTION = this.Description;
             return voucher;
         }
 
@@ -209,17 +212,17 @@ namespace MainProject.VoucherWorkSpace
             using (mainEntities db = new mainEntities())
             {
                 db.VOUCHERs.Add(viewModel.toDB_Voucher());
+                db.SaveChanges();
             }
         }
 
         public static bool HasExisted(String code)
         {
             bool rs = false;
-            /*using (mainEntities db = new mainEntities())
+            using (mainEntities db = new mainEntities())
             {
-                VOUCHER voucher = db.VOUCHERs.Where((v) => v.ID == code).First();
-                rs = voucher != null;
-            }*/
+                rs = db.VOUCHERs.Where(v => v.ID == code).Any();
+            }
             return rs;
         }
     }

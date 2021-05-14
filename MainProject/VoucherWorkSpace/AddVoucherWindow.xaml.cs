@@ -34,12 +34,9 @@ namespace MainProject.VoucherWorkSpace
                 return;
             }
 
-            if (viewModel.IsAuto)
-            {
-                viewModel.GetAvaiableCode();
-            }
+            viewModel.SaveToDB(viewModel);
 
-            Console.WriteLine(viewModel.Code);
+                Console.WriteLine(viewModel.Code);
             Console.WriteLine(viewModel.ValueString);
             Console.WriteLine(viewModel.DateStart.ToShortDateString() + "  " + viewModel.DateStart.ToShortTimeString());
             Console.WriteLine(viewModel.DateEnd.ToLongDateString() + "  " + viewModel.DateEnd.ToShortTimeString());

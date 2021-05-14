@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:MainProject.VoucherWorkSpace"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Title="AddVoucherWindow" Height="380" Width="830">
+        Title="AddVoucherWindow" Height="380" Width="830" WindowStartupLocation="CenterOwner" Topmost="False" ShowInTaskbar="False" ResizeMode="NoResize">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="300"/>
@@ -27,6 +27,7 @@
             Click="Button_Click"
             Style="{StaticResource MaterialDesignRaisedDarkButton}"
             materialDesign:ButtonAssist.CornerRadius="15"
+            IsEnabled="{Binding ElementName=voucherView, Path=IsValid, Mode=OneWay}"
             ToolTip="MaterialDesignRaisedDarkButton with Round Corners" Height="Auto" HorizontalAlignment="Center" Margin="70,5,0,10" Width="120">
             <TextBlock
                 Text="Create" FontSize="16" />
