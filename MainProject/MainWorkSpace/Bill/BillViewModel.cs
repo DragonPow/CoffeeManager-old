@@ -13,23 +13,10 @@ namespace MainProject.MainWorkSpace.Bill
     {
         #region Fields
         private BILL _currentBill;
+        private int _discount;
         private ICommand _paymentCommand;
         private ICommand _loadDiscountCommand;
         #endregion
-        private int _discount;
-
-        public int Discount
-        {
-            get { return _discount; }
-            set 
-            {
-                if (value!=_discount)
-                {
-                    _discount = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
 
 
         #region Properties
@@ -46,6 +33,26 @@ namespace MainProject.MainWorkSpace.Bill
                     _currentBill = value;
                     OnPropertyChanged();
                 }
+            }
+        }
+        public int Discount
+        {
+            get { return _discount; }
+            set
+            {
+                if (value != _discount)
+                {
+                    _discount = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        public long TotalPrice
+        {
+            get
+            {
+                return CurrentBill.DETAILBILLs.Sum(bill => bill.AMOUNT * bill.PRODUCT.PRICE);
             }
         }
         #endregion
@@ -88,6 +95,7 @@ namespace MainProject.MainWorkSpace.Bill
         public BillViewModel()
         {
             CurrentBill = new BILL();
+            CurrentBill.DETAILBILLs.Add(new DETAILBILL() { AMOUNT = 2, PRODUCT = new PRODUCT() { NAME = "Thach", PRICE = 1000 } });
         }
 
         public BillViewModel(BILL bill)
@@ -100,11 +108,14 @@ namespace MainProject.MainWorkSpace.Bill
         {
             using (var db = new mainEntities())
             {
-                var newBill = new BILL();
-                db.BILLs.Add(CurrentBill);
-                db.SaveChanges();
+                //var newBill = new BILL();
+                //db.BILLs.Add(CurrentBill);
+                //db.SaveChanges();
+
+                //testing
+                CurrentBill.DETAILBILLs[0].AMOUNT = 3;
             }
-            view.Close();
+            //view.Close();
         }
         private void LoadDiscount()
         {
