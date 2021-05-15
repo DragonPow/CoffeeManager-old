@@ -1,4 +1,5 @@
 ﻿using MainProject.ApplicationWorkSpace;
+using MainProject.MainWorkSpace.Bill;
 using MainProject.Model;
 using System;
 using System.Collections.Generic;
@@ -20,9 +21,12 @@ namespace MainProject
             AppDomain.CurrentDomain.SetData("DataDirectory", "../../");
 
             base.OnStartup(e);
-            TestingView view = new TestingView();
-            TestingViewModel viewModel = new TestingViewModel();
-            view.DataContext = viewModel;
+
+            //This is testing Startup
+            BillView view = new BillView();
+            MainWorkSpace.Bill.BillViewModel viewModel = new MainWorkSpace.Bill.BillViewModel();
+            //End testing Startup
+
 
             //tesing database
             //Để hay xóa dòng này không ảnh hưởng tới luồng chạy chương trình
@@ -30,9 +34,18 @@ namespace MainProject
             {
                 Console.WriteLine(main.EMPLOYEEs.Count());
             }
-                //LoginWorkSpace.LoginViewModel VM = new LoginWorkSpace.LoginViewModel();
-                //view.DataContext = VM;
-            view.Show();
+            //End testing database
+
+
+            //This is main Startup
+
+            //ApplicationView view = new ApplicationView();
+            //ApplicationViewModel viewModel = new ApplicationViewModel();
+
+            //End main Startup
+
+            view.DataContext = viewModel;
+            view.ShowDialog();
 
         }
     }
