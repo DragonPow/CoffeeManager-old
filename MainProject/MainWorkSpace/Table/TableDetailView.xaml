@@ -36,39 +36,28 @@
             </Grid.ColumnDefinitions>
             <Border BorderBrush="Gray" BorderThickness="0,1,0,1" Grid.ColumnSpan="2"  ></Border>
             <CheckBox
-                 Style="{StaticResource MaterialDesignFilterChipAccentCheckBox}"
-                 IsChecked="True"
-                 Margin="10,0"
-                 Foreground="Gray">
+                Height="25"
+                  Style="{StaticResource MaterialDesignFilterChipAccentCheckBox}"
+                  IsChecked="True"
+                  VerticalAlignment="Center" Margin="10,0"
+                Background="{StaticResource MainColor}"
+                Foreground="Green">
                 Mang đi
             </CheckBox>
-            <TextBlock Text="Tổng tiền" FontSize="12" HorizontalAlignment="Left" VerticalAlignment="Top" TextAlignment="Left"  Foreground="Black" Padding="0" Margin="10,0" Grid.Column="1"  />
+            <TextBlock Text="Tổng tiền" FontSize="10" HorizontalAlignment="Left" VerticalAlignment="Top" TextAlignment="Left"  Foreground="Black" Padding="0" Margin="10,0" Grid.Column="1"  />
             <TextBlock Style="{StaticResource MaterialDesignHeadline6TextBlock}"
-                Text="25000" FontSize="22" FontWeight="DemiBold" FontStyle="Italic" HorizontalAlignment="Right" VerticalAlignment="Bottom" TextAlignment="Center" Foreground="#BD8722" Margin="0,0,10,0" Padding="0" Grid.Column="1"></TextBlock>
+                Text="25000" FontSize="20" FontWeight="DemiBold" FontStyle="Italic" HorizontalAlignment="Right" VerticalAlignment="Bottom" TextAlignment="Center" Foreground="#BD8722" Margin="0,0,10,0" Padding="0" Grid.Column="1"></TextBlock>
         </Grid>
         <Grid Grid.Row="3" >
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="1*"/>
-            </Grid.ColumnDefinitions>
             <Button
-                Style="{StaticResource MaterialDesignFlatAccentBgButton}"
-                ToolTip="MaterialDesignFlatAccentBackgroundButton"
-                Content="Lưu"
-                 Height="Auto"
-                VerticalAlignment="Stretch"
-                HorizontalAlignment="Stretch"
-                IsEnabled="True"
-                Foreground="White" Background="{StaticResource MainColor}"
-                BorderThickness="0" Grid.Column="0"  />
-            <Button
-                Style="{StaticResource MaterialDesignFlatAccentBgButton}"
-                ToolTip="MaterialDesignFlatAccentBackgroundButton"
+                Style="{StaticResource MaterialDesignRaisedButton}"
+                ToolTip="MaterialDesignRaisedButton with Round Corners"
                 Content="Thanh toán"
                 Height="Auto"
+                Margin="2"
                 VerticalAlignment="Stretch"
                 HorizontalAlignment="Stretch" 
-                IsEnabled="False"
+                materialDesign:ButtonAssist.CornerRadius="2"
                 Foreground="White" Background="{StaticResource MainColor}"
                 BorderThickness="0" Grid.Column="1"/>
         </Grid>
