@@ -12,9 +12,7 @@ namespace MainProject.MainWorkSpace.Bill
     public class BillViewModel : BaseViewModel
     {
         #region Fields
-        private int _id;
-        private DateTime _timeCheckout;
-        private TABLE _tableCheckout;
+        private BILL _currentBill;
         private ICommand _paymentCommand;
         private ICommand _loadDiscountCommand;
         #endregion
@@ -35,40 +33,17 @@ namespace MainProject.MainWorkSpace.Bill
 
 
         #region Properties
-        public int ID
+        public BILL CurrentBill
         {
-            get { return _id; }
+            get
+            {
+                return _currentBill;
+            }
             private set
             {
-                if (value != _id)
+                if (value != _currentBill)
                 {
-                    _id = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
-
-        public DateTime TimeCheckout
-        {
-            get { return _timeCheckout; }
-            private set
-            {
-                if (value != _timeCheckout)
-                {
-                    _timeCheckout = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
-
-        public TABLE TableCheckout
-        {
-            get { return _tableCheckout; }
-            set
-            {
-                if (value != _tableCheckout)
-                {
-                    _tableCheckout = value;
+                    _currentBill = value;
                     OnPropertyChanged();
                 }
             }
@@ -102,13 +77,6 @@ namespace MainProject.MainWorkSpace.Bill
                 if (_loadDiscountCommand==null)
                 {
                     _loadDiscountCommand = new RelayingCommand<Object>(para => LoadDiscount());
-                    //Test list bill
-                    _bills = new List<BILL>()
-                    {
-                        //new BILL(){ID=1,TotalPrice=1000},
-                        //new BILL(){ID=2,TotalPrice=2000},
-                        //new BILL(){ID=3,TotalPrice=3000},
-                    };
                 }
                 return _loadDiscountCommand;
             }
@@ -119,19 +87,12 @@ namespace MainProject.MainWorkSpace.Bill
         #region Constructors
         public BillViewModel()
         {
-            //Constructors missing
+            CurrentBill = new BILL();
         }
 
-        public BillViewModel(TABLE table, int ID = -1) : this()
+        public BillViewModel(BILL bill)
         {
-            this.ID = ID;
-            this.TableCheckout = table;
-        }
-        public BillViewModel(BillViewModel bill)
-        {
-            this.ID = bill.ID;
-            this.TableCheckout = bill.TableCheckout;
-            this.TimeCheckout = bill.TimeCheckout;
+            CurrentBill = bill;
         }
         #endregion
 
@@ -139,7 +100,9 @@ namespace MainProject.MainWorkSpace.Bill
         {
             using (var db = new mainEntities())
             {
-                //Payment missing
+                var newBill = new BILL();
+                db.BILLs.Add(CurrentBill);
+                db.SaveChanges();
             }
             view.Close();
         }

@@ -1,6 +1,6 @@
 ﻿using MainProject.ApplicationWorkSpace;
-//using MainProject.MainWorkSpace.Bill;
-//using MainProject.Model;
+using MainProject.MainWorkSpace.Bill;
+using MainProject.Model;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -23,20 +23,10 @@ namespace MainProject
             base.OnStartup(e);
 
             //This is testing Startup
-
-            //TestingView view = new TestingView();
             BillView view = new BillView();
             MainWorkSpace.Bill.BillViewModel viewModel = new MainWorkSpace.Bill.BillViewModel();
-            //TestingViewModel viewModel = new TestingViewModel();
+            //End testing Startup
 
-
-            //This is main Startup
-
-            //ApplicationView view = new ApplicationView();
-            //ApplicationViewModel viewModel = new ApplicationViewModel();
-
-            view.DataContext = viewModel;
-            view.ShowDialog();
 
             //tesing database
             //Để hay xóa dòng này không ảnh hưởng tới luồng chạy chương trình
@@ -44,9 +34,19 @@ namespace MainProject
             {
                 Console.WriteLine(main.EMPLOYEEs.Count());
             }
-                //LoginWorkSpace.LoginViewModel VM = new LoginWorkSpace.LoginViewModel();
-                //view.DataContext = VM;
-            view.Show();
+            //End testing database
+
+
+            //This is main Startup
+
+            //ApplicationView view = new ApplicationView();
+            //ApplicationViewModel viewModel = new ApplicationViewModel();
+
+            //End main Startup
+
+            view.DataContext = viewModel;
+            view.ShowDialog();
+
         }
     }
 }

@@ -52,7 +52,7 @@
                 </TextBlock>
                 <TextBlock Grid.Row="1" Grid.Column="0">
                     <Run>Bàn</Run>
-                    <Run Text="{Binding TableCheckout.ID, StringFormat=': {0}'}"/>
+                    <Run Text="{Binding CurrentBill.Table.ID, StringFormat=': {0}'}"/>
                 </TextBlock>
                 <TextBlock Grid.Row="0" Grid.Column="1">
                     <Run>Mã số hóa đơn</Run>
@@ -80,7 +80,7 @@
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <local:Bill_ProductTable DataContext="{Binding TableCheckout}"
+            <local:Bill_ProductTable DataContext="{Binding CurrentBill.DETAILBILLs}"
                                      Grid.ColumnSpan="2"
                                      x:Name="TableLines"/>
             <TextBlock Text="Ưu đãi" Grid.Row="1" 
@@ -101,6 +101,7 @@
                        FontWeight="Bold"
                        FontSize="20"
                        HorizontalAlignment="Right"/>
+            <!--Thiếu converer-->
             <TextBlock Text="{Binding TableCheckout.TotalPrice, FallbackValue='0,000 đ', 
                                 StringFormat='{}{0:N0} đ', NotifyOnTargetUpdated=True}"
                        FontWeight="Bold"
