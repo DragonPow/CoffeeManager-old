@@ -9,7 +9,7 @@ using System.Windows.Controls;
 
 namespace MainProject.VoucherWorkSpace
 {
-    class VoucherViewModel : BaseViewModel, IMainWorkSpace
+    public class VoucherViewModel : BaseViewModel, IMainWorkSpace
     {
         public string NameWorkSpace => "Voucher";
         private const PackIconKind _IconDisplay = PackIconKind.GiftOutline;
@@ -157,8 +157,6 @@ namespace MainProject.VoucherWorkSpace
 
         private bool isAuto;
 
-        public ValidationRules.LengthRangeValidationRule LengthRangeValidationRule = new ValidationRules.LengthRangeValidationRule();
-
         public VoucherViewModel()
         {
             this._code = getRandomCode();
@@ -166,6 +164,16 @@ namespace MainProject.VoucherWorkSpace
             this.Description = "Empty description";
             this.Value = "20";
 
+            this.dateStart = DateTime.Now;
+            this.dateEnd = DateTime.Now.AddDays(1);
+        }
+
+        public VoucherViewModel(VoucherViewModel other)
+        {
+            this._code = other.Code;
+            this.isAuto = other.IsAuto;
+            this.Description = other.Description;
+            this.Value = other.Value;
             this.dateStart = DateTime.Now;
             this.dateEnd = DateTime.Now.AddDays(1);
         }
@@ -216,6 +224,30 @@ namespace MainProject.VoucherWorkSpace
             }
         }
 
+        public bool DeleteFromDB()
+        {
+            return DeleteFromDB(this.Code);
+        }
+
+        public bool UpdateToDB()
+        {
+            using (mainEntities db = new mainEntities())
+            {
+                var v = db.VOUCHERs.Where(_v => _v.ID == this.Code).FirstOrDefault();
+                if (v == null)
+                {
+                    // code not existed
+                    return false;
+                }
+                v.PERCENT = this._value;
+                v.BEGINTIME = this.DateStart;
+                v.ENDTIME = this.DateEnd;
+                v.DESCRIPTION = this.Description;
+                db.SaveChanges();
+            }
+            return true;
+        }
+
         public static bool HasExisted(String code)
         {
             bool rs = false;
@@ -225,5 +257,37 @@ namespace MainProject.VoucherWorkSpace
             }
             return rs;
         }
+
+        public static bool DeleteFromDB(String code)
+        {
+            using (mainEntities db = new mainEntities())
+            {
+                var v = db.VOUCHERs.Where(_v => _v.ID == code).FirstOrDefault();
+                if (v == null)
+                {
+                    // code not existed
+                    return false;
+                }
+
+                db.VOUCHERs.Remove(v);
+                db.SaveChanges();
+            }
+            return true;
+        }
+
+        public static VoucherViewModel from(VOUCHER voucher)
+        {
+            VoucherViewModel viewModel = new VoucherViewModel()
+            {
+                Code = voucher.ID,
+                DateStart = (DateTime)voucher.BEGINTIME,
+                DateEnd = (DateTime)voucher.ENDTIME,
+                _value = (int)voucher.PERCENT,
+                Description = voucher.DESCRIPTION
+            };
+            return viewModel;
+        }
+
+        
     }
 }

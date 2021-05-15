@@ -93,6 +93,7 @@
     <Reference Include="System.Numerics" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -258,6 +259,9 @@
     <Compile Include="VoucherWorkSpace\AddVoucherWindow.xaml.cs">
       <DependentUpon>AddVoucherWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="VoucherWorkSpace\VoucherListItem.xaml.cs">
+      <DependentUpon>VoucherListItem.xaml</DependentUpon>
+    </Compile>
     <Compile Include="VoucherWorkSpace\VoucherPreviewPanel.xaml.cs">
       <DependentUpon>VoucherPreviewPanel.xaml</DependentUpon>
     </Compile>
@@ -388,6 +392,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="VoucherWorkSpace\VoucherListItem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="VoucherWorkSpace\VoucherPreviewPanel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -453,6 +461,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Resources\iconfinder_17_330399.png" />
     <Resource Include="Resources\freetable.png" />
     <Resource Include="AccountWorkSpace\user-1648810-1401302.png" />
     <Resource Include="AccountWorkSpace\back-arrow.png" />

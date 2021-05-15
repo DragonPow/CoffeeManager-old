@@ -5,18 +5,17 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:MainProject.VoucherWorkSpace"
              xmlns:rules="clr-namespace:MainProject.ValidationRules"
-             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
+             d:DataContext="{d:DesignInstance Type=local:VoucherViewModel}"
              mc:Ignorable="d" 
              Background="White"
              d:DesignHeight="300" d:DesignWidth="800" FontSize="16">
-    <UserControl.DataContext>
-        <local:VoucherViewModel />
-    </UserControl.DataContext>
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="6*"/>
-            <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="11*"/>
+            <ColumnDefinition Width="68*"/>
+            <ColumnDefinition Width="198*"/>
+            <ColumnDefinition Width="45*"/>
+            <ColumnDefinition Width="489*"/>
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
@@ -28,8 +27,8 @@
         </Grid.RowDefinitions>
 
         <Image 
-            Grid.Column="0" Grid.RowSpan="7"
-            Source="/MainProject;component/Resources/sale_border.png" HorizontalAlignment="Center" Margin="10"
+            Grid.Column="0" Grid.RowSpan="5"
+            Source="/MainProject;component/Resources/sale_border.png" HorizontalAlignment="Center" Margin="10,10,10.4,10" Grid.ColumnSpan="2"
             
             >
             <Image.Effect>
@@ -37,32 +36,32 @@
             </Image.Effect>
         </Image>
 
-        <TextBlock Grid.Column="0" Grid.RowSpan="7"
-            Text="SALE" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="75" FontWeight="Bold" FontStyle="Italic" Margin="0,0,0,60" Foreground="#FFF45454"
+        <TextBlock Grid.Column="0" Grid.RowSpan="2"
+            Text="SALE" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="75" FontWeight="Bold" FontStyle="Italic" Margin="48,10,46.4,10" Foreground="#FFF45454" Grid.ColumnSpan="2" Grid.Row="1"
                     >
             <TextBlock.Effect>
                 <DropShadowEffect Opacity="0.7" ShadowDepth="4"/>
             </TextBlock.Effect>
         </TextBlock>
 
-        <TextBlock Grid.Column="0" Grid.RowSpan="7"
+        <TextBlock Grid.Column="0" Grid.RowSpan="2"
             Text="{Binding Path=ValueString}" 
-                   HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="65" FontWeight="Bold" FontStyle="Italic" Margin="0,80,0,0" Foreground="#FF000CFF"
+                   HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="65" FontWeight="Bold" FontStyle="Italic" Margin="68,27,66.4,6" Foreground="#FF000CFF" Grid.ColumnSpan="2" Grid.Row="2"
                    >
             <TextBlock.Effect>
                 <DropShadowEffect Opacity="0.7" ShadowDepth="4"/>
             </TextBlock.Effect>
         </TextBlock>
 
-        <Grid Grid.Column="2" Grid.Row="0">
+        <Grid Grid.Column="2" Grid.Row="0" Grid.ColumnSpan="2" Margin="44.6,0,0,0">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="6*"/>
+                <ColumnDefinition Width="4*"/>
                 <ColumnDefinition Width="1*"/>
             </Grid.ColumnDefinitions>
             <TextBox Grid.Column="0"
                      x:Name="txtCode"
                      MaxLength="16"
-                materialDesign:HintAssist.Hint="CODE"
+                materialDesign:HintAssist.Hint="Mã"
                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                 VerticalAlignment="Center"     
                      Validation.Error="On_Validation_Error"
@@ -85,17 +84,17 @@
                       IsChecked="{Binding Path=IsAuto, Mode=TwoWay}"
                       Checked="cbx_auto_Checked"
                       Unchecked="cbx_auto_Unchecked"
-                Content="Auto" Margin="0,30,0,0" VerticalContentAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" Padding="0,0,0,4"
+                Content="Tự động" Margin="10,30,0,0" VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="0,0,0,4"
                 />
         </Grid>
         <TextBox 
-            Grid.Column="1" Grid.Row="1"
+            Grid.Column="2" Grid.Row="1"
             x:Name="txt_value"
             Validation.Error="On_Validation_Error"
             MaxLength="2"
-            materialDesign:HintAssist.Hint="Value (%)"
+            materialDesign:HintAssist.Hint="Giá trị (%)"
             Style="{StaticResource MaterialDesignFloatingHintTextBox}" InputScope="Number"
-            VerticalAlignment="Center" Grid.ColumnSpan="2" Margin="44.6,0,369,0" HorizontalAlignment="Left" Width="120" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"
+            VerticalAlignment="Center" Grid.ColumnSpan="2" Margin="44.6,7,0,6" HorizontalAlignment="Left" Width="120" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"
             >
             <TextBox.Text>
                 <Binding Mode="TwoWay" Path="Value" UpdateSourceTrigger="PropertyChanged"
@@ -107,40 +106,43 @@
             </TextBox.Text>
         </TextBox>
         <StackPanel Grid.Column="2" Grid.Row="2"
-            Orientation="Horizontal">
-            <Label Content="From " VerticalAlignment="Center"/>
+            Orientation="Horizontal" Grid.ColumnSpan="2" Margin="44.6,0,0,0">
+            <Label Content="Từ" VerticalAlignment="Center"/>
+            <materialDesign:TimePicker
+                x:Name="timeStart"
+                SelectedTime="{Binding Path=DateStart, Mode=TwoWay}"
+                materialDesign:HintAssist.Hint="Pick time" Margin="2,0,10,0"/>
             <DatePicker
                 x:Name="dateStart"
                 SelectedDate="{Binding Path=DateStart, Mode=TwoWay}"
                 materialDesign:HintAssist.Hint="Pick date"
                 HorizontalContentAlignment="Center" Padding="0,4" VerticalAlignment="Center" Margin="0,11" VerticalContentAlignment="Stretch" />
+            <Label Content="Đến" VerticalAlignment="Center" Margin="10,0,0,0"/>
             <materialDesign:TimePicker
-                x:Name="timeStart"
-                SelectedTime="{Binding Path=DateStart, Mode=TwoWay}"
-                materialDesign:HintAssist.Hint="Pick time" Margin="10,0,0,0"/>
-            <Label Content="To " VerticalAlignment="Center" Margin="10,0,0,0"/>
+                x:Name="timeEnd"
+                SelectedTime="{Binding Path=DateEnd}"
+                materialDesign:HintAssist.Hint="Pick time" Margin="2,0,10,0"/>
             <DatePicker
                 x:Name="dateEnd"
                 SelectedDate="{Binding Path=DateEnd, Mode=TwoWay}"
                 DisplayDateStart="{Binding ElementName=dateStart, Path=SelectedDate}"
                 materialDesign:HintAssist.Hint="Pick date"
                 HorizontalContentAlignment="Center" Padding="0,4" VerticalAlignment="Center" Margin="0,11" VerticalContentAlignment="Stretch" />
-            <materialDesign:TimePicker
-                x:Name="timeEnd"
-                SelectedTime="{Binding Path=DateEnd}"
-                materialDesign:HintAssist.Hint="Pick time" Margin="10,0,0,0"/>
+
         </StackPanel>
-        <TextBox Grid.Column="1" Grid.Row="3" Grid.RowSpan="2"
+        <TextBox 
+            Grid.Column="2" Grid.Row="3" Grid.RowSpan="2"
+            x:Name="txtDescription"
                  Text="{Binding Path=Description}"
             Style="{StaticResource MaterialDesignOutlinedTextBox}"
             VerticalAlignment="Top"
             AcceptsReturn="True"
             TextWrapping="Wrap"
             VerticalScrollBarVisibility="Auto"
-            materialDesign:HintAssist.Hint="Description" Grid.ColumnSpan="2" Margin="9.6,0,10,0" Height="110"/>
+            materialDesign:HintAssist.Hint="Mô tả" Grid.ColumnSpan="2" Margin="9.6,0,10,0" Height="110"/>
 
-        <materialDesign:PackIcon Kind="Key" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="24" Height="24"/>
-        <materialDesign:PackIcon Kind="SackPercent" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Width="24" Height="24"/>
-        <materialDesign:PackIcon Kind="Timetable" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" Width="24" Height="24"/>
+        <materialDesign:PackIcon Kind="Key" Grid.Column="2" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="24" Height="24" Margin="10.6,18,10.2,18"/>
+        <materialDesign:PackIcon Kind="SackPercent" Grid.Column="2" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Width="24" Height="24" Margin="10.6,18,10.2,18"/>
+        <materialDesign:PackIcon Kind="Timetable" Grid.Column="2" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" Width="24" Height="24" Margin="10.6,18,10.2,18"/>
     </Grid>
 </UserControl>

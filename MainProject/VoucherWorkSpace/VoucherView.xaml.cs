@@ -24,15 +24,20 @@ namespace MainProject.VoucherWorkSpace
         public VoucherView()
         {
             InitializeComponent();
-
-            this.dateStart.DisplayDateStart = DateTime.Now.Date;
+            dateStart.DisplayDateStart = DateTime.Now.Date;
         }
 
         private void cbx_auto_Checked(object sender, RoutedEventArgs e)
         {
             VoucherViewModel viewModel = (VoucherViewModel)this.DataContext;
-            viewModel.GetAvaiableCode();
-            txtCode.IsEnabled = false;
+            if (viewModel != null)
+            {
+                if (errorCount != 0)
+                {
+                    viewModel.GetAvaiableCode();
+                }
+                txtCode.IsEnabled = false;
+            }
         }
 
         private void cbx_auto_Unchecked(object sender, RoutedEventArgs e)
@@ -54,10 +59,31 @@ namespace MainProject.VoucherWorkSpace
             {
                 errorCount--;
             }
-            this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("IsValid"));
+            this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(IsValid)));
         }
 
         public bool IsValid { get => errorCount < 1; }
 
+        public void useMode_Edit()
+        {
+            txtCode.IsEnabled = false;
+            cbx_auto.IsEnabled = false;
+        }
+
+        public void useMode_Create()
+        {
+            txtCode.IsEnabled = true;
+            cbx_auto.IsEnabled = true;
+        }
+
+        public void useMode_ReadOnly()
+        {
+            cbx_auto.IsEnabled = false;
+            txtCode.IsReadOnly = true;
+            txt_value.IsReadOnly = true;
+            txtDescription.IsReadOnly = true;
+            dateStart.IsEnabled = false;
+            dateEnd.IsEnabled = false;
+        }
     }
 }

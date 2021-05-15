@@ -84,7 +84,7 @@
                Width="550" Height="197" 
                Margin="250,50,0,200"/>
 
-        <Image Source="F:\CoffeeManager\MainProject\Resources\Coffee shop.jpg" 
+        <Image Source="/Resources/Coffee shop.jpg" 
                Stretch="Uniform" 
                Margin="417,50,168,200"
                HorizontalAlignment="Center"

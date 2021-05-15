@@ -20,9 +20,12 @@ namespace MainProject
             AppDomain.CurrentDomain.SetData("DataDirectory", "../../");
 
             base.OnStartup(e);
-            TestingView view = new TestingView();
-            TestingViewModel viewModel = new TestingViewModel();
-            view.DataContext = viewModel;
+
+            /*TestingView view = new TestingView();
+            TestingViewModel viewModel = new TestingViewModel();*/
+
+            ApplicationView view = new ApplicationView();
+            ApplicationViewModel viewModel = new ApplicationViewModel();
 
             //tesing database
             //Để hay xóa dòng này không ảnh hưởng tới luồng chạy chương trình
@@ -32,6 +35,8 @@ namespace MainProject
             }
                 //LoginWorkSpace.LoginViewModel VM = new LoginWorkSpace.LoginViewModel();
                 //view.DataContext = VM;
+            
+            view.DataContext = viewModel;
             view.Show();
 
         }
