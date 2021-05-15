@@ -124,7 +124,9 @@
     <Compile Include="AccountWorkSpace\ChangedPassword.xaml.cs">
       <DependentUpon>ChangedPassword.xaml</DependentUpon>
     </Compile>
+    <Compile Include="DatabaseController\CUSTOMTABLE.cs" />
     <Compile Include="DatabaseController\DatabaseController.cs" />
+    <Compile Include="DatabaseController\DataControllerBase.cs" />
     <Compile Include="DetailPro.cs" />
     <Compile Include="HistoryWorkSpace\HistoryViewModel.cs" />
     <Compile Include="MainWorkSpace\Bill\BillDetail.xaml.cs">
@@ -195,9 +197,6 @@
       <DependentUpon>MainModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Bill\BillViewModel.cs" />
-    <Compile Include="Model\CUSTOMER.cs">
-      <DependentUpon>MainModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Model\DETAILBILL.cs">
       <DependentUpon>MainModel.tt</DependentUpon>
     </Compile>
@@ -226,7 +225,6 @@
       <DependentUpon>MainModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Product\ProductListViewModel.cs" />
-    <Compile Include="Model\Product\ProductViewModel.cs" />
     <Compile Include="Model\REGULATION.cs">
       <DependentUpon>MainModel.tt</DependentUpon>
     </Compile>
@@ -234,7 +232,6 @@
       <DependentUpon>MainModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Table\TableListViewModel.cs" />
-    <Compile Include="Model\Table\TableViewModel.cs" />
     <Compile Include="Model\VOUCHER.cs">
       <DependentUpon>MainModel.tt</DependentUpon>
     </Compile>
@@ -250,6 +247,7 @@
     </Compile>
     <Compile Include="StatisticWorkSpace\StatisticViewModel.cs" />
     <Compile Include="Store.cs" />
+    <Compile Include="TABLECUSTOM.cs" />
     <Compile Include="ValidationRules\ExistVoucherValidationRule.cs" />
     <Compile Include="ValidationRules\NotNullableValidationRule.cs" />
     <Compile Include="ValidationRules\RangeNumberValidationRule.cs" />
