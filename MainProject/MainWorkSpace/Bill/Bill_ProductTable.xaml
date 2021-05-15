@@ -35,7 +35,7 @@
                     <TextBlock Text="Thành tiền" Grid.Column="3" HorizontalAlignment="Center"/>
                 </Grid>
 
-                <ItemsControl ItemsSource="{Binding }">
+                <ItemsControl ItemsSource="{Binding }" x:Name="Parent">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
                             <Grid>
@@ -54,8 +54,7 @@
                                 <TextBlock Text="{Binding PRODUCT.NAME}" Grid.Column="0" HorizontalAlignment="Left" TextWrapping="Wrap" Margin="5 0"/>
                                 <TextBlock Text="{Binding AMOUNT}" Grid.Column="1" HorizontalAlignment="Center"/>
                                 <TextBlock Text="{Binding PRODUCT.PRICE, StringFormat='{}{0:N0} đ'}" Grid.Column="2" HorizontalAlignment="Center"/>
-                                <!--Missing Converter-->
-                                <TextBlock Text="{Binding TotalPrice, StringFormat='{}{0:N0} đ'}" Grid.Column="3" HorizontalAlignment="Center"/>
+                                <TextBlock Text="{Binding PRODUCT.PRICE, StringFormat='{}{0:N0} đ'}" Grid.Column="3" HorizontalAlignment="Center"/>
                             </Grid>
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
