@@ -7,7 +7,7 @@ namespace MainProject
         private int _quantity;
         private PRODUCT pro;
 
-        public int Quantity
+        public int Quantity 
         {
             get => _quantity;
             set
@@ -19,13 +19,25 @@ namespace MainProject
                 }
             }
         }
-        public PRODUCT Pro { get => pro; set => pro = value; }
 
+        public PRODUCT Pro
+        {
+            get => pro;
+            set
+            {
+                if (pro != value)
+                {
+                    pro = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+          
         public DetailPro(PRODUCT pro, int quan = 0)
         {
             this.Pro = pro;
             this.Quantity = quan;
         }
-
     }
 }
