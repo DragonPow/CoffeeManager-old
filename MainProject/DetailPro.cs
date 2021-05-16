@@ -19,6 +19,7 @@ namespace MainProject
                 }
             }
         }
+
         public PRODUCT Pro
         {
             get => pro;
@@ -38,7 +39,5 @@ namespace MainProject
             this.Pro = pro;
             this.Quantity = quan;
         }
-
-         
     }
 }

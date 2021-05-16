@@ -75,9 +75,10 @@ namespace MainProject.Model.Product
             get => _type;
             set
             {
-                if (_type!= value)
+                if (_type != value)
                 {
                     _type = value;
+                    OnPropertyChanged();
                 }
             }
         }

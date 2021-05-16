@@ -49,9 +49,8 @@ namespace MainProject
 
         #region Properties
 
-        public int Floors
-        {
-            get => _currentfloors;
+        public int Floors { 
+            get => _floors;
             set
             {
                 if (value != _currentfloors)
