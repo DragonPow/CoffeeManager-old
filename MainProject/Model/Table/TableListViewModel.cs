@@ -153,10 +153,12 @@ namespace MainProject
         public void ClickTable()
         {
             //SelectedTable = new TABLECUSTOM() { table};
-            Console.WriteLine("ok");
-            TableDetailView view = new TableDetailView();
-            view.DataContext = SelectedTable;
-            view.Show();
+
+            //testing
+            //Console.WriteLine("ok");
+            //TableDetailView view = new TableDetailView();
+            //view.DataContext = SelectedTable;
+            //view.Show();
         }
         public void Update(int Number)
         {
