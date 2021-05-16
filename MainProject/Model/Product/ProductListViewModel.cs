@@ -13,7 +13,7 @@ namespace MainProject.Model.Product
 
         private ObservableCollection<PRODUCT> _listProView;
         private PRODUCT _chosseproduct;
-        private string Type;
+        private string _type;
 
         private ICommand _addProduct;
         private ICommand _deletePro;
@@ -59,20 +59,25 @@ namespace MainProject.Model.Product
 
         public PRODUCT ChosseProduct
         {
-            get
-            {
-                if (_chosseproduct == null)
-                {
-                    _chosseproduct = new PRODUCT();
-                }
-                return _chosseproduct;
-            }
+            get => _chosseproduct;
             set
             {
                 if (_chosseproduct != value)
                 {
                     _chosseproduct = value;
                     OnPropertyChanged();
+                }
+            }
+        }
+
+        public string Type
+        {
+            get => _type;
+            set
+            {
+                if (_type!= value)
+                {
+                    _type = value;
                 }
             }
         }
