@@ -16,7 +16,7 @@
         <Button Grid.Column="0" Background="#f1f8e9" BorderBrush="#f1f8e9" HorizontalAlignment="Center" VerticalAlignment="Center" Height="Auto" Width="auto" >
             <materialDesign:PackIcon Foreground="{StaticResource MainColor}" Kind="Minus"  />
         </Button>
-        <TextBlock Grid.Column="1" Text="1"  FontSize="16"  Foreground="Gray" VerticalAlignment="Stretch" HorizontalAlignment="Center" Height="Auto" />
+        <TextBlock Grid.Column="1" Text="{Binding AMOUNT, FallbackValue='1'}"  FontSize="16"  Foreground="Gray" VerticalAlignment="Stretch" HorizontalAlignment="Center" Height="Auto" />
         <Button Grid.Column="2" Background="#f1f8e9" BorderBrush="#f1f8e9" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Height="Auto" Width="auto" >
             <materialDesign:PackIcon Kind="Plus" Foreground="{StaticResource MainColor}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
         </Button>

@@ -4,26 +4,17 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="mainModel.Store" Provider="System.Data.SQLite.EF6" ProviderManifestToken="Data Source=D:\Major\CoffeeManager\MainProject\ProjectDatabase.db" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="mainModel.Store" Provider="System.Data.SQLite.EF6" ProviderManifestToken="Data Source=D:\Users\User\GItHub\CoffeeManager\CoffeeManager\MainProject\ProjectDatabase.db" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="BILL">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="integer" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TOTAL" Type="integer" />
+          <Property Name="CHECKOUTDAY" Type="datetime" />
           <Property Name="ID_VOUCHER" Type="nvarchar" MaxLength="16" />
           <Property Name="ID_TABLES" Type="integer" />
           <Property Name="ID_EMPLOYEE" Type="integer" />
-        </EntityType>
-        <EntityType Name="CUSTOMER">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="integer" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="NAME" Type="nvarchar" MaxLength="2147483647" />
-          <Property Name="BIRTHDAY" Type="datetime" />
-          <Property Name="PHONE" Type="nvarchar" MaxLength="2147483647" Nullable="false" />
-          <Property Name="POINT_ACCUMULATION" Type="int" />
-          <Property Name="DELETED" Type="int" />
         </EntityType>
         <EntityType Name="DETAILBILL">
           <Key>
@@ -159,7 +150,6 @@
         </Association>
         <EntityContainer Name="mainModelStoreContainer">
           <EntitySet Name="BILL" EntityType="Self.BILL" store:Type="Tables" />
-          <EntitySet Name="CUSTOMER" EntityType="Self.CUSTOMER" store:Type="Tables" />
           <EntitySet Name="DETAILBILL" EntityType="Self.DETAILBILL" store:Type="Tables" />
           <EntitySet Name="EMPLOYEE" EntityType="Self.EMPLOYEE" store:Type="Tables" />
           <EntitySet Name="GOOD" EntityType="Self.GOOD" store:Type="Tables" />
@@ -193,13 +183,12 @@
     <edmx:ConceptualModels>
       <Schema Namespace="mainModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="mainEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="GOODs" EntityType="mainModel.GOOD" />
+          <EntitySet Name="REGULATIONs" EntityType="mainModel.REGULATION" />
           <EntitySet Name="BILLs" EntityType="mainModel.BILL" />
-          <EntitySet Name="CUSTOMERs" EntityType="mainModel.CUSTOMER" />
           <EntitySet Name="DETAILBILLs" EntityType="mainModel.DETAILBILL" />
           <EntitySet Name="EMPLOYEEs" EntityType="mainModel.EMPLOYEE" />
-          <EntitySet Name="GOODs" EntityType="mainModel.GOOD" />
           <EntitySet Name="PRODUCTs" EntityType="mainModel.PRODUCT" />
-          <EntitySet Name="REGULATIONs" EntityType="mainModel.REGULATION" />
           <EntitySet Name="TABLES" EntityType="mainModel.TABLE" />
           <EntitySet Name="VOUCHERs" EntityType="mainModel.VOUCHER" />
           <AssociationSet Name="FK_BILL_0_0" Association="mainModel.FK_BILL_0_0">
@@ -222,12 +211,32 @@
             <End Role="PRODUCT" EntitySet="PRODUCTs" />
             <End Role="DETAILBILL" EntitySet="DETAILBILLs" />
           </AssociationSet>
-        </EntityContainer>
+          </EntityContainer>
+        <EntityType Name="GOOD">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+          <Property Name="Amount" Type="Int64" />
+          <Property Name="Price" Type="Int64" />
+          <Property Name="ExpriteTime" Type="DateTime" />
+        </EntityType>
+        <EntityType Name="REGULATION">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NAME" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+          <Property Name="LIMITED" Type="Int32" />
+        </EntityType>
         <EntityType Name="BILL">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TOTAL" Type="Int64" />
+          <Property Name="CHECKOUTDAY" Type="DateTime" />
           <Property Name="ID_VOUCHER" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
           <Property Name="ID_TABLES" Type="Int64" />
           <Property Name="ID_EMPLOYEE" Type="Int64" />
@@ -235,17 +244,6 @@
           <NavigationProperty Name="TABLE" Relationship="mainModel.FK_BILL_1_0" FromRole="BILL" ToRole="TABLE" />
           <NavigationProperty Name="VOUCHER" Relationship="mainModel.FK_BILL_2_0" FromRole="BILL" ToRole="VOUCHER" />
           <NavigationProperty Name="DETAILBILLs" Relationship="mainModel.FK_DETAILBILL_0_0" FromRole="BILL" ToRole="DETAILBILL" />
-        </EntityType>
-        <EntityType Name="CUSTOMER">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="NAME" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
-          <Property Name="BIRTHDAY" Type="DateTime" />
-          <Property Name="PHONE" Type="String" Nullable="false" MaxLength="2147483647" FixedLength="false" Unicode="true" />
-          <Property Name="POINT_ACCUMULATION" Type="Int32" />
-          <Property Name="DELETED" Type="Int32" />
         </EntityType>
         <EntityType Name="DETAILBILL">
           <Key>
@@ -271,16 +269,6 @@
           <Property Name="DELETED" Type="Int32" />
           <NavigationProperty Name="BILLs" Relationship="mainModel.FK_BILL_0_0" FromRole="EMPLOYEE" ToRole="BILL" />
         </EntityType>
-        <EntityType Name="GOOD">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
-          <Property Name="Amount" Type="Int64" />
-          <Property Name="Price" Type="Int64" />
-          <Property Name="ExpriteTime" Type="DateTime" />
-        </EntityType>
         <EntityType Name="PRODUCT">
           <Key>
             <PropertyRef Name="ID" />
@@ -293,14 +281,6 @@
           <Property Name="TYPE" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
           <Property Name="DELETED" Type="Int32" />
           <NavigationProperty Name="DETAILBILLs" Relationship="mainModel.FK_DETAILBILL_1_0" FromRole="PRODUCT" ToRole="DETAILBILL" />
-        </EntityType>
-        <EntityType Name="REGULATION">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="NAME" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
-          <Property Name="LIMITED" Type="Int32" />
         </EntityType>
         <EntityType Name="TABLE">
           <Key>
@@ -391,24 +371,34 @@
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="mainModelStoreContainer" CdmEntityContainer="mainEntities">
+          <EntitySetMapping Name="GOODs">
+            <EntityTypeMapping TypeName="mainModel.GOOD">
+              <MappingFragment StoreEntitySet="GOOD">
+                <ScalarProperty Name="ExpriteTime" ColumnName="ExpriteTime" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="REGULATIONs">
+            <EntityTypeMapping TypeName="mainModel.REGULATION">
+              <MappingFragment StoreEntitySet="REGULATION">
+                <ScalarProperty Name="LIMITED" ColumnName="LIMITED" />
+                <ScalarProperty Name="NAME" ColumnName="NAME" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="BILLs">
             <EntityTypeMapping TypeName="mainModel.BILL">
               <MappingFragment StoreEntitySet="BILL">
                 <ScalarProperty Name="ID_EMPLOYEE" ColumnName="ID_EMPLOYEE" />
                 <ScalarProperty Name="ID_TABLES" ColumnName="ID_TABLES" />
                 <ScalarProperty Name="ID_VOUCHER" ColumnName="ID_VOUCHER" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="CUSTOMERs">
-            <EntityTypeMapping TypeName="mainModel.CUSTOMER">
-              <MappingFragment StoreEntitySet="CUSTOMER">
-                <ScalarProperty Name="DELETED" ColumnName="DELETED" />
-                <ScalarProperty Name="POINT_ACCUMULATION" ColumnName="POINT_ACCUMULATION" />
-                <ScalarProperty Name="PHONE" ColumnName="PHONE" />
-                <ScalarProperty Name="BIRTHDAY" ColumnName="BIRTHDAY" />
-                <ScalarProperty Name="NAME" ColumnName="NAME" />
+                <ScalarProperty Name="CHECKOUTDAY" ColumnName="CHECKOUTDAY" />
+                <ScalarProperty Name="TOTAL" ColumnName="TOTAL" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -435,17 +425,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="GOODs">
-            <EntityTypeMapping TypeName="mainModel.GOOD">
-              <MappingFragment StoreEntitySet="GOOD">
-                <ScalarProperty Name="ExpriteTime" ColumnName="ExpriteTime" />
-                <ScalarProperty Name="Price" ColumnName="Price" />
-                <ScalarProperty Name="Amount" ColumnName="Amount" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="PRODUCTs">
             <EntityTypeMapping TypeName="mainModel.PRODUCT">
               <MappingFragment StoreEntitySet="PRODUCT">
@@ -454,15 +433,6 @@
                 <ScalarProperty Name="PRICE" ColumnName="PRICE" />
                 <ScalarProperty Name="IMAGE" ColumnName="IMAGE" />
                 <ScalarProperty Name="DETAIL" ColumnName="DETAIL" />
-                <ScalarProperty Name="NAME" ColumnName="NAME" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="REGULATIONs">
-            <EntityTypeMapping TypeName="mainModel.REGULATION">
-              <MappingFragment StoreEntitySet="REGULATION">
-                <ScalarProperty Name="LIMITED" ColumnName="LIMITED" />
                 <ScalarProperty Name="NAME" ColumnName="NAME" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
@@ -491,7 +461,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-        </EntityContainerMapping>
+          </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
   </edmx:Runtime>

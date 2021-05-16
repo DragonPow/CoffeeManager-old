@@ -11,7 +11,7 @@ namespace MainProject
     {
         #region field
 
-        TableViewModel _table;
+        TABLECUSTOM _table;
 
         ICommand _payCommand;
         ICommand _cancelCommand;
@@ -20,13 +20,13 @@ namespace MainProject
 
         #region Property 
 
-        public TableViewModel Table
+        public TABLECUSTOM Table
         {
             get
             {
                 if ( _table == null)
                 {
-                    _table = new TableViewModel();
+                    _table = new TABLECUSTOM();
                 }
                 return _table;
             }
