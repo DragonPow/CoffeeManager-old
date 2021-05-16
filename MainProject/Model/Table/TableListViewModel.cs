@@ -1,4 +1,5 @@
 ﻿using MainProject.DatabaseController;
+using MainProject.MainWorkSpace.Bill;
 using MainProject.MainWorkSpace.Table;
 using MainProject.Model;
 using System;
@@ -12,14 +13,15 @@ namespace MainProject
     {
         #region Field
         private ObservableCollection<TABLECUSTOM> _listTable;
-        private int _floors;
+        private int _currentfloors;
         private TABLECUSTOM _selectedTable;
+        private DetailPro _selectedDetailPro;
 
-        private ICommand _deleteTable;
-        private ICommand _InsertTable;
-        private ICommand _UpdateStatusTable;
+        private ICommand _deleteTableCommand;
+        private ICommand _InsertTableCommand;
+        private ICommand _UpdateStatusTableCommand;
         private ICommand _SelectedTable;
-        private ICommand _LoadTableByFloors;
+        private ICommand _LoadTableByFloorsCommand;
 
         private ICommand _getTotal;
         private ICommand _payCommand;
@@ -27,7 +29,13 @@ namespace MainProject
         private ICommand _removeDetailPro;
 
         private ICommand _clickTableCommand;
+
+        private ICommand _plusQuantityCommand;
+        private ICommand _minusQuantityCommand;
+        private ICommand _ClickQuantityCommand;
+
         #endregion
+
 
         #region Init
 
@@ -36,31 +44,44 @@ namespace MainProject
         {
             ListTable = DataController.LoadTable(Floors);
             SelectedTable = null;
-            //Insert();
-            //Insert();
         }
         #endregion
 
         #region Properties
 
-        public int Floors { get => _floors;
+        public int Floors
+        {
+            get => _currentfloors;
             set
             {
-                if (value!=_floors)
+                if (value != _currentfloors)
                 {
-                    _floors = value;
+                    _currentfloors = value;
                     OnPropertyChanged();
                 }
             }
         }
-        public TABLECUSTOM SelectedTable 
-        { 
+        public TABLECUSTOM SelectedTable
+        {
             get => _selectedTable;
             set
             {
-                if (value!=_selectedTable)
+                if (value != _selectedTable)
                 {
                     _selectedTable = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        public DetailPro SelectedDetailPro
+        {
+            get => _selectedDetailPro;
+            set
+            {
+                if (value != _selectedDetailPro)
+                {
+                    _selectedDetailPro = value;
                     OnPropertyChanged();
                 }
             }
@@ -87,26 +108,34 @@ namespace MainProject
         #endregion
 
         #region Command
+
         public ICommand ClickTableCommand
         {
             get
             {
-                if (_clickTableCommand==null)
+                if (_clickTableCommand == null)
                 {
                     _clickTableCommand = new RelayingCommand<object>(para => ClickTable());
                 }
                 return _clickTableCommand;
             }
         }
+
+        public void ClickTable()
+        {
+            TableDetailView view = new TableDetailView();
+            view.DataContext = SelectedTable;
+            view.Show();
+        }
         public ICommand DeleteTable
         {
             get
             {
-                if (_deleteTable == null)
+                if (_deleteTableCommand == null)
                 {
-                    _deleteTable = new RelayingCommand<int>(a => Delete(a));
+                    _deleteTableCommand = new RelayingCommand<int>(a => Delete(a));
                 }
-                return _deleteTable;
+                return _deleteTableCommand;
             }
 
         }
@@ -124,17 +153,17 @@ namespace MainProject
         {
             get
             {
-                if (_InsertTable == null)
+                if (_InsertTableCommand == null)
                 {
-                    _InsertTable = new RelayingCommand<object>(a => Insert());
+                    _InsertTableCommand = new RelayingCommand<object>(a => Insert());
                 }
-                return _InsertTable;
+                return _InsertTableCommand;
             }
         }
 
         public void Insert()
         {
-            ListTable.Add(new TABLECUSTOM() { table = new TABLE() {NUMBER = ListTable.Count + 1 } });
+            ListTable.Add(new TABLECUSTOM() { table = new TABLE() { NUMBER = ListTable.Count + 1 } });
             //DataController.AddTable(Floors, ListTable.Count + 1 );
         }
 
@@ -142,24 +171,14 @@ namespace MainProject
         {
             get
             {
-                if (_UpdateStatusTable == null)
+                if (_UpdateStatusTableCommand == null)
                 {
-                    _UpdateStatusTable = new RelayingCommand<int>(a => Update(a));
+                    _UpdateStatusTableCommand = new RelayingCommand<int>(a => Update(a));
                 }
-                return _UpdateStatusTable;
+                return _UpdateStatusTableCommand;
             }
         }
 
-        public void ClickTable()
-        {
-            //SelectedTable = new TABLECUSTOM() { table};
-
-            //testing
-            //Console.WriteLine("ok");
-            //TableDetailView view = new TableDetailView();
-            //view.DataContext = SelectedTable;
-            //view.Show();
-        }
         public void Update(int Number)
         {
 
@@ -186,11 +205,11 @@ namespace MainProject
         {
             get
             {
-                if (_LoadTableByFloors == null)
+                if (_LoadTableByFloorsCommand == null)
                 {
-                    _LoadTableByFloors = new RelayingCommand<int>(a => LoadTable(a));
+                    _LoadTableByFloorsCommand = new RelayingCommand<int>(a => LoadTable(a));
                 }
-                return _LoadTableByFloors;
+                return _LoadTableByFloorsCommand;
             }
         }
 
@@ -198,7 +217,7 @@ namespace MainProject
         {
             ListTable = DataController.LoadTable(Floors);
         }
-   
+
         public ICommand Pay_Command
         {
             get
@@ -211,9 +230,9 @@ namespace MainProject
         }
         public void Pay()
         {
-            // SaveDetail();
-            //Open BillWordSpace
-
+            BillView billView = new BillView();
+            billView.DataContext = SelectedTable;
+            billView.Show();
         }
 
         public ICommand GetTotal
@@ -230,7 +249,7 @@ namespace MainProject
         {
             long Total = 0;
             foreach (DetailPro p in SelectedTable.ListPro)
-                Total += (long) p.Pro.PRICE * p.Quantity;
+                Total +=  p.Pro.PRICE * p.Quantity;
             return Total;
         }
         // detailPro được thêm vào list tạm khi chưa click nút Save
@@ -249,6 +268,7 @@ namespace MainProject
 
         public void addDetailPro(PRODUCT pro)
         {
+            SelectedTable.Total += pro.PRICE;
             SelectedTable.ListPro.Add(new DetailPro(pro));
         }
 
@@ -268,11 +288,68 @@ namespace MainProject
         }
         public void RemoveDetail(int number)
         {
+            SelectedTable.Total -= SelectedDetailPro.Pro.PRICE * SelectedDetailPro.Quantity;
             if (number < SelectedTable.ListPro.Count)
             {
                 SelectedTable.ListPro.RemoveAt(number - 1);
             }
         }
+
+       
+        public ICommand PlusQuantity
+        {
+            get
+            {
+                if (PlusQuantity == null)
+                    _plusQuantityCommand = new RelayingCommand<object>(a => Plus());
+                return _plusQuantityCommand;
+            }
+        }
+
+        public void Plus()
+        {
+            SelectedTable.Total += SelectedDetailPro.Pro.PRICE;
+            ++SelectedDetailPro.Quantity;
+
+        }
+        public ICommand MinusQuantity
+        {
+            get
+            {
+                if (_minusQuantityCommand == null)
+                    _minusQuantityCommand = new RelayingCommand<object>(a => Minus());
+
+                return _minusQuantityCommand;
+            }
+
+        }
+
+        public void Minus()
+        {
+            SelectedTable.Total -= SelectedDetailPro.Pro.PRICE;
+            --SelectedDetailPro.Quantity;
+        }
+
+        public ICommand ClickQuantityCommand
+        {
+            get
+            {
+                if (_ClickQuantityCommand == null)
+                {
+                    _clickTableCommand = new RelayingCommand<int>(a => ChangeQuantityCommand(a));
+                }
+                return _clickTableCommand;
+            }
+        }    
+
+        public void ChangeQuantityCommand(int Number)
+        {
+            SelectedTable.Total -= SelectedDetailPro.Quantity * SelectedDetailPro.Pro.PRICE;
+            SelectedDetailPro.Quantity = Number;
+            SelectedTable.Total += Number * SelectedDetailPro.Pro.PRICE;
+        }
+
         #endregion
+
     }
 }

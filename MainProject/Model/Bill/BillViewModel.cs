@@ -22,14 +22,7 @@ namespace MainProject
 
         public TABLECUSTOM Table
         {
-            get
-            {
-                if ( _table == null)
-                {
-                    _table = new TABLECUSTOM();
-                }
-                return _table;
-            }
+            get => _table;
             set
             {
                 if (_table != value)
