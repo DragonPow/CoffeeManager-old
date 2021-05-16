@@ -38,10 +38,12 @@
             </Grid.ColumnDefinitions>
             <Border BorderBrush="Gray" BorderThickness="0,1,0,1" Grid.ColumnSpan="2"/>
             <CheckBox
-                 Style="{StaticResource MaterialDesignFilterChipAccentCheckBox}"
-                 IsChecked="True"
-                 Margin="10,0"
-                 Foreground="Gray">
+                Height="25"
+                  Style="{StaticResource MaterialDesignFilterChipAccentCheckBox}"
+                  IsChecked="True"
+                  VerticalAlignment="Center" Margin="10,0"
+                Background="{StaticResource MainColor}"
+                Foreground="Green">
                 Mang đi
             </CheckBox>
             <StackPanel Grid.Column="1" Orientation="Vertical">
@@ -67,13 +69,14 @@
                 Foreground="White" Background="{StaticResource MainColor}"
                 BorderThickness="0" Grid.Column="0"  />
             <Button
-                Style="{StaticResource MaterialDesignFlatAccentBgButton}"
-                ToolTip="MaterialDesignFlatAccentBackgroundButton"
+                Style="{StaticResource MaterialDesignRaisedButton}"
+                ToolTip="MaterialDesignRaisedButton with Round Corners"
                 Content="Thanh toán"
                 Height="Auto"
+                Margin="2"
                 VerticalAlignment="Stretch"
                 HorizontalAlignment="Stretch" 
-                IsEnabled="False"
+                materialDesign:ButtonAssist.CornerRadius="2"
                 Foreground="White" Background="{StaticResource MainColor}"
                 BorderThickness="0" Grid.Column="1"/>
         </Grid>

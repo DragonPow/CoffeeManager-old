@@ -10,9 +10,9 @@
              d:DesignHeight="45" d:DesignWidth="350" Background="Transparent">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="10*"/>
+            <ColumnDefinition Width="9*"/>
             <ColumnDefinition Width="3*"/>
-            <ColumnDefinition Width="4*"/>
+            <ColumnDefinition Width="5*"/>
         </Grid.ColumnDefinitions>
         <Border BorderThickness="0,0,0,1" BorderBrush="Gray" Grid.ColumnSpan="3"></Border>
         <TextBlock Grid.Column="0" Text="1" Foreground="Gray" HorizontalAlignment="Left" Visibility="Hidden" ></TextBlock>
