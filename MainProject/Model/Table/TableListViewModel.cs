@@ -1,5 +1,7 @@
 ﻿using MainProject.DatabaseController;
+using MainProject.MainWorkSpace.Table;
 using MainProject.Model;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
@@ -8,9 +10,7 @@ namespace MainProject
 {
     class TableListViewModel : BaseViewModel
     {
-
         #region Field
-
         private ObservableCollection<TABLECUSTOM> _listTable;
         private int _floors;
         private TABLECUSTOM _selectedTable;
@@ -26,22 +26,45 @@ namespace MainProject
         private ICommand _addDetailPro;
         private ICommand _removeDetailPro;
 
+        private ICommand _clickTableCommand;
         #endregion
 
         #region Init
 
 
-        public TableListViewModel(int Floors = 0)
+        public TableListViewModel(int Floors = 1)
         {
             ListTable = DataController.LoadTable(Floors);
-            SelectedTable = new TABLECUSTOM();          
+            SelectedTable = null;
+            //Insert();
+            //Insert();
         }
         #endregion
 
         #region Properties
 
-        public int Floors { get => _floors; set => _floors = value; }
-        public TABLECUSTOM SelectedTable { get => _selectedTable; set => _selectedTable = value; }
+        public int Floors { get => _floors;
+            set
+            {
+                if (value!=_floors)
+                {
+                    _floors = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        public TABLECUSTOM SelectedTable 
+        { 
+            get => _selectedTable;
+            set
+            {
+                if (value!=_selectedTable)
+                {
+                    _selectedTable = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
         public ObservableCollection<TABLECUSTOM> ListTable
         {
             get
@@ -64,7 +87,17 @@ namespace MainProject
         #endregion
 
         #region Command
-
+        public ICommand ClickTableCommand
+        {
+            get
+            {
+                if (_clickTableCommand==null)
+                {
+                    _clickTableCommand = new RelayingCommand<object>(para => ClickTable());
+                }
+                return _clickTableCommand;
+            }
+        }
         public ICommand DeleteTable
         {
             get
@@ -96,14 +129,13 @@ namespace MainProject
                     _InsertTable = new RelayingCommand<object>(a => Insert());
                 }
                 return _InsertTable;
-
             }
         }
 
         public void Insert()
         {
             ListTable.Add(new TABLECUSTOM() { table = new TABLE() {NUMBER = ListTable.Count + 1 } });
-            DataController.AddTable(Floors, ListTable.Count + 1 );
+            //DataController.AddTable(Floors, ListTable.Count + 1 );
         }
 
         ICommand UpdateStatusTable
@@ -118,8 +150,14 @@ namespace MainProject
             }
         }
 
-        
-
+        public void ClickTable()
+        {
+            //SelectedTable = new TABLECUSTOM() { table};
+            Console.WriteLine("ok");
+            TableDetailView view = new TableDetailView();
+            view.DataContext = SelectedTable;
+            view.Show();
+        }
         public void Update(int Number)
         {
 
@@ -139,7 +177,7 @@ namespace MainProject
 
         public void Selected(TABLECUSTOM table)
         {
-            this._selectedTable = table;
+            this.SelectedTable = table;
         }
 
         public ICommand LoadTableByFloors
