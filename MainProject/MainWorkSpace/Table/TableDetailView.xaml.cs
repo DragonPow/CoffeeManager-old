@@ -18,7 +18,7 @@ namespace MainProject.MainWorkSpace.Table
     /// <summary>
     /// Interaction logic for TableDetailView.xaml
     /// </summary>
-    public partial class TableDetailView : Window
+    public partial class TableDetailView : UserControl
     {
         public TableDetailView()
         {
