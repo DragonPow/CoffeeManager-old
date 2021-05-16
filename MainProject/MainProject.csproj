@@ -176,9 +176,6 @@
     <Compile Include="MainWorkSpace\Product\Pro_UC.xaml.cs">
       <DependentUpon>Pro_UC.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MainWorkSpace\Product\SelectProdDetail_UC.xaml.cs">
-      <DependentUpon>SelectProdDetail_UC.xaml</DependentUpon>
-    </Compile>
     <Compile Include="MainWorkSpace\Table\AlreadyTable_UC.xaml.cs">
       <DependentUpon>AlreadyTable_UC.xaml</DependentUpon>
     </Compile>
@@ -199,9 +196,6 @@
     </Compile>
     <Compile Include="MainWorkSpace\Table\TableView.xaml.cs">
       <DependentUpon>TableView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="MainWorkSpace\TabMenu_UC.xaml.cs">
-      <DependentUpon>TabMenu_UC.xaml</DependentUpon>
     </Compile>
     <Compile Include="Model\BILL.cs">
       <DependentUpon>MainModel.tt</DependentUpon>
@@ -354,10 +348,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MainWorkSpace\Product\SelectProdDetail_UC.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="MainWorkSpace\Table\AlreadyTable_UC.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -383,10 +373,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="MainWorkSpace\Table\TableView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="MainWorkSpace\TabMenu_UC.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
