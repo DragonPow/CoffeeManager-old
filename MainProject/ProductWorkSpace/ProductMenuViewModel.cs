@@ -53,11 +53,11 @@ namespace MainProject.ProductWorkSpace
         }
 
         public ICommand CommandAddSelectedProduct;
-        public void AddSelectedProduct(TableViewModel tableViewModel)
+       /* public void AddSelectedProduct(TableViewModel tableViewModel)
         {
             DetailPro detailPro = new DetailPro(SelectedProduct.Product, 1);
             tableViewModel.addDetailPro(detailPro.Pro);
-        }
+        }*/
 
         public ICommand CommandRemoveSelectedProduct;
        /* public void RemoveSelectedProduct(TableViewModel tableViewModel)
@@ -69,7 +69,7 @@ namespace MainProject.ProductWorkSpace
         {
             this.CommandSearch = new RelayingCommand<string>(Search);
             this.CommandGoDetail = new RelayingCommand<ProductViewModel>(GoDetail);
-            this.CommandAddSelectedProduct = new RelayingCommand<TableViewModel>(AddSelectedProduct);
+         /*   this.CommandAddSelectedProduct = new RelayingCommand<TableViewModel>(AddSelectedProduct);*/
          /*   this.CommandRemoveSelectedProduct = new RelayingCommand<TableViewModel>(RemoveSelectedProduct);*/
         }
 

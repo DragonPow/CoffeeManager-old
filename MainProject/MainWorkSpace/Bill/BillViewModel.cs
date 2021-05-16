@@ -52,7 +52,7 @@ namespace MainProject.MainWorkSpace.Bill
         {
             get
             {
-                return CurrentBill.DETAILBILLs.Sum(bill => bill.AMOUNT * bill.PRODUCT.PRICE);
+                return 1;//CurrentBill.DETAILBILLs.Sum(bill => bill.AMOUNT * bill.PRODUCT.PRICE);
             }
         }
         #endregion

@@ -21,6 +21,8 @@ namespace MainProject.Model
         }
     
         public long ID { get; set; }
+        public Nullable<long> TOTAL { get; set; }
+        public Nullable<System.DateTime> CHECKOUTDAY { get; set; }
         public string ID_VOUCHER { get; set; }
         public Nullable<long> ID_TABLES { get; set; }
         public Nullable<long> ID_EMPLOYEE { get; set; }

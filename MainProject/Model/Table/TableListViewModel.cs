@@ -1,18 +1,19 @@
 ﻿using MainProject.DatabaseController;
+using MainProject.MainWorkSpace.Table;
 using MainProject.Model;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Windows.Input;
 
 namespace MainProject
 {
     class TableListViewModel : BaseViewModel
     {
-
         #region Field
-
-        private List<TableViewModel> _listTable;
+        private ObservableCollection<TABLECUSTOM> _listTable;
         private int _floors;
-        private TABLE _selectedTable;
+        private TABLECUSTOM _selectedTable;
 
         private ICommand _deleteTable;
         private ICommand _InsertTable;
@@ -20,30 +21,57 @@ namespace MainProject
         private ICommand _SelectedTable;
         private ICommand _LoadTableByFloors;
 
+        private ICommand _getTotal;
+        private ICommand _payCommand;
+        private ICommand _addDetailPro;
+        private ICommand _removeDetailPro;
+
+        private ICommand _clickTableCommand;
         #endregion
 
         #region Init
 
 
-        public TableListViewModel()
+        public TableListViewModel(int Floors = 1)
         {
-            Floors = 0;
-            ListTable = new List<TableViewModel>();
-            SelectedTable = new TABLE();          
+            ListTable = DataController.LoadTable(Floors);
+            SelectedTable = null;
+            //Insert();
+            //Insert();
         }
         #endregion
 
         #region Properties
 
-        public int Floors { get => _floors; set => _floors = value; }
-        public TABLE SelectedTable { get => _selectedTable; set => _selectedTable = value; }
-        public List<TableViewModel> ListTable
+        public int Floors { get => _floors;
+            set
+            {
+                if (value!=_floors)
+                {
+                    _floors = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        public TABLECUSTOM SelectedTable 
+        { 
+            get => _selectedTable;
+            set
+            {
+                if (value!=_selectedTable)
+                {
+                    _selectedTable = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        public ObservableCollection<TABLECUSTOM> ListTable
         {
             get
             {
                 if (_listTable == null)
                 {
-                    _listTable = new List<TableViewModel>();
+                    _listTable = new ObservableCollection<TABLECUSTOM>();
                 }
                 return _listTable;
             }
@@ -59,7 +87,17 @@ namespace MainProject
         #endregion
 
         #region Command
-
+        public ICommand ClickTableCommand
+        {
+            get
+            {
+                if (_clickTableCommand==null)
+                {
+                    _clickTableCommand = new RelayingCommand<object>(para => ClickTable());
+                }
+                return _clickTableCommand;
+            }
+        }
         public ICommand DeleteTable
         {
             get
@@ -76,9 +114,9 @@ namespace MainProject
         private void Delete(int number)
         {
 
-            _listTable.RemoveAt(number - 1);
-            for (int i = number; i < _listTable.Count; ++i)
-                --_listTable[i].Table.NUMBER;
+            ListTable.RemoveAt(number - 1);
+            for (int i = number; i < ListTable.Count; ++i)
+                --ListTable[i].table.NUMBER;
             DataController.DeleteTable(number, Floors);
         }
 
@@ -91,14 +129,13 @@ namespace MainProject
                     _InsertTable = new RelayingCommand<object>(a => Insert());
                 }
                 return _InsertTable;
-
             }
         }
 
         public void Insert()
         {
-            ListTable.Add(new TableViewModel(ListTable.Count + 1));
-            DataController.AddTable(Floors, ListTable.Count + 1 );
+            ListTable.Add(new TABLECUSTOM() { table = new TABLE() {NUMBER = ListTable.Count + 1 } });
+            //DataController.AddTable(Floors, ListTable.Count + 1 );
         }
 
         ICommand UpdateStatusTable
@@ -113,8 +150,14 @@ namespace MainProject
             }
         }
 
-        
-
+        public void ClickTable()
+        {
+            //SelectedTable = new TABLECUSTOM() { table};
+            Console.WriteLine("ok");
+            TableDetailView view = new TableDetailView();
+            view.DataContext = SelectedTable;
+            view.Show();
+        }
         public void Update(int Number)
         {
 
@@ -126,15 +169,15 @@ namespace MainProject
             {
                 if (_SelectedTable == null)
                 {
-                    _SelectedTable = new RelayingCommand<TABLE>(a => Selected(a));
+                    _SelectedTable = new RelayingCommand<TABLECUSTOM>(a => Selected(a));
                 }
                 return _SelectedTable;
             }
         }
 
-        public void Selected(TABLE table)
+        public void Selected(TABLECUSTOM table)
         {
-            this._selectedTable = table;
+            this.SelectedTable = table;
         }
 
         public ICommand LoadTableByFloors
@@ -151,11 +194,81 @@ namespace MainProject
 
         public void LoadTable(int Floors)
         {
-            List<TABLE> TableList = DataController.LoadTable(Floors);
-            ListTable = new List<TableViewModel>(TableList.Count);
-            foreach (TABLE t in TableList)
+            ListTable = DataController.LoadTable(Floors);
+        }
+   
+        public ICommand Pay_Command
+        {
+            get
             {
-                ListTable.Add(new TableViewModel(t));
+                if (_payCommand == null)
+                    _payCommand = new RelayingCommand<object>(a => Pay());
+                return _payCommand;
+            }
+
+        }
+        public void Pay()
+        {
+            // SaveDetail();
+            //Open BillWordSpace
+
+        }
+
+        public ICommand GetTotal
+        {
+            get
+            {
+                if (_getTotal == null)
+                    _getTotal = new RelayingCommand<object>(a => getTotal());
+                return _getTotal;
+            }
+        }
+
+        public long getTotal()
+        {
+            long Total = 0;
+            foreach (DetailPro p in SelectedTable.ListPro)
+                Total += (long) p.Pro.PRICE * p.Quantity;
+            return Total;
+        }
+        // detailPro được thêm vào list tạm khi chưa click nút Save
+        public ICommand AddDetailPro
+        {
+            get
+            {
+                if (_addDetailPro == null)
+                {
+                    _addDetailPro = new RelayingCommand<PRODUCT>(a => addDetailPro(a));
+                }
+                return _addDetailPro;
+            }
+        }
+
+
+        public void addDetailPro(PRODUCT pro)
+        {
+            SelectedTable.ListPro.Add(new DetailPro(pro));
+        }
+
+
+        // Xóa detailPro đã chọn
+
+        public ICommand RemoveDetailPro
+        {
+            get
+            {
+                if (_removeDetailPro == null)
+                {
+                    _removeDetailPro = new RelayingCommand<int>(a => RemoveDetail(a));
+                }
+                return _removeDetailPro;
+            }
+        }
+        public void RemoveDetail(int number)
+        {
+            if (number < SelectedTable.ListPro.Count)
+            {
+                SelectedTable.ListPro.RemoveAt(number - 1);
             }
         }
         #endregion

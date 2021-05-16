@@ -1,11 +1,29 @@
 ﻿using MainProject.Model;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 
 namespace MainProject.DatabaseController
 {
      public static class DataController
     {
+        internal static ObservableCollection<TABLECUSTOM> LoadTable(int Floors)
+        {
+            ObservableCollection<TABLECUSTOM> ObserTab = new ObservableCollection<TABLECUSTOM>();
+            List<TABLE> listtab;
+
+            using (var db = new mainEntities())
+            {
+                listtab = db.TABLES.Where(t => (t.FLOORS == Floors && t.DELETED == 0)).ToList();
+
+                foreach (TABLE t in listtab)
+                {
+                    ObserTab.Add(new TABLECUSTOM() { table = t, ListPro = null });
+                }
+            }
+
+            return ObserTab;
+        }
         public static void DeleteTable(int Number, int Floors)
         {
             
@@ -17,7 +35,7 @@ namespace MainProject.DatabaseController
                 {
                     table.DELETED = 1;
 
-                    var TABLES = db.TABLES.Where(t => t.NUMBER > Number && t.FLOORS == Floors);
+                    var TABLES = db.TABLES.Where(t => t.NUMBER > Number && t.FLOORS == Floors && t.DELETED == 0);
 
                     foreach (TABLE tab in TABLES)
                     {
@@ -30,6 +48,7 @@ namespace MainProject.DatabaseController
             }    
         }
 
+        
         public static void AddTable (int Floors, int Number)
         {
             TABLE tab = new TABLE { FLOORS = Floors, STATUS = 0, NUMBER = Number, DELETED = 0 };
@@ -39,6 +58,30 @@ namespace MainProject.DatabaseController
                 db.TABLES.Add(tab);
                 db.SaveChanges();
             }
+        }
+
+        public static ObservableCollection<PRODUCT> LoadProduct(string Type = "")
+        {
+            ObservableCollection<PRODUCT> ListObsPro = new ObservableCollection<PRODUCT>();
+            List<PRODUCT> listPro;
+
+            using (var db = new mainEntities())
+            {
+                if ( Type == "")
+                {
+                    listPro = db.PRODUCTs.Where(p => (p.DELETED == 0)).ToList();               
+                }
+                else
+                {
+                    listPro = db.PRODUCTs.Where(p=>( (p.TYPE == Type) && (p.DELETED == 0))).ToList();
+                }
+
+                foreach (var p in ListObsPro)
+                {
+                    ListObsPro.Add(p);
+                }
+            }
+            return ListObsPro;
         }
 
         public static void UpdateProduct(PRODUCT product)
@@ -76,19 +119,6 @@ namespace MainProject.DatabaseController
 
         }
 
-        public static List<TABLE> LoadTable(int Floors)
-        {
-            
-            using (var db = new mainEntities())
-            {
-                List<TABLE> listtab = db.TABLES.Where(t => (t.FLOORS == Floors ) && (t.DELETED == 0)).ToList();
-                if (listtab != null)
-                {
-                    return listtab;
-                }
-            }
-            return null;
-        }
 
         public static List<PRODUCT> SearchProByType(string Type)
         {

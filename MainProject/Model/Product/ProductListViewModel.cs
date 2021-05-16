@@ -1,9 +1,8 @@
 ﻿using MainProject.DatabaseController;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace MainProject.Model.Product
@@ -12,36 +11,39 @@ namespace MainProject.Model.Product
     {
         #region Field
 
-        private List<ProductViewModel> _listProView;
-        private ProductViewModel _productView;
+        private ObservableCollection<PRODUCT> _listProView;
+        private PRODUCT _chosseproduct;
         private string Type;
 
-        private ICommand _addProView;
-        private ICommand _deleteProView;
+        private ICommand _addProduct;
+        private ICommand _deletePro;
         private ICommand _searchByName;
         private ICommand _searchByType;
+        private ICommand _OpenViewUpdateProduct;
+        private ICommand _OpenViewDetailProduct;
+        private ICommand _UpdateProduct;
 
         #endregion
         #region Init
 
         public ProductListViewModel()
         {
-            ListPoView = new List<ProductViewModel>();
+            ListPoView = DataController.LoadProduct();
             Type = "";
-            ProductView = new ProductViewModel();
+            ChosseProduct = new PRODUCT();
         }
 
         #endregion
 
         #region Properties
 
-        public List<ProductViewModel>  ListPoView
+        public ObservableCollection<PRODUCT> ListPoView
         {
             get
             {
                 if (_listProView == null)
                 {
-                    _listProView = new List<ProductViewModel>();
+                    _listProView = new ObservableCollection<PRODUCT>();
                 }
                 return _listProView;
             }
@@ -55,21 +57,21 @@ namespace MainProject.Model.Product
             }
         }
 
-        public ProductViewModel ProductView
+        public PRODUCT ChosseProduct
         {
             get
             {
-                if (_productView == null)
+                if (_chosseproduct == null)
                 {
-                    _productView = new ProductViewModel();
+                    _chosseproduct = new PRODUCT();
                 }
-                return _productView;
+                return _chosseproduct;
             }
             set
             {
-                if (_productView != value)
+                if (_chosseproduct != value)
                 {
-                    _productView = value;
+                    _chosseproduct = value;
                     OnPropertyChanged();
                 }
             }
@@ -80,22 +82,40 @@ namespace MainProject.Model.Product
 
         #region Icommand
 
+        public ICommand AddProduct
+        {
+            get 
+            {
+                if (_addProduct ==null)
+                {
+                    _addProduct = new RelayingCommand<PRODUCT>(a => Add(a));
+                }
+                return _addProduct;
+            }
+        }   
+        
+        public void Add(PRODUCT p)
+        {
+            ListPoView.Add(p);
+            DataController.UpdateProduct(p);
+        }
+
         public ICommand DeleteProduct
         {
             get
             {
-                if (_deleteProView == null)
+                if (_deletePro == null)
                 {
-                    _deleteProView = new RelayingCommand<ProductViewModel>(a => DeletePro(a));
+                    _deletePro = new RelayingCommand<PRODUCT>(a => DeletePro(a));
                 }
-                return _deleteProView;
+                return _deletePro;
             }
         }
 
-        public void DeletePro(ProductViewModel Pro)
+        public void DeletePro(PRODUCT Pro)
         {
             ListPoView.Remove(Pro);
-            DataController.DeleteProduct(Pro.Prodduct);
+            DataController.DeleteProduct(Pro);
 
         }
 
@@ -113,9 +133,10 @@ namespace MainProject.Model.Product
 
         public void SearchName(string name)
         {
+           SearchType(Type);
           for ( int i = 0; i < ListPoView.Count; ++i)
             {
-                if (!ListPoView[i].Prodduct.NAME.Contains(name)) ListPoView.RemoveAt(i);
+                if (!ListPoView[i].NAME.Contains(name)) ListPoView.RemoveAt(i);
             }
         }
 
@@ -132,13 +153,69 @@ namespace MainProject.Model.Product
         }
         public void SearchType(string Type)
         {
-            List<PRODUCT> ProList = DataController.SearchProByType(Type);
             this.Type = Type;
-            ListPoView = new List<ProductViewModel>(ProList.Count);
+            List<PRODUCT> ProList = DataController.SearchProByType(Type);        
+            ListPoView = new ObservableCollection<PRODUCT>();
+
             foreach (PRODUCT p in ProList)
             {
-                this.ListPoView.Add(new ProductViewModel(p));
+                this.ListPoView.Add(p);
             }
+        }
+
+        public ICommand OpenViewUpdateProduct
+        {
+            get
+            {
+                if (_OpenViewUpdateProduct == null)
+                {
+                    _OpenViewUpdateProduct = new RelayingCommand<PRODUCT>(a => OpenViewUpdate(a));
+                }
+                return _OpenViewUpdateProduct;
+            }
+        }
+
+        public void OpenViewUpdate(PRODUCT P)
+        {
+
+           ChosseProduct = P;
+            //open new view to update product
+        }
+
+        public ICommand OpenViewDetailProduct
+        {
+            get
+            {
+                if (_OpenViewDetailProduct == null)
+                {
+                    _OpenViewDetailProduct = new RelayingCommand<PRODUCT>(a => OpenViewDetail(a));
+                }
+                return _OpenViewDetailProduct;
+            }
+        }
+
+        public void OpenViewDetail(PRODUCT p)
+        {
+            ChosseProduct = p;
+            //open new View detail product
+        }
+
+        public ICommand UpdateProduct
+        {
+            get
+            {
+                if (_UpdateProduct == null)
+                {
+                    _UpdateProduct = new RelayingCommand<PRODUCT>(a => Update(a));
+                }
+                return _UpdateProduct;
+            }
+        }
+
+        public void Update(PRODUCT pro)
+        {
+            ChosseProduct = pro;
+            DataController.UpdateProduct(pro);
         }
         #endregion
     }
