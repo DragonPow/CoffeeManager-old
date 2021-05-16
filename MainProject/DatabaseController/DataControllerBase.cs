@@ -19,7 +19,8 @@ namespace MainProject.DatabaseController
 
                 foreach (TABLE t in listtab)
                 {
-                    ObserTab.Add(new TABLECUSTOM() { table = t, ListPro = null });
+                    //Nhực làm bị lỗi, làm lại
+                    //ObserTab.Add(new TABLECUSTOM() { table = t, ListPro = null });
                 }
             }
 
