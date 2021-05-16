@@ -10,24 +10,15 @@
 namespace MainProject.Model
 {
     using System;
-    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     
-    public partial class CUSTOMER
+    public partial class CUSTOMER : BaseViewModel
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public CUSTOMER()
-        {
-            this.BILLs = new HashSet<BILL>();
-        }
-    
         public long ID { get; set; }
         public string NAME { get; set; }
         public Nullable<System.DateTime> BIRTHDAY { get; set; }
         public string PHONE { get; set; }
         public Nullable<int> POINT_ACCUMULATION { get; set; }
         public Nullable<int> DELETED { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<BILL> BILLs { get; set; }
     }
 }

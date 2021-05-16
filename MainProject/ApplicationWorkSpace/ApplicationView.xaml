@@ -22,7 +22,7 @@
             <HistoryWorkSpace:HistoryView />
         </DataTemplate>
         <DataTemplate DataType="{x:Type VoucherWorkSpace:VoucherViewModel}">
-            <VoucherWorkSpace:VoucherView />
+            <VoucherWorkSpace:VoucherPreviewPanel />
         </DataTemplate>
         <DataTemplate DataType="{x:Type StatisticWorkSpace:StatisticViewModel}">
             <StatisticWorkSpace:StatisticView />
