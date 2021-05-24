@@ -17,7 +17,6 @@ namespace MainProject.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public PRODUCT()
         {
-            this.PRICE = 0;
             this.DETAILBILLs = new  ObservableCollection<DETAILBILL>();
         }
     

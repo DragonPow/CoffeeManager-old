@@ -48,9 +48,9 @@ namespace MainProject
         #endregion
 
         #region Properties
-
-        public int Floors { 
-            get => _floors;
+        public int Floors
+        {
+            get => _currentfloors;
             set
             {
                 if (value != _currentfloors)
@@ -124,7 +124,9 @@ namespace MainProject
         {
             TableDetailView view = new TableDetailView();
             view.DataContext = SelectedTable;
-            view.Show();
+
+            //view is a user control
+            //view.Show();
         }
         public ICommand DeleteTable
         {

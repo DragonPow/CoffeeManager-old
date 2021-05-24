@@ -277,7 +277,7 @@
           <Property Name="NAME" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
           <Property Name="DETAIL" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
           <Property Name="IMAGE" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
-          <Property Name="PRICE" Type="Int64" />
+          <Property Name="PRICE" Type="Int64" Nullable="false" />
           <Property Name="TYPE" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
           <Property Name="DELETED" Type="Int32" />
           <NavigationProperty Name="DETAILBILLs" Relationship="mainModel.FK_DETAILBILL_1_0" FromRole="PRODUCT" ToRole="DETAILBILL" />

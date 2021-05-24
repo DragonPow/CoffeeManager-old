@@ -25,19 +25,20 @@
         <Button
             Grid.Column="0" Grid.Row="1"
             Click="Button_Click"
+            Content="Create" FontSize="16"
             Style="{StaticResource MaterialDesignRaisedDarkButton}"
             materialDesign:ButtonAssist.CornerRadius="15"
-            ToolTip="MaterialDesignRaisedDarkButton with Round Corners" Height="Auto" HorizontalAlignment="Center" Margin="70,5,0,10" Width="120">
-            <TextBlock
-                Text="Create" FontSize="16" />
-        </Button>
+            ToolTip="MaterialDesignRaisedDarkButton with Round Corners" 
+            Height="Auto" Width="120"
+            HorizontalAlignment="Center" Margin="70,5,0,10" />
         <Button
             Grid.Column="1" Grid.Row="1"
+            FontSize="16"
+            Content="Cancel"
             Style="{StaticResource MaterialDesignRaisedDarkButton}"
             materialDesign:ButtonAssist.CornerRadius="15"
-            ToolTip="MaterialDesignRaisedDarkButton with Round Corners" Height="Auto" HorizontalAlignment="Center" Margin="0,5,70,10" Width="120">
-            <TextBlock
-                Text="Cancel" FontSize="16" />
-        </Button>
+            ToolTip="MaterialDesignRaisedDarkButton with Round Corners" 
+            Height="Auto" Width="120"
+            HorizontalAlignment="Center" Margin="0,5,70,10" />
     </Grid>
 </Window>

@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:MainProject.VoucherWorkSpace"
              xmlns:rules="clr-namespace:MainProject.ValidationRules"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-             mc:Ignorable="d" 
+             mc:Ignorable="d"
              Background="White"
              d:DesignHeight="300" d:DesignWidth="800" FontSize="16">
     <UserControl.DataContext>
@@ -29,17 +29,17 @@
 
         <Image 
             Grid.Column="0" Grid.RowSpan="7"
-            Source="/MainProject;component/Resources/sale_border.png" HorizontalAlignment="Center" Margin="10"
-            
-            >
+            Source="/MainProject;component/Resources/sale_border.png" 
+            HorizontalAlignment="Center" Margin="10">
             <Image.Effect>
                 <BlurEffect/>
             </Image.Effect>
         </Image>
 
         <TextBlock Grid.Column="0" Grid.RowSpan="7"
-            Text="SALE" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="75" FontWeight="Bold" FontStyle="Italic" Margin="0,0,0,60" Foreground="#FFF45454"
-                    >
+            Text="SALE" HorizontalAlignment="Center" 
+                   VerticalAlignment="Center" FontSize="75" FontWeight="Bold" 
+                   FontStyle="Italic" Margin="0,0,0,60" Foreground="#FFF45454">
             <TextBlock.Effect>
                 <DropShadowEffect Opacity="0.7" ShadowDepth="4"/>
             </TextBlock.Effect>
@@ -47,8 +47,10 @@
 
         <TextBlock Grid.Column="0" Grid.RowSpan="7"
             Text="{Binding Path=ValueString}" 
-                   HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="65" FontWeight="Bold" FontStyle="Italic" Margin="0,80,0,0" Foreground="#FF000CFF"
-                   >
+                   HorizontalAlignment="Center" VerticalAlignment="Center" 
+                   FontSize="65" FontWeight="Bold" 
+                   FontStyle="Italic" Margin="0,80,0,0" 
+                   Foreground="#FF000CFF">
             <TextBlock.Effect>
                 <DropShadowEffect Opacity="0.7" ShadowDepth="4"/>
             </TextBlock.Effect>
@@ -64,26 +66,31 @@
                      Text="{Binding Path=Code, Mode=TwoWay}"
                 materialDesign:HintAssist.Hint="CODE"
                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                VerticalAlignment="Center"     
-                />
+                VerticalAlignment="Center"/>
             <CheckBox Grid.Column="1"
                       x:Name="cbx_auto"
                       IsChecked="{Binding Path=IsAuto, Mode=TwoWay}"
                       Checked="cbx_auto_Checked"
                       Unchecked="cbx_auto_Unchecked"
-                Content="Auto" Margin="0,30,0,0" VerticalContentAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" Padding="0,0,0,4"
-                />
+                      Content="Auto" Margin="0,30,0,0"
+                      VerticalContentAlignment="Center" 
+                      HorizontalAlignment="Center" VerticalAlignment="Center" 
+                      Padding="0,0,0,3"/>
         </Grid>
         <TextBox 
             Grid.Column="1" Grid.Row="1"
             x:Name="txt_value"
             MaxLength="2"
             materialDesign:HintAssist.Hint="Value (%)"
-            Style="{StaticResource MaterialDesignFloatingHintTextBox}" InputScope="Number"
-            VerticalAlignment="Center" Grid.ColumnSpan="2" Margin="44.6,0,369,0" HorizontalAlignment="Left" Width="120" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"
-            >
+            Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
+            InputScope="Number"
+            VerticalAlignment="Center" Grid.ColumnSpan="2" 
+            Margin="44.6,0,369,0" HorizontalAlignment="Left" 
+            Width="120" HorizontalContentAlignment="Left" 
+            VerticalContentAlignment="Center">
             <TextBox.Text>
-                <Binding Mode="TwoWay" Path="Value" UpdateSourceTrigger="PropertyChanged">
+                <Binding Mode="TwoWay" Path="Value" 
+                         UpdateSourceTrigger="PropertyChanged">
                     <Binding.ValidationRules>
                         <rules:NotNullableValidationRule />
                     </Binding.ValidationRules>
@@ -97,7 +104,9 @@
                 x:Name="dateStart"
                 SelectedDate="{Binding Path=DateStart, Mode=TwoWay}"
                 materialDesign:HintAssist.Hint="Pick date"
-                HorizontalContentAlignment="Center" Padding="0,4" VerticalAlignment="Center" Margin="0,11" VerticalContentAlignment="Stretch" />
+                HorizontalContentAlignment="Center" Padding="0,4" 
+                VerticalAlignment="Center" Margin="0,11" 
+                VerticalContentAlignment="Stretch" />
             <materialDesign:TimePicker
                 x:Name="timeStart"
                 SelectedTime="{Binding Path=DateStart, Mode=TwoWay}"
@@ -116,12 +125,14 @@
         </StackPanel>
         <TextBox Grid.Column="1" Grid.Row="3" Grid.RowSpan="2"
                  Text="{Binding Path=Description}"
-            Style="{StaticResource MaterialDesignOutlinedTextBox}"
-            VerticalAlignment="Top"
-            AcceptsReturn="True"
-            TextWrapping="Wrap"
-            VerticalScrollBarVisibility="Auto"
-            materialDesign:HintAssist.Hint="Description" Grid.ColumnSpan="2" Margin="9.6,0,10,0" Height="110"/>
+                 Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                 VerticalAlignment="Top"
+                 AcceptsReturn="True"
+                 TextWrapping="Wrap"
+                 VerticalScrollBarVisibility="Auto"
+                 materialDesign:HintAssist.Hint="Description" 
+                 Grid.ColumnSpan="2" Margin="9.6,0,10,0" 
+                 Height="110"/>
 
         <materialDesign:PackIcon Kind="Key" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="24" Height="24"/>
         <materialDesign:PackIcon Kind="SackPercent" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Width="24" Height="24"/>
