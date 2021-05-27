@@ -1,0 +1,87 @@
+﻿<UserControl x:Class="MainProject.MainWorkSpace.Product.CreateProd"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:local="clr-namespace:MainProject.MainWorkSpace.Product"
+             mc:Ignorable="d" 
+             d:DesignHeight="650" d:DesignWidth="600">
+    <DockPanel>
+        <Grid DockPanel.Dock="Top" Background="{StaticResource MainColor}">
+            <Border BorderBrush="Gray" BorderThickness="1"/>
+            <TextBlock Style="{StaticResource MaterialDesignHeadline6TextBlock}"
+                       Text="Tạo mặt hàng" 
+                       FontSize="26" 
+                       Foreground="White"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"/>
+            <Button Background="Transparent" BorderBrush="Transparent" Margin="10" HorizontalAlignment="Right">
+                <materialDesign:PackIcon Kind="Close" Width="25" Height="25" />
+            </Button>
+        </Grid>
+        <StackPanel DockPanel.Dock="Bottom" Background="White">
+
+            <Border Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Row="1" BorderBrush="Gray" BorderThickness="2" Margin="0,40,0,20">
+                <Button Background="Transparent" BorderBrush="Transparent" Width="200" Height="200">
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="Plus" Foreground="Gray" Width="35" Height="35" />
+                        <TextBlock Text="Thêm ảnh" Foreground="Gray" FontSize="24" VerticalAlignment="Center"/>
+                    </StackPanel>
+
+                </Button>
+            </Border>
+            <TextBox 
+                    Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                    materialDesign:HintAssist.Hint="Tên mặt hàng"
+                    FontSize="16"
+                    Margin="100,5"/>
+            <ComboBox
+                    Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                    materialDesign:HintAssist.Hint="Danh mục"
+                     ItemsSource="{Binding ShortStringList}"
+                     FontSize="16"
+                     Margin="100,5"/>
+            <TextBox 
+                    Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                    materialDesign:HintAssist.Hint="Giá"
+                    FontSize="16"
+                    Margin="100,5"/>
+            <Grid Margin="100,30">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Button
+                    Height="50"
+                  Style="{StaticResource MaterialDesignOutlinedButton}"
+                  ToolTip="MaterialDesignOutlinedButton"
+                  Content="Cancel"
+                  Foreground="{StaticResource MainColor}"
+                  BorderBrush="#31CA62"
+                  FontSize="24"
+                  Margin="10"/>
+                <Button
+                    Style="{StaticResource MaterialDesignRaisedAccentButton}"
+                    Grid.Column="1"
+                    Height="50"
+                    HorizontalAlignment="Stretch"                  
+                    Background="{StaticResource MainColor}"
+                    BorderBrush="#31CA62"
+                    Foreground="White"
+                    Margin="10">
+                    <TextBlock
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Text="Thêm vào" FontSize="24"
+                        Margin="5"/>
+                </Button>
+
+            </Grid>
+
+
+
+
+        </StackPanel>
+    </DockPanel>
+</UserControl>
