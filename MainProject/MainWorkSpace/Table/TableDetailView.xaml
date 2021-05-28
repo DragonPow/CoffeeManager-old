@@ -61,17 +61,6 @@
             </StackPanel>
         </Grid>
         <Grid Grid.Row="3" >
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="1*"/>
-            </Grid.ColumnDefinitions>
-            <Button
-                Style="{StaticResource MaterialDesignFlatAccentBgButton}"
-                ToolTip="MaterialDesignFlatAccentBackgroundButton"
-                Content="Lưu"
-                Height="Auto"
-                Foreground="White" Background="{StaticResource MainColor}"
-                BorderThickness="0" Grid.Column="0"  />
             <Button
                 Style="{StaticResource MaterialDesignRaisedButton}"
                 ToolTip="MaterialDesignRaisedButton with Round Corners"
