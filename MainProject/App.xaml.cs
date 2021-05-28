@@ -45,7 +45,6 @@ namespace MainProject
 
             view.DataContext = viewModel;
             view.ShowDialog();
-
         }
     }
 }

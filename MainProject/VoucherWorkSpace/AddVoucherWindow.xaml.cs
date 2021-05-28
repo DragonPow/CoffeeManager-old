@@ -22,10 +22,38 @@ namespace MainProject.VoucherWorkSpace
         public AddVoucherWindow()
         {
             InitializeComponent();
-            voucherView.DataContext = new VoucherViewModel();
+            btnSubmit.Click += BtnCreate_Click;
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        public AddVoucherWindow(VoucherViewModel viewModel)
+        {
+            DataContext = viewModel;
+            InitializeComponent();
+            voucherView.useMode_Edit();
+            txtSubmit.Text = "Lưu thay đổi";
+            btnSubmit.Click += BtnEdit_Click;
+        }
+
+        private void BtnEdit_Click(object sender, RoutedEventArgs e)
+        {
+            VoucherViewModel viewModel = (VoucherViewModel)voucherView.DataContext;
+            if (viewModel.DateStart > viewModel.DateEnd)
+            {
+                MessageBox.Show("Error", "ERROR: Invalid time", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+            if (viewModel.UpdateToDB())
+            {
+                this.Tag = "OK";
+                this.Close();
+            }
+            else
+            {
+                MessageBox.Show("LỖI: Voucher không tồn tại", "Thất bại", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+        }
+
+        private void BtnCreate_Click(object sender, RoutedEventArgs e)
         {
             VoucherViewModel viewModel = (VoucherViewModel)voucherView.DataContext;
             if (viewModel.DateStart > viewModel.DateEnd)
@@ -34,9 +62,15 @@ namespace MainProject.VoucherWorkSpace
                 return;
             }
 
-            if (viewModel.IsAuto)
+            try
             {
-                viewModel.GetAvaiableCode();
+                viewModel.SaveToDB(viewModel);
+                this.Tag = "OK";
+                this.Close();
+            }
+            catch(Exception)
+            {
+                MessageBox.Show("LỖI: CSDL từ chối dữ liệu", "Thất bại", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
 
             Console.WriteLine(viewModel.Code);
@@ -44,6 +78,11 @@ namespace MainProject.VoucherWorkSpace
             Console.WriteLine(viewModel.DateStart.ToShortDateString() + "  " + viewModel.DateStart.ToShortTimeString());
             Console.WriteLine(viewModel.DateEnd.ToLongDateString() + "  " + viewModel.DateEnd.ToShortTimeString());
             Console.WriteLine(viewModel.Description);
+        }
+
+        private void ButtonClose_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }

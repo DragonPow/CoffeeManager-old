@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:MainProject.VoucherWorkSpace"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Title="AddVoucherWindow" Height="380" Width="830">
+        Title="AddVoucherWindow" Height="380" Width="830" WindowStartupLocation="CenterOwner" Topmost="False" ResizeMode="NoResize">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="300"/>
@@ -22,23 +22,30 @@
             x:Name="voucherView"
             />
 
-        <Button
-            Grid.Column="0" Grid.Row="1"
-            Click="Button_Click"
-            Content="Create" FontSize="16"
-            Style="{StaticResource MaterialDesignRaisedDarkButton}"
-            materialDesign:ButtonAssist.CornerRadius="15"
-            ToolTip="MaterialDesignRaisedDarkButton with Round Corners" 
-            Height="Auto" Width="120"
-            HorizontalAlignment="Center" Margin="70,5,0,10" />
-        <Button
-            Grid.Column="1" Grid.Row="1"
-            FontSize="16"
-            Content="Cancel"
-            Style="{StaticResource MaterialDesignRaisedDarkButton}"
-            materialDesign:ButtonAssist.CornerRadius="15"
-            ToolTip="MaterialDesignRaisedDarkButton with Round Corners" 
-            Height="Auto" Width="120"
-            HorizontalAlignment="Center" Margin="0,5,70,10" />
+        <Button Grid.Column="0" Grid.Row="1"
+                Name="btnSubmit"
+                Content="Tạo mới" FontSize="18"
+                Style="{StaticResource MaterialDesignRaisedDarkButton}"
+                materialDesign:ButtonAssist.CornerRadius="15"
+                IsEnabled="{Binding ElementName=voucherView, Path=IsValid, Mode=OneWay}"
+                ToolTip="MaterialDesignRaisedDarkButton with Round Corners"
+                Height="35" HorizontalAlignment="Center" 
+                Margin="70,0,0,10" 
+                Width="150" 
+                VerticalAlignment="Center" 
+                Padding="16,0"/>
+        <Button Grid.Column="1" Grid.Row="1"
+                Content="Hủy"
+                FontSize="18"
+                Click="ButtonClose_Click"
+                Style="{StaticResource MaterialDesignRaisedDarkButton}"
+                materialDesign:ButtonAssist.CornerRadius="15"
+                ToolTip="MaterialDesignRaisedDarkButton with Round Corners"
+                Height="35" 
+                HorizontalAlignment="Center" 
+                Margin="0,0,70,10" 
+                Width="150"
+                VerticalAlignment="Center" 
+                Padding="16,0"/>
     </Grid>
 </Window>
