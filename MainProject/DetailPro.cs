@@ -2,7 +2,7 @@
 
 namespace MainProject
 {
-    class DetailPro: BaseViewModel
+    public class DetailPro: BaseViewModel
     {
         private int _quantity;
         private PRODUCT pro;
