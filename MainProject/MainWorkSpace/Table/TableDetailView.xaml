@@ -24,6 +24,8 @@
                                          Height="Auto" Width="Auto" Foreground="#BD8722" RenderTransformOrigin="0.323,0.538"/>
             </StackPanel>
         </Button>
+        
+        <!--Container list product-->
         <ScrollViewer Grid.Row="1" 
                       materialDesign:ScrollBarAssist.ThumbHeight="50" 
                       materialDesign:ScrollBarAssist.ThumbWidth="5" 
