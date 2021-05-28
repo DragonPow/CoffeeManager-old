@@ -18,20 +18,17 @@
         <materialDesign:ColorZone DockPanel.Dock="Top"
               Mode="PrimaryMid"
               Padding="5">
-            <Grid
-
-              materialDesign:RippleAssist.IsCentered="True">
+            <Grid materialDesign:RippleAssist.IsCentered="True">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="auto"/>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <ToggleButton Grid.Column="0" Margin="10,0,0,0"
-                Style="{DynamicResource MaterialDesignHamburgerToggleButton}" />
+
                 <materialDesign:ColorZone
                     Mode="Standard"
                     Margin="50,0,0,0"
-                    Padding="8 4 8 4"
+                    Padding="8 4"
                     CornerRadius="2"
                     Panel.ZIndex="1"
                     materialDesign:ShadowAssist.ShadowDepth="Depth1" Grid.Column="1">
@@ -40,8 +37,8 @@
                             <ColumnDefinition Width="Auto" />
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
-                        <Button
-                             Style="{DynamicResource MaterialDesignToolButton}">
+                        <Button VerticalAlignment="Center"
+                                Style="{DynamicResource MaterialDesignToolButton}">
                             <materialDesign:PackIcon
                                   Kind="Search"
                                   Opacity=".56" />
@@ -58,20 +55,21 @@
                 </materialDesign:ColorZone>
 
             </Grid>
-
         </materialDesign:ColorZone>
-        <TabControl       
-        TabStripPlacement="Bottom"
-        Style="{StaticResource MaterialDesignNavigatilRailTabControl}"  
-        materialDesign:ColorZoneAssist.Mode="PrimaryMid">
-
-            <TabItem
-            Width="120"
-            Style="{StaticResource MaterialDesignNavigationRailTabItem}">
+        <TabControl TabStripPlacement="Bottom"
+                    Style="{StaticResource MaterialDesignNavigatilRailTabControl}"
+                    materialDesign:ColorZoneAssist.Mode="PrimaryMid">
+            <TabItem Width="120"
+                     Style="{StaticResource MaterialDesignNavigationRailTabItem}">
                 <TabItem.Header>
                     <StackPanel>
-                        <TextBlock Text="01" FontSize="18" FontWeight="Bold" Foreground="White" HorizontalAlignment="Center"></TextBlock>
-                        <TextBlock Text="Tất cả" FontSize="14" Foreground="White" HorizontalAlignment="Center"></TextBlock>
+                        <TextBlock Text="01" FontSize="18" 
+                                   FontWeight="Bold" 
+                                   Foreground="White" 
+                                   HorizontalAlignment="Center"/>
+                        <TextBlock Text="Tất cả" FontSize="14" 
+                                   Foreground="White" 
+                                   HorizontalAlignment="Center"/>
                     </StackPanel>
                 </TabItem.Header>
                 <Grid>
@@ -83,8 +81,8 @@
                     <Prod:ProdView Grid.Column="0"/>
                 </Grid>
             </TabItem>
-            <TabItem
-            Style="{StaticResource MaterialDesignNavigationRailTabItem}" Width="120">
+            <TabItem Style="{StaticResource MaterialDesignNavigationRailTabItem}" 
+                     Width="120">
                 <TabItem.Header>
                     <StackPanel>
                         <TextBlock Text="02" FontSize="18" FontWeight="Bold" Foreground="White" HorizontalAlignment="Center"></TextBlock>
@@ -95,13 +93,16 @@
                Tab2
                 </TextBlock>
             </TabItem>
-            <TabItem
-            Width="120"
-            Style="{StaticResource MaterialDesignNavigationRailTabItem}">
+            <TabItem Width="120"
+                     Style="{StaticResource MaterialDesignNavigationRailTabItem}">
                 <TabItem.Header>
                     <StackPanel>
-                        <TextBlock Text="03" FontSize="18" FontWeight="Bold" Foreground="White" HorizontalAlignment="Center"></TextBlock>
-                        <TextBlock Text="Trà sữa" FontSize="14" Foreground="White" HorizontalAlignment="Center"></TextBlock>
+                        <TextBlock Text="03" FontSize="18" 
+                                   FontWeight="Bold" Foreground="White"
+                                   HorizontalAlignment="Center"/>
+                        <TextBlock Text="Trà sữa" FontSize="14" 
+                                   Foreground="White" 
+                                   HorizontalAlignment="Center"/>
                     </StackPanel>
                 </TabItem.Header>
                 <TextBlock>

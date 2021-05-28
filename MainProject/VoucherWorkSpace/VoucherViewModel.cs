@@ -9,7 +9,7 @@ using System.Windows.Controls;
 
 namespace MainProject.VoucherWorkSpace
 {
-    class VoucherViewModel : BaseViewModel, IMainWorkSpace
+    public class VoucherViewModel : BaseViewModel, IMainWorkSpace
     {
         public string NameWorkSpace => "Voucher";
         private const PackIconKind _IconDisplay = PackIconKind.GiftOutline;
@@ -159,11 +159,21 @@ namespace MainProject.VoucherWorkSpace
 
         public VoucherViewModel()
         {
-
-            this.Code = "";
+            this._code = getRandomCode();
+            this.isAuto = true;
             this.Description = "Empty description";
             this.Value = "20";
 
+            this.dateStart = DateTime.Now;
+            this.dateEnd = DateTime.Now.AddDays(1);
+        }
+
+        public VoucherViewModel(VoucherViewModel other)
+        {
+            this._code = other.Code;
+            this.isAuto = other.IsAuto;
+            this.Description = other.Description;
+            this.Value = other.Value;
             this.dateStart = DateTime.Now;
             this.dateEnd = DateTime.Now.AddDays(1);
         }
@@ -182,13 +192,12 @@ namespace MainProject.VoucherWorkSpace
 
         public void GetAvaiableCode()
         {
+            this._code = getRandomCode();
             using (mainEntities db = new mainEntities())
             {
-                VOUCHER voucher = db.VOUCHERs.Where((v) => v.ID == this._code).First();
-                while (voucher != null)
+                while (db.VOUCHERs.Where((v) => v.ID == this._code).Any())
                 {
-                    _code = getRandomCode();
-                    voucher = db.VOUCHERs.Where((v) => v.ID == _code).First();
+                    this._code = getRandomCode();
                 }
             }
             OnPropertyChanged("Code");
@@ -197,10 +206,12 @@ namespace MainProject.VoucherWorkSpace
         public VOUCHER toDB_Voucher()
         {
             VOUCHER voucher = new VOUCHER();
-            //voucher.ID = this.Code;
+            voucher.ID = this.Code;
             voucher.BEGINTIME = this.DateStart;
             voucher.ENDTIME = this.dateEnd;
             voucher.PERCENT = this._value;
+            voucher.DELETED = 0;
+            voucher.DESCRIPTION = this.Description;
             return voucher;
         }
 
@@ -209,18 +220,74 @@ namespace MainProject.VoucherWorkSpace
             using (mainEntities db = new mainEntities())
             {
                 db.VOUCHERs.Add(viewModel.toDB_Voucher());
+                db.SaveChanges();
             }
+        }
+
+        public bool DeleteFromDB()
+        {
+            return DeleteFromDB(this.Code);
+        }
+
+        public bool UpdateToDB()
+        {
+            using (mainEntities db = new mainEntities())
+            {
+                var v = db.VOUCHERs.Where(_v => _v.ID == this.Code).FirstOrDefault();
+                if (v == null)
+                {
+                    // code not existed
+                    return false;
+                }
+                v.PERCENT = this._value;
+                v.BEGINTIME = this.DateStart;
+                v.ENDTIME = this.DateEnd;
+                v.DESCRIPTION = this.Description;
+                db.SaveChanges();
+            }
+            return true;
         }
 
         public static bool HasExisted(String code)
         {
             bool rs = false;
-            /*using (mainEntities db = new mainEntities())
+            using (mainEntities db = new mainEntities())
             {
-                VOUCHER voucher = db.VOUCHERs.Where((v) => v.ID == code).First();
-                rs = voucher != null;
-            }*/
+                rs = db.VOUCHERs.Where(v => v.ID == code).Any();
+            }
             return rs;
         }
+
+        public static bool DeleteFromDB(String code)
+        {
+            using (mainEntities db = new mainEntities())
+            {
+                var v = db.VOUCHERs.Where(_v => _v.ID == code).FirstOrDefault();
+                if (v == null)
+                {
+                    // code not existed
+                    return false;
+                }
+
+                db.VOUCHERs.Remove(v);
+                db.SaveChanges();
+            }
+            return true;
+        }
+
+        public static VoucherViewModel from(VOUCHER voucher)
+        {
+            VoucherViewModel viewModel = new VoucherViewModel()
+            {
+                Code = voucher.ID,
+                DateStart = (DateTime)voucher.BEGINTIME,
+                DateEnd = (DateTime)voucher.ENDTIME,
+                _value = (int)voucher.PERCENT,
+                Description = voucher.DESCRIPTION
+            };
+            return viewModel;
+        }
+
+        
     }
 }

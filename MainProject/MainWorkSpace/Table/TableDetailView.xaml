@@ -24,6 +24,8 @@
                                          Height="Auto" Width="Auto" Foreground="#BD8722" RenderTransformOrigin="0.323,0.538"/>
             </StackPanel>
         </Button>
+        
+        <!--Container list product-->
         <ScrollViewer Grid.Row="1" 
                       materialDesign:ScrollBarAssist.ThumbHeight="50" 
                       materialDesign:ScrollBarAssist.ThumbWidth="5" 
@@ -61,17 +63,6 @@
             </StackPanel>
         </Grid>
         <Grid Grid.Row="3" >
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="1*"/>
-            </Grid.ColumnDefinitions>
-            <Button
-                Style="{StaticResource MaterialDesignFlatAccentBgButton}"
-                ToolTip="MaterialDesignFlatAccentBackgroundButton"
-                Content="Lưu"
-                Height="Auto"
-                Foreground="White" Background="{StaticResource MainColor}"
-                BorderThickness="0" Grid.Column="0"  />
             <Button
                 Style="{StaticResource MaterialDesignRaisedButton}"
                 ToolTip="MaterialDesignRaisedButton with Round Corners"

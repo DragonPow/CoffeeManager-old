@@ -66,6 +66,7 @@
                                                  Height="25"
                                                  Foreground="{Binding ElementName=tb_Username, Path=BorderBrush}" />
                         <TextBox materialDesign:HintAssist.Hint="Tài khoản"
+                                 Name="tb_Username"
                                  Text="{Binding CurrentAccount.Name}"
                                  Margin="10 0 0 0"
                                  Width="250"
@@ -81,6 +82,7 @@
                                                  HorizontalAlignment="Center"
                                                  Foreground="{Binding ElementName=tb_Password, Path=BorderBrush}" />
                         <PasswordBox Margin="10 0"
+                                     Name="tb_Password"
                                      materialDesign:HintAssist.Hint="Mật khẩu"
                                      Width="250"
                                      Padding="0 15 0 10"
