@@ -30,7 +30,7 @@ namespace MainProject.VoucherWorkSpace
             DataContext = viewModel;
             InitializeComponent();
             voucherView.useMode_Edit();
-            txtSubmit.Text = "Lưu thay đổi";
+            btnSubmit.Content = "Lưu thay đổi";
             btnSubmit.Click += BtnEdit_Click;
         }
 

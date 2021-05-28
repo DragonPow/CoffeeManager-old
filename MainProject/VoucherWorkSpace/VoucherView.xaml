@@ -64,7 +64,7 @@
                      MaxLength="16"
                      materialDesign:HintAssist.Hint="Mã"
                      Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                     VerticalAlignment="Center"     
+                     VerticalAlignment="Center"
                      Validation.Error="On_Validation_Error">
                 <TextBox.Text>
                     <Binding Path="Code" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged" 
