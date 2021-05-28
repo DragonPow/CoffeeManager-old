@@ -8,6 +8,7 @@
              xmlns:Model="clr-namespace:MainProject.Model"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d"
+             DataContext="TableListViewModel"
              d:DesignHeight="630" d:DesignWidth="900" Background="White">
     <DockPanel>
         <Grid Height="45"

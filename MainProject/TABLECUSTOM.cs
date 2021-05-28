@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace MainProject
 {
-    class TABLECUSTOM : BaseViewModel
+    public class TABLECUSTOM : BaseViewModel
     {
         private ObservableCollection<DetailPro> _listPro;
         public TABLE table { get; set; }
@@ -22,6 +22,14 @@ namespace MainProject
                     _listPro = new ObservableCollection<DetailPro>();
                 }
                 return _listPro;
+            }
+            set
+            {
+                if (_listPro != value)
+                {
+                    _listPro = value;
+                    OnPropertyChanged();
+                }
             }
         }
 

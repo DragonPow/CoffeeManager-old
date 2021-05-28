@@ -131,8 +131,6 @@
     <Compile Include="AccountWorkSpace\ChangedPassword.xaml.cs">
       <DependentUpon>ChangedPassword.xaml</DependentUpon>
     </Compile>
-    <Compile Include="DatabaseController\CUSTOMTABLE.cs" />
-    <Compile Include="DatabaseController\DatabaseController.cs" />
     <Compile Include="DetailPro.cs" />
     <Compile Include="HistoryWorkSpace\HistoryViewModel.cs" />
     <Compile Include="MainWorkSpace\Bill\BillDetail.xaml.cs">
@@ -141,7 +139,7 @@
     <Compile Include="MainWorkSpace\Bill\BillView.xaml.cs">
       <DependentUpon>BillView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MainWorkSpace\Bill\BillViewModel.cs" />
+    <Compile Include="ViewModel\BillViewModel.cs" />
     <Compile Include="MainWorkSpace\Bill\Bill_ProductTable.xaml.cs">
       <DependentUpon>Bill_ProductTable.xaml</DependentUpon>
     </Compile>
@@ -199,7 +197,6 @@
     <Compile Include="Model\BILL.cs">
       <DependentUpon>MainModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\Bill\BillViewModel.cs" />
     <Compile Include="Model\DETAILBILL.cs">
       <DependentUpon>MainModel.tt</DependentUpon>
     </Compile>
@@ -227,14 +224,14 @@
     <Compile Include="Model\PRODUCT.cs">
       <DependentUpon>MainModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\Product\ProductListViewModel.cs" />
+    <Compile Include="ViewModel\ProductListViewModel.cs" />
     <Compile Include="Model\REGULATION.cs">
       <DependentUpon>MainModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\TABLE.cs">
       <DependentUpon>MainModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\Table\TableListViewModel.cs" />
+    <Compile Include="ViewModel\TableListViewModel.cs" />
     <Compile Include="Model\VOUCHER.cs">
       <DependentUpon>MainModel.tt</DependentUpon>
     </Compile>

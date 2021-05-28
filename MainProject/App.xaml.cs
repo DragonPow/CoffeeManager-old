@@ -24,7 +24,7 @@ namespace MainProject
 
             //This is testing Startup
             BillView view = new BillView();
-            MainWorkSpace.Bill.BillViewModel viewModel = new MainWorkSpace.Bill.BillViewModel();
+            BillViewModel viewModel = new BillViewModel();
             //End testing Startup
 
 
