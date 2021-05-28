@@ -53,10 +53,10 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <Button
-                    Height="50"
+                  Height="50"
                   Style="{StaticResource MaterialDesignOutlinedButton}"
                   ToolTip="MaterialDesignOutlinedButton"
-                  Content="Cancel"
+                  Content="Hủy"
                   Foreground="{StaticResource MainColor}"
                   BorderBrush="#31CA62"
                   FontSize="24"
