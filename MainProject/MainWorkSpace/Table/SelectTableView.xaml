@@ -17,18 +17,8 @@
                                       Background="{DynamicResource MainColor}" 
                                       Foreground="White">
                 <StackPanel Orientation="Horizontal"
-                            Margin="4,0"  >
-                    <RadioButton Style="{StaticResource MaterialDesignTabRadioButton}"
-                                 Margin="4,0"
-                                 Height="50"
-                                 IsChecked="True"
-                                 Content="HÓA ĐƠN"
-                                 FontWeight="Bold"
-                                 FontSize="18" />
-                    <TextBlock Text="|" 
-                               FontSize="30" 
-                               FontWeight="Light" 
-                               Foreground="#737373"/>
+                            Margin="4,0">
+                    
                     <RadioButton Style="{StaticResource MaterialDesignTabRadioButton}"
                                  Margin="4"
                                  Content="TẦNG 1"

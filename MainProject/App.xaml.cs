@@ -1,4 +1,5 @@
 ﻿using MainProject.ApplicationWorkSpace;
+using MainProject.MainWorkSpace.Bill;
 using MainProject.Model;
 using System;
 using System.Collections.Generic;
@@ -21,24 +22,29 @@ namespace MainProject
 
             base.OnStartup(e);
 
-            /*TestingView view = new TestingView();
-            TestingViewModel viewModel = new TestingViewModel();*/
+            ////Testing Startup
+            //BillView view = new BillView();
+            //MainWorkSpace.Bill.BillViewModel viewModel = new MainWorkSpace.Bill.BillViewModel();
+            ////End testing Startup
 
+
+            ////Tesing database
+            ////Để hay xóa dòng này không ảnh hưởng tới luồng chạy chương trình
+            //using (var main = new mainEntities())
+            //{
+            //    Console.WriteLine(main.EMPLOYEEs.Count());
+            //}
+            ////End testing database
+
+
+            //Main Startup
             ApplicationView view = new ApplicationView();
             ApplicationViewModel viewModel = new ApplicationViewModel();
+            //End main Startup
 
-            //tesing database
-            //Để hay xóa dòng này không ảnh hưởng tới luồng chạy chương trình
-            using (var main = new mainEntities())
-            {
-                Console.WriteLine(main.EMPLOYEEs.Count());
-            }
-                //LoginWorkSpace.LoginViewModel VM = new LoginWorkSpace.LoginViewModel();
-                //view.DataContext = VM;
-            
+
             view.DataContext = viewModel;
-            view.Show();
-
+            view.ShowDialog();
         }
     }
 }

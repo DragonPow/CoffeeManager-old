@@ -4,179 +4,156 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:MainProject.AccountWorkSpace"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
              Background="White"
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="650" d:DesignWidth="900">
     <UserControl.DataContext>
         <local:AccountViewModel />
     </UserControl.DataContext>
     <Grid>
-        <Grid HorizontalAlignment="Left">
-            <Border BorderBrush="Gray" BorderThickness="1"/>
-            <TabPanel x:Name="ManageAccount"
-                      Grid.ColumnSpan="1"
-                      Height="50"
-                      Width="250"
-                      HorizontalAlignment="Left"
-                      VerticalAlignment="Top">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="7*"/>
+        </Grid.ColumnDefinitions>
+        <Grid  Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="8*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Border BorderBrush="Gray" BorderThickness="1" Grid.RowSpan="3"/>
+            <Grid x:Name="ManageAccount"
+                      Grid.Column="0"
+                        Background="{StaticResource MainColor}">
                 <Border BorderBrush="Gray" BorderThickness="1"/>
-                <Button Name ="btnBacktoHome" 
-                        Height="35" 
-                        Width="35"
-                        Margin="7,7,-7,-7" 
-                        BorderBrush="{x:Null}" 
-                        Foreground="{x:Null}">
-                    <Button.Background>
-                        <ImageBrush ImageSource="back-arrow.png"/>
-                    </Button.Background>
-                </Button>
                 <TextBlock Text="Quản lý Nhân viên" 
-                           FontWeight="Bold"
-                           HorizontalAlignment="Left"
+                           FontWeight="DemiBold"
+                           HorizontalAlignment="Center"
                            VerticalAlignment="Center" 
-                           FontSize="20"
-                           Margin="22,12,-21.727,-3">
+                           FontSize="18" 
+                           Margin="10,0,0,0"
+                           Foreground="White">
                 </TextBlock>
-            </TabPanel>
-            <ScrollViewer x:Name="scvAcc" 
-                          VerticalScrollBarVisibility="Auto"
-                          HorizontalScrollBarVisibility="Visible" 
-                          Margin="0,50,0,50">
-                <WrapPanel x:Name="pnlAccount"
-                       Width="250"
-                       Orientation="Vertical"
-                       HorizontalAlignment="Left"
-                       VerticalAlignment="Top">
+            </Grid>
+            <ScrollViewer Grid.Row="1"
+                          x:Name="scvAcc" 
+                          VerticalScrollBarVisibility="Auto">
+                <StackPanel x:Name="pnlAccount"
+                       Orientation="Vertical">
                     <local:AccountControl/>
                     <local:AccountControl/>
                     <local:AccountControl/>
                     <local:AccountControl/>
-                </WrapPanel>
+                </StackPanel>
             </ScrollViewer>
-            <Button x:Name="AddAccount"
-                    Height="50"
-                    Width="250"
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Bottom"
-                    Content="Thêm nhân viên mới"
-                    Foreground="#FF1B9126"
-                    Padding="20,0,0,0">
-                <Button.Background>
-                    <ImageBrush ImageSource="icon_Add.png" Stretch="Uniform" AlignmentX ="Left"/>
-                </Button.Background>
+            <Button x:Name="AddAccount"   
+                    BorderBrush="Gray"
+                    BorderThickness="0"
+                    Grid.Row="2"
+                    VerticalAlignment="Stretch"
+                    Background="Transparent">
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                    <materialDesign:PackIcon Kind="PlusCircleOutline" Foreground="{StaticResource MainColor}" VerticalAlignment="Center" Height="25" Width="25" />
+                    <TextBlock Text="Thêm nhân viên mới" FontWeight="SemiBold" Foreground="{StaticResource MainColor}" FontSize="16" Padding="15,5,0,5" VerticalAlignment="Center"></TextBlock>
+                </StackPanel>
+
             </Button>
         </Grid>
-        <Grid Margin="250,0,0,400" >
-            <TextBlock Text="Name" 
+        <DockPanel Grid.Column="1">
+            <Border BorderThickness="1" BorderBrush="Gray"/>
+            <Grid DockPanel.Dock="Top">
+                <TextBlock Text="Name"         
                        Name="txblname"
                        Height="auto"
                        Width="auto"
                        Foreground="Black"
-                       FontSize="25"
-                       HorizontalAlignment="Center" 
+                       FontSize="20" Padding="10"
+                       HorizontalAlignment="Center"
+                       FontWeight="Bold"
                        VerticalAlignment="Center"/>
-        </Grid>
-        <Image 
-               Stretch="Fill" 
-               HorizontalAlignment="Center"
-               VerticalAlignment="Center" 
-               Source="background.jpg" 
-               Width="550" Height="197" 
-               Margin="250,50,0,200"/>
+                <Button BorderBrush="Transparent"
+                    Style="{StaticResource MaterialDesignOutlinedButton}"
+                    Content="SỬA" 
+                    FontSize="18" 
+                    Foreground="{StaticResource MainColor}"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Center"
+                        FontWeight="Regular"
+                    Visibility="Visible"/>
+            </Grid>
+            <Grid DockPanel.Dock="Bottom">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="2*"/>
+                </Grid.RowDefinitions>
+                <Image       
+                     Source="background.jpg" 
+                     Stretch="Fill"/>
+                <StackPanel Orientation="Vertical" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <TextBlock Text="Tên người dùng" FontSize="14" FontWeight="Light" HorizontalAlignment="Center" Foreground="White"></TextBlock>
+                    <TextBlock Text="Name" FontSize="20" FontWeight="DemiBold" HorizontalAlignment="Center" Foreground="White"></TextBlock>
+                    <TextBlock Text="Nhân vien" FontSize="14" FontWeight="Light" HorizontalAlignment="Center" Foreground="White"></TextBlock>
+                </StackPanel>
+                <StackPanel Grid.Row="1" Margin="0,10">
+                    <TextBox 
+                    Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                    materialDesign:HintAssist.Hint="Tên"
+                    FontSize="16"
+                    Margin="100,5"/>
+                    <ComboBox
+                    Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                    materialDesign:HintAssist.Hint="Quyền"
+                     ItemsSource="{Binding ShortStringList}"
+                     FontSize="16"
+                     Margin="100,0"/>
+                    <TextBox 
+                    Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                    materialDesign:HintAssist.Hint="Số điện thoại"
+                    FontSize="16"
+                    Margin="100,5"/>
+                    <Grid Margin="75,10">
+                        <materialDesign:PackIcon Kind="AlertCircle" Width="25" Height="25" Foreground="Gray" />
+                        <TextBlock Text="Nhân viên sẽ được hạn chế quyền truy cập vì lí do bảo mặt, nhưng sẽ không làm ảnh hưởng đến hoạt động kinh doanh của bạn."    
+                               FontStyle="Italic"
+                                   Margin="30,0"
+                               TextWrapping="WrapWithOverflow"/>
+                    </Grid>
+                    
+                    <TextBlock Text="Quản lí có quyền truy cập tương tự như chủ cửa hàng, nhưng không thể thay đổi quyền nhân viên thành quyền quản lí"
+                               Margin="105,0" 
+                               FontStyle="Italic"
+                               TextWrapping="WrapWithOverflow"/>
+                    <Grid Margin="100,30">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Button
+                              Height="50"
+                              Style="{StaticResource MaterialDesignOutlinedButton}"
+                              ToolTip="MaterialDesignOutlinedButton"
+                              Content="Đổi mật khẩu"
+                              Foreground="{StaticResource MainColor}"
+                              BorderBrush="#31CA62"
+                              FontSize="20"
+                              Margin="10"/>
+                        <Button
+                             Grid.Column="1"
+                              Height="50"
+                              Style="{StaticResource MaterialDesignOutlinedButton}"
+                              ToolTip="MaterialDesignOutlinedButton"
+                              Content="Xóa nhân viên"
+                              Foreground="Red"
+                              BorderBrush="Red"
+                              FontSize="20"
+                              Margin="10"/>
+                    </Grid>
+                </StackPanel>
 
-        <Image Source="/Resources/Coffee shop.jpg" 
-               Stretch="Uniform" 
-               Margin="417,50,168,200"
-               HorizontalAlignment="Center"
-               VerticalAlignment="Center" Height="198" Width="215"/>
-        <Grid x:Name="GrbName"
-              Margin="325,290,75,125">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="9*"/>
-                <RowDefinition Height="26*"/>
-            </Grid.RowDefinitions>
-            <Border BorderBrush="Gray" BorderThickness="1" Grid.RowSpan="2" Margin="0,-14,0,14"/>
-            <TextBlock Text="Họ tên"
-                       Height="auto"
-                       Width="auto"
-                       HorizontalAlignment="Left"
-                       VerticalAlignment="Center"
-                       Margin="15,-6,0,22"
-                       FontSize="14" Foreground="Black" Grid.RowSpan="2"/>
-            <TextBlock x:Name="txblName"
-                       Text="Name"
-                       Height="auto"
-                       Width="auto"
-                       HorizontalAlignment="Right"
-                       VerticalAlignment="Center"
-                       Margin="0,-7,14,20"
-                       FontSize="16" Grid.RowSpan="2"/>
-
-        </Grid>
-        <Grid x:Name="GrbPhone"
-              Margin="325,324,75,91">
-            <Border BorderBrush="Gray" 
-                    BorderThickness="1" Margin="0,-14,0,14"/>
-            <TextBlock Text="Số điện thoại"
-                       Height="auto"
-                       Width="auto"
-                       HorizontalAlignment="Left"
-                       VerticalAlignment="Center"
-                       Margin="15,-6,0,22"
-                       FontSize="14" Foreground="Black"/>
-            <TextBlock x:Name="txblPhone"
-                       Text="Phone"
-                       Height="auto"
-                       Width="auto"
-                       HorizontalAlignment="Right"
-                       VerticalAlignment="Center"
-                       Margin="0,-7,15,21"
-                       FontSize="16"/>
-        </Grid>
-        <Grid x:Name="GrbPost"
-              Margin="325,358,75,56">
-            <Border BorderBrush="Gray" 
-                    BorderThickness="1" Margin="0,-14,0,14"/>
-            <TextBlock Text="Chức vụ"
-                       Height="auto"
-                       Width="auto"
-                       HorizontalAlignment="Left"
-                       VerticalAlignment="Center"
-                       Margin="15,-6,0,22"
-                       FontSize="14" Foreground="Black"/>
-            <TextBlock x:Name="txblPost"
-                       Text="Chức vụ"
-                       Height="auto"
-                       Width="auto"
-                       HorizontalAlignment="Right"
-                       VerticalAlignment="Center"
-                       Margin="0,-6,15,22"
-                       FontSize="16"/>
-
-        </Grid>
-        <Grid>
-            <Image Source="note.png" Stretch="Uniform" Margin="310,390,470,40"/>
-            <TextBlock Margin="335,385,60,36"
-                   Height="auto"
-                   Width="auto"
-                   HorizontalAlignment="Center"
-                   VerticalAlignment="Center"
-                   FontSize="10"
-                   TextWrapping="Wrap" FontFamily="Arial" FontStyle="Italic">
-            Nhân viên sẽ được hạn chế quyền truy cập Ocha vì lí do bảo mặt, nhưng sẽ không làm ảnh hưởng đến hoạt động kinh doanh của bạn.
-            </TextBlock>
-
-            <TextBlock Margin="336,418,60,8"
-                   Height="auto"
-                   Width="404"
-                   HorizontalAlignment="Center"
-                   VerticalAlignment="Center"
-                   FontSize="10"
-                   TextWrapping="Wrap" FontFamily="Arial" FontStyle="Italic">
-            Quản lí có quyền truy cập tương tự như chủ cửa hàng, nhưng không thể thay đổi quyền nhân viên thành quyền quản lí
-            </TextBlock>
-        </Grid>
+            </Grid>
 
 
+        </DockPanel>
     </Grid>
 </UserControl>

@@ -6,4 +6,5 @@
         xmlns:local="clr-namespace:MainProject.MainWorkSpace.Bill"
         mc:Ignorable="d"
         Title="TestingView" Width="600" Height="600">
+    <local:TableManager DataContext="{Binding}"/>
 </Window>

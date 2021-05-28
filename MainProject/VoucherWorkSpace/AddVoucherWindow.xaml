@@ -22,25 +22,30 @@
             x:Name="voucherView"
             />
 
-        <Button
-            Grid.Column="0" Grid.Row="1"
-            Name="btnSubmit"
-            Style="{StaticResource MaterialDesignRaisedDarkButton}"
-            materialDesign:ButtonAssist.CornerRadius="15"
-            IsEnabled="{Binding ElementName=voucherView, Path=IsValid, Mode=OneWay}"
-            Height="35" HorizontalAlignment="Center" Margin="70,0,0,10" Width="150" VerticalAlignment="Center" Padding="16,0">
-            <TextBlock 
-                x:Name="txtSubmit"
-                Text="Tạo mới" FontSize="18" />
-        </Button>
-        <Button
-            Grid.Column="1" Grid.Row="1"
-            Click="ButtonClose_Click"
-            Style="{StaticResource MaterialDesignRaisedDarkButton}"
-            materialDesign:ButtonAssist.CornerRadius="15"
-            Height="35" HorizontalAlignment="Center" Margin="0,0,70,10" Width="150" VerticalAlignment="Center" Padding="16,0">
-            <TextBlock
-                Text="Hủy" FontSize="18" />
-        </Button>
+        <Button Grid.Column="0" Grid.Row="1"
+                Name="btnSubmit"
+                Content="Tạo mới" FontSize="18"
+                Style="{StaticResource MaterialDesignRaisedDarkButton}"
+                materialDesign:ButtonAssist.CornerRadius="15"
+                IsEnabled="{Binding ElementName=voucherView, Path=IsValid, Mode=OneWay}"
+                ToolTip="MaterialDesignRaisedDarkButton with Round Corners"
+                Height="35" HorizontalAlignment="Center" 
+                Margin="70,0,0,10" 
+                Width="150" 
+                VerticalAlignment="Center" 
+                Padding="16,0"/>
+        <Button Grid.Column="1" Grid.Row="1"
+                Content="Hủy"
+                FontSize="18"
+                Click="ButtonClose_Click"
+                Style="{StaticResource MaterialDesignRaisedDarkButton}"
+                materialDesign:ButtonAssist.CornerRadius="15"
+                ToolTip="MaterialDesignRaisedDarkButton with Round Corners"
+                Height="35" 
+                HorizontalAlignment="Center" 
+                Margin="0,0,70,10" 
+                Width="150"
+                VerticalAlignment="Center" 
+                Padding="16,0"/>
     </Grid>
 </Window>

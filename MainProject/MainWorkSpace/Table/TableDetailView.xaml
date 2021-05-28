@@ -16,59 +16,61 @@
             <RowDefinition Height="4*"/>
             <RowDefinition Height="4*"/>
         </Grid.RowDefinitions>
-        <Grid Grid.Row="0">
-            <Button FontSize="18" HorizontalAlignment="Left" Margin="0,0"  Background="Transparent" BorderBrush="Transparent">
-                <StackPanel Orientation="Horizontal">
-                    <Label Padding="0"  Foreground="#BD8722" Content="Chọn bàn"/>
-                    <materialDesign:PackIcon VerticalAlignment="Top" Kind="ChevronRight"  Height="25" Width="28" Foreground="#BD8722" Margin="0,2" RenderTransformOrigin="0.323,0.538"/>
-                </StackPanel>
-            </Button>
-        </Grid>
-        <ScrollViewer Grid.Row="1" Margin="0,5" materialDesign:ScrollBarAssist.ThumbHeight="50" materialDesign:ScrollBarAssist.ThumbWidth="5" materialDesign:ScrollBarAssist.ThumbCornerRadius="10" Grid.RowSpan="3">
+        <!--Button "Chon ban"-->
+        <Button FontSize="18" HorizontalAlignment="Left" Background="Transparent" BorderBrush="Transparent">
+            <StackPanel Orientation="Horizontal">
+                <Label Padding="0" Foreground="#BD8722" Content="Chọn bàn"/>
+                <materialDesign:PackIcon VerticalAlignment="Center" Kind="ChevronRight"
+                                         Height="Auto" Width="Auto" Foreground="#BD8722" RenderTransformOrigin="0.323,0.538"/>
+            </StackPanel>
+        </Button>
+        
+        <!--Container list product-->
+        <ScrollViewer Grid.Row="1" 
+                      materialDesign:ScrollBarAssist.ThumbHeight="50" 
+                      materialDesign:ScrollBarAssist.ThumbWidth="5" 
+                      materialDesign:ScrollBarAssist.ThumbCornerRadius="10"
+                      HorizontalScrollBarVisibility="Auto">
+            <!--The Panel contains list product-->
             <StackPanel>
-                <Item:Item_UC></Item:Item_UC>
+                <Item:Item_UC/>
+                <Item:Item_UC/>
             </StackPanel>
         </ScrollViewer>
-        <Grid  Grid.Row="2" >
+        <Grid  Grid.Row="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="3*"/>
                 <ColumnDefinition Width="2*"/>
             </Grid.ColumnDefinitions>
-            <Border BorderBrush="Gray" BorderThickness="0,1,0,1" Grid.ColumnSpan="2"  ></Border>
+            <Border BorderBrush="Gray" BorderThickness="0,1,0,1" Grid.ColumnSpan="2"/>
             <CheckBox
-                 Style="{StaticResource MaterialDesignFilterChipAccentCheckBox}"
-                 IsChecked="True"
-                 Margin="10,0"
-                 Foreground="Gray">
+                Height="25"
+                  Style="{StaticResource MaterialDesignFilterChipAccentCheckBox}"
+                  IsChecked="True"
+                  VerticalAlignment="Center" Margin="10,0"
+                Background="{StaticResource MainColor}"
+                Foreground="Green">
                 Mang đi
             </CheckBox>
-            <TextBlock Text="Tổng tiền" FontSize="12" HorizontalAlignment="Left" VerticalAlignment="Top" TextAlignment="Left"  Foreground="Black" Padding="0" Margin="10,0" Grid.Column="1"  />
-            <TextBlock Style="{StaticResource MaterialDesignHeadline6TextBlock}"
-                Text="25000" FontSize="22" FontWeight="DemiBold" FontStyle="Italic" HorizontalAlignment="Right" VerticalAlignment="Bottom" TextAlignment="Center" Foreground="#BD8722" Margin="0,0,10,0" Padding="0" Grid.Column="1"></TextBlock>
+            <StackPanel Grid.Column="1" Orientation="Vertical">
+                <TextBlock Text="Tổng tiền" FontSize="12" 
+                           HorizontalAlignment="Left" VerticalAlignment="Top" TextAlignment="Left"
+                           Foreground="Black" Margin="8,0"/>
+                <TextBlock Style="{StaticResource MaterialDesignHeadline6TextBlock}"
+                           Text="{Binding TotalPrice, FallbackValue='25,000đ', StringFormat='{}{0:N0} đ'}" FontSize="22" FontWeight="DemiBold" FontStyle="Italic" 
+                           HorizontalAlignment="Right" VerticalAlignment="Bottom" TextAlignment="Center" 
+                           Foreground="#BD8722" Margin="0 -5 10 0"/>
+            </StackPanel>
         </Grid>
         <Grid Grid.Row="3" >
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="1*"/>
-            </Grid.ColumnDefinitions>
             <Button
-                Style="{StaticResource MaterialDesignFlatAccentBgButton}"
-                ToolTip="MaterialDesignFlatAccentBackgroundButton"
-                Content="Lưu"
-                 Height="Auto"
-                VerticalAlignment="Stretch"
-                HorizontalAlignment="Stretch"
-                IsEnabled="True"
-                Foreground="White" Background="{StaticResource MainColor}"
-                BorderThickness="0" Grid.Column="0"  />
-            <Button
-                Style="{StaticResource MaterialDesignFlatAccentBgButton}"
-                ToolTip="MaterialDesignFlatAccentBackgroundButton"
+                Style="{StaticResource MaterialDesignRaisedButton}"
+                ToolTip="MaterialDesignRaisedButton with Round Corners"
                 Content="Thanh toán"
-                Height="Auto"
-                VerticalAlignment="Stretch"
-                HorizontalAlignment="Stretch" 
-                IsEnabled="False"
+                Margin="2"
+                VerticalAlignment="Stretch" HorizontalAlignment="Stretch" 
+                Width="Auto" Height="Auto"
+                materialDesign:ButtonAssist.CornerRadius="2"
                 Foreground="White" Background="{StaticResource MainColor}"
                 BorderThickness="0" Grid.Column="1"/>
         </Grid>

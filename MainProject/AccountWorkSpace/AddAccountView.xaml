@@ -3,204 +3,166 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:local="clr-namespace:MainProject.AccountWorkSpace"
              mc:Ignorable="d" 
-             d:DesignHeight="350" d:DesignWidth="600"
+             d:DesignHeight="500" d:DesignWidth="600"
              Background="White">
-    <Grid>
-        <Grid Height="50"
-              VerticalAlignment="Top">
+    <DockPanel>
+        <Grid DockPanel.Dock="Top">
             <Border BorderBrush="Gray" BorderThickness="1" />
-            <Button Width="30"
-                    Height="30"
-                    Margin="10,10"
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Center"
-                    BorderBrush="{x:Null}">
-                <Button.Background>
-                    <ImageBrush ImageSource="button_cancel.svg.png" 
-                                Stretch="Uniform"/>
-                </Button.Background>
+            <Button Background="Transparent" BorderBrush="Transparent"  HorizontalAlignment="Right">
+                <materialDesign:PackIcon Kind="Close" Width="25" Height="25" Foreground="#524F4F" />
             </Button>
             <TextBlock HorizontalAlignment="Center"
                        VerticalAlignment="Center"
-                       Width="auto"
-                       Height="auto"
                        FontSize="20" 
                        FontWeight="Bold"
-                       >
-                Thêm thành viên mới
-            </TextBlock>
-            <Button Height="30"
-                    Width="60"
-                    Name="btnSave"
-                    Margin="0,0,10,0"
-                    HorizontalAlignment="Right"
-                    VerticalAlignment="Center" 
-                    BorderBrush="{x:Null}" 
-                    Background="{x:Null}"
-                    Content="Lưu" 
-                    Foreground="#FF00CD13" FontSize="16" FontWeight="Bold"/>
+                       Padding="10"
+                       Foreground="#524F4F"
+                       Text="Thêm nhân viên"/>
         </Grid>
-        <Grid x:Name="GrbName"
-              Margin="100,85,100,230">
-            <Border BorderBrush="Gray" BorderThickness="1" Grid.RowSpan="2" Margin="0,-1,0,1"/>
-            <TextBlock Text="Họ tên"
-                       Height="19"
-                       Width="42"
+        <StackPanel DockPanel.Dock="Bottom">
+            <Grid Margin="100,20,100,0">
+                <Border BorderBrush="Gray" BorderThickness="1"/>
+                <TextBlock Text="Họ tên"
                        HorizontalAlignment="Left"
                        VerticalAlignment="Center"
-                       Margin="15,5,0,11"
                        FontSize="14" 
-                       Foreground="Black" />
-            <TextBox x:Name="txblName"
+                       Margin="10,5"
+                       Foreground="#524F4F" />
+                <TextBox x:Name="txblName"
                        Text="Name"
-                       Height="auto"
-                       Width="auto"
                        HorizontalAlignment="Right"
                        VerticalAlignment="Center"
-                       Margin="0,0,15,0"
-                       FontSize="16"/>
-
-        </Grid>
-        <Grid x:Name="GrbPhone"
-              Margin="100,119,100,196">
-            <Border BorderBrush="Gray" 
-                    BorderThickness="1"/>
-            <TextBlock Text="Số điện thoại"
-                       Height="auto"
-                       Width="auto"
+                       Margin="15,5"
+                       FontSize="16"
+                       BorderThickness="0"
+                       Foreground="#524F4F"
+                       FontWeight="DemiBold"/>
+            </Grid>
+            <Grid Margin="100,5,100,0">
+                <Border BorderBrush="Gray" BorderThickness="1"/>
+                <TextBlock Text="Số điện thoại"
                        HorizontalAlignment="Left"
                        VerticalAlignment="Center"
-                       Margin="15,8,0,8"
                        FontSize="14" 
-                       Foreground="Black"/>
-            <TextBox x:Name="txblPhone"
-                     Height="auto"
-                     Width="auto"
-                     HorizontalAlignment="Right"
-                     VerticalAlignment="Center"
-                     Margin="0,0,15,0"
-                     FontSize="16" 
-                     TextWrapping="Wrap"
-                     MaxLines="1" 
-                     
-                     Text="nuberphone"/>
-        </Grid>
-        <Grid x:Name="GrbUsername"
-              Margin="100,153,100,162">
-            <Border BorderBrush="Gray" 
-                    BorderThickness="1" Grid.ColumnSpan="2"/>
-            <TextBlock Text="Tên người dùng"
-                       Height="auto"
-                       Width="auto"
-                       HorizontalAlignment="Left"
-                       VerticalAlignment="Center"
-                       Margin="15,8,0,7"
-                       FontSize="14" 
-                       Foreground="Black"/>
-            <TextBox x:Name="txblUser"
-                       Text="username"
-                       Height="auto"
-                       Width="auto"
+                       Margin="10,5"
+                       Foreground="#524F4F" />
+                <TextBox x:Name="txblPhone"
+                       Text="Phone Number"
                        HorizontalAlignment="Right"
                        VerticalAlignment="Center"
-                       Margin="0,0,15,0"
-                       FontSize="16" />
-        </Grid>
-        <Grid HorizontalAlignment="Center"
-              VerticalAlignment="Center"
-              Margin="100,195,100,130">
-            <Image Source="note.png"
-                   Stretch="Uniform" 
-                   HorizontalAlignment="Left"/>
-            <TextBlock
-                   Height="auto"
-                   Width="auto"
-                   Margin="30,0,0,0"
+                       Margin="15,5"
+                       FontSize="16"
+                       BorderThickness="0"
+                       Foreground="#524F4F"
+                       FontWeight="DemiBold"/>
+            </Grid>
+            <Grid Margin="100,5,100,0">
+                <Border BorderBrush="Gray" BorderThickness="1" />
+                <TextBlock Text="Tên người dùng"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Center"
+                       FontSize="14" 
+                       Margin="10,5"
+                       Foreground="#524F4F" />
+                <TextBox x:Name="txblUser"
+                       Text="User name"
+                       HorizontalAlignment="Right"
+                       VerticalAlignment="Center"
+                       Margin="15,5"
+                       FontSize="16"
+                       BorderThickness="0"
+                       Foreground="#524F4F"
+                       FontWeight="DemiBold"/>
+            </Grid>
+            <Grid   HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Margin="100,10">
+                <materialDesign:PackIcon Kind="AlertCircle" Width="25" Height="25" Foreground="Gray" />
+                <TextBlock
                    HorizontalAlignment="Center"
                    VerticalAlignment="Center"
-                   FontSize="10"
-                   TextWrapping="Wrap" FontFamily="Arial" FontStyle="Italic">
-            Tên người dùng được sử dụng để Nhân viên đăng nhập 
-            và không thể thay đổi sau khi cà đặt
-            </TextBlock>
-        </Grid>
+                   FontSize="12"
+                    Margin="30,0,0,0"
+                   TextWrapping="WrapWithOverflow" FontFamily="Arial" FontStyle="Italic">
+                   Tên người dùng được sử dụng để Nhân viên đăng nhập và không thể thay đổi sau khi cài đặt
+                </TextBlock>
+            </Grid>
 
-        <Grid x:Name="GrbPost"
-              Margin="100,225,100,90">
-            <Border BorderBrush="Gray" 
-                    BorderThickness="1"/>
-            <TextBlock Text="Mật khẩu"
-                       Height="auto"
-                       Width="auto"
+            <Grid Margin="100,5,100,0">
+                <Border BorderBrush="Gray" BorderThickness="1"  />
+                <TextBlock Text="Mật khẩu"
                        HorizontalAlignment="Left"
                        VerticalAlignment="Center"
-                       Margin="15,8,0,7"
                        FontSize="14" 
-                       Foreground="Black"/>
-            <PasswordBox x:Name="txblPassword"
-                     Password="password"
-                     Height="auto"
-                     Width="auto"
-                     HorizontalAlignment="Right"
-                     VerticalAlignment="Center"
-                     Margin="0,0,15,0"
-                     FontSize="16" 
-                     />
-        </Grid>
-        <Grid x:Name="GrbRePsW"
-              Margin="100,260,100,55">
-            <Border BorderBrush="Gray" 
-                    BorderThickness="1"/>
-            <TextBlock Text="Xác nhận mật khẩu"
-                       Height="auto"
-                       Width="auto"
+                       Margin="10,5"
+                       Foreground="#524F4F" />
+                <PasswordBox x:Name="txblPass"
+                       Password="Password"
+                       HorizontalAlignment="Right"
+                       VerticalAlignment="Center"
+                       Margin="15,5"
+                       FontSize="16"
+                       BorderThickness="0"
+                       Foreground="#524F4F"/>
+            </Grid>
+            <Grid Margin="100,5,100,0">
+                <Border BorderBrush="Gray" BorderThickness="1"/>
+                <TextBlock Text="Xác nhận mật khẩu"
                        HorizontalAlignment="Left"
                        VerticalAlignment="Center"
-                       Margin="15,8,0,7"
                        FontSize="14" 
-                       Foreground="Black"/>
-            <PasswordBox x:Name="txblRePsW"
-                     Height="auto"
-                     Width="auto"
-                     HorizontalAlignment="Right"
-                     VerticalAlignment="Center"
-                     Margin="0,0,15,0"
-                     FontSize="16"
-                     Password="passwoes" 
-                     />
-        </Grid>
+                       Margin="10,5"
+                       Foreground="#524F4F" />
+                <PasswordBox x:Name="txblRepass"
+                       Password="Password"
+                       HorizontalAlignment="Right"
+                       VerticalAlignment="Center"
+                       Margin="15,5"
+                       FontSize="16"
+                       BorderThickness="0"
+                       Foreground="#524F4F"/>
+            </Grid>
 
-        <Grid x:Name="GrbPosition"
-              Margin="100,300,100,15">
-            <Border BorderBrush="Gray" 
+            <Grid x:Name="GrbPosition"
+              Margin="100,5,100,0">
+                <Border BorderBrush="Gray" 
                     BorderThickness="1"/>
-            <TextBlock Text="Chức vụ"
-                       Height="auto"
-                       Width="auto"
+                <TextBlock Text="Vị trí"
                        HorizontalAlignment="Left"
                        VerticalAlignment="Center"
-                       Margin="15,8,0,7"
+                       Margin="10,5"
                        FontSize="14" 
-                       Foreground="Black"/>
-            <ComboBox x:Name="txblPositon"
+                       Foreground="#524F4F"/>
+                <ComboBox x:Name="txblPositon"
+                     Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                     BorderThickness="0"
                      Text="Quản lý"
-                     Height="auto"
-                     Width="auto"
+                     Padding="10"
                      HorizontalAlignment="Right"
                      VerticalAlignment="Center"
-                     Margin="0,0,15,0"
-                     FontSize="16" >
-                <Button BorderBrush="Black" 
-                        Background="{x:Null}"
-                        Content="Quản lý"
-                        Name="CbbBtnQL"/>
-                <Button BorderBrush="Black" 
-                        Background="{x:Null}"
-                        Name="CbbBtnNV"
-                        Content="Nhân viên"/>
-            </ComboBox>
-        </Grid>
-    </Grid>
+                     FontSize="14" >
+                    <ComboBoxItem Content="Nhân Viên"
+                                  FontSize="14"/>
+                    <ComboBoxItem Content="Quản lý"
+                                  FontSize="14"/>
+                </ComboBox>
+                
+            </Grid>
+            <Button
+                Style="{StaticResource MaterialDesignRaisedButton}"
+                ToolTip="MaterialDesignRaisedButton with Round Corners"
+                Content="Thêm nhân viên"
+                Margin="150,40"
+                Width="Auto" Height="Auto"
+                materialDesign:ButtonAssist.CornerRadius="2"
+                Foreground="White" Background="{StaticResource MainColor}"
+                BorderThickness="0"
+                FontSize="16"
+                Padding="10"/>
+        </StackPanel>
+        
+    </DockPanel>
 </UserControl>

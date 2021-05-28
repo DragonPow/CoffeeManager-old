@@ -27,18 +27,17 @@
         </Grid.RowDefinitions>
 
         <Image 
-            Grid.Column="0" Grid.RowSpan="5"
-            Source="/MainProject;component/Resources/sale_border.png" HorizontalAlignment="Center" Margin="10,10,10.4,10" Grid.ColumnSpan="2"
-            
-            >
+            Grid.Column="0" Grid.RowSpan="7"
+            Source="/MainProject;component/Resources/sale_border.png" 
+            HorizontalAlignment="Center" Margin="10">
             <Image.Effect>
                 <BlurEffect/>
             </Image.Effect>
         </Image>
-
-        <TextBlock Grid.Column="0" Grid.RowSpan="2"
-            Text="SALE" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="75" FontWeight="Bold" FontStyle="Italic" Margin="48,10,46.4,10" Foreground="#FFF45454" Grid.ColumnSpan="2" Grid.Row="1"
-                    >
+        <TextBlock Grid.Column="0" Grid.RowSpan="7"
+            Text="SALE" HorizontalAlignment="Center" 
+                   VerticalAlignment="Center" FontSize="75" FontWeight="Bold" 
+                   FontStyle="Italic" Margin="0,0,0,60" Foreground="#FFF45454">
             <TextBlock.Effect>
                 <DropShadowEffect Opacity="0.7" ShadowDepth="4"/>
             </TextBlock.Effect>
@@ -46,8 +45,10 @@
 
         <TextBlock Grid.Column="0" Grid.RowSpan="2"
             Text="{Binding Path=ValueString}" 
-                   HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="65" FontWeight="Bold" FontStyle="Italic" Margin="68,27,66.4,6" Foreground="#FF000CFF" Grid.ColumnSpan="2" Grid.Row="2"
-                   >
+                   HorizontalAlignment="Center" VerticalAlignment="Center" 
+                   FontSize="65" FontWeight="Bold" 
+                   FontStyle="Italic" Margin="0,80,0,0" 
+                   Foreground="#FF000CFF">
             <TextBlock.Effect>
                 <DropShadowEffect Opacity="0.7" ShadowDepth="4"/>
             </TextBlock.Effect>
@@ -61,11 +62,10 @@
             <TextBox Grid.Column="0"
                      x:Name="txtCode"
                      MaxLength="16"
-                materialDesign:HintAssist.Hint="Mã"
-                Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                VerticalAlignment="Center"     
-                     Validation.Error="On_Validation_Error"
-                >
+                     materialDesign:HintAssist.Hint="Mã"
+                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                     VerticalAlignment="Center"     
+                     Validation.Error="On_Validation_Error">
                 <TextBox.Text>
                     <Binding Path="Code" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged" 
                              NotifyOnValidationError="True">
@@ -84,20 +84,28 @@
                       IsChecked="{Binding Path=IsAuto, Mode=TwoWay}"
                       Checked="cbx_auto_Checked"
                       Unchecked="cbx_auto_Unchecked"
-                Content="Tự động" Margin="10,30,0,0" VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="0,0,0,4"
-                />
+                      Content="Tự động" Margin="0,30,0,0"
+                      VerticalContentAlignment="Center" 
+                      HorizontalAlignment="Center" VerticalAlignment="Center" 
+                      Padding="0,0,0,3"/>
         </Grid>
-        <TextBox 
-            Grid.Column="2" Grid.Row="1"
-            x:Name="txt_value"
-            Validation.Error="On_Validation_Error"
-            MaxLength="2"
-            materialDesign:HintAssist.Hint="Giá trị (%)"
-            Style="{StaticResource MaterialDesignFloatingHintTextBox}" InputScope="Number"
-            VerticalAlignment="Center" Grid.ColumnSpan="2" Margin="44.6,7,0,6" HorizontalAlignment="Left" Width="120" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"
-            >
+        <TextBox Grid.Column="2" Grid.Row="1"
+                 x:Name="txt_value"
+                 Validation.Error="On_Validation_Error"
+                 MaxLength="2"
+                 materialDesign:HintAssist.Hint="Giá trị (%)"
+                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                 InputScope="Number"
+                 VerticalAlignment="Center" 
+                 Grid.ColumnSpan="2" 
+                 Margin="44.6,7,0,6" 
+                 HorizontalAlignment="Left" 
+                 Width="120" 
+                 HorizontalContentAlignment="Left" 
+                 VerticalContentAlignment="Center">
             <TextBox.Text>
-                <Binding Mode="TwoWay" Path="Value" UpdateSourceTrigger="PropertyChanged"
+                <Binding Mode="TwoWay" Path="Value" 
+                         UpdateSourceTrigger="PropertyChanged"
                          NotifyOnValidationError="True">
                     <Binding.ValidationRules>
                         <rules:NotNullableValidationRule />
@@ -112,11 +120,14 @@
                 x:Name="timeStart"
                 SelectedTime="{Binding Path=DateStart, Mode=TwoWay}"
                 materialDesign:HintAssist.Hint="Pick time" Margin="2,0,10,0"/>
-            <DatePicker
-                x:Name="dateStart"
-                SelectedDate="{Binding Path=DateStart, Mode=TwoWay}"
-                materialDesign:HintAssist.Hint="Pick date"
-                HorizontalContentAlignment="Center" Padding="0,4" VerticalAlignment="Center" Margin="0,11" VerticalContentAlignment="Stretch" />
+            <DatePicker x:Name="dateStart"
+                        SelectedDate="{Binding Path=DateStart, Mode=TwoWay}"
+                        materialDesign:HintAssist.Hint="Pick date"
+                        HorizontalContentAlignment="Center" 
+                        Padding="0,4" 
+                        VerticalAlignment="Center" 
+                        Margin="0,11" 
+                        VerticalContentAlignment="Stretch" />
             <Label Content="Đến" VerticalAlignment="Center" Margin="10,0,0,0"/>
             <materialDesign:TimePicker
                 x:Name="timeEnd"
@@ -130,17 +141,17 @@
                 HorizontalContentAlignment="Center" Padding="0,4" VerticalAlignment="Center" Margin="0,11" VerticalContentAlignment="Stretch" />
 
         </StackPanel>
-        <TextBox 
-            Grid.Column="2" Grid.Row="3" Grid.RowSpan="2"
-            x:Name="txtDescription"
+        <TextBox Grid.Column="2" Grid.Row="3" Grid.RowSpan="2"
+                 x:Name="txtDescription"
                  Text="{Binding Path=Description}"
-            Style="{StaticResource MaterialDesignOutlinedTextBox}"
-            VerticalAlignment="Top"
-            AcceptsReturn="True"
-            TextWrapping="Wrap"
-            VerticalScrollBarVisibility="Auto"
-            materialDesign:HintAssist.Hint="Mô tả" Grid.ColumnSpan="2" Margin="9.6,0,10,0" Height="110"/>
-
+                 Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                 VerticalAlignment="Top"
+                 AcceptsReturn="True"
+                 TextWrapping="Wrap"
+                 VerticalScrollBarVisibility="Auto"
+                 materialDesign:HintAssist.Hint="Mô tả" 
+                 Grid.ColumnSpan="2" Margin="9.6,0,10,0" 
+                 Height="110"/>
         <materialDesign:PackIcon Kind="Key" Grid.Column="2" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="24" Height="24" Margin="10.6,18,10.2,18"/>
         <materialDesign:PackIcon Kind="SackPercent" Grid.Column="2" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Width="24" Height="24" Margin="10.6,18,10.2,18"/>
         <materialDesign:PackIcon Kind="Timetable" Grid.Column="2" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" Width="24" Height="24" Margin="10.6,18,10.2,18"/>
