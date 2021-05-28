@@ -10,50 +10,45 @@
              d:DesignHeight="520" d:DesignWidth="900" Background="White">
     <Grid>
         <Grid VerticalAlignment="Top" Height="50">
-            <Border BorderBrush="#737373" BorderThickness="2"></Border>
-            <materialDesign:ColorZone Mode="PrimaryMid" Height="50" Background="{DynamicResource MainColor}" Foreground="White">
-            <StackPanel
-                 Orientation="Horizontal"
-                Margin="4,0"  >
-                <RadioButton
-                    Style="{StaticResource MaterialDesignTabRadioButton}"
-                    Margin="4,0"
-                    Height="50"
-                    IsChecked="True"
-                    Content="HÓA ĐƠN" 
-                    FontWeight="Bold"
-                    FontSize="18" />
-                <TextBlock Text="|" FontSize="30" FontWeight="Light" Foreground="#737373"></TextBlock>
-                <RadioButton
-                    Style="{StaticResource MaterialDesignTabRadioButton}"
-                    Margin="4"
-                    Content="TẦNG 1"
-                    FontSize="16"/>
-                <RadioButton
-                    Style="{StaticResource MaterialDesignTabRadioButton}"
-                    Margin="4"  
-                    Content="TẦNG 2" 
-                    FontSize="16"/>
-            </StackPanel>
+            <Border BorderBrush="#737373" 
+                    BorderThickness="2"/>
+            <materialDesign:ColorZone Mode="PrimaryMid" 
+                                      Height="50" 
+                                      Background="{DynamicResource MainColor}" 
+                                      Foreground="White">
+                <StackPanel Orientation="Horizontal"
+                            Margin="4,0">
+                    
+                    <RadioButton Style="{StaticResource MaterialDesignTabRadioButton}"
+                                 Margin="4"
+                                 Content="TẦNG 1"
+                                 FontSize="16"/>
+                    <RadioButton Style="{StaticResource MaterialDesignTabRadioButton}"
+                                 Margin="4"
+                                 Content="TẦNG 2"
+                                 FontSize="16"/>
+                </StackPanel>
             </materialDesign:ColorZone>
         </Grid>
-        <Grid VerticalAlignment="Stretch" Margin="0,55,0,0">
-            <Border Grid.Row="1" BorderThickness="1 0 1 1"  Padding="16">
+        <Grid VerticalAlignment="Stretch" 
+              Margin="0,55,0,0">
+            <Border Grid.Row="1"
+                    BorderThickness="1 0 1 1"
+                    Padding="16">
                 <Grid>
                     <Grid Visibility="{Binding IsChecked, ElementName=rbTab1, Converter={StaticResource BooleanToVisibilityConverter}}">
-                        <TextBlock Text="This is tab page 1 content" FontSize="16" FontWeight="Medium"/>
+                        <TextBlock Text="This is tab page 1 content" 
+                                   FontSize="16" 
+                                   FontWeight="Medium"/>
                     </Grid>
                     <Grid Visibility="{Binding IsChecked, ElementName=rbTab2, Converter={StaticResource BooleanToVisibilityConverter}}">
-                        <local:TableView></local:TableView>
+                        <local:TableView/>
                     </Grid>
                     <Grid Visibility="{Binding IsChecked, ElementName=rbTab3, Converter={StaticResource BooleanToVisibilityConverter}}">
-                        <local:TableView></local:TableView>
+                        <local:TableView/>
                     </Grid>
                 </Grid>
             </Border>
-
         </Grid>
-        
-        
     </Grid>
 </UserControl>

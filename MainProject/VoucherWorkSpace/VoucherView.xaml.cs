@@ -23,6 +23,20 @@ namespace MainProject.VoucherWorkSpace
         public VoucherView()
         {
             InitializeComponent();
+
+            this.dateStart.DisplayDateStart = DateTime.Now.Date;
+        }
+
+        private void cbx_auto_Checked(object sender, RoutedEventArgs e)
+        {
+            VoucherViewModel viewModel = (VoucherViewModel)this.DataContext;
+            viewModel.GetAvaiableCode();
+            txtCode.IsEnabled = false;
+        }
+
+        private void cbx_auto_Unchecked(object sender, RoutedEventArgs e)
+        {
+            txtCode.IsEnabled = true;
         }
     }
 }

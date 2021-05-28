@@ -13,7 +13,7 @@
             <Border BorderBrush="Gray" BorderThickness="1" />
             <Button Width="30"
                     Height="30"
-                    Margin="10,10"
+                    Margin="10 0"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Center"
                     BorderBrush="{x:Null}">
@@ -28,9 +28,7 @@
                        Height="auto"
                        FontSize="20" 
                        FontWeight="Bold"
-                       >
-                Thêm thành viên mới
-            </TextBlock>
+                       Text="Thêm nhân viên"/>
             <Button Height="30"
                     Width="60"
                     Name="btnSave"
@@ -42,8 +40,7 @@
                     Content="Lưu" 
                     Foreground="#FF00CD13" FontSize="16" FontWeight="Bold"/>
         </Grid>
-        <Grid x:Name="GrbName"
-              Margin="100,85,100,230">
+        <Grid Margin="100,85,100,230">
             <Border BorderBrush="Gray" BorderThickness="1" Grid.RowSpan="2" Margin="0,-1,0,1"/>
             <TextBlock Text="Họ tên"
                        Height="19"
@@ -63,32 +60,25 @@
                        FontSize="16"/>
 
         </Grid>
-        <Grid x:Name="GrbPhone"
-              Margin="100,119,100,196">
+        <Grid Margin="100,119,100,196">
             <Border BorderBrush="Gray" 
                     BorderThickness="1"/>
             <TextBlock Text="Số điện thoại"
-                       Height="auto"
-                       Width="auto"
                        HorizontalAlignment="Left"
                        VerticalAlignment="Center"
-                       Margin="15,8,0,8"
+                       Margin="15 0 0 0"
                        FontSize="14" 
                        Foreground="Black"/>
             <TextBox x:Name="txblPhone"
-                     Height="auto"
-                     Width="auto"
                      HorizontalAlignment="Right"
                      VerticalAlignment="Center"
                      Margin="0,0,15,0"
                      FontSize="16" 
                      TextWrapping="Wrap"
-                     MaxLines="1" 
-                     
-                     Text="nuberphone"/>
+                     MaxLines="1"
+                     Text="Number phone"/>
         </Grid>
-        <Grid x:Name="GrbUsername"
-              Margin="100,153,100,162">
+        <Grid Margin="100,153,100,162">
             <Border BorderBrush="Gray" 
                     BorderThickness="1" Grid.ColumnSpan="2"/>
             <TextBlock Text="Tên người dùng"
@@ -100,7 +90,7 @@
                        FontSize="14" 
                        Foreground="Black"/>
             <TextBox x:Name="txblUser"
-                       Text="username"
+                       Text="User Name"
                        Height="auto"
                        Width="auto"
                        HorizontalAlignment="Right"
@@ -113,7 +103,9 @@
               Margin="100,195,100,130">
             <Image Source="note.png"
                    Stretch="Uniform" 
-                   HorizontalAlignment="Left"/>
+                   HorizontalAlignment="Left"
+                   Width="25"
+                   Height="25"/>
             <TextBlock
                    Height="auto"
                    Width="auto"
@@ -123,7 +115,7 @@
                    FontSize="10"
                    TextWrapping="Wrap" FontFamily="Arial" FontStyle="Italic">
             Tên người dùng được sử dụng để Nhân viên đăng nhập 
-            và không thể thay đổi sau khi cà đặt
+            và không thể thay đổi sau khi cài đặt
             </TextBlock>
         </Grid>
 

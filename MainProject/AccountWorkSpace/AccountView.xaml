@@ -23,8 +23,8 @@
                 <Button Name ="btnBacktoHome" 
                         Height="35" 
                         Width="35"
-                        Margin="7,7,-7,-7" 
-                        BorderBrush="{x:Null}" 
+                        Margin="7,7,-7,-7"
+                        BorderBrush="{x:Null}"
                         Foreground="{x:Null}">
                     <Button.Background>
                         <ImageBrush ImageSource="back-arrow.png"/>
@@ -50,7 +50,7 @@
                     <local:AccountControl/>
                     <local:AccountControl/>
                     <local:AccountControl/>
-                    <local:AccountControl/>
+
                 </WrapPanel>
             </ScrollViewer>
             <Button x:Name="AddAccount"
@@ -91,22 +91,14 @@
                VerticalAlignment="Center" Height="198" Width="215"/>
         <Grid x:Name="GrbName"
               Margin="325,290,75,125">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="9*"/>
-                <RowDefinition Height="26*"/>
-            </Grid.RowDefinitions>
-            <Border BorderBrush="Gray" BorderThickness="1" Grid.RowSpan="2" Margin="0,-14,0,14"/>
+            <Border BorderBrush="Gray" BorderThickness="1" Margin="0,-14,0,14"/>
             <TextBlock Text="Họ tên"
-                       Height="auto"
-                       Width="auto"
                        HorizontalAlignment="Left"
                        VerticalAlignment="Center"
                        Margin="15,-6,0,22"
                        FontSize="14" Foreground="Black" Grid.RowSpan="2"/>
             <TextBlock x:Name="txblName"
                        Text="Name"
-                       Height="auto"
-                       Width="auto"
                        HorizontalAlignment="Right"
                        VerticalAlignment="Center"
                        Margin="0,-7,14,20"
@@ -118,16 +110,12 @@
             <Border BorderBrush="Gray" 
                     BorderThickness="1" Margin="0,-14,0,14"/>
             <TextBlock Text="Số điện thoại"
-                       Height="auto"
-                       Width="auto"
                        HorizontalAlignment="Left"
                        VerticalAlignment="Center"
                        Margin="15,-6,0,22"
                        FontSize="14" Foreground="Black"/>
             <TextBlock x:Name="txblPhone"
                        Text="Phone"
-                       Height="auto"
-                       Width="auto"
                        HorizontalAlignment="Right"
                        VerticalAlignment="Center"
                        Margin="0,-7,15,21"
@@ -138,16 +126,12 @@
             <Border BorderBrush="Gray" 
                     BorderThickness="1" Margin="0,-14,0,14"/>
             <TextBlock Text="Chức vụ"
-                       Height="auto"
-                       Width="auto"
                        HorizontalAlignment="Left"
                        VerticalAlignment="Center"
                        Margin="15,-6,0,22"
                        FontSize="14" Foreground="Black"/>
             <TextBlock x:Name="txblPost"
                        Text="Chức vụ"
-                       Height="auto"
-                       Width="auto"
                        HorizontalAlignment="Right"
                        VerticalAlignment="Center"
                        Margin="0,-6,15,22"

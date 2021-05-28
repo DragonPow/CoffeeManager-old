@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="packages\PropertyChanged.Fody.3.3.3\build\PropertyChanged.Fody.props" Condition="Exists('packages\PropertyChanged.Fody.3.3.3\build\PropertyChanged.Fody.props')" />
   <Import Project="packages\EntityFramework.6.4.0\build\EntityFramework.props" Condition="Exists('packages\EntityFramework.6.4.0\build\EntityFramework.props')" />
   <Import Project="packages\SQLite.3.13.0\build\net45\SQLite.props" Condition="Exists('packages\SQLite.3.13.0\build\net45\SQLite.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
@@ -72,6 +73,12 @@
     <Reference Include="MaterialDesignThemes.Wpf, Version=4.0.0.2422, Culture=neutral, PublicKeyToken=df2a72020bd7962a, processorArchitecture=MSIL">
       <HintPath>packages\MaterialDesignThemes.4.0.0\lib\net452\MaterialDesignThemes.Wpf.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Xaml.Behaviors, Version=1.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.Xaml.Behaviors.Wpf.1.1.31\lib\net45\Microsoft.Xaml.Behaviors.dll</HintPath>
+    </Reference>
+    <Reference Include="PropertyChanged, Version=3.3.3.0, Culture=neutral, PublicKeyToken=ee3ee20bcf148ddd, processorArchitecture=MSIL">
+      <HintPath>packages\PropertyChanged.Fody.3.3.3\lib\net40\PropertyChanged.dll</HintPath>
+    </Reference>
     <Reference Include="System">
       <HintPath>C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.7.2\System.dll</HintPath>
     </Reference>
@@ -124,11 +131,19 @@
     <Compile Include="AccountWorkSpace\ChangedPassword.xaml.cs">
       <DependentUpon>ChangedPassword.xaml</DependentUpon>
     </Compile>
+    <Compile Include="DatabaseController\CUSTOMTABLE.cs" />
     <Compile Include="DatabaseController\DatabaseController.cs" />
     <Compile Include="DetailPro.cs" />
     <Compile Include="HistoryWorkSpace\HistoryViewModel.cs" />
-    <Compile Include="MainWorkSpace\Bill\BillDetail_UC.xaml.cs">
-      <DependentUpon>BillDetail_UC.xaml</DependentUpon>
+    <Compile Include="MainWorkSpace\Bill\BillDetail.xaml.cs">
+      <DependentUpon>BillDetail.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MainWorkSpace\Bill\BillView.xaml.cs">
+      <DependentUpon>BillView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MainWorkSpace\Bill\BillViewModel.cs" />
+    <Compile Include="MainWorkSpace\Bill\Bill_ProductTable.xaml.cs">
+      <DependentUpon>Bill_ProductTable.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainWorkSpace\MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>
@@ -140,16 +155,22 @@
     <Compile Include="LoginWorkSpace\LoginView.xaml.cs">
       <DependentUpon>LoginView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="LoginWorkSpace\LoginWindow.xaml.cs">
-      <DependentUpon>LoginWindow.xaml</DependentUpon>
-    </Compile>
     <Compile Include="HelperClass\BaseViewModel.cs" />
     <Compile Include="HelperClass\RelayingCommand.cs" />
     <Compile Include="LoginWorkSpace\LoginViewModel.cs" />
     <Compile Include="ApplicationWorkSpace\ApplicationViewModel.cs" />
     <Compile Include="MainWorkSpace\MainViewModel.cs" />
+    <Compile Include="MainWorkSpace\NumericUpdown.xaml.cs">
+      <DependentUpon>NumericUpdown.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MainWorkSpace\Product\AddProd_UC.xaml.cs">
       <DependentUpon>AddProd_UC.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MainWorkSpace\Product\CreateProd.xaml.cs">
+      <DependentUpon>CreateProd.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MainWorkSpace\Product\Item_UC.xaml.cs">
+      <DependentUpon>Item_UC.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainWorkSpace\Product\ProdView.xaml.cs">
       <DependentUpon>ProdView.xaml</DependentUpon>
@@ -169,6 +190,9 @@
     <Compile Include="MainWorkSpace\Table\SelectTableView.xaml.cs">
       <DependentUpon>SelectTableView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MainWorkSpace\Table\TableDetailView.xaml.cs">
+      <DependentUpon>TableDetailView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MainWorkSpace\Table\TableManager.xaml.cs">
       <DependentUpon>TableManager.xaml</DependentUpon>
     </Compile>
@@ -179,9 +203,6 @@
       <DependentUpon>MainModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Bill\BillViewModel.cs" />
-    <Compile Include="Model\CUSTOMER.cs">
-      <DependentUpon>MainModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Model\DETAILBILL.cs">
       <DependentUpon>MainModel.tt</DependentUpon>
     </Compile>
@@ -209,6 +230,7 @@
     <Compile Include="Model\PRODUCT.cs">
       <DependentUpon>MainModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\Product\ProductListViewModel.cs" />
     <Compile Include="Model\REGULATION.cs">
       <DependentUpon>MainModel.tt</DependentUpon>
     </Compile>
@@ -216,7 +238,6 @@
       <DependentUpon>MainModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Table\TableListViewModel.cs" />
-    <Compile Include="Model\Table\TableViewModel.cs" />
     <Compile Include="Model\VOUCHER.cs">
       <DependentUpon>MainModel.tt</DependentUpon>
     </Compile>
@@ -232,6 +253,23 @@
     </Compile>
     <Compile Include="StatisticWorkSpace\StatisticViewModel.cs" />
     <Compile Include="Store.cs" />
+    <Compile Include="TABLECUSTOM.cs" />
+    <Compile Include="ValidationRules\ExistVoucherValidationRule.cs" />
+    <Compile Include="ValidationRules\NotNullableValidationRule.cs" />
+    <Compile Include="ValidationRules\RangeNumberValidationRule.cs" />
+    <Compile Include="VoucherWorkSpace\AddVoucherWindow.xaml.cs">
+      <DependentUpon>AddVoucherWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="VoucherWorkSpace\VoucherPreviewPanel.xaml.cs">
+      <DependentUpon>VoucherPreviewPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TestingView.xaml.cs">
+      <DependentUpon>TestingView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TestingViewModel.cs" />
+    <Compile Include="TestView.xaml.cs">
+      <DependentUpon>TestView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="VoucherWorkSpace\VoucherView.xaml.cs">
       <DependentUpon>VoucherView.xaml</DependentUpon>
     </Compile>
@@ -249,14 +287,22 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="AccountWorkSpace\ChangedPassword.xaml">
-      <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="MainWorkSpace\Bill\BillDetail_UC.xaml">
+    <Page Include="MainWorkSpace\Bill\BillDetail.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MainWorkSpace\Bill\BillView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MainWorkSpace\Bill\Bill_ProductTable.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -272,10 +318,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="LoginWorkSpace\LoginWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="ApplicationWorkSpace\ApplicationView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -288,9 +330,21 @@
       <DependentUpon>ApplicationView.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="MainWorkSpace\NumericUpdown.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="MainWorkSpace\Product\AddProd_UC.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MainWorkSpace\Product\CreateProd.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MainWorkSpace\Product\Item_UC.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="MainWorkSpace\Product\ProdView.xaml">
       <SubType>Designer</SubType>
@@ -316,6 +370,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="MainWorkSpace\Table\TableDetailView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="MainWorkSpace\Table\TableManager.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -327,6 +385,22 @@
     <Page Include="StatisticWorkSpace\StatisticView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="VoucherWorkSpace\AddVoucherWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="VoucherWorkSpace\VoucherPreviewPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TestingView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TestView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="VoucherWorkSpace\VoucherView.xaml">
       <SubType>Designer</SubType>
@@ -381,6 +455,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Resources\freetable.png" />
     <Resource Include="AccountWorkSpace\user-1648810-1401302.png" />
     <Resource Include="AccountWorkSpace\back-arrow.png" />
     <Resource Include="AccountWorkSpace\icon_Add.png" />
@@ -388,6 +463,7 @@
     <Resource Include="AccountWorkSpace\images_Note.png" />
     <Resource Include="AccountWorkSpace\button_cancel.svg.png" />
     <Resource Include="AccountWorkSpace\Note.png" />
+    <Resource Include="FodyWeavers.xml" />
     <Content Include="Model\MainModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>MainModel.edmx</DependentUpon>
@@ -398,6 +474,8 @@
       <DependentUpon>MainModel.edmx</DependentUpon>
       <LastGenOutput>MainModel.cs</LastGenOutput>
     </Content>
+    <Resource Include="Resources\sale_border.png" />
+    <Resource Include="Resources\coffee.jpg" />
     <Resource Include="Resources\alreadyTable.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
@@ -416,6 +494,8 @@
     <Error Condition="!Exists('packages\SQLite.3.13.0\build\net45\SQLite.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\SQLite.3.13.0\build\net45\SQLite.props'))" />
     <Error Condition="!Exists('packages\EntityFramework.6.4.0\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\EntityFramework.6.4.0\build\EntityFramework.props'))" />
     <Error Condition="!Exists('packages\EntityFramework.6.4.0\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\EntityFramework.6.4.0\build\EntityFramework.targets'))" />
+    <Error Condition="!Exists('packages\Fody.6.4.0\build\Fody.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Fody.6.4.0\build\Fody.targets'))" />
+    <Error Condition="!Exists('packages\PropertyChanged.Fody.3.3.3\build\PropertyChanged.Fody.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\PropertyChanged.Fody.3.3.3\build\PropertyChanged.Fody.props'))" />
   </Target>
   <Import Project="packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.113.3\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets" Condition="Exists('packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.113.3\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets')" />
   <PropertyGroup>
@@ -426,4 +506,5 @@
     xcopy /s /y "$(SolutionDir)packages\Microsoft.SqlServer.Compact.4.0.8876.1\NativeBinaries\amd64\*.*" "$(TargetDir)amd64"</PostBuildEvent>
   </PropertyGroup>
   <Import Project="packages\EntityFramework.6.4.0\build\EntityFramework.targets" Condition="Exists('packages\EntityFramework.6.4.0\build\EntityFramework.targets')" />
+  <Import Project="packages\Fody.6.4.0\build\Fody.targets" Condition="Exists('packages\Fody.6.4.0\build\Fody.targets')" />
 </Project>

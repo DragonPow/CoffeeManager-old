@@ -5,24 +5,39 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:MainProject.MainWorkSpace.Table"
              mc:Ignorable="d" 
-             d:DesignHeight="480" d:DesignWidth="840" Background="White">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="120" />
-            <RowDefinition Height="120" />
-            <RowDefinition Height="120" />
-            <RowDefinition Height="120" />
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="140" />
-            <ColumnDefinition Width="140" />
-            <ColumnDefinition Width="140" />
-            <ColumnDefinition Width="140" />
-            <ColumnDefinition Width="140" />
-            <ColumnDefinition Width="140" />
-            <ColumnDefinition Width="140" />
-        </Grid.ColumnDefinitions>
-        <local:FreeTable_UC Grid.Column="0" Grid.Row="0" Margin="20,10"></local:FreeTable_UC>
-       
-    </Grid>
+             x:Name="Table_Manager"
+             xmlns:test="clr-namespace:MainProject"
+             d:DesignHeight="480" d:DesignWidth="700">
+    <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+                  VerticalScrollBarVisibility="Auto">
+        <ItemsControl ItemsSource="{Binding ListTable}">
+            <ItemsControl.Resources>
+                <!--<DataTemplate DataType="{x:Type local:FreeTable_UC}">
+                    <local:FreeTable_UC DataContext="{Binding }"/>
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type local:AlreadyTable_UC}">
+                    <local:AlreadyTable_UC DataContext="{Binding }"/>
+                </DataTemplate>-->
+            </ItemsControl.Resources>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Button DataContext="{Binding table}" Command="{Binding DataContext.ClickTableCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                            Width="Auto" Height="Auto">
+                        <local:FreeTable_UC DataContext="{Binding}"/>
+                    </Button>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel Orientation="Horizontal"></WrapPanel>
+                    <!--<StackPanel Orientation="Horizontal"/>-->
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <!--<ItemsControl.ItemContainerStyle>
+            <Style TargetType="ItemsPresenter">
+                <Setter Property="Margin" Value="10"/>
+            </Style>
+        </ItemsControl.ItemContainerStyle>-->
+        </ItemsControl>
+    </ScrollViewer>
 </UserControl>
