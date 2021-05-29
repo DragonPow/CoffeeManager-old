@@ -1,7 +1,6 @@
 ﻿using MainProject.ApplicationWorkSpace;
 using MainProject.MainWorkSpace.Bill;
 using MainProject.Model;
-using MainProject.Model.Product;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -9,6 +8,7 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using MainProject.ViewModel;
 
 namespace MainProject
 {
@@ -39,8 +39,8 @@ namespace MainProject
 
 
             //Main Startup
-          /*  ApplicationView view = new ApplicationView();
-            ApplicationViewModel viewModel = new ApplicationViewModel();*/
+            //ApplicationView view = new ApplicationView();
+            //ApplicationViewModel viewModel = new ApplicationViewModel();
             //End main Startup
 
 

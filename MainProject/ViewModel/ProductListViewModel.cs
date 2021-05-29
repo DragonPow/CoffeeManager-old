@@ -1,4 +1,5 @@
 ﻿
+using MainProject.Model;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -13,7 +14,7 @@ using System.Windows.Input;
 
 
 
-namespace MainProject.Model.Product
+namespace MainProject.ViewModel
 {
     class ProductViewModel : BaseViewModel
     {
@@ -47,7 +48,19 @@ namespace MainProject.Model.Product
 
         public int IndexCurrentProduct { get => _IndexCurrentproduct; set { if (_IndexCurrentproduct != value) { _IndexCurrentproduct = value; OnPropertyChanged(); } } }
 
-        public CUSTOMPRODUCT Newproduct { get => _Newproduct; set { if (_Newproduct != value) { _Newproduct = value; OnPropertyChanged(); if (value.product.Image != null) _Newproduct.Image_product = byteArrayToImage(value.product.Image);  } } }
+        public CUSTOMPRODUCT Newproduct 
+        { 
+            get => _Newproduct; 
+            set 
+            { 
+                if (_Newproduct != value) 
+                { 
+                    _Newproduct = value; 
+                    OnPropertyChanged(); 
+                    if (value.product.Image != null) _Newproduct.Image_product = byteArrayToImage(value.product.Image);  
+                } 
+            } 
+        }
 
         public string SearchProduct { get => _SearchProduct; set { if (_SearchProduct != value) { _Type = value; OnPropertyChanged(); } } }
         public string Type { get => _Type; set { if (_Type != value) { _Type = value; OnPropertyChanged(); } } }
