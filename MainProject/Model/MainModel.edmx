@@ -37,8 +37,6 @@
           <Property Name="Password" Type="varchar" MaxLength="255" />
           <Property Name="DELETED" Type="int" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6005: The data type '' is currently not supported for the target Entity Framework version; the column 'DELETED' in the table 'main.PRODUCT' was excluded.-->
         <EntityType Name="PRODUCT">
           <Key>
             <PropertyRef Name="ID" />
@@ -47,8 +45,9 @@ warning 6005: The data type '' is currently not supported for the target Entity 
           <Property Name="NAME" Type="nvarchar" MaxLength="2147483647" />
           <Property Name="DETAIL" Type="nvarchar" MaxLength="2147483647" />
           <Property Name="IMAGE" Type="blob" />
-          <Property Name="Price" Type="integer" />
+          <Property Name="PRICE" Type="integer" />
           <Property Name="TYPE" Type="nvarchar" MaxLength="2147483647" />
+          <Property Name="DELETED" Type="int" />
         </EntityType>
         <EntityType Name="REGULATION">
           <Key>
@@ -248,8 +247,9 @@ warning 6005: The data type '' is currently not supported for the target Entity 
           <Property Name="NAME" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
           <Property Name="DETAIL" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
           <Property Name="IMAGE" Type="Binary" MaxLength="2147483647" FixedLength="false" />
-          <Property Name="Price" Type="Int64" />
+          <Property Name="PRICE" Type="Int64" />
           <Property Name="TYPE" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+          <Property Name="DELETED" Type="Int32" />
           <NavigationProperty Name="DETAILBILLs" Relationship="mainModel.FK_DETAILBILL_1_0" FromRole="PRODUCT" ToRole="DETAILBILL" />
         </EntityType>
         <EntityType Name="REGULATION">
@@ -386,8 +386,9 @@ warning 6005: The data type '' is currently not supported for the target Entity 
           <EntitySetMapping Name="PRODUCTs">
             <EntityTypeMapping TypeName="mainModel.PRODUCT">
               <MappingFragment StoreEntitySet="PRODUCT">
+                <ScalarProperty Name="DELETED" ColumnName="DELETED" />
                 <ScalarProperty Name="TYPE" ColumnName="TYPE" />
-                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="PRICE" ColumnName="PRICE" />
                 <ScalarProperty Name="IMAGE" ColumnName="IMAGE" />
                 <ScalarProperty Name="DETAIL" ColumnName="DETAIL" />
                 <ScalarProperty Name="NAME" ColumnName="NAME" />
