@@ -25,12 +25,11 @@ namespace MainProject.Model
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<GOOD> GOODs { get; set; }
-        public virtual DbSet<REGULATION> REGULATIONs { get; set; }
         public virtual DbSet<BILL> BILLs { get; set; }
         public virtual DbSet<DETAILBILL> DETAILBILLs { get; set; }
         public virtual DbSet<EMPLOYEE> EMPLOYEEs { get; set; }
         public virtual DbSet<PRODUCT> PRODUCTs { get; set; }
+        public virtual DbSet<REGULATION> REGULATIONs { get; set; }
         public virtual DbSet<TABLE> TABLES { get; set; }
         public virtual DbSet<VOUCHER> VOUCHERs { get; set; }
     }
