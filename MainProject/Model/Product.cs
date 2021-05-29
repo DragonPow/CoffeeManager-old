@@ -11,28 +11,26 @@ namespace MainProject.Model
 {
     using System;
     using System.Collections.ObjectModel;
-    using System.Drawing;
-    using System.IO;
-
+    
     public partial class PRODUCT : BaseViewModel
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public PRODUCT()
         {
-            this.DETAILBILLs = new ObservableCollection<DETAILBILL>();
+            this.DETAILBILLs = new  ObservableCollection<DETAILBILL>();
+            this.TYPE_PRODUCT = new  ObservableCollection<TYPE_PRODUCT>();
         }
-
-        public long ID { get; set; }
-        public string NAME { get; set; }
-        public string DETAIL { get; set; }
-        public byte[] IMAGE { get; set; }
-        public Nullable<long> PRICE { get; set; }
-        public string TYPE { get; set; }
+    
+        public long ID { get; private set; }
+        public string Name { get; set; }
+        public string Detail { get; set; }
+        public byte[] Image { get; set; }
+        public int Price { get; set; }
         public Nullable<int> DELETED { get; set; }
-
-       
-
+    
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ObservableCollection<DETAILBILL> DETAILBILLs { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ObservableCollection<TYPE_PRODUCT> TYPE_PRODUCT { get; set; }
     }
 }

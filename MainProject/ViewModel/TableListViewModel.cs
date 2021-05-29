@@ -48,7 +48,7 @@ namespace MainProject
 
             using (var db = new mainEntities())
             {
-                var listtab = db.TABLES.Where(t => (t.FLOORS == CurrentFloors && t.DELETED == 0)).ToList();
+                var listtab = db.TABLES.Where(t => (t.Floor == CurrentFloors && t.DELETED == 0)).ToList();
 
                 if (listtab == null) return;
 
@@ -94,7 +94,7 @@ namespace MainProject
 
                     using (var db = new mainEntities())
                     {
-                        var listtab = db.TABLES.Where(t => (t.FLOORS == CurrentFloors && t.DELETED == 0)).ToList();
+                        var listtab = db.TABLES.Where(t => (t.Floor == CurrentFloors && t.DELETED == 0)).ToList();
 
                         if (listtab == null) return;
 
@@ -175,7 +175,7 @@ namespace MainProject
         public void Plus()
         {
             CurrentDetailPro.Quantity++;
-            TotalCurrentTable += (long) _CurrentDetailPro.Pro.PRICE;
+            TotalCurrentTable += (long) _CurrentDetailPro.Pro.Price;
 
         }
         public ICommand MinusDetailProQuantity
@@ -194,7 +194,7 @@ namespace MainProject
         {
             if (CurrentDetailPro.Quantity < 1) return;
             CurrentDetailPro.Quantity--;
-            TotalCurrentTable -= (int) _CurrentDetailPro.Pro.PRICE;
+            TotalCurrentTable -= (int) _CurrentDetailPro.Pro.Price;
         }
 
         public ICommand ClickQuantityDetailProCommand
@@ -211,9 +211,9 @@ namespace MainProject
 
         public void ChangeQuantityCommand(int Number)
         {
-            TotalCurrentTable -= CurrentDetailPro.Quantity * (int)CurrentDetailPro.Pro.PRICE;
+            TotalCurrentTable -= CurrentDetailPro.Quantity * (int)CurrentDetailPro.Pro.Price;
             CurrentDetailPro.Quantity = Number;
-            TotalCurrentTable += Number * (int)CurrentDetailPro.Pro.PRICE;
+            TotalCurrentTable += Number * (int)CurrentDetailPro.Pro.Price;
         }
 
 
@@ -272,7 +272,7 @@ namespace MainProject
         }
         public void RemoveDetail()
         {
-            TotalCurrentTable -=  CurrentDetailPro.Quantity + (int)CurrentDetailPro.Pro.PRICE;
+            TotalCurrentTable -=  CurrentDetailPro.Quantity + (int)CurrentDetailPro.Pro.Price;
             Currentlistdetailpro.Remove(CurrentDetailPro);
         }
 
@@ -316,13 +316,13 @@ namespace MainProject
 
             using (var db = new mainEntities())
             {
-                TABLE table = db.TABLES.Where(d => (d.NUMBER == number && d.FLOORS == CurrentFloors) && (d.DELETED == 0)).FirstOrDefault();
+                TABLE table = db.TABLES.Where(d => (d.NUMBER == number && d.Floor == CurrentFloors) && (d.DELETED == 0)).FirstOrDefault();
 
                 if (table != null)
                 {
                     table.DELETED = 1;
 
-                    var TABLES = db.TABLES.Where(t => t.NUMBER > number && t.FLOORS == CurrentFloors && t.DELETED == 0);
+                    var TABLES = db.TABLES.Where(t => t.NUMBER > number && t.Floor == CurrentFloors && t.DELETED == 0);
 
                     foreach (TABLE tab in TABLES)
                     {
@@ -350,7 +350,7 @@ namespace MainProject
         public void Insert()
         {
 
-            TABLE tab = new TABLE() { FLOORS = CurrentFloors, STATUS = 0, NUMBER = ListTable.Count + 1, DELETED = 0 };
+            TABLE tab = new TABLE() { Floor = CurrentFloors, STATUS_TABLE = 0, NUMBER = ListTable.Count + 1, DELETED = 0 };
 
             ListTable.Add(new TABLECUSTOM() { table = tab });
 

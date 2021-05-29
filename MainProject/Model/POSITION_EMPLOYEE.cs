@@ -12,24 +12,18 @@ namespace MainProject.Model
     using System;
     using System.Collections.ObjectModel;
     
-    public partial class EMPLOYEE : BaseViewModel
+    public partial class POSITION_EMPLOYEE : BaseViewModel
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public EMPLOYEE()
+        public POSITION_EMPLOYEE()
         {
-            this.BILLs = new  ObservableCollection<BILL>();
+            this.EMPLOYEEs = new  ObservableCollection<EMPLOYEE>();
         }
     
         private long ID { get; set; }
-        public Nullable<System.DateTime> Birthday { get; set; }
-        public string Phone { get; set; }
-        private Nullable<long> ID_Position { get; set; }
-        public string Name { get; set; }
-        public string Password { get; set; }
-        public Nullable<int> DELETED { get; set; }
+        public string Position { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ObservableCollection<BILL> BILLs { get; set; }
-        public virtual POSITION_EMPLOYEE POSITION_EMPLOYEE { get; set; }
+        public virtual ObservableCollection<EMPLOYEE> EMPLOYEEs { get; set; }
     }
 }
