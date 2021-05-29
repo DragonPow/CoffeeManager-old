@@ -23,6 +23,7 @@ namespace MainProject.Model.Product
         private int _IndexCurrentproduct;
         private string _Type;
         string _SearchProduct;
+        CUSTOMPRODUCT _Newproduct;
         long _Id;
         string _Name;
         string _Detail;
@@ -53,17 +54,10 @@ namespace MainProject.Model.Product
 
         public int IndexCurrentProduct { get => _IndexCurrentproduct; set { if (_IndexCurrentproduct != value) { _IndexCurrentproduct = value; OnPropertyChanged(); } } }
 
+        public CUSTOMPRODUCT Newproduct { get => _Newproduct; set { if (_Newproduct != value) { _Newproduct = value; OnPropertyChanged(); if (value.product.IMAGE != null) _Newproduct.Image_product = byteArrayToImage(value.product.IMAGE);  } } }
+
         public string SearchProduct { get => _SearchProduct; set { if (_SearchProduct != value) { _Type = value; OnPropertyChanged(); } } }
         public string Type { get => _Type; set { if (_Type != value) { _Type = value; OnPropertyChanged(); } } }
-        public long Id { get => _Id; set { if (_Id != value) { _Id = value; OnPropertyChanged(); } } }
-        public string Name { get => _Name; set { if (_Name != value) { _Name = value; OnPropertyChanged(); } } }
-        public string Detail { get => _Detail; set { if (_Detail != value) { _Detail = value; OnPropertyChanged(); } } }
-        public byte[] Image { get => _Image; set { if (_Image != value) { _Image = value; OnPropertyChanged(); Image_Product = byteArrayToImage(value); } } }
-        public long Price { get => _Price; set { if (_Price != value) { _Price = value; OnPropertyChanged(); } } }
-        public string TypePro { get => _TypePro; set { if (_TypePro != value) { _TypePro = value; OnPropertyChanged(); } } }
-
-        public Image Image_Product { get => _Image_product; set { if (_Image_product != value) { _Image_product = value; OnPropertyChanged(); } } }
-
 
         #endregion
 
@@ -91,6 +85,7 @@ namespace MainProject.Model.Product
                     ListPoduct.Add(new CUSTOMPRODUCT(p));
                 }
             }
+            Newproduct = new CUSTOMPRODUCT() { product = new PRODUCT() { DELETED = 0, IMAGE = null } };
         }
 
         #endregion
@@ -131,20 +126,16 @@ namespace MainProject.Model.Product
 
         public void Add(object a)
         {
-
-            PRODUCT product = new PRODUCT() { NAME = Name, IMAGE = Image, PRICE = Price, DETAIL = Detail, DELETED = 0, TYPE = TypePro };
-            CUSTOMPRODUCT customproduct = new CUSTOMPRODUCT(product);
-
+           
             using (var db = new mainEntities())
             {
                 {
-                    db.PRODUCTs.Add(product);
+                    db.PRODUCTs.Add(Newproduct.product);
                     db.SaveChanges();
                 }
             }
 
-            ListPoduct.Add(customproduct);
-
+            ListPoduct.Add(Newproduct);
         }
 
         public ICommand ExitAddProductView
@@ -297,14 +288,13 @@ namespace MainProject.Model.Product
         {
             using (var db = new mainEntities())
             {
-                PRODUCT pro = db.PRODUCTs.Where(p => (p.ID == ListPoduct.ElementAt(IndexCurrentProduct).product.ID) && (p.DELETED == 0)).FirstOrDefault();
-                PRODUCT pr = new PRODUCT() { NAME = Name, IMAGE = Image, PRICE = Price, DETAIL = Detail, DELETED = 0, TYPE = TypePro };
+                PRODUCT pro = db.PRODUCTs.Where(p => (p.ID == ListPoduct.ElementAt(IndexCurrentProduct).product.ID) && (p.DELETED == 0)).FirstOrDefault();             
 
                 pro.DELETED = 1;
-                db.PRODUCTs.Add(pr);
+                db.PRODUCTs.Add(Newproduct.product);
                 db.SaveChanges();
 
-                _ListProduct.Add(new CUSTOMPRODUCT(pr));
+                _ListProduct.Add(Newproduct);
             }
         }
 
@@ -385,8 +375,8 @@ namespace MainProject.Model.Product
             if (openFile.ShowDialog() == DialogResult.OK)
             {
                 path = openFile.FileName;
-                Image = converImgToByte(path);
-                Image_Product = byteArrayToImage(Image);
+                Newproduct.product.IMAGE = converImgToByte(path);
+                Newproduct.Image_product= byteArrayToImage(Newproduct.product.IMAGE);
             }                    
         }
         #endregion
