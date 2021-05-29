@@ -31,22 +31,9 @@
                             <materialDesign:PackIcon Kind="Plus" Foreground="Gray" Width="35" Height="35" />
                             <TextBlock Text="Thêm ảnh" Foreground="Gray" FontSize="24" VerticalAlignment="Center"/>
                         </StackPanel>
-<!--Error here-->
-            <Border Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Row="1" BorderBrush="Gray" BorderThickness="2" Margin="0,40,0,20">
-                <Button Background="Transparent" BorderBrush="Transparent" Width="200" Height="200" Command="{Binding AddImageProduct}">
-                    <StackPanel Orientation="Horizontal">
-                        <materialDesign:PackIcon Kind="Plus" Foreground="Gray" Width="35" Height="35" />
-                        <TextBlock Text="Thêm ảnh" Foreground="Gray" FontSize="24" VerticalAlignment="Center"/>
-                    </StackPanel>
-
-                </Button>
-            </Border>
-            <TextBox 
-<!--Above is new commit, below is commit of main-->
                     </Button>
                 </Grid>
                 <TextBox 
-<!--End error-->
                     Style="{StaticResource MaterialDesignOutlinedTextBox}"
                     materialDesign:HintAssist.Hint="Tên mặt hàng"
                     FontSize="16"
