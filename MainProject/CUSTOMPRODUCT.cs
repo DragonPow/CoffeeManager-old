@@ -14,6 +14,10 @@ namespace MainProject
         public PRODUCT product;
         public Image Image_product;
 
+        public CUSTOMPRODUCT()
+        {
+        }
+
         public CUSTOMPRODUCT (PRODUCT p)
         {
             product = p;
