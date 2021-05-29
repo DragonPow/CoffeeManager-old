@@ -169,6 +169,9 @@
     <Compile Include="MainWorkSpace\Product\Item_UC.xaml.cs">
       <DependentUpon>Item_UC.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MainWorkSpace\Product\ProdDetail.xaml.cs">
+      <DependentUpon>ProdDetail.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MainWorkSpace\Product\ProdView.xaml.cs">
       <DependentUpon>ProdView.xaml</DependentUpon>
     </Compile>
@@ -338,6 +341,10 @@
     <Page Include="MainWorkSpace\Product\Item_UC.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MainWorkSpace\Product\ProdDetail.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="MainWorkSpace\Product\ProdView.xaml">
       <SubType>Designer</SubType>
