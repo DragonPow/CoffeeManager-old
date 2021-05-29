@@ -17,7 +17,7 @@ namespace MainProject.ValidationRules
         public override ValidationResult Validate(object value, CultureInfo cultureInfo)
         {
             String code = value.ToString();
-            if (VoucherWorkSpace.VoucherViewModel.HasExisted(code))
+            if (!VoucherWorkSpace.VoucherViewModel.HasExisted(code))
             {
                 return new ValidationResult(true, null);
             }
@@ -25,16 +25,6 @@ namespace MainProject.ValidationRules
             {
                 return new ValidationResult(false, this.ErrorMsg);
             }
-        }
-
-        public override ValidationResult Validate(object value, CultureInfo cultureInfo, BindingExpressionBase owner)
-        {
-            return base.Validate(value, cultureInfo, owner);
-        }
-
-        public override ValidationResult Validate(object value, CultureInfo cultureInfo, BindingGroup owner)
-        {
-            return base.Validate(value, cultureInfo, owner);
         }
     }
 }

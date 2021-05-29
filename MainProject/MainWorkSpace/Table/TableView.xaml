@@ -21,7 +21,8 @@
             </ItemsControl.Resources>
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <Button DataContext="{Binding table}" Command="{Binding DataContext.ClickTableCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                    <Button DataContext="{Binding table}" 
+                            Command="{Binding DataContext.ClickTableCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
                             Width="Auto" Height="Auto">
                         <local:FreeTable_UC DataContext="{Binding}"/>
                     </Button>

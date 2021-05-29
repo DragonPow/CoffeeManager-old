@@ -4,16 +4,15 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="f195b6e19bf4446cb6a0f4288a4bccb5" Name="Diagram1">
-        <EntityTypeShape EntityType="mainModel.BILL" Width="1.5" PointX="3.375" PointY="1" />
+      <Diagram DiagramId="f195b6e19bf4446cb6a0f4288a4bccb5" Name="Diagram1" ZoomLevel="108">
         <EntityTypeShape EntityType="mainModel.CUSTOMER" Width="1.5" PointX="5.75" PointY="4.75" />
-        <EntityTypeShape EntityType="mainModel.DETAILBILL" Width="1.5" PointX="5.5" PointY="1.25" />
-        <EntityTypeShape EntityType="mainModel.EMPLOYEE" Width="1.5" PointX="1.25" PointY="1.25" />
-        <EntityTypeShape EntityType="mainModel.GOOD" Width="1.5" PointX="7.5" PointY="0.875" />
-        <EntityTypeShape EntityType="mainModel.REGULATION" Width="1.5" PointX="7.625" PointY="3.125" />
-        <EntityTypeShape EntityType="mainModel.PRODUCT" Width="1.5" PointX="5.625" PointY="4.125" />
-        <EntityTypeShape EntityType="mainModel.TABLE" Width="1.5" PointX="3.25" PointY="4.625" />
-        <EntityTypeShape EntityType="mainModel.VOUCHER" Width="1.5" PointX="1.375" PointY="4.125" />
+        <EntityTypeShape EntityType="mainModel.BILL" Width="1.5" PointX="3" PointY="1" />
+        <EntityTypeShape EntityType="mainModel.DETAILBILL" Width="1.5" PointX="5.25" PointY="1.5" />
+        <EntityTypeShape EntityType="mainModel.EMPLOYEE" Width="1.5" PointX="0.75" PointY="5.75" />
+        <EntityTypeShape EntityType="mainModel.PRODUCT" Width="1.5" PointX="3" PointY="5.125" />
+        <EntityTypeShape EntityType="mainModel.REGULATION" Width="1.5" PointX="5.75" PointY="4.75" />
+        <EntityTypeShape EntityType="mainModel.TABLE" Width="1.5" PointX="0.75" PointY="9" />
+        <EntityTypeShape EntityType="mainModel.VOUCHER" Width="1.5" PointX="0.75" PointY="1.25" />
         <AssociationConnector Association="mainModel.FK_BILL_0_0" />
         <AssociationConnector Association="mainModel.FK_BILL_1_0" />
         <AssociationConnector Association="mainModel.FK_BILL_2_0" />

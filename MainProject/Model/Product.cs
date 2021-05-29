@@ -23,8 +23,8 @@ namespace MainProject.Model
         public long ID { get; set; }
         public string NAME { get; set; }
         public string DETAIL { get; set; }
-        public string IMAGE { get; set; }
-        public long PRICE { get; set; }
+        public byte[] IMAGE { get; set; }
+        public Nullable<long> PRICE { get; set; }
         public string TYPE { get; set; }
         public Nullable<int> DELETED { get; set; }
     

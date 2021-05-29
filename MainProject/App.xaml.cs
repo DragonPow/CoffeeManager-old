@@ -22,31 +22,29 @@ namespace MainProject
 
             base.OnStartup(e);
 
-            //This is testing Startup
-            BillView view = new BillView();
-            MainWorkSpace.Bill.BillViewModel viewModel = new MainWorkSpace.Bill.BillViewModel();
-            //End testing Startup
+            ////Testing Startup
+            //BillView view = new BillView();
+            //MainWorkSpace.Bill.BillViewModel viewModel = new MainWorkSpace.Bill.BillViewModel();
+            ////End testing Startup
 
 
-            //tesing database
-            //Để hay xóa dòng này không ảnh hưởng tới luồng chạy chương trình
-            using (var main = new mainEntities())
-            {
-                Console.WriteLine(main.EMPLOYEEs.Count());
-            }
-            //End testing database
+            ////Tesing database
+            ////Để hay xóa dòng này không ảnh hưởng tới luồng chạy chương trình
+            //using (var main = new mainEntities())
+            //{
+            //    Console.WriteLine(main.EMPLOYEEs.Count());
+            //}
+            ////End testing database
 
 
-            //This is main Startup
-
-            //ApplicationView view = new ApplicationView();
-            //ApplicationViewModel viewModel = new ApplicationViewModel();
-
+            //Main Startup
+            ApplicationView view = new ApplicationView();
+            ApplicationViewModel viewModel = new ApplicationViewModel();
             //End main Startup
+
 
             view.DataContext = viewModel;
             view.ShowDialog();
-
         }
     }
 }

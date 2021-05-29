@@ -5,18 +5,17 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:MainProject.VoucherWorkSpace"
              xmlns:rules="clr-namespace:MainProject.ValidationRules"
-             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-             mc:Ignorable="d"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
+             d:DataContext="{d:DesignInstance Type=local:VoucherViewModel}"
+             mc:Ignorable="d" 
              Background="White"
              d:DesignHeight="300" d:DesignWidth="800" FontSize="16">
-    <UserControl.DataContext>
-        <local:VoucherViewModel />
-    </UserControl.DataContext>
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="6*"/>
-            <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="11*"/>
+            <ColumnDefinition Width="68*"/>
+            <ColumnDefinition Width="198*"/>
+            <ColumnDefinition Width="45*"/>
+            <ColumnDefinition Width="489*"/>
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
@@ -35,7 +34,6 @@
                 <BlurEffect/>
             </Image.Effect>
         </Image>
-
         <TextBlock Grid.Column="0" Grid.RowSpan="7"
             Text="SALE" HorizontalAlignment="Center" 
                    VerticalAlignment="Center" FontSize="75" FontWeight="Bold" 
@@ -45,7 +43,7 @@
             </TextBlock.Effect>
         </TextBlock>
 
-        <TextBlock Grid.Column="0" Grid.RowSpan="7"
+        <TextBlock Grid.Column="0" Grid.RowSpan="2"
             Text="{Binding Path=ValueString}" 
                    HorizontalAlignment="Center" VerticalAlignment="Center" 
                    FontSize="65" FontWeight="Bold" 
@@ -56,41 +54,59 @@
             </TextBlock.Effect>
         </TextBlock>
 
-        <Grid Grid.Column="2" Grid.Row="0">
+        <Grid Grid.Column="2" Grid.Row="0" Grid.ColumnSpan="2" Margin="44.6,0,0,0">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="6*"/>
+                <ColumnDefinition Width="4*"/>
                 <ColumnDefinition Width="1*"/>
             </Grid.ColumnDefinitions>
             <TextBox Grid.Column="0"
                      x:Name="txtCode"
-                     Text="{Binding Path=Code, Mode=TwoWay}"
-                materialDesign:HintAssist.Hint="CODE"
-                Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                VerticalAlignment="Center"/>
+                     MaxLength="16"
+                     materialDesign:HintAssist.Hint="Mã"
+                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                     VerticalAlignment="Center"
+                     Validation.Error="On_Validation_Error">
+                <TextBox.Text>
+                    <Binding Path="Code" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged" 
+                             NotifyOnValidationError="True">
+                        <Binding.ValidationRules>
+                            <rules:LengthRangeValidationRule Min="16" Max="17" 
+                                                             ErrorMessage="Code must has 16 character (A-Z || 0-9)"/>
+                            <rules:CharacterValidationRule ValidCharacterSet="QWERTYUIOPASDFGHJKLZXCVBNM1234567890"
+                                                           ErrorMessage="Code must has 16 character (A-Z || 0-9)"/>
+                            <rules:ExistVoucherValidationRule ErrorMsg="Code already existed"/>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
             <CheckBox Grid.Column="1"
                       x:Name="cbx_auto"
                       IsChecked="{Binding Path=IsAuto, Mode=TwoWay}"
                       Checked="cbx_auto_Checked"
                       Unchecked="cbx_auto_Unchecked"
-                      Content="Auto" Margin="0,30,0,0"
+                      Content="Tự động" Margin="0,30,0,0"
                       VerticalContentAlignment="Center" 
                       HorizontalAlignment="Center" VerticalAlignment="Center" 
                       Padding="0,0,0,3"/>
         </Grid>
-        <TextBox 
-            Grid.Column="1" Grid.Row="1"
-            x:Name="txt_value"
-            MaxLength="2"
-            materialDesign:HintAssist.Hint="Value (%)"
-            Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
-            InputScope="Number"
-            VerticalAlignment="Center" Grid.ColumnSpan="2" 
-            Margin="44.6,0,369,0" HorizontalAlignment="Left" 
-            Width="120" HorizontalContentAlignment="Left" 
-            VerticalContentAlignment="Center">
+        <TextBox Grid.Column="2" Grid.Row="1"
+                 x:Name="txt_value"
+                 Validation.Error="On_Validation_Error"
+                 MaxLength="2"
+                 materialDesign:HintAssist.Hint="Giá trị (%)"
+                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                 InputScope="Number"
+                 VerticalAlignment="Center" 
+                 Grid.ColumnSpan="2" 
+                 Margin="44.6,7,0,6" 
+                 HorizontalAlignment="Left" 
+                 Width="120" 
+                 HorizontalContentAlignment="Left" 
+                 VerticalContentAlignment="Center">
             <TextBox.Text>
                 <Binding Mode="TwoWay" Path="Value" 
-                         UpdateSourceTrigger="PropertyChanged">
+                         UpdateSourceTrigger="PropertyChanged"
+                         NotifyOnValidationError="True">
                     <Binding.ValidationRules>
                         <rules:NotNullableValidationRule />
                     </Binding.ValidationRules>
@@ -98,44 +114,46 @@
             </TextBox.Text>
         </TextBox>
         <StackPanel Grid.Column="2" Grid.Row="2"
-            Orientation="Horizontal">
-            <Label Content="From " VerticalAlignment="Center"/>
-            <DatePicker
-                x:Name="dateStart"
-                SelectedDate="{Binding Path=DateStart, Mode=TwoWay}"
-                materialDesign:HintAssist.Hint="Pick date"
-                HorizontalContentAlignment="Center" Padding="0,4" 
-                VerticalAlignment="Center" Margin="0,11" 
-                VerticalContentAlignment="Stretch" />
+            Orientation="Horizontal" Grid.ColumnSpan="2" Margin="44.6,0,0,0">
+            <Label Content="Từ" VerticalAlignment="Center"/>
             <materialDesign:TimePicker
                 x:Name="timeStart"
                 SelectedTime="{Binding Path=DateStart, Mode=TwoWay}"
-                materialDesign:HintAssist.Hint="Pick time" Margin="10,0,0,0"/>
-            <Label Content="To " VerticalAlignment="Center" Margin="10,0,0,0"/>
+                materialDesign:HintAssist.Hint="Pick time" Margin="2,0,10,0"/>
+            <DatePicker x:Name="dateStart"
+                        SelectedDate="{Binding Path=DateStart, Mode=TwoWay}"
+                        materialDesign:HintAssist.Hint="Pick date"
+                        HorizontalContentAlignment="Center" 
+                        Padding="0,4" 
+                        VerticalAlignment="Center" 
+                        Margin="0,11" 
+                        VerticalContentAlignment="Stretch" />
+            <Label Content="Đến" VerticalAlignment="Center" Margin="10,0,0,0"/>
+            <materialDesign:TimePicker
+                x:Name="timeEnd"
+                SelectedTime="{Binding Path=DateEnd}"
+                materialDesign:HintAssist.Hint="Pick time" Margin="2,0,10,0"/>
             <DatePicker
                 x:Name="dateEnd"
                 SelectedDate="{Binding Path=DateEnd, Mode=TwoWay}"
                 DisplayDateStart="{Binding ElementName=dateStart, Path=SelectedDate}"
                 materialDesign:HintAssist.Hint="Pick date"
                 HorizontalContentAlignment="Center" Padding="0,4" VerticalAlignment="Center" Margin="0,11" VerticalContentAlignment="Stretch" />
-            <materialDesign:TimePicker
-                x:Name="timeEnd"
-                SelectedTime="{Binding Path=DateEnd}"
-                materialDesign:HintAssist.Hint="Pick time" Margin="10,0,0,0"/>
+
         </StackPanel>
-        <TextBox Grid.Column="1" Grid.Row="3" Grid.RowSpan="2"
+        <TextBox Grid.Column="2" Grid.Row="3" Grid.RowSpan="2"
+                 x:Name="txtDescription"
                  Text="{Binding Path=Description}"
                  Style="{StaticResource MaterialDesignOutlinedTextBox}"
                  VerticalAlignment="Top"
                  AcceptsReturn="True"
                  TextWrapping="Wrap"
                  VerticalScrollBarVisibility="Auto"
-                 materialDesign:HintAssist.Hint="Description" 
+                 materialDesign:HintAssist.Hint="Mô tả" 
                  Grid.ColumnSpan="2" Margin="9.6,0,10,0" 
                  Height="110"/>
-
-        <materialDesign:PackIcon Kind="Key" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="24" Height="24"/>
-        <materialDesign:PackIcon Kind="SackPercent" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Width="24" Height="24"/>
-        <materialDesign:PackIcon Kind="Timetable" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" Width="24" Height="24"/>
+        <materialDesign:PackIcon Kind="Key" Grid.Column="2" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="24" Height="24" Margin="10.6,18,10.2,18"/>
+        <materialDesign:PackIcon Kind="SackPercent" Grid.Column="2" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Width="24" Height="24" Margin="10.6,18,10.2,18"/>
+        <materialDesign:PackIcon Kind="Timetable" Grid.Column="2" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" Width="24" Height="24" Margin="10.6,18,10.2,18"/>
     </Grid>
 </UserControl>

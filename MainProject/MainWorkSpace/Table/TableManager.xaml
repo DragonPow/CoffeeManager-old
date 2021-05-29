@@ -8,6 +8,7 @@
              xmlns:Model="clr-namespace:MainProject.Model"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d"
+             DataContext="TableListViewModel"
              d:DesignHeight="630" d:DesignWidth="900" Background="White">
     <DockPanel>
         <Grid Height="45"
@@ -89,8 +90,7 @@
                         Canvas.Right="20">
                     <materialDesign:PackIcon Kind="Plus"
                                              Height="30"
-                                             Width="30" 
-                                             Foreground="White"/>
+                                             Width="30" />
                 </Button>
             </Canvas>
         </Grid>

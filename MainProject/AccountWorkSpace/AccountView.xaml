@@ -90,7 +90,6 @@
                 <Image       
                      Source="background.jpg" 
                      Stretch="Fill"/>
-
                 <StackPanel Orientation="Vertical" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center">
                     <TextBlock Text="Tên người dùng" FontSize="14" FontWeight="Light" HorizontalAlignment="Center" Foreground="White"></TextBlock>
                     <TextBlock Text="Name" FontSize="20" FontWeight="DemiBold" HorizontalAlignment="Center" Foreground="White"></TextBlock>
