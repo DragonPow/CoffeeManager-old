@@ -95,7 +95,7 @@ namespace MainProject.MainWorkSpace.Bill
         public BillViewModel()
         {
             CurrentBill = new BILL();
-            CurrentBill.DETAILBILLs.Add(new DETAILBILL() { AMOUNT = 2, PRODUCT = new PRODUCT() { NAME = "Thach", PRICE = 1000 } });
+            CurrentBill.DETAILBILLs.Add(new DETAILBILL() { Amount = 2, PRODUCT = new PRODUCT() { Name = "Thach", Price = 1000 } });
         }
 
         public BillViewModel(BILL bill)
@@ -113,7 +113,7 @@ namespace MainProject.MainWorkSpace.Bill
                 //db.SaveChanges();
 
                 //testing
-                CurrentBill.DETAILBILLs[0].AMOUNT = 3;
+                CurrentBill.DETAILBILLs[0].Amount = 3;
             }
             //view.Close();
         }

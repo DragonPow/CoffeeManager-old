@@ -195,15 +195,6 @@
     <Compile Include="MainWorkSpace\Table\TableView.xaml.cs">
       <DependentUpon>TableView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Model\BILL.cs">
-      <DependentUpon>MainModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\DETAILBILL.cs">
-      <DependentUpon>MainModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\EMPLOYEE.cs">
-      <DependentUpon>MainModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Model\MainModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -219,20 +210,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>MainModel.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Model\PRODUCT.cs">
-      <DependentUpon>MainModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="ViewModel\ProductListViewModel.cs" />
-    <Compile Include="Model\REGULATION.cs">
-      <DependentUpon>MainModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\TABLE.cs">
-      <DependentUpon>MainModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="ViewModel\TableListViewModel.cs" />
-    <Compile Include="Model\VOUCHER.cs">
-      <DependentUpon>MainModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="ProductWorkSpace\ProductMenuViewModel.cs" />
     <Compile Include="ProductWorkSpace\ProductViewModel.cs" />
     <Compile Include="Properties\Resources.Designer.cs">

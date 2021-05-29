@@ -207,11 +207,11 @@ namespace MainProject.VoucherWorkSpace
         {
             VOUCHER voucher = new VOUCHER();
             voucher.ID = this.Code;
-            voucher.BEGINTIME = this.DateStart;
-            voucher.ENDTIME = this.dateEnd;
-            voucher.PERCENT = this._value;
+            voucher.BeginTime = this.DateStart;
+            voucher.EndTime = this.dateEnd;
+            voucher.Percent = this._value;
             voucher.DELETED = 0;
-            voucher.DESCRIPTION = this.Description;
+            voucher.Description = this.Description;
             return voucher;
         }
 
@@ -239,10 +239,10 @@ namespace MainProject.VoucherWorkSpace
                     // code not existed
                     return false;
                 }
-                v.PERCENT = this._value;
-                v.BEGINTIME = this.DateStart;
-                v.ENDTIME = this.DateEnd;
-                v.DESCRIPTION = this.Description;
+                v.Percent = this._value;
+                v.BeginTime = this.DateStart;
+                v.EndTime = this.DateEnd;
+                v.Description = this.Description;
                 db.SaveChanges();
             }
             return true;
@@ -280,10 +280,10 @@ namespace MainProject.VoucherWorkSpace
             VoucherViewModel viewModel = new VoucherViewModel()
             {
                 Code = voucher.ID,
-                DateStart = (DateTime)voucher.BEGINTIME,
-                DateEnd = (DateTime)voucher.ENDTIME,
-                _value = (int)voucher.PERCENT,
-                Description = voucher.DESCRIPTION
+                DateStart = (DateTime)voucher.BeginTime,
+                DateEnd = (DateTime)voucher.EndTime,
+                _value = (int)voucher.Percent,
+                Description = voucher.Description
             };
             return viewModel;
         }

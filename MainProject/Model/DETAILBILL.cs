@@ -14,9 +14,9 @@ namespace MainProject.Model
     
     public partial class DETAILBILL : BaseViewModel
     {
-        public long ID_PRODUCT { get; set; }
-        public long ID_BILL { get; set; }
-        public Nullable<int> AMOUNT { get; set; }
+        private long ID_Product { get; set; }
+        public long ID_Bill { get; set; }
+        public int Amount { get; set; }
     
         public virtual BILL BILL { get; set; }
         public virtual PRODUCT PRODUCT { get; set; }

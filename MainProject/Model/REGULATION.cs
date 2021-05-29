@@ -15,7 +15,7 @@ namespace MainProject.Model
     public partial class REGULATION : BaseViewModel
     {
         public long ID { get; set; }
-        public string NAME { get; set; }
-        public Nullable<int> LIMITED { get; set; }
+        public string Name { get; set; }
+        public string Value { get; set; }
     }
 }

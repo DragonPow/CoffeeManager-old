@@ -20,17 +20,17 @@ namespace MainProject.Model
             this.DETAILBILLs = new  ObservableCollection<DETAILBILL>();
         }
     
-        public long ID { get; set; }
-        public Nullable<long> TOTAL { get; set; }
-        public Nullable<System.DateTime> CHECKOUTDAY { get; set; }
-        public string ID_VOUCHER { get; set; }
-        public Nullable<long> ID_TABLES { get; set; }
-        public Nullable<long> ID_EMPLOYEE { get; set; }
+        private long ID { get; set; }
+        public long TotalPrice { get; set; }
+        public Nullable<System.DateTime> CheckoutDay { get; set; }
+        private string ID_Voucher { get; set; }
+        private Nullable<long> ID_Tables { get; set; }
+        private Nullable<long> ID_Employee { get; set; }
     
-        public virtual EMPLOYEE EMPLOYEE { get; set; }
         public virtual TABLE TABLE { get; set; }
         public virtual VOUCHER VOUCHER { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ObservableCollection<DETAILBILL> DETAILBILLs { get; set; }
+        public virtual EMPLOYEE EMPLOYEE { get; set; }
     }
 }

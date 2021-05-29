@@ -55,7 +55,7 @@ namespace MainProject.Model.Product
                 }
                 else
                 {
-                    ListPoduct = new ObservableCollection<PRODUCT>(db.PRODUCTs.Where(p => ((p.TYPE == Type) && (p.DELETED == 0))).ToList());
+                    ListPoduct = new ObservableCollection<PRODUCT>(db.PRODUCTs.Where(p => ((p.TYPE_PRODUCT == Type) && (p.DELETED == 0))).ToList());
                 }
 
             }
@@ -118,7 +118,7 @@ namespace MainProject.Model.Product
         public void Add(object a)
         {
 
-            PRODUCT p = new PRODUCT() { NAME = Name, IMAGE = Image, PRICE = Price, DETAIL = Detail, DELETED = 0, TYPE = TypePro };
+            PRODUCT p = new PRODUCT() { Name = Name, Image = Image, Price = Price, Detail = Detail, DELETED = 0, TYPE = TypePro };
 
             using (var db = new mainEntities())
             {
@@ -207,7 +207,7 @@ namespace MainProject.Model.Product
             {
                 using (var db = new mainEntities())
                 {
-                    var listpro = db.PRODUCTs.Where(p => (ConvertToUnSign(p.NAME).ToLower().Contains(ConvertToUnSign(SearchProduct).ToLower()) && p.DELETED == 0));
+                    var listpro = db.PRODUCTs.Where(p => (ConvertToUnSign(p.Name).ToLower().Contains(ConvertToUnSign(SearchProduct).ToLower()) && p.DELETED == 0));
                     if (listpro == null) return;
                     ListPoduct = new ObservableCollection<PRODUCT>(listpro.ToList());
                 }
@@ -269,7 +269,7 @@ namespace MainProject.Model.Product
             using (var db = new mainEntities())
             {
                 PRODUCT pro = db.PRODUCTs.Where(p => (p.ID == ListPoduct.ElementAt(IndexCurrentProduct).ID) && (p.DELETED == 0)).FirstOrDefault();
-                PRODUCT pr = new PRODUCT() { NAME = Name, IMAGE = Image, PRICE = Price, DETAIL = Detail, DELETED = 0, TYPE = TypePro };
+                PRODUCT pr = new PRODUCT() { Name = Name, Image = Image, Price = Price, Detail = Detail, DELETED = 0, TYPE = TypePro };
 
                 pro.DELETED = 1;
                 db.PRODUCTs.Add(pr);
