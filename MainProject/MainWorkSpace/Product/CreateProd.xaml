@@ -6,6 +6,7 @@
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:local="clr-namespace:MainProject.MainWorkSpace.Product"
              mc:Ignorable="d" 
+             DataContext="ProductViewModel"
              d:DesignHeight="650" d:DesignWidth="600">
     <DockPanel>
         <Grid DockPanel.Dock="Top" Background="{StaticResource MainColor}">
@@ -23,7 +24,7 @@
         <StackPanel DockPanel.Dock="Bottom" Background="White">
 
             <Border Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Row="1" BorderBrush="Gray" BorderThickness="2" Margin="0,40,0,20">
-                <Button Background="Transparent" BorderBrush="Transparent" Width="200" Height="200">
+                <Button Background="Transparent" BorderBrush="Transparent" Width="200" Height="200" Command="{Binding AddImageProduct}">
                     <StackPanel Orientation="Horizontal">
                         <materialDesign:PackIcon Kind="Plus" Foreground="Gray" Width="35" Height="35" />
                         <TextBlock Text="Thêm ảnh" Foreground="Gray" FontSize="24" VerticalAlignment="Center"/>
