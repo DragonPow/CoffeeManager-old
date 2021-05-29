@@ -24,5 +24,10 @@ namespace MainProject.MainWorkSpace.Product
         {
             InitializeComponent();
         }
+
+        private void ComboBox_SelectionChanged()
+        {
+
+        }
     }
 }
