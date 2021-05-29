@@ -384,6 +384,7 @@ namespace MainProject.ViewModel
 
             if (openFile.ShowDialog() == DialogResult.OK)
             {
+                Newproduct = new CUSTOMPRODUCT() { product = new PRODUCT() { DELETED = 0, Image = null } };
                 path = openFile.FileName;
                 Newproduct.product.Image = converImgToByte(path);
                 Newproduct.Image_product= byteArrayToImage(Newproduct.product.Image);
