@@ -27,10 +27,10 @@ namespace MainProject.Model
         private Nullable<long> ID_Tables { get; set; }
         private Nullable<long> ID_Employee { get; set; }
     
-        public virtual TABLE TABLE { get; set; }
         public virtual VOUCHER VOUCHER { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ObservableCollection<DETAILBILL> DETAILBILLs { get; set; }
         public virtual EMPLOYEE EMPLOYEE { get; set; }
+        public virtual TABLE TABLE { get; set; }
     }
 }

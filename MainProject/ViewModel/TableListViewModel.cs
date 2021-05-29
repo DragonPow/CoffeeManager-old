@@ -312,21 +312,21 @@ namespace MainProject
             ListTable.RemoveAt(number - 1);
 
             for (int i = number; i < ListTable.Count; ++i)
-                --ListTable[i].table.NUMBER;
+                --ListTable[i].table.Number;
 
             using (var db = new mainEntities())
             {
-                TABLE table = db.TABLES.Where(d => (d.NUMBER == number && d.Floor == CurrentFloors) && (d.DELETED == 0)).FirstOrDefault();
+                TABLE table = db.TABLES.Where(d => (d.Number == number && d.Floor == CurrentFloors) && (d.DELETED == 0)).FirstOrDefault();
 
                 if (table != null)
                 {
                     table.DELETED = 1;
 
-                    var TABLES = db.TABLES.Where(t => t.NUMBER > number && t.Floor == CurrentFloors && t.DELETED == 0);
+                    var TABLES = db.TABLES.Where(t => t.Number > number && t.Floor == CurrentFloors && t.DELETED == 0);
 
                     foreach (TABLE tab in TABLES)
                     {
-                        --tab.NUMBER;
+                        --tab.Number;
                     }
 
                 }
@@ -350,7 +350,7 @@ namespace MainProject
         public void Insert()
         {
 
-            TABLE tab = new TABLE() { Floor = CurrentFloors, STATUS_TABLE = 0, NUMBER = ListTable.Count + 1, DELETED = 0 };
+            TABLE tab = new TABLE() { Floor = CurrentFloors, STATUS_TABLE = 0, Number = ListTable.Count + 1, DELETED = 0 };
 
             ListTable.Add(new TABLECUSTOM() { table = tab });
 
