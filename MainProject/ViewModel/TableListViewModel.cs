@@ -175,7 +175,7 @@ namespace MainProject
         public void Plus()
         {
             CurrentDetailPro.Quantity++;
-            TotalCurrentTable += _CurrentDetailPro.Pro.PRICE;
+            TotalCurrentTable += (long) _CurrentDetailPro.Pro.PRICE;
 
         }
         public ICommand MinusDetailProQuantity
@@ -194,7 +194,7 @@ namespace MainProject
         {
             if (CurrentDetailPro.Quantity < 1) return;
             CurrentDetailPro.Quantity--;
-            TotalCurrentTable -= _CurrentDetailPro.Pro.PRICE;
+            TotalCurrentTable -= (int) _CurrentDetailPro.Pro.PRICE;
         }
 
         public ICommand ClickQuantityDetailProCommand
@@ -211,9 +211,9 @@ namespace MainProject
 
         public void ChangeQuantityCommand(int Number)
         {
-            TotalCurrentTable -= CurrentDetailPro.Quantity * CurrentDetailPro.Pro.PRICE;
+            TotalCurrentTable -= CurrentDetailPro.Quantity * (int)CurrentDetailPro.Pro.PRICE;
             CurrentDetailPro.Quantity = Number;
-            TotalCurrentTable += Number * CurrentDetailPro.Pro.PRICE;
+            TotalCurrentTable += Number * (int)CurrentDetailPro.Pro.PRICE;
         }
 
 
@@ -272,7 +272,7 @@ namespace MainProject
         }
         public void RemoveDetail()
         {
-            TotalCurrentTable -= CurrentDetailPro.Quantity + CurrentDetailPro.Pro.PRICE;
+            TotalCurrentTable -=  CurrentDetailPro.Quantity + (int)CurrentDetailPro.Pro.PRICE;
             Currentlistdetailpro.Remove(CurrentDetailPro);
         }
 

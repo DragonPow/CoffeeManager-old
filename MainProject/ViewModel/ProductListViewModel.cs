@@ -23,7 +23,7 @@ namespace MainProject.Model.Product
         long _Id;
         string _Name;
         string _Detail;
-        string _Image;
+        byte[] _Image;
         long _Price;
         string _TypePro;
 
@@ -74,7 +74,7 @@ namespace MainProject.Model.Product
         public long Id { get => _Id; set { if (_Id != value) { _Id = value; OnPropertyChanged(); } } }
         public string Name { get => _Name; set { if (_Name != value) { _Name = value; OnPropertyChanged(); } } }
         public string Detail { get => _Detail; set { if (_Detail != value) { _Detail = value; OnPropertyChanged(); } } }
-        public string Image { get => _Image; set { if (_Image != value) { _Image = value; OnPropertyChanged(); } } }
+        public  byte[] Image { get => _Image; set { if (_Image != value) { _Image = value; OnPropertyChanged(); } } }
         public long Price { get => _Price; set { if (_Price != value) { _Price = value; OnPropertyChanged(); } } }
         public string TypePro { get => _TypePro; set { if (_TypePro != value) { _TypePro = value; OnPropertyChanged(); } } }
 

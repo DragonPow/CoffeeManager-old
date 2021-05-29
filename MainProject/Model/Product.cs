@@ -24,8 +24,9 @@ namespace MainProject.Model
         public string NAME { get; set; }
         public string DETAIL { get; set; }
         public byte[] IMAGE { get; set; }
-        public Nullable<long> Price { get; set; }
+        public Nullable<long> PRICE { get; set; }
         public string TYPE { get; set; }
+        public Nullable<int> DELETED { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ObservableCollection<DETAILBILL> DETAILBILLs { get; set; }
