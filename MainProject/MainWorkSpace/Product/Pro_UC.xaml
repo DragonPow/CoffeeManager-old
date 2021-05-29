@@ -5,9 +5,9 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:MainProject.MainWorkSpace.Product"
              mc:Ignorable="d" 
-             d:DesignHeight="110" 
-             d:DesignWidth="110">
-    <Border BorderThickness="2" BorderBrush="Gray">
+             Height="120"
+             Width="150">
+    <Border BorderThickness="1" BorderBrush="Gray">
         <Grid>
             <Image Source="/Resources/coffee.jpg" Stretch="Fill" Margin="0,0,0,10"/>
             <TextBlock FontSize="15"  HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Text="Cà phê đen" Cursor="None"  TextAlignment="Center" Padding="5" FontWeight="DemiBold" >
