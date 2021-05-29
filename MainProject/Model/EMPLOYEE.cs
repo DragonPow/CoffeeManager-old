@@ -20,7 +20,7 @@ namespace MainProject.Model
             this.BILLs = new  ObservableCollection<BILL>();
         }
     
-        private long ID { get; set; }
+        public long ID { get; set; }
         public Nullable<System.DateTime> Birthday { get; set; }
         public string Phone { get; set; }
         private Nullable<long> ID_Position { get; set; }
