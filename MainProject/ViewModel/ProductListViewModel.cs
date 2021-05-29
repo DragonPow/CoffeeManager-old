@@ -2,9 +2,12 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Windows.Forms;
 using System.Windows.Input;
 
 
@@ -16,7 +19,7 @@ namespace MainProject.Model.Product
     {
         #region Field
 
-        private ObservableCollection<PRODUCT> _ListProduct;
+        private ObservableCollection<CUSTOMPRODUCT> _ListProduct;
         private int _IndexCurrentproduct;
         private string _Type;
         string _SearchProduct;
@@ -26,6 +29,7 @@ namespace MainProject.Model.Product
         byte[] _Image;
         long _Price;
         string _TypePro;
+        Image _Image_product;
 
         private ICommand _AddProduct;
         private ICommand _DeletePro;
@@ -38,34 +42,14 @@ namespace MainProject.Model.Product
         private ICommand _ExitAddProview;
         private ICommand _ExitUpdateProduct;
         private ICommand _ExitDetailProduct;
+        private ICommand _AddImageProduct;
 
         #endregion
-        #region Init
-
-        public ProductViewModel()
-        {
-
-            using (var db = new mainEntities())
-            {
-                if (Type == null) return;
-
-                if (Type == "Tất cả")
-                {
-                    ListPoduct = new ObservableCollection<PRODUCT>(db.PRODUCTs.Where(p => (p.DELETED == 0)).ToList());
-                }
-                else
-                {
-                    ListPoduct = new ObservableCollection<PRODUCT>(db.PRODUCTs.Where(p => ((p.TYPE_PRODUCT == Type) && (p.DELETED == 0))).ToList());
-                }
-
-            }
-        }
-
-        #endregion
+       
 
         #region Properties
 
-        public ObservableCollection<PRODUCT> ListPoduct { get => _ListProduct; set { if (value != _ListProduct) { _ListProduct = value; OnPropertyChanged(); } } }
+        public ObservableCollection<CUSTOMPRODUCT> ListPoduct { get => _ListProduct; set { if (value != _ListProduct) { _ListProduct = value; OnPropertyChanged(); } } }
 
         public int IndexCurrentProduct { get => _IndexCurrentproduct; set { if (_IndexCurrentproduct != value) { _IndexCurrentproduct = value; OnPropertyChanged(); } } }
 
@@ -74,10 +58,40 @@ namespace MainProject.Model.Product
         public long Id { get => _Id; set { if (_Id != value) { _Id = value; OnPropertyChanged(); } } }
         public string Name { get => _Name; set { if (_Name != value) { _Name = value; OnPropertyChanged(); } } }
         public string Detail { get => _Detail; set { if (_Detail != value) { _Detail = value; OnPropertyChanged(); } } }
-        public  byte[] Image { get => _Image; set { if (_Image != value) { _Image = value; OnPropertyChanged(); } } }
+        public byte[] Image { get => _Image; set { if (_Image != value) { _Image = value; OnPropertyChanged(); Image_Product = byteArrayToImage(value); } } }
         public long Price { get => _Price; set { if (_Price != value) { _Price = value; OnPropertyChanged(); } } }
         public string TypePro { get => _TypePro; set { if (_TypePro != value) { _TypePro = value; OnPropertyChanged(); } } }
 
+        public Image Image_Product { get => _Image_product; set { if (_Image_product != value) { _Image_product = value; OnPropertyChanged(); } } }
+
+
+        #endregion
+
+        #region Init
+
+        public ProductViewModel()
+        {
+            using (var db = new mainEntities())
+            {
+                if (Type == null) return;
+
+                ObservableCollection<PRODUCT> listproduct;
+
+                if (Type == "Tất cả")
+                {
+                    listproduct = new ObservableCollection<PRODUCT>(db.PRODUCTs.Where(p => (p.DELETED == 0)).ToList());
+                }
+                else
+                {
+                    ListPoduct = new ObservableCollection<PRODUCT>(db.PRODUCTs.Where(p => ((p.TYPE_PRODUCT == Type) && (p.DELETED == 0))).ToList());
+                }   
+                
+                foreach ( PRODUCT p in listproduct)
+                {
+                    ListPoduct.Add(new CUSTOMPRODUCT(p));
+                }
+            }
+        }
 
         #endregion
 
@@ -117,18 +131,18 @@ namespace MainProject.Model.Product
 
         public void Add(object a)
         {
-
             PRODUCT p = new PRODUCT() { Name = Name, Image = Image, Price = Price, Detail = Detail, DELETED = 0, TYPE = TypePro };
+            CUSTOMPRODUCT customproduct = new CUSTOMPRODUCT(product);
 
             using (var db = new mainEntities())
             {
                 {
-                    db.PRODUCTs.Add(p);
+                    db.PRODUCTs.Add(product);
                     db.SaveChanges();
                 }
             }
 
-            ListPoduct.Add(p);
+            ListPoduct.Add(customproduct);
 
         }
 
@@ -170,7 +184,7 @@ namespace MainProject.Model.Product
 
             using (var db = new mainEntities())
             {
-                PRODUCT product = db.PRODUCTs.Where(p => (p.ID == ListPoduct.ElementAt(IndexCurrentProduct).ID) && (p.DELETED == 0)).FirstOrDefault();
+                PRODUCT product = db.PRODUCTs.Where(p => (p.ID == ListPoduct.ElementAt(IndexCurrentProduct).product.ID) && (p.DELETED == 0)).FirstOrDefault();
                 if (product != null)
                 {
                     product.DELETED = 1;
@@ -195,12 +209,12 @@ namespace MainProject.Model.Product
 
         public void SearchName()
         {
-
+            ObservableCollection<PRODUCT> listproduct;
             if (SearchProduct == "")
             {
                 using (var db = new mainEntities())
                 {
-                    ListPoduct = new ObservableCollection<PRODUCT>(db.PRODUCTs.ToList());
+                    listproduct = new ObservableCollection<PRODUCT>(db.PRODUCTs.ToList());
                 }
             }
             else
@@ -209,9 +223,16 @@ namespace MainProject.Model.Product
                 {
                     var listpro = db.PRODUCTs.Where(p => (ConvertToUnSign(p.Name).ToLower().Contains(ConvertToUnSign(SearchProduct).ToLower()) && p.DELETED == 0));
                     if (listpro == null) return;
-                    ListPoduct = new ObservableCollection<PRODUCT>(listpro.ToList());
+                    listproduct = new ObservableCollection<PRODUCT>(listpro.ToList());
                 }
             }
+
+            foreach (PRODUCT p in listproduct)
+            {
+                ListPoduct.Add(new CUSTOMPRODUCT(p));
+            }
+
+
         }
 
         public ICommand SearchByType
@@ -227,12 +248,19 @@ namespace MainProject.Model.Product
         }
         public void SearchType()
         {
+            ObservableCollection<PRODUCT> listproduct;
             using (var db = new mainEntities())
             {
                 var listpro = db.PRODUCTs.Where(p => (p.TYPE == Type && p.DELETED == 0));
                 if (listpro == null) return;
-                ListPoduct = new ObservableCollection<PRODUCT>(listpro.ToList());
+                listproduct = new ObservableCollection<PRODUCT>(listpro.ToList());
             }
+
+            foreach (PRODUCT p in listproduct)
+            {
+                ListPoduct.Add(new CUSTOMPRODUCT(p));
+            }
+
         }
 
         public ICommand LoadViewUpdateProduct
@@ -268,15 +296,14 @@ namespace MainProject.Model.Product
         {
             using (var db = new mainEntities())
             {
-                PRODUCT pro = db.PRODUCTs.Where(p => (p.ID == ListPoduct.ElementAt(IndexCurrentProduct).ID) && (p.DELETED == 0)).FirstOrDefault();
-                PRODUCT pr = new PRODUCT() { Name = Name, Image = Image, Price = Price, Detail = Detail, DELETED = 0, TYPE = TypePro };
+                PRODUCT pro = db.PRODUCTs.Where(p => (p.ID == ListPoduct.ElementAt(IndexCurrentProduct).product.ID) && (p.DELETED == 0)).FirstOrDefault();
+                PRODUCT pr = new PRODUCT() { NAME = Name, IMAGE = Image, PRICE = Price, DETAIL = Detail, DELETED = 0, TYPE = TypePro };
 
                 pro.DELETED = 1;
                 db.PRODUCTs.Add(pr);
                 db.SaveChanges();
 
-               // ListPoduct.ElementAt(IndexCurrentProduct) = pr;
-               
+                _ListProduct.Add(new CUSTOMPRODUCT(pr));
             }
         }
 
@@ -291,7 +318,7 @@ namespace MainProject.Model.Product
                 return _ExitUpdateProduct;
             }
         }
-            
+
 
         public void ExitUpdate(Object a)
         {
@@ -332,6 +359,35 @@ namespace MainProject.Model.Product
             //open view Add_pro(a)
         }
 
+        public ICommand AddImageProductCommand
+        {
+            get
+            {
+                if (_AddImageProduct == null)
+                {
+                    _AddImageProduct = new RelayingCommand<Object>(a => AddImageProduct());
+                }
+                return _AddImageProduct;
+            }
+        }
+
+
+        public void AddImageProduct()
+        {
+            string path = "";
+
+            OpenFileDialog openFile = new OpenFileDialog();
+            openFile.Filter = "Pictures files (*.jpg, *.jpeg, *.jpe, *.jfif, *.png)|*.jpg; *.jpeg; *.jpe; *.jfif; *.png|All files (*.*)|*.*";
+            openFile.FilterIndex = 1;
+            openFile.RestoreDirectory = true;
+
+            if (openFile.ShowDialog() == DialogResult.OK)
+            {
+                path = openFile.FileName;
+                Image = converImgToByte(path);
+                Image_Product = byteArrayToImage(Image);
+            }                    
+        }
         #endregion
 
         private string ConvertToUnSign(string input)
@@ -349,6 +405,25 @@ namespace MainProject.Model.Product
                 str2 = str2.Remove(str2.IndexOf("?"), 1);
             }
             return str2;
+        }
+
+        private byte[] converImgToByte(string path)
+        {
+            FileStream fs;
+            fs = new FileStream(path, FileMode.Open, FileAccess.Read);
+            byte[] picbyte = new byte[fs.Length];
+            fs.Read(picbyte, 0, System.Convert.ToInt32(fs.Length));
+            fs.Close();
+            return picbyte;
+        }
+
+     
+        public Image byteArrayToImage(byte[] byteArrayIn)
+        {
+            using (MemoryStream ms = new MemoryStream(byteArrayIn))
+            {
+                return System.Drawing.Image.FromStream(ms);
+            }
         }
     }
 }
