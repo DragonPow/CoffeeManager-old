@@ -349,8 +349,7 @@ namespace MainProject
 
         public void Insert()
         {
-
-            TABLE tab = new TABLE() { Floor = CurrentFloors, STATUS_TABLE = 0, Number = ListTable.Count + 1, DELETED = 0 };
+            TABLE tab = new TABLE() { Floor = CurrentFloors, STATUS_TABLE = new STATUS_TABLE() { Status = "Empty"}, Number = ListTable.Count + 1, DELETED = 0 };
 
             ListTable.Add(new TABLECUSTOM() { table = tab });
 
