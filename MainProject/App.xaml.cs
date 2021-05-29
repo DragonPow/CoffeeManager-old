@@ -1,6 +1,7 @@
 ﻿using MainProject.ApplicationWorkSpace;
 using MainProject.MainWorkSpace.Bill;
 using MainProject.Model;
+using MainProject.Model.Product;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -23,8 +24,8 @@ namespace MainProject
             base.OnStartup(e);
 
             ////Testing Startup
-            //BillView view = new BillView();
-            //MainWorkSpace.Bill.BillViewModel viewModel = new MainWorkSpace.Bill.BillViewModel();
+            TestingView view = new TestingView();
+            ProductViewModel viewModel = new ProductViewModel();
             ////End testing Startup
 
 
@@ -38,8 +39,8 @@ namespace MainProject
 
 
             //Main Startup
-            ApplicationView view = new ApplicationView();
-            ApplicationViewModel viewModel = new ApplicationViewModel();
+          /*  ApplicationView view = new ApplicationView();
+            ApplicationViewModel viewModel = new ApplicationViewModel();*/
             //End main Startup
 
 
