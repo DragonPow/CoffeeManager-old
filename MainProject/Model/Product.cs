@@ -21,7 +21,7 @@ namespace MainProject.Model
             this.TYPE_PRODUCT = new  ObservableCollection<TYPE_PRODUCT>();
         }
     
-        private long ID { get; set; }
+        public long ID { get; private set; }
         public string Name { get; set; }
         public string Detail { get; set; }
         public byte[] Image { get; set; }

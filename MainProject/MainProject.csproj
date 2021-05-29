@@ -137,6 +137,36 @@
     <Compile Include="MainWorkSpace\Bill\BillView.xaml.cs">
       <DependentUpon>BillView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Model\BILL.cs">
+      <DependentUpon>MainModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\DETAILBILL.cs">
+      <DependentUpon>MainModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\EMPLOYEE.cs">
+      <DependentUpon>MainModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\POSITION_EMPLOYEE.cs">
+      <DependentUpon>MainModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\PRODUCT.cs">
+      <DependentUpon>MainModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\REGULATION.cs">
+      <DependentUpon>MainModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\STATUS_TABLE.cs">
+      <DependentUpon>MainModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\TABLE.cs">
+      <DependentUpon>MainModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\TYPE_PRODUCT.cs">
+      <DependentUpon>MainModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\VOUCHER.cs">
+      <DependentUpon>MainModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="ViewModel\BillViewModel.cs" />
     <Compile Include="MainWorkSpace\Bill\Bill_ProductTable.xaml.cs">
       <DependentUpon>Bill_ProductTable.xaml</DependentUpon>
@@ -400,7 +430,7 @@
       <DependentUpon>MainModel.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
-    <None Include="ProjectDatabase.db" />
+    <None Include="ProjectDatabase-new.db" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

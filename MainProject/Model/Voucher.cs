@@ -20,7 +20,7 @@ namespace MainProject.Model
             this.BILLs = new  ObservableCollection<BILL>();
         }
     
-        private string ID { get; set; }
+        public string ID { get; set; }
         public Nullable<System.DateTime> BeginTime { get; set; }
         public Nullable<System.DateTime> EndTime { get; set; }
         public int Percent { get; set; }
