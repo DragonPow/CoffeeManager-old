@@ -304,7 +304,11 @@ namespace MainProject.ViewModel
                 db.PRODUCTs.Add(Newproduct.product);
                 db.SaveChanges();
 
-                _ListProduct.Add(Newproduct);
+                var item = ListPoduct.ElementAt(IndexCurrentProduct);
+                if (item != null)
+                {
+                    item = Newproduct;
+                }              
             }
         }
 

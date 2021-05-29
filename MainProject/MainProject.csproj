@@ -247,6 +247,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>MainModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="ViewModel\EmployeeViewModel.cs" />
     <Compile Include="ViewModel\ProductListViewModel.cs" />
     <Compile Include="ViewModel\TableListViewModel.cs" />
     <Compile Include="ProductWorkSpace\ProductMenuViewModel.cs" />
