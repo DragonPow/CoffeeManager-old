@@ -21,11 +21,11 @@ namespace MainProject.Model
         }
     
         public string ID { get; set; }
-        public Nullable<System.DateTime> BEGINTIME { get; set; }
-        public Nullable<System.DateTime> ENDTIME { get; set; }
-        public Nullable<int> PERCENT { get; set; }
+        public Nullable<System.DateTime> BeginTime { get; set; }
+        public Nullable<System.DateTime> EndTime { get; set; }
+        public int Percent { get; set; }
         public Nullable<int> DELETED { get; set; }
-        public string DESCRIPTION { get; set; }
+        public string Description { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ObservableCollection<BILL> BILLs { get; set; }

@@ -83,7 +83,7 @@ namespace MainProject.Model.Product
                 }
                 else
                 {
-                    listproduct = new ObservableCollection<PRODUCT>(db.PRODUCTs.Where(p => ((p.TYPE == Type) && (p.DELETED == 0))).ToList());
+                    ListPoduct = new ObservableCollection<PRODUCT>(db.PRODUCTs.Where(p => ((p.TYPE_PRODUCT == Type) && (p.DELETED == 0))).ToList());
                 }   
                 
                 foreach ( PRODUCT p in listproduct)
@@ -131,8 +131,7 @@ namespace MainProject.Model.Product
 
         public void Add(object a)
         {
-
-            PRODUCT product = new PRODUCT() { NAME = Name, IMAGE = Image, PRICE = Price, DETAIL = Detail, DELETED = 0, TYPE = TypePro };
+            PRODUCT p = new PRODUCT() { Name = Name, Image = Image, Price = Price, Detail = Detail, DELETED = 0, TYPE = TypePro };
             CUSTOMPRODUCT customproduct = new CUSTOMPRODUCT(product);
 
             using (var db = new mainEntities())
@@ -222,7 +221,7 @@ namespace MainProject.Model.Product
             {
                 using (var db = new mainEntities())
                 {
-                    var listpro = db.PRODUCTs.Where(p => (ConvertToUnSign(p.NAME).ToLower().Contains(ConvertToUnSign(SearchProduct).ToLower()) && p.DELETED == 0));
+                    var listpro = db.PRODUCTs.Where(p => (ConvertToUnSign(p.Name).ToLower().Contains(ConvertToUnSign(SearchProduct).ToLower()) && p.DELETED == 0));
                     if (listpro == null) return;
                     listproduct = new ObservableCollection<PRODUCT>(listpro.ToList());
                 }
