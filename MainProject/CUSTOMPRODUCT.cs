@@ -21,7 +21,7 @@ namespace MainProject
         public CUSTOMPRODUCT (PRODUCT p)
         {
             product = p;
-            if (p.IMAGE != null) Image_product = byteArrayToImage(p.IMAGE);
+            if (p.Image != null) Image_product = byteArrayToImage(p.Image);
             else Image_product = null;
         }
 

@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="mainModel.Store" Provider="System.Data.SQLite.EF6" ProviderManifestToken="Data Source=D:\Major\CoffeeManager\MainProject\ProjectDatabase.db" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="mainModel.Store" Provider="System.Data.SQLite.EF6" ProviderManifestToken="Data Source=D:\Major\CoffeeManager\MainProject\ProjectDatabase-new.db" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="BILL">
           <Key>
             <PropertyRef Name="ID" />
@@ -86,6 +86,7 @@
           <Property Name="Floor" Type="int" />
           <Property Name="ID_Status" Type="integer" />
           <Property Name="DELETED" Type="int" />
+          <Property Name="Number" Type="int" />
         </EntityType>
         <EntityType Name="TYPE_PRODUCT">
           <Key>
@@ -271,14 +272,8 @@
           <EntitySet Name="DETAILBILLs" EntityType="mainModel.DETAILBILL" />
           <EntitySet Name="PRODUCTs" EntityType="mainModel.PRODUCT" />
           <EntitySet Name="REGULATIONs" EntityType="mainModel.REGULATION" />
-          <EntitySet Name="STATUS_TABLE" EntityType="mainModel.STATUS_TABLE" />
-          <EntitySet Name="TABLES" EntityType="mainModel.TABLE" />
           <EntitySet Name="TYPE_PRODUCT" EntityType="mainModel.TYPE_PRODUCT" />
           <EntitySet Name="VOUCHERs" EntityType="mainModel.VOUCHER" />
-          <AssociationSet Name="FK_BILL_0_0" Association="mainModel.FK_BILL_0_0">
-            <End Role="TABLE" EntitySet="TABLES" />
-            <End Role="BILL" EntitySet="BILLs" />
-          </AssociationSet>
           <AssociationSet Name="FK_BILL_2_0" Association="mainModel.FK_BILL_2_0">
             <End Role="VOUCHER" EntitySet="VOUCHERs" />
             <End Role="BILL" EntitySet="BILLs" />
@@ -290,10 +285,6 @@
           <AssociationSet Name="FK_DETAILBILL_0_0" Association="mainModel.FK_DETAILBILL_0_0">
             <End Role="PRODUCT" EntitySet="PRODUCTs" />
             <End Role="DETAILBILL" EntitySet="DETAILBILLs" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TABLES_0_0" Association="mainModel.FK_TABLES_0_0">
-            <End Role="STATUS_TABLE" EntitySet="STATUS_TABLE" />
-            <End Role="TABLE" EntitySet="TABLES" />
           </AssociationSet>
           <AssociationSet Name="CURRENT_PRODUCT_TYPE" Association="mainModel.CURRENT_PRODUCT_TYPE">
             <End Role="TYPE_PRODUCT" EntitySet="TYPE_PRODUCT" />
@@ -309,6 +300,16 @@
             <End Role="POSITION_EMPLOYEE" EntitySet="POSITION_EMPLOYEE" />
             <End Role="EMPLOYEE" EntitySet="EMPLOYEEs" />
           </AssociationSet>
+          <EntitySet Name="STATUS_TABLE" EntityType="mainModel.STATUS_TABLE" />
+          <EntitySet Name="TABLES" EntityType="mainModel.TABLE" />
+          <AssociationSet Name="FK_BILL_0_0" Association="mainModel.FK_BILL_0_0">
+            <End Role="TABLE" EntitySet="TABLES" />
+            <End Role="BILL" EntitySet="BILLs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TABLES_0_0" Association="mainModel.FK_TABLES_0_0">
+            <End Role="STATUS_TABLE" EntitySet="STATUS_TABLE" />
+            <End Role="TABLE" EntitySet="TABLES" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="BILL">
           <Key>
@@ -320,10 +321,10 @@
           <Property Name="ID_Voucher" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" a:GetterAccess="Private" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" a:SetterAccess="Private" />
           <Property Name="ID_Tables" Type="Int64" a:GetterAccess="Private" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" a:SetterAccess="Private" />
           <Property Name="ID_Employee" Type="Int64" a:GetterAccess="Private" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" a:SetterAccess="Private" />
-          <NavigationProperty Name="TABLE" Relationship="mainModel.FK_BILL_0_0" FromRole="BILL" ToRole="TABLE" />
           <NavigationProperty Name="VOUCHER" Relationship="mainModel.FK_BILL_2_0" FromRole="BILL" ToRole="VOUCHER" />
           <NavigationProperty Name="DETAILBILLs" Relationship="mainModel.FK_DETAILBILL_1_0" FromRole="BILL" ToRole="DETAILBILL" />
           <NavigationProperty Name="EMPLOYEE" Relationship="mainModel.FK_BILL_1_0" FromRole="BILL" ToRole="EMPLOYEE" />
+          <NavigationProperty Name="TABLE" Relationship="mainModel.FK_BILL_0_0" FromRole="BILL" ToRole="TABLE" />
         </EntityType>
         <EntityType Name="DETAILBILL">
           <Key>
@@ -357,25 +358,6 @@
           <Property Name="Name" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Value" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" Nullable="false" />
         </EntityType>
-        <EntityType Name="STATUS_TABLE">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" a:SetterAccess="Private" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" a:GetterAccess="Private" />
-          <Property Name="Status" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="TABLES" Relationship="mainModel.FK_TABLES_0_0" FromRole="STATUS_TABLE" ToRole="TABLE" />
-        </EntityType>
-        <EntityType Name="TABLE">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" a:GetterAccess="Private" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" a:SetterAccess="Private" />
-          <Property Name="Floor" Type="Int32" Nullable="false" />
-          <Property Name="ID_Status" Type="Int64" a:SetterAccess="Private" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" a:GetterAccess="Private" />
-          <Property Name="DELETED" Type="Int32" />
-          <NavigationProperty Name="BILLs" Relationship="mainModel.FK_BILL_0_0" FromRole="TABLE" ToRole="BILL" />
-          <NavigationProperty Name="STATUS_TABLE" Relationship="mainModel.FK_TABLES_0_0" FromRole="TABLE" ToRole="STATUS_TABLE" />
-        </EntityType>
         <EntityType Name="TYPE_PRODUCT">
           <Key>
             <PropertyRef Name="ID" />
@@ -396,18 +378,6 @@
           <Property Name="Description" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="BILLs" Relationship="mainModel.FK_BILL_2_0" FromRole="VOUCHER" ToRole="BILL" />
         </EntityType>
-        <Association Name="FK_BILL_0_0">
-          <End Type="mainModel.TABLE" Role="TABLE" Multiplicity="0..1" />
-          <End Type="mainModel.BILL" Role="BILL" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TABLE">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="BILL">
-              <PropertyRef Name="ID_Tables" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_BILL_2_0">
           <End Type="mainModel.VOUCHER" Role="VOUCHER" Multiplicity="0..1" />
           <End Type="mainModel.BILL" Role="BILL" Multiplicity="*" />
@@ -441,18 +411,6 @@
             </Principal>
             <Dependent Role="DETAILBILL">
               <PropertyRef Name="ID_Product" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_TABLES_0_0">
-          <End Type="mainModel.STATUS_TABLE" Role="STATUS_TABLE" Multiplicity="0..1" />
-          <End Type="mainModel.TABLE" Role="TABLE" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="STATUS_TABLE">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="TABLE">
-              <PropertyRef Name="ID_Status" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -506,6 +464,50 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="STATUS_TABLE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Status" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="TABLES" Relationship="mainModel.FK_TABLES_0_0" FromRole="STATUS_TABLE" ToRole="TABLE" />
+        </EntityType>
+        <EntityType Name="TABLE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Floor" Type="Int32" Nullable="false" />
+          <Property Name="ID_Status" Type="Int64" />
+          <Property Name="DELETED" Type="Int32" />
+          <NavigationProperty Name="BILLs" Relationship="mainModel.FK_BILL_0_0" FromRole="TABLE" ToRole="BILL" />
+          <NavigationProperty Name="STATUS_TABLE" Relationship="mainModel.FK_TABLES_0_0" FromRole="TABLE" ToRole="STATUS_TABLE" />
+          <Property Name="Number" Type="Int32" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_BILL_0_0">
+          <End Type="mainModel.TABLE" Role="TABLE" Multiplicity="0..1" />
+          <End Type="mainModel.BILL" Role="BILL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TABLE">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="BILL">
+              <PropertyRef Name="ID_Tables" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TABLES_0_0">
+          <End Type="mainModel.STATUS_TABLE" Role="STATUS_TABLE" Multiplicity="0..1" />
+          <End Type="mainModel.TABLE" Role="TABLE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="STATUS_TABLE">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TABLE">
+              <PropertyRef Name="ID_Status" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -550,24 +552,6 @@
               <MappingFragment StoreEntitySet="REGULATION">
                 <ScalarProperty Name="Value" ColumnName="Value" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="STATUS_TABLE">
-            <EntityTypeMapping TypeName="mainModel.STATUS_TABLE">
-              <MappingFragment StoreEntitySet="STATUS_TABLE">
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="TABLES">
-            <EntityTypeMapping TypeName="mainModel.TABLE">
-              <MappingFragment StoreEntitySet="TABLES">
-                <ScalarProperty Name="DELETED" ColumnName="DELETED" />
-                <ScalarProperty Name="ID_Status" ColumnName="ID_Status" />
-                <ScalarProperty Name="Floor" ColumnName="Floor" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -617,6 +601,25 @@
             <EntityTypeMapping TypeName="mainModel.POSITION_EMPLOYEE">
               <MappingFragment StoreEntitySet="POSITION_EMPLOYEE">
                 <ScalarProperty Name="Position" ColumnName="Position" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="STATUS_TABLE">
+            <EntityTypeMapping TypeName="mainModel.STATUS_TABLE">
+              <MappingFragment StoreEntitySet="STATUS_TABLE">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TABLES">
+            <EntityTypeMapping TypeName="mainModel.TABLE">
+              <MappingFragment StoreEntitySet="TABLES">
+                <ScalarProperty Name="Number" ColumnName="Number" />
+                <ScalarProperty Name="DELETED" ColumnName="DELETED" />
+                <ScalarProperty Name="ID_Status" ColumnName="ID_Status" />
+                <ScalarProperty Name="Floor" ColumnName="Floor" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
