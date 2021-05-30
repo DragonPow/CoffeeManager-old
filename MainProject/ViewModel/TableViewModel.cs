@@ -270,8 +270,13 @@ namespace MainProject
         public void Pay()
         {
             CurrentTable.ListPro = Currentlistdetailpro;
+
+            BillViewModel billviewmodel = new BillViewModel();
+            billviewmodel.CurrentTable = CurrentTable;
+
             BillView billView = new BillView();
-            billView.DataContext = CurrentTable;
+            billView.DataContext = billviewmodel;
+
             billView.Show();
         }
 

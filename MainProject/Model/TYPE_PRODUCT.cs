@@ -20,7 +20,7 @@ namespace MainProject.Model
             this.PRODUCTs = new  ObservableCollection<PRODUCT>();
         }
     
-        private long ID { get; set; }
+        public long ID { get; set; }
         public string Type { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

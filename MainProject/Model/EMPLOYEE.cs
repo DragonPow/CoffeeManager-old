@@ -23,7 +23,7 @@ namespace MainProject.Model
         public long ID { get; set; }
         public Nullable<System.DateTime> Birthday { get; set; }
         public string Phone { get; set; }
-        private Nullable<long> ID_Position { get; set; }
+        public Nullable<long> ID_Position { get; set; }
         public string Name { get; set; }
         public string Password { get; set; }
         public Nullable<int> DELETED { get; set; }

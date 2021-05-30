@@ -12,10 +12,16 @@ namespace MainProject.MainWorkSpace.Bill
     public class BillViewModel : BaseViewModel
     {
         #region Fields
-        private BILL _currentBill;
-        private int _discount;
-        private ICommand _paymentCommand;
-        private ICommand _loadDiscountCommand;
+
+        private BILL _CurrentBill;
+        private string _Discount;
+        private TABLECUSTOM _Current_table;
+        private ObservableCollection<DETAILBILL> _ListDetailBill;      
+        //StoreInfor 
+
+        private ICommand _PaymentCommand;
+        private ICommand _CheckDiscountCommand;
+
         #endregion
 
 
@@ -24,25 +30,25 @@ namespace MainProject.MainWorkSpace.Bill
         {
             get
             {
-                return _currentBill;
+                return _CurrentBill;
             }
             private set
             {
-                if (value != _currentBill)
+                if (value != _CurrentBill)
                 {
-                    _currentBill = value;
+                    _CurrentBill = value;
                     OnPropertyChanged();
                 }
             }
         }
-        public int Discount
+        public string Discount
         {
-            get { return _discount; }
+            get { return _Discount; }
             set
             {
-                if (value != _discount)
+                if (value != _Discount)
                 {
-                    _discount = value;
+                    _Discount = value;
                     OnPropertyChanged();
                 }
             }
@@ -55,6 +61,35 @@ namespace MainProject.MainWorkSpace.Bill
                 return 1;//CurrentBill.DETAILBILLs.Sum(bill => bill.AMOUNT * bill.PRODUCT.PRICE);
             }
         }
+        public TABLECUSTOM CurrentTable
+        {
+            get => _Current_table;
+            set
+            {
+                if (value != _Current_table)
+                {
+                    _Current_table = value;
+                    OnPropertyChanged();
+
+                }
+            }
+        }
+
+        public ObservableCollection<DETAILBILL> ListDetailBill
+        {
+            get => _ListDetailBill;
+            set
+            {
+                if (_ListDetailBill != value)
+                {
+                    _ListDetailBill = value;
+                    OnPropertyChanged();
+                   
+                }
+            }
+        }
+       
+
         #endregion
 
 
@@ -66,26 +101,26 @@ namespace MainProject.MainWorkSpace.Bill
         {
             get
             {
-                if (_paymentCommand == null)
+                if (_PaymentCommand == null)
                 {
-                    _paymentCommand = new RelayingCommand<BillView>(para => Payment(para));
+                    _PaymentCommand = new RelayingCommand<BillView>(para => Payment(para));
                 }
-                return _paymentCommand;
+                return _PaymentCommand;
             }
         }
 
         /// <summary>
         /// Auto load discount percent when eligible
         /// </summary>
-        public ICommand LoadDiscountCommand
+        public ICommand CheckDiscountCommand
         {
             get
             {
-                if (_loadDiscountCommand==null)
+                if (_CheckDiscountCommand == null)
                 {
-                    _loadDiscountCommand = new RelayingCommand<Object>(para => LoadDiscount());
+                    _CheckDiscountCommand = new RelayingCommand<Object>(para => LoadDiscount());
                 }
-                return _loadDiscountCommand;
+                return _CheckDiscountCommand;
             }
         }
         #endregion
@@ -95,7 +130,16 @@ namespace MainProject.MainWorkSpace.Bill
         public BillViewModel()
         {
             CurrentBill = new BILL();
-            CurrentBill.DETAILBILLs.Add(new DETAILBILL() { Amount = 2, PRODUCT = new PRODUCT() { Name = "Thach", Price = 1000 } });
+            
+          /*  CurrentBill.DETAILBILLs.Add(new DETAILBILL() { Amount = 2, PRODUCT = new PRODUCT() { Name = "Thach", Price = 1000 } });      */      
+
+            foreach( var p in CurrentTable.ListPro)
+            {
+                CurrentBill.DETAILBILLs.Add(new DETAILBILL() { PRODUCT = p.Pro, Amount = p.Quantity });
+            }
+            CurrentBill.TABLE = CurrentTable.table;
+
+
         }
 
         public BillViewModel(BILL bill)
@@ -108,14 +152,36 @@ namespace MainProject.MainWorkSpace.Bill
         {
             using (var db = new mainEntities())
             {
-                //var newBill = new BILL();
-                //db.BILLs.Add(CurrentBill);
-                //db.SaveChanges();
+                long Sale = 0;
+                var t = db.VOUCHERs.Where(v => (v.CODE == Discount && v.DELETED == 0)).FirstOrDefault();
+                if ( t!= null || Discount == "")
+                {
+                    if ( Discount != "")
+                    {
+                        CurrentBill.ID_Voucher = t.ID;
+                        CurrentBill.VOUCHER = t;
+                        Sale = (long)(CurrentTable.Total * t.Percent) / 100;
 
-                //testing
-                CurrentBill.DETAILBILLs[0].Amount = 3;
+                    }   
+                    
+                    CurrentBill.ID_Tables = CurrentTable.table.ID;                 
+                    CurrentBill.TotalPrice = CurrentTable.Total - Sale;
+                    CurrentBill.CheckoutDay = DateTime.Now;
+                   
+                    db.BILLs.Add(CurrentBill);
+
+                    CurrentTable.ListPro = null;
+                    CurrentTable.Total = 0;
+                    
+                    view.Close();
+                                    
+                    //Xuất đơn ra PDF
+                }
+                else
+                {
+                    //open messegnbox thông báo lỗi sai mã voucher
+                }                    
             }
-            //view.Close();
         }
         private void LoadDiscount()
         {

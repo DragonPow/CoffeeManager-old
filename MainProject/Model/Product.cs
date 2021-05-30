@@ -21,11 +21,11 @@ namespace MainProject.Model
             this.TYPE_PRODUCT = new  ObservableCollection<TYPE_PRODUCT>();
         }
     
-        public long ID { get; private set; }
+        public long ID { get; set; }
         public string Name { get; set; }
         public string Detail { get; set; }
         public byte[] Image { get; set; }
-        public int Price { get; set; }
+        public Nullable<int> Price { get; set; }
         public Nullable<int> DELETED { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
