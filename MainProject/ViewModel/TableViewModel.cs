@@ -22,8 +22,7 @@ namespace MainProject
 
         private ICommand _plusQuantityDetailProCommand;
         private ICommand _minusQuantityDetailProCommand;
-        private ICommand _ClickQuantityDetailProCommand;
-        private ICommand _AddDetailProCommand;
+        private ICommand _ClickQuantityDetailProCommand;        
         private ICommand _DeleteDetailPro;
 
         private ICommand _OpenViewChooseTable;
@@ -237,25 +236,7 @@ namespace MainProject
 
        
 
-        /* public ICommand AddDetailPro
-         {
-             get
-             {
-                 if (_AddDetailPro == null)
-                 {
-                     _AddDetailPro = new RelayingCommand<PRODUCT>(a => addDetailPro(a));
-                 }
-                 return _AddDetailPro;
-             }
-         }
-
-
-         public void addDetailPro(PRODUCT pro)
-         {
-             SelectedTable.Total += pro.PRICE;
-             SelectedTable.ListPro.Add(new DetailPro(pro));
-         }
- */
+        
 
         // Xóa detailPro đã chọn
 

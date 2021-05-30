@@ -26,6 +26,8 @@ namespace MainProject.ViewModel
         string _SearchProduct;
         CUSTOMPRODUCT _Newproduct;
 
+        TableViewModel _Tableviewmodel;
+
         private ICommand _AddProduct;
         private ICommand _DeletePro;
         private ICommand _SearchByName;
@@ -38,9 +40,10 @@ namespace MainProject.ViewModel
         private ICommand _ExitUpdateProduct;
         private ICommand _ExitDetailProduct;
         private ICommand _AddImageProduct;
+        private ICommand _AddDetailProToTableCommand;
 
         #endregion
-       
+
 
         #region Properties
 
@@ -65,6 +68,7 @@ namespace MainProject.ViewModel
         public string SearchProduct { get => _SearchProduct; set { if (_SearchProduct != value) { _Type = value; OnPropertyChanged(); } } }
         public string Type { get => _Type; set { if (_Type != value) { _Type = value; OnPropertyChanged(); } } }
 
+        public TableViewModel Tableviewmodel { get => _Tableviewmodel; set { if (_Tableviewmodel != value) { _Tableviewmodel = value; OnPropertyChanged(); } } }
         #endregion
 
         #region Init
@@ -394,6 +398,35 @@ namespace MainProject.ViewModel
                 Newproduct.Image_product= byteArrayToImage(Newproduct.product.Image);
             }                    
         }
+
+         public ICommand AddDetailProToTableCommand
+        {
+             get
+             {
+                 if (_AddDetailProToTableCommand == null)
+                 {
+                    _AddDetailProToTableCommand = new RelayingCommand<Object>(a => AddDetailProToTable());
+                 }
+                 return _AddDetailProToTableCommand;
+             }
+         }
+
+
+         public void AddDetailProToTable()
+         {
+            Tableviewmodel.CurrentTable.Total += ListPoduct.ElementAt(IndexCurrentProduct).product.Price;
+
+            foreach ( var p in Tableviewmodel.CurrentTable.ListPro)
+            {
+                if (p.Pro == ListPoduct.ElementAt(IndexCurrentProduct).product)
+                {
+                    ++p.Quantity;
+                    return;
+                }
+            }
+           
+             Tableviewmodel.CurrentTable.ListPro.Add(new DetailPro(ListPoduct.ElementAt(IndexCurrentProduct).product));
+         }
         #endregion
 
         private string ConvertToUnSign(string input)
