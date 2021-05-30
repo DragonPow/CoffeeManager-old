@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:MainProject.MainWorkSpace.Bill"
         xmlns:view="clr-namespace:MainProject.MainWorkSpace.Product"
         mc:Ignorable="d"
-        Title="TestingView" Width="600" Height="600">
+        Title="TestingView" 
+        Width="600" Height="700">
     <view:CreateProd/>
 </Window>

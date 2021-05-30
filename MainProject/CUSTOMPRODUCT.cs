@@ -11,8 +11,8 @@ namespace MainProject
 {
     class CUSTOMPRODUCT : BaseViewModel
     {
-        public PRODUCT product;
-        public Image Image_product;
+        public PRODUCT product { get; set; }
+        public Image Image_product { get; set; }
 
         public CUSTOMPRODUCT()
         {

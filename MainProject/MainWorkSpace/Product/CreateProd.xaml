@@ -5,10 +5,14 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:local="clr-namespace:MainProject.MainWorkSpace.Product"
+             xmlns:model="clr-namespace:MainProject.Model"
              xmlns:viewmodel="clr-namespace:MainProject.ViewModel"
              mc:Ignorable="d" 
              d:DataContext="{d:DesignInstance Type=viewmodel:ProductViewModel}"
              d:DesignHeight="650" d:DesignWidth="600">
+    <UserControl.Resources>
+        <model:TYPE_PRODUCT x:Key="Type_Product"/>
+    </UserControl.Resources>
     <DockPanel>
         <Grid DockPanel.Dock="Top" Background="{StaticResource MainColor}">
             <Border BorderBrush="Gray" BorderThickness="1"/>
@@ -26,7 +30,7 @@
             <StackPanel>
                 <Grid Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Row="1"  Margin="0,40,0,20" Width="200" Height="160">
                     <Border BorderBrush="Gray" BorderThickness="2"></Border>
-                    <Image Stretch="Uniform"/>
+                    <Image Stretch="Uniform" />
                     <Button Background="Transparent" BorderBrush="Transparent" 
                             Command="{Binding AddImageProductCommand}">
                         <StackPanel Orientation="Horizontal">
@@ -47,10 +51,12 @@
                 <ComboBox
                     Style="{StaticResource MaterialDesignOutlinedComboBox}"
                     materialDesign:HintAssist.Hint="Danh mục"
-                     ItemsSource="{Binding ShortStringList}"
-                     FontSize="16"
+                    ItemsSource="{Binding Source={x:Static model:TYPE_PRODUCT.ListType}}"
+                    DisplayMemberPath="Name"
+                    SelectedValuePath="Name"
+                    FontSize="16"
                     MaxWidth="500"
-                     Margin="100,5"/>
+                    Margin="100,5"/>
                 <TextBox 
                     Style="{StaticResource MaterialDesignOutlinedTextBox}"
                     materialDesign:HintAssist.Hint="Giá"
