@@ -14,7 +14,8 @@ namespace MainProject.MainWorkSpace.Bill
         #region Fields
 
         private BILL _CurrentBill;
-        private string _Discount;
+        private string _CodeDiscount;
+        private int _Discount;
         private TABLECUSTOM _Current_table;
         private ObservableCollection<DETAILBILL> _ListDetailBill;      
         //StoreInfor 
@@ -41,7 +42,7 @@ namespace MainProject.MainWorkSpace.Bill
                 }
             }
         }
-        public string Discount
+        public int Discount
         {
             get { return _Discount; }
             set
@@ -49,6 +50,19 @@ namespace MainProject.MainWorkSpace.Bill
                 if (value != _Discount)
                 {
                     _Discount = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        public string CodeDiscount
+        {
+            get { return _CodeDiscount; }
+            set
+            {
+                if (value != _CodeDiscount)
+                {
+                    _CodeDiscount = value;
                     OnPropertyChanged();
                 }
             }
@@ -138,7 +152,7 @@ namespace MainProject.MainWorkSpace.Bill
                 CurrentBill.DETAILBILLs.Add(new DETAILBILL() { PRODUCT = p.Pro, Amount = p.Quantity });
             }
             CurrentBill.TABLE = CurrentTable.table;
-
+            Discount = 0;
 
         }
 
@@ -152,20 +166,20 @@ namespace MainProject.MainWorkSpace.Bill
         {
             using (var db = new mainEntities())
             {
-                long Sale = 0;
-                var t = db.VOUCHERs.Where(v => (v.CODE == Discount && v.DELETED == 0)).FirstOrDefault();
-                if ( t!= null || Discount == "")
+               
+                var t = db.VOUCHERs.Where(v => (v.CODE == CodeDiscount && v.DELETED == 0)).FirstOrDefault();
+                if ( t!= null || CodeDiscount == "")
                 {
-                    if ( Discount != "")
+                    if (CodeDiscount != "")
                     {
                         CurrentBill.ID_Voucher = t.ID;
                         CurrentBill.VOUCHER = t;
-                        Sale = (long)(CurrentTable.Total * t.Percent) / 100;
+                        Discount = (int)(CurrentTable.Total * t.Percent) / 100;
 
                     }   
                     
                     CurrentBill.ID_Tables = CurrentTable.table.ID;                 
-                    CurrentBill.TotalPrice = CurrentTable.Total - Sale;
+                    CurrentBill.TotalPrice = CurrentTable.Total - Discount;
                     CurrentBill.CheckoutDay = DateTime.Now;
                    
                     db.BILLs.Add(CurrentBill);
