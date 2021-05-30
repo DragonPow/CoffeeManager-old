@@ -414,7 +414,7 @@ namespace MainProject.ViewModel
 
          public void AddDetailProToTable()
          {
-            Tableviewmodel.CurrentTable.Total += ListPoduct.ElementAt(IndexCurrentProduct).product.Price;
+            Tableviewmodel.CurrentTable.Total += (long) ListPoduct.ElementAt(IndexCurrentProduct).product.Price;
 
             foreach ( var p in Tableviewmodel.CurrentTable.ListPro)
             {
