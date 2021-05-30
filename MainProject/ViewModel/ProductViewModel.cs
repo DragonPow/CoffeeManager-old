@@ -99,7 +99,7 @@ namespace MainProject.ViewModel
         #region Icommand
 
 
-        public ICommand LoadAddProductView
+        public ICommand LoadAddProductView_Command
         {
             get
             {
@@ -117,7 +117,7 @@ namespace MainProject.ViewModel
             //open view Add_pro(a)
         }
 
-        public ICommand AddProduct
+        public ICommand AddProduct_Command_Command
         {
             get
             {
@@ -148,7 +148,7 @@ namespace MainProject.ViewModel
             ListPoduct.Add(Newproduct);
         }
 
-        public ICommand ExitAddProductView
+        public ICommand ExitAddProductView_Command
         {
             get
             {
@@ -168,7 +168,7 @@ namespace MainProject.ViewModel
         }
 
 
-        public ICommand DeleteProduct
+        public ICommand DeleteProduct_Command
         {
             get
             {
@@ -197,7 +197,7 @@ namespace MainProject.ViewModel
             ListPoduct.Remove(ListPoduct.ElementAt(IndexCurrentProduct));
         }
 
-        public ICommand SearchByName
+        public ICommand SearchByName_Command
         {
             get
             {
@@ -237,7 +237,7 @@ namespace MainProject.ViewModel
 
         }
 
-        public ICommand SearchByType
+        public ICommand SearchByType_Command
         {
             get
             {
@@ -265,7 +265,7 @@ namespace MainProject.ViewModel
 
         }
 
-        public ICommand LoadViewUpdateProduct
+        public ICommand LoadViewUpdateProduct_Command
         {
             get
             {
@@ -282,7 +282,7 @@ namespace MainProject.ViewModel
             //open viewUpdatate
         }
 
-        public ICommand UpdateProduct
+        public ICommand UpdateProduct_Command
         {
             get
             {
@@ -312,7 +312,7 @@ namespace MainProject.ViewModel
             }
         }
 
-        public ICommand ExitUpdateProduct
+        public ICommand ExitUpdateProduct_Command
         {
             get
             {
@@ -330,7 +330,7 @@ namespace MainProject.ViewModel
             //Exit view Update_pro(a)
         }
 
-        public ICommand OpenViewDetailProduct
+        public ICommand OpenViewDetailProduct_Command
         {
             get
             {
