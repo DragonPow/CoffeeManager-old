@@ -9,7 +9,7 @@ namespace MainProject.Model
 {
     public partial class TYPE_PRODUCT
     {
-        public ObservableCollection<string> ListType { get; set; }
+        public ObservableCollection<string> ListType { get; private set; }
         public static void loadListType()
         {
             using (var db = new mainEntities())

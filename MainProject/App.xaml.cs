@@ -27,24 +27,23 @@ namespace MainProject
             TestingView view = new TestingView();
             ProductViewModel viewModel = new ProductViewModel();
             ////End testing Startup
-            TYPE_PRODUCT.loadListType();
-            ////Tesing database
-            ////Để hay xóa dòng này không ảnh hưởng tới luồng chạy chương trình
-            //using (var main = new mainEntities())
-            //{
-            //    Console.WriteLine(main.EMPLOYEEs.Count());
-            //}
-            ////End testing database
-
+            ///
 
             //Main Startup
             //ApplicationView view = new ApplicationView();
             //ApplicationViewModel viewModel = new ApplicationViewModel();
             //End main Startup
 
-
+            LoadInitApp();
             view.DataContext = viewModel;
             view.ShowDialog();
+        }
+
+        private void LoadInitApp()
+        {
+            TYPE_PRODUCT.loadListType();
+            STATUS_TABLE.loadListStatus();
+            POSITION_EMPLOYEE.loadListStatus();
         }
     }
 }

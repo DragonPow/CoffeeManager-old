@@ -7,24 +7,24 @@ using System.Threading.Tasks;
 
 namespace MainProject.Model
 {
-    public partial class STATUS_TABLE
+    public partial class POSITION_EMPLOYEE
     {
-        public ObservableCollection<string> ListStatus { get; private set; }
+        public ObservableCollection<string> ListPosition { get; private set; }
         public static void loadListStatus()
         {
             using (var db = new mainEntities())
             {
-                Instance.ListStatus = new ObservableCollection<string>(db.STATUS_TABLE.Select(i => i.Status).ToList());
+                Instance.ListPosition = new ObservableCollection<string>(db.POSITION_EMPLOYEE.Select(i => i.Position).ToList());
             }
         }
-        private static STATUS_TABLE _instance;
-        public static STATUS_TABLE Instance
+        private static POSITION_EMPLOYEE _instance;
+        public static POSITION_EMPLOYEE Instance
         {
             get
             {
                 if (_instance == null)
                 {
-                    _instance = new STATUS_TABLE();
+                    _instance = new POSITION_EMPLOYEE();
                 }
                 return _instance;
             }
