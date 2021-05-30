@@ -28,44 +28,54 @@
         </Grid>
         <ScrollViewer DockPanel.Dock="Bottom" Background="White" ScrollViewer.VerticalScrollBarVisibility="Hidden" HorizontalScrollBarVisibility="Disabled">
             <StackPanel>
-                <Grid Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Row="1"  Margin="0,40,0,20" Width="200" Height="160">
-                    <Border BorderBrush="Gray" BorderThickness="2"></Border>
-                    <Image Stretch="Uniform" />
-                    <Button Background="Transparent" BorderBrush="Transparent" 
-                            Command="{Binding AddImageProductCommand}">
+                <Button Grid.Column="0" 
+                        HorizontalAlignment="Center" 
+                        VerticalAlignment="Top" Grid.Row="1"
+                        Margin="0,40,0,20" 
+                        Width="200" Height="160"
+                        Background="Transparent"
+                        Command="{Binding AddImageProductCommand}">
+                    <Grid>
+                        <Image Stretch="Uniform"
+                               Source="{Binding Newproduct.product.Image}"/>
                         <StackPanel Orientation="Horizontal">
                             <materialDesign:PackIcon Kind="Plus" 
                                                      Foreground="Gray" 
                                                      Width="35" Height="35" 
                                                      VerticalAlignment="Center"/>
-                            <TextBlock Text="Thêm ảnh" Foreground="Gray" FontSize="24" VerticalAlignment="Center"/>
+                            <TextBlock Text="Thêm ảnh" 
+                                       Foreground="Gray" 
+                                       FontSize="24" 
+                                       VerticalAlignment="Center"/>
                         </StackPanel>
-                    </Button>
-                </Grid>
+                    </Grid>
+                </Button>
                 <TextBox 
                     Style="{StaticResource MaterialDesignOutlinedTextBox}"
                     materialDesign:HintAssist.Hint="Tên mặt hàng"
+                    Text="{Binding Newproduct.product.Name}"
                     FontSize="16"
                     Margin="100,5"
                     MaxWidth="500"/>
                 <ComboBox
                     Style="{StaticResource MaterialDesignOutlinedComboBox}"
                     materialDesign:HintAssist.Hint="Danh mục"
-                    ItemsSource="{Binding Source={x:Static model:TYPE_PRODUCT.ListType}}"
-                    DisplayMemberPath="Name"
-                    SelectedValuePath="Name"
+                    ItemsSource="{Binding Source={x:Static model:TYPE_PRODUCT.Instance}, Path=ListType}"
+                    SelectedItem="{Binding Newproduct.product.MainType}"
                     FontSize="16"
                     MaxWidth="500"
                     Margin="100,5"/>
                 <TextBox 
                     Style="{StaticResource MaterialDesignOutlinedTextBox}"
                     materialDesign:HintAssist.Hint="Giá"
+                    Text="{Binding Newproduct.product.Price}"
                     FontSize="16"
                     MaxWidth="500"
                     Margin="100,5"/>
                 <TextBox 
                     Style="{StaticResource MaterialDesignOutlinedTextBox}"
                     materialDesign:HintAssist.Hint="Mô tả"
+                    Text="{Binding Newproduct.product.Detail}"
                     TextWrapping="Wrap"
                     MaxWidth="500"
                     Margin="100,5"/>
