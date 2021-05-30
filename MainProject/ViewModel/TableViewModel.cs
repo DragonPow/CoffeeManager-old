@@ -10,7 +10,7 @@ using System.Windows.Input;
 
 namespace MainProject
 {
-   public  class TableListViewModel : BaseViewModel
+   public  class TableViewModel : BaseViewModel
     {
         #region Field
         private ObservableCollection<TABLECUSTOM> _ListTable;
@@ -23,7 +23,7 @@ namespace MainProject
         private ICommand _plusQuantityDetailProCommand;
         private ICommand _minusQuantityDetailProCommand;
         private ICommand _ClickQuantityDetailProCommand;
-        private ICommand _AddDetailPro;
+        private ICommand _AddDetailProCommand;
         private ICommand _DeleteDetailPro;
 
         private ICommand _OpenViewChooseTable;
@@ -41,7 +41,7 @@ namespace MainProject
         #region Init
 
 
-        public TableListViewModel()
+        public TableViewModel()
         {
             CurrentFloors = 1;
             TotalCurrentTable = 0;
@@ -162,7 +162,7 @@ namespace MainProject
 
         #region Command
 
-        public ICommand PlusDetailProQuantity
+        public ICommand PlusDetailProQuantityCommand
         {
             get
             {
@@ -178,7 +178,7 @@ namespace MainProject
             TotalCurrentTable += (long) _CurrentDetailPro.Pro.Price;
 
         }
-        public ICommand MinusDetailProQuantity
+        public ICommand MinusDetailProQuantityCommand
         {
             get
             {
@@ -217,7 +217,7 @@ namespace MainProject
         }
 
 
-        public ICommand OpenViewChooseTable
+        public ICommand OpenViewChooseTableCommand
         {
             get
             {
@@ -259,7 +259,7 @@ namespace MainProject
 
         // Xóa detailPro đã chọn
 
-        public ICommand DeleteDetailPro
+        public ICommand DeleteDetailProCommand
         {
             get
             {
@@ -295,7 +295,7 @@ namespace MainProject
         }
 
 
-        public ICommand DeleteTable
+        public ICommand DeleteTableCommand
         {
             get
             {
@@ -335,7 +335,7 @@ namespace MainProject
             }
         }
 
-        public ICommand InsertTable
+        public ICommand InsertTableCommand
         {
             get
             {

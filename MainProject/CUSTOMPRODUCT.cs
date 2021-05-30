@@ -29,7 +29,7 @@ namespace MainProject
         {
             using (MemoryStream ms = new MemoryStream(byteArrayIn))
             {
-                return System.Drawing.Image.FromStream(ms);
+                return Image.FromStream(ms);
             }
         }
 
