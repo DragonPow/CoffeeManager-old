@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MainProject.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,23 @@ namespace MainProject.AccountWorkSpace
         public AddAccountView()
         {
             InitializeComponent();
+            txt_newpass.PasswordChanged += NewPasswordChanged;
+            txt_oldpass.PasswordChanged += OldPasswordChanged;
+        }
+
+        private void NewPasswordChanged(object sender, RoutedEventArgs e)
+        {
+            if (DataContext!=null)
+            {
+                
+            }
+        }
+        private void OldPasswordChanged(object sender, RoutedEventArgs e)
+        {
+            if (DataContext != null)
+            {
+
+            }
         }
     }
 }
