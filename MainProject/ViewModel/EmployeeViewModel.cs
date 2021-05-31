@@ -14,8 +14,8 @@ namespace MainProject.ViewModel
     {
         #region Field
         ObservableCollection<EMPLOYEE> _ListEmployee;
-        int _Index_CurrentEmployee; //Lưu trữ thông tin của view addemployee 
-        EMPLOYEE _New_Infor_Employee;// Lưu trữ thông tin của view updateeployee 
+        long _ID_CurrentEmployee; 
+        EMPLOYEE _New_Infor_Employee;
         bool _IsPassword;
         bool _IsConfirmPassword;
         bool _Is_Add_New_Employee;
@@ -24,9 +24,11 @@ namespace MainProject.ViewModel
         string _Confirm_Password;
 
         ICommand _Click_Add_New_Employee;
+        ICommand _Add_New_EMployee;
 
         ICommand _Cancel;
 
+        ICommand _Click_Update_Employee;
         ICommand _UpDate_Add_EMployee;
     
         ICommand _Delete_EMployee;
@@ -45,8 +47,7 @@ namespace MainProject.ViewModel
             {
 
                 ListEmployee = new ObservableCollection<EMPLOYEE>(db.EMPLOYEEs.Where(e => ((e.DELETED == 0))).ToList());
-                New_Infor_Employee = new EMPLOYEE() { DELETED = 0};
-                Index_CurrentEmployee = 0;
+              /*  New_Infor_Employee = new EMPLOYEE() { DELETED = 0, Name = "", Password = "", Birthday = null, Phone = "", POSITION_EMPLOYEE = null };*/
                 IsPassword = IsConfirmPassword = true;
                 Is_Add_New_Employee = false;
             }
@@ -56,8 +57,8 @@ namespace MainProject.ViewModel
         #region Propertity
 
         public ObservableCollection<EMPLOYEE> ListEmployee { get => _ListEmployee; set { if (value != _ListEmployee) { _ListEmployee = value; OnPropertyChanged(); } } }
-        public int Index_CurrentEmployee { get => _Index_CurrentEmployee; set { if (_Index_CurrentEmployee != value) { _Index_CurrentEmployee = value; OnPropertyChanged(); } } }
-        public EMPLOYEE New_Infor_Employee { get => _New_Infor_Employee; set { if (_New_Infor_Employee != value) { _New_Infor_Employee = value; OnPropertyChanged(); } } }
+        public long ID_CurrentEmployee { get => _ID_CurrentEmployee; set { if (_ID_CurrentEmployee != value) { _ID_CurrentEmployee = value; OnPropertyChanged(); } } }
+        public EMPLOYEE New_Infor_Employee { get => _New_Infor_Employee; set { if (_New_Infor_Employee != value) { _New_Infor_Employee = value; OnPropertyChanged();  } } }
         public string PassWord { get => _PassWord; set { if (_PassWord != value) { _PassWord = value; OnPropertyChanged(); } } }
         public string Confirm_Password { get => _Confirm_Password; set { if (_Confirm_Password != value) { _Confirm_Password = value; OnPropertyChanged(); } } }
         public bool IsPassword { get => _IsPassword; set { if (_IsPassword != value) { _IsPassword = value; OnPropertyChanged(); } } }
@@ -101,18 +102,27 @@ namespace MainProject.ViewModel
             }
         }*/
 
-
-
-        public void Update_EMployee()
+        public ICommand Click_Add_New_Employee_Command
         {
-
-            using (var db = new mainEntities())
+            get
             {
-                EMPLOYEE employee = db.EMPLOYEEs.Where(e => ( e.DELETED == 0 && e.ID == ListEmployee.ElementAt(Index_CurrentEmployee).ID )).FirstOrDefault();
-                employee.DELETED = 1;
-                db.EMPLOYEEs.Add(ListEmployee.ElementAt(Index_CurrentEmployee));
-                db.SaveChanges();
+                if (_Click_Add_New_Employee == null)
+                {
+                    _Click_Add_New_Employee = new RelayingCommand<Object>(a => Click_Add_New_Employee());
+                }
+                return _Click_Add_New_Employee;
             }
+        }
+
+
+        public void Click_Add_New_Employee()
+        {
+            ID_CurrentEmployee = New_Infor_Employee.ID;
+
+            ListEmployee.Add(new EMPLOYEE() { DELETED = 0});
+            New_Infor_Employee = ListEmployee.Last();
+
+            Is_Add_New_Employee = true;
         }
 
         public ICommand UpDate_Add_EMployee_Command
@@ -130,27 +140,30 @@ namespace MainProject.ViewModel
 
         public void UpDate_Add_EMployee()
         {
+            
             using (var db = new mainEntities())
             {
                     if (Is_Add_New_Employee)
                     {
                         db.EMPLOYEEs.Add(New_Infor_Employee);
-                        db.SaveChanges();
-                        ListEmployee.Add(New_Infor_Employee);
+                        db.SaveChanges();                    
                 }
                     else
                     {
-                        EMPLOYEE employee = db.EMPLOYEEs.Where(e => (e.DELETED == 0 && e.ID == ListEmployee.ElementAt(Index_CurrentEmployee).ID)).FirstOrDefault();
-                        employee.DELETED = 1;
-                        db.EMPLOYEEs.Add(ListEmployee.ElementAt(Index_CurrentEmployee));
-                        db.SaveChanges();
-                        ListEmployee[ListEmployee.IndexOf(ListEmployee.ElementAt(Index_CurrentEmployee))] = employee;
+                        ID_CurrentEmployee = New_Infor_Employee.ID;
 
+                        EMPLOYEE employee = db.EMPLOYEEs.Where(e => (e.DELETED == 0 && e.ID == New_Infor_Employee.ID)).FirstOrDefault();
+                        employee.DELETED = 1;
+                        db.EMPLOYEEs.Add(New_Infor_Employee);
+                        db.SaveChanges();
+
+                        ListEmployee[ListEmployee.IndexOf(New_Infor_Employee)] = employee;
                 }
             }
-            Is_Add_New_Employee = false;
 
-            
+            Is_Add_New_Employee = false;
+            ID_CurrentEmployee = new long();
+
         }
 
         public ICommand Delete_EMployee_Command
@@ -170,31 +183,16 @@ namespace MainProject.ViewModel
         {
             using (var db = new mainEntities())
             {
-                EMPLOYEE employee = db.EMPLOYEEs.Where(e => (e.DELETED == 0 && e.ID == ListEmployee.ElementAt(Index_CurrentEmployee).ID)).FirstOrDefault();
+                EMPLOYEE employee = db.EMPLOYEEs.Where(e => (e.DELETED == 0 && e.ID == New_Infor_Employee.ID)).FirstOrDefault();
                 employee.DELETED = 1;
                 db.SaveChanges();
             }
-            ListEmployee.RemoveAt(Index_CurrentEmployee);
+
+            ListEmployee.Remove(New_Infor_Employee);
         }
 
 
-        public ICommand Load_ViewChange_Pass_Command
-        {
-            get
-            {
-                if (_Load_View_Change_Pass_Employee == null)
-                {
-                    _Load_View_Change_Pass_Employee = new RelayingCommand<Object>(a => Load_View_Change_Pass_Employee());
-                }
-                return _Load_View_Change_Pass_Employee;
-            }
-        }
-
-
-        public void Load_View_Change_Pass_Employee()
-        {
-           //Show view ChangePass
-        }
+        
 
         public ICommand Cancel_Command
         {
@@ -214,11 +212,30 @@ namespace MainProject.ViewModel
             using (var db = new mainEntities())
             {
                 
-                EMPLOYEE employee = db.EMPLOYEEs.Where(e => (e.DELETED == 0 && e.ID == ListEmployee.ElementAt(Index_CurrentEmployee).ID)).FirstOrDefault();
-                ListEmployee[ListEmployee.IndexOf(ListEmployee.ElementAt(Index_CurrentEmployee))] = employee;           
+                EMPLOYEE employee = db.EMPLOYEEs.Where(e => (e.DELETED == 0 && e.ID == ID_CurrentEmployee)).FirstOrDefault();
+                ListEmployee[ListEmployee.IndexOf(New_Infor_Employee)] = employee;
+
+                if (Is_Add_New_Employee) ListEmployee.RemoveAt(ListEmployee.Count);
             }
         }
 
+        public ICommand Load_ViewChange_Pass_Command
+        {
+            get
+            {
+                if (_Load_View_Change_Pass_Employee == null)
+                {
+                    _Load_View_Change_Pass_Employee = new RelayingCommand<Object>(a => Load_View_Change_Pass_Employee());
+                }
+                return _Load_View_Change_Pass_Employee;
+            }
+        }
+
+
+        public void Load_View_Change_Pass_Employee()
+        {
+            //Show view ChangePass
+        }
 
         public ICommand Change_Pass_Employee_Command
         {
@@ -236,7 +253,7 @@ namespace MainProject.ViewModel
         {
             using (var db = new mainEntities())
             {
-                var e = db.EMPLOYEEs.Where(employee => (employee.Password == PassWord && ListEmployee.ElementAt(Index_CurrentEmployee).ID == employee.ID && ListEmployee.ElementAt(Index_CurrentEmployee).DELETED == 0)).FirstOrDefault();
+                var e = db.EMPLOYEEs.Where(employee => (employee.Password == PassWord && New_Infor_Employee.ID == employee.ID && New_Infor_Employee.DELETED == 0)).FirstOrDefault();
 
                 if (e == null)
                 {
@@ -244,28 +261,25 @@ namespace MainProject.ViewModel
                     return;
                 }
 
-                if (Confirm_Password != Confirm_Password)
+                IsPassword = true;
+
+                if (Confirm_Password != PassWord)
                 {
                     IsConfirmPassword = false;
                     return;
                 }
 
+                IsConfirmPassword = true;
+
                 e.Password = PassWord;
                 db.SaveChanges();
+
+                New_Infor_Employee.Password = PassWord;
+
+                //close view changePass
             }
         }
 
-        public ICommand Click_Add_New_Employee_Command
-        {
-            get
-            {
-                if (_Click_Add_New_Employee == null)
-                {
-                    _Click_Add_New_Employee = new RelayingCommand<Object>(a => Is_Add_New_Employee = true); ;
-                }
-                return _Click_Add_New_Employee;
-            }
-        }
 
         #endregion
 
