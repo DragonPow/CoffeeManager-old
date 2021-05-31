@@ -15,10 +15,13 @@ namespace MainProject.MainWorkSpace.Bill
 
         private BILL _CurrentBill;
         private string _CodeDiscount;
+        private DateTime _Time;
+        private int _BillCode;
         private int _Discount;
         private TABLECUSTOM _Current_table;
+
         private ObservableCollection<DETAILBILL> _ListDetailBill;      
-        //StoreInfor 
+        //StoreInfor : namestore, phone, address
 
         private ICommand _PaymentCommand;
         private ICommand _CheckDiscountCommand;
@@ -42,6 +45,20 @@ namespace MainProject.MainWorkSpace.Bill
                 }
             }
         }
+
+        public DateTime Time
+        {
+            get { return _Time; }
+            set
+            {
+                if (value != _Time)
+                {
+                    _Time = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
         public int Discount
         {
             get { return _Discount; }
@@ -50,6 +67,18 @@ namespace MainProject.MainWorkSpace.Bill
                 if (value != _Discount)
                 {
                     _Discount = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        public int BillCode
+        {
+            get { return _BillCode; }
+            set
+            {
+                if (value != _BillCode)
+                {
+                    _BillCode = value;
                     OnPropertyChanged();
                 }
             }
@@ -151,10 +180,16 @@ namespace MainProject.MainWorkSpace.Bill
             {
                 CurrentBill.DETAILBILLs.Add(new DETAILBILL() { PRODUCT = p.Pro, Amount = p.Quantity });
             }
+
             CurrentBill.TABLE = CurrentTable.table;
             Discount = 0;
+            Time = DateTime.Now;
+            using (var db = new mainEntities())
+            {
+                BillCode = db.BILLs.Count() + 1;
+            }
 
-        }
+         }
 
         public BillViewModel(BILL bill)
         {
@@ -180,7 +215,7 @@ namespace MainProject.MainWorkSpace.Bill
                     
                     CurrentBill.ID_Tables = CurrentTable.table.ID;                 
                     CurrentBill.TotalPrice = CurrentTable.Total - Discount;
-                    CurrentBill.CheckoutDay = DateTime.Now;
+                    CurrentBill.CheckoutDay = Time;
                    
                     db.BILLs.Add(CurrentBill);
 
