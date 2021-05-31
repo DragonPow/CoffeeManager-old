@@ -1,159 +1,226 @@
 ﻿<UserControl x:Class="MainProject.AccountWorkSpace.AccountView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:MainProject.AccountWorkSpace"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-             mc:Ignorable="d" 
+             xmlns:viewmodel="clr-namespace:MainProject.ViewModel"
+             mc:Ignorable="d"
              Background="White"
-             d:DesignHeight="650" d:DesignWidth="900">
+             xmlns:model="clr-namespace:MainProject.Model"
+             xmlns:behaviors="http://schemas.microsoft.com/xaml/behaviors"
+             d:DataContext="{d:DesignInstance Type=viewmodel:EmployeeViewModel}"
+             d:DesignWidth="900">
     <UserControl.DataContext>
         <local:AccountViewModel />
     </UserControl.DataContext>
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="3*"/>
-            <ColumnDefinition Width="7*"/>
+            <ColumnDefinition Width="3*" />
+            <ColumnDefinition Width="7*" />
         </Grid.ColumnDefinitions>
         <Grid  Grid.Column="0">
             <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="8*"/>
-                <RowDefinition Height="*"/>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="8*" />
+                <RowDefinition Height="*" />
             </Grid.RowDefinitions>
-            <Border BorderBrush="Gray" BorderThickness="1" Grid.RowSpan="3"/>
+            <Border BorderBrush="Gray"
+                    BorderThickness="1"
+                    Grid.RowSpan="3" />
             <Grid x:Name="ManageAccount"
-                      Grid.Column="0"
-                        Background="{StaticResource MainColor}">
-                <Border BorderBrush="Gray" BorderThickness="1"/>
-                <TextBlock Text="Quản lý Nhân viên" 
+                  Grid.Column="0"
+                  Background="{StaticResource MainColor}">
+                <Border BorderBrush="Gray"
+                        BorderThickness="1" />
+                <TextBlock Text="NHÂN VIÊN"
                            FontWeight="DemiBold"
                            HorizontalAlignment="Center"
-                           VerticalAlignment="Center" 
-                           FontSize="18" 
+                           VerticalAlignment="Center"
+                           FontSize="18"
                            Margin="10,0,0,0"
                            Foreground="White">
                 </TextBlock>
             </Grid>
             <ScrollViewer Grid.Row="1"
-                          x:Name="scvAcc" 
                           VerticalScrollBarVisibility="Auto">
-                <StackPanel x:Name="pnlAccount"
-                       Orientation="Vertical">
-                    <local:AccountControl/>
-                    <local:AccountControl/>
-                    <local:AccountControl/>
-                    <local:AccountControl/>
-                </StackPanel>
+                <ListBox ItemsSource="{Binding ListEmployee}"
+                         SelectedItem="{Binding CurrentEmployee}"
+                         HorizontalContentAlignment="Stretch"
+                         VerticalContentAlignment="Stretch">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <local:AccountControl />
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                    <ListBox.ItemContainerStyle>
+                        <Style TargetType="ListBoxItem">
+                            <Setter Property="Padding"
+                                    Value="0" />
+                            <Setter Property="BorderThickness"
+                                    Value="1" />
+                            <Setter Property="BorderBrush"
+                                    Value="Black" />
+                        </Style>
+                    </ListBox.ItemContainerStyle>
+                </ListBox>
             </ScrollViewer>
-            <Button x:Name="AddAccount"   
+            <Button x:Name="AddAccount"
                     BorderBrush="Gray"
                     BorderThickness="0"
                     Grid.Row="2"
                     VerticalAlignment="Stretch"
                     Background="Transparent">
-                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                    <materialDesign:PackIcon Kind="PlusCircleOutline" Foreground="{StaticResource MainColor}" VerticalAlignment="Center" Height="25" Width="25" />
-                    <TextBlock Text="Thêm nhân viên mới" FontWeight="SemiBold" Foreground="{StaticResource MainColor}" FontSize="16" Padding="15,5,0,5" VerticalAlignment="Center"></TextBlock>
+                <StackPanel Orientation="Horizontal"
+                            VerticalAlignment="Center">
+                    <materialDesign:PackIcon Kind="PlusCircleOutline"
+                                             Foreground="{StaticResource MainColor}"
+                                             VerticalAlignment="Center"
+                                             Height="25"
+                                             Width="25" />
+                    <TextBlock Text="Thêm nhân viên mới"
+                               FontWeight="SemiBold"
+                               Foreground="{StaticResource MainColor}"
+                               FontSize="18"
+                               Padding="15 0 0 0"
+                               VerticalAlignment="Center">
+                    </TextBlock>
+                    <behaviors:Interaction.Triggers>
+                        <behaviors:EventTrigger EventName="Click">
+                            <behaviors:InvokeCommandAction Command="{Binding Add_EMployee_Command}" />
+                        </behaviors:EventTrigger>
+                    </behaviors:Interaction.Triggers>
                 </StackPanel>
-
             </Button>
         </Grid>
         <DockPanel Grid.Column="1">
-            <Border BorderThickness="1" BorderBrush="Gray"/>
-            <Grid DockPanel.Dock="Top">
-                <TextBlock Text="Name"         
-                       Name="txblname"
-                       Height="auto"
-                       Width="auto"
-                       Foreground="Black"
-                       FontSize="20" Padding="10"
-                       HorizontalAlignment="Center"
-                       FontWeight="Bold"
-                       VerticalAlignment="Center"/>
-                <Button BorderBrush="Transparent"
-                    Style="{StaticResource MaterialDesignOutlinedButton}"
-                    Content="SỬA" 
-                    FontSize="18" 
-                    Foreground="{StaticResource MainColor}"
-                    HorizontalAlignment="Right"
-                    VerticalAlignment="Center"
-                        FontWeight="Regular"
-                    Visibility="Visible"/>
-            </Grid>
-            <Grid DockPanel.Dock="Bottom">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="1*"/>
-                    <RowDefinition Height="2*"/>
-                </Grid.RowDefinitions>
-                <Image       
-                     Source="background.jpg" 
-                     Stretch="Fill"/>
-                <StackPanel Orientation="Vertical" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center">
-                    <TextBlock Text="Tên người dùng" FontSize="14" FontWeight="Light" HorizontalAlignment="Center" Foreground="White"></TextBlock>
-                    <TextBlock Text="Name" FontSize="20" FontWeight="DemiBold" HorizontalAlignment="Center" Foreground="White"></TextBlock>
-                    <TextBlock Text="Nhân vien" FontSize="14" FontWeight="Light" HorizontalAlignment="Center" Foreground="White"></TextBlock>
-                </StackPanel>
-                <StackPanel Grid.Row="1" Margin="0,10">
-                    <TextBox 
-                    Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                    materialDesign:HintAssist.Hint="Tên"
-                    FontSize="16"
-                    Margin="100,5"/>
-                    <ComboBox
-                    Style="{StaticResource MaterialDesignOutlinedComboBox}"
-                    materialDesign:HintAssist.Hint="Quyền"
-                     ItemsSource="{Binding ShortStringList}"
-                     FontSize="16"
-                     Margin="100,0"/>
-                    <TextBox 
-                    Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                    materialDesign:HintAssist.Hint="Số điện thoại"
-                    FontSize="16"
-                    Margin="100,5"/>
-                    <Grid Margin="75,10">
-                        <materialDesign:PackIcon Kind="AlertCircle" Width="25" Height="25" Foreground="Gray" />
-                        <TextBlock Text="Nhân viên sẽ được hạn chế quyền truy cập vì lí do bảo mặt, nhưng sẽ không làm ảnh hưởng đến hoạt động kinh doanh của bạn."    
-                               FontStyle="Italic"
-                                   Margin="30,0"
-                               TextWrapping="WrapWithOverflow"/>
-                    </Grid>
-                    
-                    <TextBlock Text="Quản lí có quyền truy cập tương tự như chủ cửa hàng, nhưng không thể thay đổi quyền nhân viên thành quyền quản lí"
-                               Margin="105,0" 
-                               FontStyle="Italic"
-                               TextWrapping="WrapWithOverflow"/>
-                    <Grid Margin="100,30">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-                        <Button
-                              Height="50"
-                              Style="{StaticResource MaterialDesignOutlinedButton}"
-                              ToolTip="MaterialDesignOutlinedButton"
-                              Content="Đổi mật khẩu"
-                              Foreground="{StaticResource MainColor}"
-                              BorderBrush="#31CA62"
-                              FontSize="20"
-                              Margin="10"/>
-                        <Button
-                             Grid.Column="1"
-                              Height="50"
-                              Style="{StaticResource MaterialDesignOutlinedButton}"
-                              ToolTip="MaterialDesignOutlinedButton"
-                              Content="Xóa nhân viên"
-                              Foreground="Red"
-                              BorderBrush="Red"
-                              FontSize="20"
-                              Margin="10"/>
-                    </Grid>
-                </StackPanel>
+            <Border BorderThickness="1"
+                    BorderBrush="Gray" />
+            <Grid DockPanel.Dock="Top"
+                  Margin="0 10">
+                <TextBlock Text="Thông tin"
+                           Height="auto"
+                           Width="auto"
+                           Foreground="Black"
+                           FontSize="35"
+                           Padding="10"
+                           HorizontalAlignment="Center"
+                           FontWeight="Bold"
+                           VerticalAlignment="Center" />
+                <Button Height="Auto"
+                        FontSize="25"
+                        Foreground="Red"
+                        FontWeight="Bold"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Right"
+                        Margin="0 0 20 0"
+                        Background="Transparent"
+                        BorderBrush="Transparent"
+                        Command="{Binding Delete_EMployee_Command}">
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="Content"
+                                    Value="Xóa" />
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding }"
+                                             Value="">
+                                    <Setter Property="Content"
+                                            Value="Hủy" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
 
             </Grid>
+            <StackPanel DockPanel.Dock="Bottom">
+                <TextBox Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                         materialDesign:HintAssist.Hint="Tên"
+                         Text="{Binding CurrentEmployee.Name}"
+                         FontSize="16"
+                         Width="420"
+                         Margin="0 5" />
+                <DatePicker Style="{StaticResource MaterialDesignOutlinedDatePicker}"
+                            materialDesign:HintAssist.Hint="Ngày sinh"
+                            Text="{Binding CurrentEmployee.Birthday}"
+                            FontSize="16"
+                            Width="420"
+                            Margin="0 5" />
+                <ComboBox Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                          materialDesign:HintAssist.Hint="Quyền"
+                          ItemsSource="{Binding Source={x:Static model:POSITION_EMPLOYEE.Instance}, Path=ListPosition}"
+                          SelectedItem="{Binding CurrentEmployee.POSITION_EMPLOYEE.Position}"
+                          FontSize="16"
+                          Width="420"
+                          Margin="0 5" />
+                <TextBox Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                         materialDesign:HintAssist.Hint="Số điện thoại"
+                         Text="{Binding CurrentEmployee.Phone}"
+                         FontSize="16"
+                         Width="420"
+                         Margin="0 30 0 5" />
+                <PasswordBox x:Name="txt_pass"
+                             Style="{StaticResource MaterialDesignOutlinedPasswordBox}"
+                             materialDesign:HintAssist.Hint="Mật khẩu"
+                             FontSize="16"
+                             Width="420"
+                             Margin="0 5" />
+                <Grid Margin="75,10">
+                    <materialDesign:PackIcon Kind="AlertCircle"
+                                             Width="25"
+                                             Height="25"
+                                             Foreground="Gray" />
+                    <TextBlock Text="Nhân viên sẽ được hạn chế quyền truy cập vì lí do bảo mặt, nhưng sẽ không làm ảnh hưởng đến hoạt động kinh doanh của bạn."
+                               FontStyle="Italic"
+                               Margin="30,0"
+                               TextWrapping="WrapWithOverflow" />
+                </Grid>
 
-
+                <TextBlock Text="Quản lí có quyền truy cập tương tự như chủ cửa hàng, nhưng không thể thay đổi quyền nhân viên thành quyền quản lí"
+                           Margin="105,0"
+                           FontStyle="Italic"
+                           TextWrapping="WrapWithOverflow" />
+                <Grid Margin="100,30">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Button Height="50"
+                            Name="test"
+                            Style="{StaticResource MaterialDesignOutlinedButton}"
+                            ToolTip="MaterialDesignOutlinedButton"
+                            Content="Đổi mật khẩu"
+                            Command="{Binding Load_ViewChange_Pass_Command}"
+                            Foreground="{StaticResource MainColor}"
+                            BorderBrush="#31CA62"
+                            FontSize="20"
+                            Margin="10" />
+                    <Button Grid.Column="1"
+                            Height="50"
+                            Command="{Binding Delete_EMployee_Command}"
+                            ToolTip="MaterialDesignOutlinedButton"
+                            Foreground="Blue"
+                            BorderBrush="Blue"
+                            FontSize="20"
+                            Margin="10">
+                        <Button.Style>
+                            <Style TargetType="Button"
+                                BasedOn="{StaticResource MaterialDesignOutlinedButton}">
+                                <Setter Property="Content"
+                                        Value="Sửa thông tin" />
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding }"
+                                                 Value="">
+                                        <Setter Property="Content"
+                                                Value="Lưu" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+                </Grid>
+            </StackPanel>
         </DockPanel>
     </Grid>
 </UserControl>

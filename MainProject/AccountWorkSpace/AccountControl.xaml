@@ -4,24 +4,29 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:MainProject.AccountWorkSpace"
+             xmlns:viewmodel="clr-namespace:MainProject.Model"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-             mc:Ignorable="d" d:DesignHeight="50" d:DesignWidth="250">
-    <Grid Background ="White">
+             mc:Ignorable="d"
+             d:DesignWidth="250"
+             d:DataContext="{d:DesignInstance viewmodel:EMPLOYEE}">
+    <Grid Background = "Transparent">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
-        <Border BorderBrush="Gray" BorderThickness="1" Grid.ColumnSpan="3"/>
-        <materialDesign:PackIcon Kind="AccountOutline" Foreground="Gray" Width="25" Height="25" VerticalAlignment="Center" Margin="5,15"/>
+        <materialDesign:PackIcon Kind="AccountOutline" Foreground="Gray" 
+                                 Width="25" Height="25" 
+                                 VerticalAlignment="Center"
+                                 Margin="5,10"/>
         <TextBlock x:Name="txblName" 
-                   Text="Name" 
+                   Text="{Binding Name, FallbackValue='Tên nhân viên'}" 
                    HorizontalAlignment="Left" 
                    VerticalAlignment="Center"
                    FontSize="14" Grid.Column="1"
                    Margin="5,0"/>
         <TextBlock x:Name="txblPosition" 
-                   Text="Chức vụ" 
+                   Text="{Binding POSITION_EMPLOYEE.Position, FallbackValue='Chức vụ'}" 
                    HorizontalAlignment="Right" 
                    VerticalAlignment="Center"
                    Margin="10"
