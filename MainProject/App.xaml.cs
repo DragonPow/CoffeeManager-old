@@ -34,9 +34,10 @@ namespace MainProject
             //ApplicationViewModel viewModel = new ApplicationViewModel();
             //End main Startup
 
-            LoadInitApp();
+            //LoadInitApp();
             view.DataContext = viewModel;
-            view.ShowDialog();
+            view.Show();
+            //view.ShowDialog();
         }
 
         private void LoadInitApp()

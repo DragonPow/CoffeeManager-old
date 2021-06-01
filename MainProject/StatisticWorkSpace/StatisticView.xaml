@@ -4,13 +4,106 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:MainProject.StatisticWorkSpace"
+             xmlns:conver="clr-namespace:MainProject.StatisticWorkSpace.Converter"
+             xmlns:charting="clr-namespace:System.Windows.Controls.DataVisualization.Charting;assembly=DotNetProjects.DataVisualization.Toolkit"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
              Background="White"
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="450" d:DesignWidth="950">
     <UserControl.DataContext>
-        <local:StatisticViewModel />
+        <local:StatisticViewModel x:Name="binding"/>
     </UserControl.DataContext>
-    <Grid>
-        <TextBlock Text="This is statistic workspace" />
-    </Grid>
+    <UserControl.Resources>
+        <conver:TimeConverter x:Key="timeConverter"/>
+    </UserControl.Resources>
+    <StackPanel 
+        Orientation="Horizontal" 
+        >
+        <StackPanel
+            Background="DarkGray"
+            >
+            <Label
+                Margin="5,0"
+                >
+                Thống kê theo:
+            </Label>
+            <ComboBox
+                SelectedIndex="0"
+                Margin="5,0,5,0"
+                >
+                <ComboBoxItem Content="Ngày trong tuần"/>
+                <ComboBoxItem Content="Tuần trong tháng"/>
+                <ComboBoxItem Content="Tháng trong năm"/>
+            </ComboBox>
+            <Viewbox 
+                Margin="5,5,5,0"
+                Height="200" Stretch="UniformToFill"
+                >
+                <Calendar
+                    materialDesign:CalendarAssist.IsHeaderVisible="False"
+                    FontSize="14" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" FirstDayOfWeek="Monday" 
+                />
+            </Viewbox>
+            <Label
+                Margin="5,0"
+                >
+                Sản phẩm:
+            </Label>
+            <ComboBox
+                SelectedIndex="0"
+                Margin="5,0,5,0"
+                >
+                <ComboBoxItem Content="Tất cả sản phẩm"/>
+                <ComboBoxItem Content="Sản phẩm 1"/>
+                <ComboBoxItem Content="Sản phẩm 2"/>
+            </ComboBox>
+            
+            <Button
+                materialDesign:ButtonAssist.CornerRadius="10"
+                Margin="15,5,15,0" VerticalContentAlignment="Center" VerticalAlignment="Bottom"
+                >
+                Thống Kê
+            </Button>
+            
+        </StackPanel>
+        <DockPanel
+            Margin="5,5">
+            <Label 
+                DockPanel.Dock="Top"
+                FontWeight="Bold">
+                Kết quả thống kê
+            </Label>
+            <Grid
+                DockPanel.Dock="Bottom">
+                <TextBlock HorizontalAlignment="Left" FontWeight="Bold">Tổng doanh thu</TextBlock>
+                <TextBlock HorizontalAlignment="Right">5.000.000đ</TextBlock>
+            </Grid>
+            <DataGrid
+                DockPanel.Dock="Left"
+                SelectionMode="Single"
+                
+                BorderBrush="Black" 
+                HorizontalGridLinesBrush="Gray" VerticalGridLinesBrush="LightGray" GridLinesVisibility="All"
+                materialDesign:DataGridAssist.CornerRadius="2"
+                ItemsSource="{Binding Path=ListModel}"
+                >
+                <DataGrid.Columns>
+                    <materialDesign:DataGridTextColumn
+                        Binding="{Binding Title, Mode=OneWay}"
+                        Header="Thời gian"
+                        />
+                    <materialDesign:DataGridTextColumn
+                        
+                        Header="Doanh thu"
+                        />
+                </DataGrid.Columns>
+            </DataGrid>
+            <charting:Chart>
+                
+            </charting:Chart>
+        </DockPanel>
+        <DockPanel
+            Margin="5">
+        </DockPanel>
+    </StackPanel>
 </UserControl>
