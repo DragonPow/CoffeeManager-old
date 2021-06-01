@@ -66,7 +66,7 @@ namespace MainProject.ViewModel
         }
 
         public string SearchProduct { get => _SearchProduct; set { if (_SearchProduct != value) { _Type = value; OnPropertyChanged(); } } }
-        public string Type { get => _Type; set { if (_Type != value) { _Type = value; OnPropertyChanged(); } } }
+        public string Type { get => _Type; set { if (_Type != value) { _Type = value; OnPropertyChanged(); LoadProductByType(); } } }
 
         public TableViewModel Tableviewmodel { get => _Tableviewmodel; set { if (_Tableviewmodel != value) { _Tableviewmodel = value; OnPropertyChanged(); } } }
         #endregion
@@ -75,26 +75,7 @@ namespace MainProject.ViewModel
 
         public ProductViewModel()
         {
-            using (var db = new mainEntities())
-            {
-                if (Type == null) return;
-
-                ObservableCollection<PRODUCT> listproduct = null;
-
-                if (Type == "Tất cả")
-                {
-                    listproduct = new ObservableCollection<PRODUCT>(db.PRODUCTs.Where(p => (p.DELETED == 0)).ToList());
-                }
-                else
-                {
-                    listproduct = new ObservableCollection<PRODUCT>(db.PRODUCTs.Where(p => (( p.TYPE_PRODUCT.ElementAt(0).Type == Type) && (p.DELETED == 0))).ToList());
-                }   
-                
-                foreach (var p in listproduct)
-                {
-                    ListPoduct.Add(new CUSTOMPRODUCT(p));
-                }
-            }
+            Type = "Tất cả";
             Newproduct = new CUSTOMPRODUCT() { product = new PRODUCT() { DELETED = 0, Image = null } };
         }
 
@@ -428,6 +409,33 @@ namespace MainProject.ViewModel
             Tableviewmodel.Currentlistdetailpro.Add(new DetailPro(ListPoduct.ElementAt(IndexCurrentProduct).product));
          }
         #endregion
+
+        private void LoadProductByType()
+        {
+            using (var db = new mainEntities())
+            {
+                if (Type == null) return;
+
+                ObservableCollection<PRODUCT> listproduct = new ObservableCollection<PRODUCT>();
+
+                if (Type == "Tất cả")
+                {
+                    listproduct = new ObservableCollection<PRODUCT>(db.PRODUCTs.Where(p => (p.DELETED == 0)).ToList());
+                }
+                else
+                {
+                    var p = db.PRODUCTs.Where(pro => ((pro.TYPE_PRODUCT.ElementAt(0).Type == Type) && (pro.DELETED == 0)));
+                    if (p == null) return;
+                    listproduct = new ObservableCollection<PRODUCT>(p.ToList());
+                }
+
+                ListPoduct = new ObservableCollection<CUSTOMPRODUCT>();
+                foreach (var p in listproduct)
+                {
+                    ListPoduct.Add(new CUSTOMPRODUCT(p));
+                }
+            }
+        }
 
         private string ConvertToUnSign(string input)
         {
