@@ -414,9 +414,9 @@ namespace MainProject.ViewModel
 
          public void AddDetailProToTable()
          {
-            Tableviewmodel.CurrentTable.Total += (long) ListPoduct.ElementAt(IndexCurrentProduct).product.Price;
+            Tableviewmodel.TotalCurrentTable += (long) ListPoduct.ElementAt(IndexCurrentProduct).product.Price;
 
-            foreach ( var p in Tableviewmodel.CurrentTable.ListPro)
+            foreach ( var p in Tableviewmodel.Currentlistdetailpro)
             {
                 if (p.Pro == ListPoduct.ElementAt(IndexCurrentProduct).product)
                 {
@@ -424,8 +424,8 @@ namespace MainProject.ViewModel
                     return;
                 }
             }
-           
-             Tableviewmodel.CurrentTable.ListPro.Add(new DetailPro(ListPoduct.ElementAt(IndexCurrentProduct).product));
+
+            Tableviewmodel.Currentlistdetailpro.Add(new DetailPro(ListPoduct.ElementAt(IndexCurrentProduct).product));
          }
         #endregion
 
