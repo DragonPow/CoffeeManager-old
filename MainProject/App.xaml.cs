@@ -37,8 +37,6 @@ namespace MainProject
             LoadInitApp();
             view.DataContext = viewModel;
             //view.ShowDialog();
-
-            TableViewModel t = new TableViewModel();
         }
 
         private void LoadInitApp()
