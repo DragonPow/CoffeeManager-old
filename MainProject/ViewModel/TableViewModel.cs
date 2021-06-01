@@ -14,6 +14,7 @@ namespace MainProject
     {
         #region Field
         private ObservableCollection<TABLECUSTOM> _ListTable;
+        private ObservableCollection<int> _ListFloor;
         private int _Currentfloors;
         private TABLECUSTOM _CurrentTable;
         private DetailPro _CurrentDetailPro;
@@ -32,6 +33,8 @@ namespace MainProject
         private ICommand _DeleteTableCommand;
         private ICommand _InsertTableCommand;
         private ICommand _UpdateStatusTableCommand;
+
+        private ICommand _AddFloor;
 
 
         #endregion
@@ -60,6 +63,7 @@ namespace MainProject
 
                 ListTable = new ObservableCollection<TABLECUSTOM>(Tablecustoms);
 
+                ListFloor = new ObservableCollection<int> ((List<int>)db.TABLES.Select(t => t.Floor));
             }
         }
         #endregion
@@ -81,6 +85,18 @@ namespace MainProject
                 } 
             } 
         }
+        public ObservableCollection<int> ListFloor
+        {
+            get => _ListFloor;
+            set
+            {
+                if (_ListFloor != value)
+                {
+                    _ListFloor = value; OnPropertyChanged();
+                }
+            }
+        }
+
         public int CurrentFloors
         {
             get => _Currentfloors;
