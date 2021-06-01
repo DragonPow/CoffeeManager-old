@@ -23,7 +23,9 @@
                 <DataTemplate>
                     <Button DataContext="{Binding table}" 
                             Command="{Binding DataContext.ClickTableCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
-                            Width="Auto" Height="Auto">
+                            Width="Auto" Height="Auto"
+                            Background="Transparent"
+                            BorderBrush="Transparent">
                         <local:FreeTable_UC DataContext="{Binding}"/>
                     </Button>
                 </DataTemplate>

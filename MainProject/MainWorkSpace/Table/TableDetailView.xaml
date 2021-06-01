@@ -5,8 +5,10 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:MainProject.MainWorkSpace.Table"
              xmlns:Item="clr-namespace:MainProject.MainWorkSpace.Product"
+             xmlns:ViewModel="clr-namespace:MainProject.ViewModel"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
+             d:DataContext="{d:DesignInstance ViewModel:TableViewModel}"
              BorderBrush="Gray" BorderThickness="2"
              d:DesignHeight="550" d:DesignWidth="300" Background="#FEFDEB">
     <Grid>
@@ -17,9 +19,9 @@
             <RowDefinition Height="4*"/>
         </Grid.RowDefinitions>
         <!--Button "Chon ban"-->
-        <Button FontSize="18" HorizontalAlignment="Left" Background="Transparent" BorderBrush="Transparent">
+        <Button Command="{Binding OpenViewChooseTableCommand}" FontSize="18" HorizontalAlignment="Left" Background="Transparent" BorderBrush="Transparent">
             <StackPanel Orientation="Horizontal">
-                <Label Padding="0" Foreground="#BD8722" Content="Chọn bàn"/>
+                <Label Padding="0" Foreground="#BD8722" Content="Chọn bàn" VerticalAlignment="Center"/>
                 <materialDesign:PackIcon VerticalAlignment="Center" Kind="ChevronRight"
                                          Height="Auto" Width="Auto" Foreground="#BD8722" RenderTransformOrigin="0.323,0.538"/>
             </StackPanel>
@@ -32,10 +34,20 @@
                       materialDesign:ScrollBarAssist.ThumbCornerRadius="10"
                       HorizontalScrollBarVisibility="Auto">
             <!--The Panel contains list product-->
-            <StackPanel>
-                <Item:Item_UC/>
-                <Item:Item_UC/>
-            </StackPanel>
+            <ItemsControl ItemsSource="{Binding Currentlistdetailpro, UpdateSourceTrigger=PropertyChanged}">
+                <ItemsControl.Resources>
+                </ItemsControl.Resources>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Item:Item_UC DataContext="{Binding}"/>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Vertical"></StackPanel>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+            </ItemsControl>
         </ScrollViewer>
         <Grid  Grid.Row="2">
             <Grid.ColumnDefinitions>
@@ -57,7 +69,7 @@
                            HorizontalAlignment="Left" VerticalAlignment="Top" TextAlignment="Left"
                            Foreground="Black" Margin="8,0"/>
                 <TextBlock Style="{StaticResource MaterialDesignHeadline6TextBlock}"
-                           Text="{Binding TotalPrice, FallbackValue='25,000đ', StringFormat='{}{0:N0} đ'}" FontSize="22" FontWeight="DemiBold" FontStyle="Italic" 
+                           Text="{Binding TotalCurrentTable, UpdateSourceTrigger=PropertyChanged, FallbackValue='25,000đ', StringFormat='{}{0:N0} đ'}" FontSize="22" FontWeight="DemiBold" FontStyle="Italic" 
                            HorizontalAlignment="Right" VerticalAlignment="Bottom" TextAlignment="Center" 
                            Foreground="#BD8722" Margin="0 -5 10 0"/>
             </StackPanel>
@@ -68,6 +80,7 @@
                 ToolTip="MaterialDesignRaisedButton with Round Corners"
                 Content="Thanh toán"
                 Margin="2"
+                Command="{Binding Pay_Command}"
                 VerticalAlignment="Stretch" HorizontalAlignment="Stretch" 
                 Width="Auto" Height="Auto"
                 materialDesign:ButtonAssist.CornerRadius="2"

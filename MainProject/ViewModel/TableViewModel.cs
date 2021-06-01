@@ -8,7 +8,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows.Input;
 
-namespace MainProject
+namespace MainProject.ViewModel
 {
    public  class TableViewModel : BaseViewModel
     {
