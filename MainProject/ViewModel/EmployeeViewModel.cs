@@ -13,22 +13,20 @@ namespace MainProject.ViewModel
     class EmployeeViewModel : BaseViewModel
     {
         #region Field
-        ObservableCollection<EMPLOYEE> _ListEmployee;
-        long _ID_CurrentEmployee; 
-        EMPLOYEE _New_Infor_Employee;
-        bool _IsPassword;
-        bool _IsConfirmPassword;
-        bool _Is_Add_New_Employee;
+        ObservableCollection<EMPLOYEE> _ListEmployee; /*list employee hiện tại*/
+        long _ID_CurrentEmployee; /* cái này ko binding, chỉ dùng để lưu lại giá trị của  employee đang đc chỉnh sửa, khi hủy thì load lại dữ liệu từ database */
+        EMPLOYEE _New_Infor_Employee;  /*là cái hiển thị khi xem detail, edit, add employee*/
+        bool _IsPassword;/* xác định xem password nhập vào đúng ko*/
+        bool _IsConfirmPassword; /*xác định confirmpass đúng hay ko */
+        bool _Is_Add_New_Employee; /*xác định hiện tại đang thực hiện add new EMPLOYEE */
 
-        string _PassWord;
-        string _Confirm_Password;
+        string _PassWord;  /*nhập new Password*/
+        string _Confirm_Password;  /*confirm lại pasword*/
 
         ICommand _Click_Add_New_Employee;
-        ICommand _Add_New_EMployee;
 
         ICommand _Cancel;
 
-        ICommand _Click_Update_Employee;
         ICommand _UpDate_Add_EMployee;
     
         ICommand _Delete_EMployee;
