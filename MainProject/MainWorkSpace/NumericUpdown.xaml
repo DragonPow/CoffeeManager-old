@@ -21,7 +21,7 @@
                                  HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
                                  Foreground="{StaticResource MainColor}" Kind="Minus"  />
         <TextBlock Grid.Column="1" 
-                   Text="{Binding AMOUNT, FallbackValue='1'}"
+                   Text="{Binding Quantity, FallbackValue='1'}"
                    FontSize="16"  Foreground="Gray" 
                    VerticalAlignment="Center" HorizontalAlignment="Center"/>
         <materialDesign:PackIcon Grid.Column="2" 
