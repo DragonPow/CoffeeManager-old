@@ -35,6 +35,7 @@ namespace MainProject
         private ICommand _UpdateStatusTableCommand;
 
         private ICommand _AddFloor;
+        private ICommand _DeleteFloor;
 
 
         #endregion
