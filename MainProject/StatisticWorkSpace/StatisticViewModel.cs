@@ -31,14 +31,19 @@ namespace MainProject.StatisticWorkSpace
             currentMode = (StatisticMode)index;
         }
 
+        public Func<double, string> formaterLabelAxisY { get; set; }
+
         public StatisticViewModel()
         {
-            listModel = new ObservableCollection<StatisticModel>();
-            listModel.Add(new StatisticModel());
-            listModel.Add(new StatisticModel());
-            listModel.Add(new StatisticModel());
-            listModel.Add(new StatisticModel());
-            listModel.Add(new StatisticModel());
+            listModel = new ObservableCollection<StatisticModel>
+            {
+                new StatisticModel(){ Label = "Label1", Revenue = 10000},
+                new StatisticModel(){ Label = "Label2", Revenue = 110000},
+                new StatisticModel(){ Label = "Label3", Revenue = 70000},
+                new StatisticModel(){ Label = "Label4", Revenue = 60000},
+                new StatisticModel(){ Label = "Label5", Revenue = 30000}
+            };
+            formaterLabelAxisY = val => (val/1000).ToString("N0")+"k";
         }
     }
 }

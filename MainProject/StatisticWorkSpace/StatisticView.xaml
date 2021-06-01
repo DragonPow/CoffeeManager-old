@@ -5,25 +5,39 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:MainProject.StatisticWorkSpace"
              xmlns:conver="clr-namespace:MainProject.StatisticWorkSpace.Converter"
-             xmlns:charting="clr-namespace:System.Windows.Controls.DataVisualization.Charting;assembly=DotNetProjects.DataVisualization.Toolkit"
+             xmlns:charting="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
-             Background="White"
-             d:DesignHeight="450" d:DesignWidth="950">
-    <UserControl.DataContext>
-        <local:StatisticViewModel x:Name="binding"/>
-    </UserControl.DataContext>
+             Background="White" FontSize="13"
+             d:DesignHeight="450" d:DesignWidth="950" 
+             d:DataContext="{d:DesignInstance Type=local:StatisticViewModel,IsDesignTimeCreatable=True}">
     <UserControl.Resources>
-        <conver:TimeConverter x:Key="timeConverter"/>
+        <Style x:Key="headerStyle" TargetType="Control">
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+        </Style>
+        <Style x:Key="labelStyle" TargetType="Label">
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+        </Style>
+        <conver:MoneyConverter x:Key="moneyConverter"/>
+        <conver:ChartValueConverter x:Key="chartValueConverter"/>
+        <conver:ChartLabelConverter x:Key="chartLabelConverterAxisX" Axis="X"/>
+        <conver:ChartLabelConverter x:Key="chartLabelConverterAxisY" Axis="Y"/>
     </UserControl.Resources>
-    <StackPanel 
-        Orientation="Horizontal" 
-        >
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="300"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
         <StackPanel
+            Grid.Column="0"
             Background="DarkGray"
             >
             <Label
-                Margin="5,0"
+                Margin="5,0" Style="{StaticResource labelStyle}"
                 >
                 Thống kê theo:
             </Label>
@@ -40,12 +54,13 @@
                 Height="200" Stretch="UniformToFill"
                 >
                 <Calendar
-                    materialDesign:CalendarAssist.IsHeaderVisible="False"
+                    SelectedDatesChanged="Calendar_SelectedDatesChanged"
+                    materialDesign:CalendarAssist.IsHeaderVisible="False" SelectionMode="SingleRange"
                     FontSize="14" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" FirstDayOfWeek="Monday" 
                 />
             </Viewbox>
             <Label
-                Margin="5,0"
+                Margin="5,0" Style="{StaticResource labelStyle}"
                 >
                 Sản phẩm:
             </Label>
@@ -57,53 +72,78 @@
                 <ComboBoxItem Content="Sản phẩm 1"/>
                 <ComboBoxItem Content="Sản phẩm 2"/>
             </ComboBox>
-            
+
             <Button
                 materialDesign:ButtonAssist.CornerRadius="10"
-                Margin="15,5,15,0" VerticalContentAlignment="Center" VerticalAlignment="Bottom"
+                Margin="15,35,15,0" VerticalContentAlignment="Center" VerticalAlignment="Bottom"
                 >
                 Thống Kê
             </Button>
-            
+
         </StackPanel>
         <DockPanel
+            Grid.Column="1"
             Margin="5,5">
             <Label 
-                DockPanel.Dock="Top"
-                FontWeight="Bold">
+                DockPanel.Dock="Top" Style="{StaticResource labelStyle}">
                 Kết quả thống kê
             </Label>
             <Grid
                 DockPanel.Dock="Bottom">
-                <TextBlock HorizontalAlignment="Left" FontWeight="Bold">Tổng doanh thu</TextBlock>
-                <TextBlock HorizontalAlignment="Right">5.000.000đ</TextBlock>
+                <Label HorizontalAlignment="Left" Style="{StaticResource labelStyle}">Tổng doanh thu</Label>
+                <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center">5.000.000đ</TextBlock>
             </Grid>
             <DataGrid
-                DockPanel.Dock="Left"
+                DockPanel.Dock="Top"
                 SelectionMode="Single"
-                
-                BorderBrush="Black" 
+                BorderBrush="Black" IsReadOnly="True" CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False" CanUserResizeRows="False"
                 HorizontalGridLinesBrush="Gray" VerticalGridLinesBrush="LightGray" GridLinesVisibility="All"
-                materialDesign:DataGridAssist.CornerRadius="2"
-                ItemsSource="{Binding Path=ListModel}"
+                materialDesign:DataGridAssist.CornerRadius="2" AutoGenerateColumns="False"
+                ItemsSource="{Binding Path=ListModel}" 
                 >
                 <DataGrid.Columns>
-                    <materialDesign:DataGridTextColumn
-                        Binding="{Binding Title, Mode=OneWay}"
-                        Header="Thời gian"
-                        />
-                    <materialDesign:DataGridTextColumn
-                        
-                        Header="Doanh thu"
-                        />
+                    <DataGridTemplateColumn 
+                        Header="Thời gian" HeaderStyle="{StaticResource headerStyle}"
+                        Width="Auto" IsReadOnly="True" CanUserResize="False">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Path=Title}"></TextBlock>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn 
+                        Header="Doanh thu" HeaderStyle="{StaticResource headerStyle}"
+                        Width="*" IsReadOnly="True">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Path=Revenue, Mode=OneWay, 
+                                    Converter={StaticResource moneyConverter}}" TextAlignment="Center"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
                 </DataGrid.Columns>
             </DataGrid>
-            <charting:Chart>
-                
-            </charting:Chart>
+
         </DockPanel>
         <DockPanel
-            Margin="5">
+            Grid.Column="2"
+            Margin="5,5,5,5">
+            <Label DockPanel.Dock="Top" Style="{StaticResource labelStyle}">Biểu đồ </Label>
+            <charting:CartesianChart 
+                DockPanel.Dock="Top" x:Name="chartRevenue" >
+                <charting:CartesianChart.Series>
+                    <charting:ColumnSeries Values="{Binding Path=ListModel, Converter={StaticResource chartValueConverter}}"/>
+
+                </charting:CartesianChart.Series>
+                <charting:CartesianChart.AxisX>
+                    <charting:Axis 
+                        x:Name="chartRevenueAxisX" Labels="{Binding Path=ListModel, Converter={StaticResource chartLabelConverterAxisX}}"/>
+                </charting:CartesianChart.AxisX>
+                <charting:CartesianChart.AxisY>
+                    <charting:Axis 
+                        x:Name="chartRevenueAxisY" LabelFormatter="{Binding Path=formaterLabelAxisY}"/>
+                </charting:CartesianChart.AxisY>
+            </charting:CartesianChart>
         </DockPanel>
-    </StackPanel>
+    </Grid>
 </UserControl>

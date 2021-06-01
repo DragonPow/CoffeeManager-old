@@ -183,6 +183,9 @@
     <Compile Include="Model\CustomModel\POSITION_EMPLOYEE.cs" />
     <Compile Include="Model\CustomModel\STATUS_TABLE.cs" />
     <Compile Include="Model\CustomModel\TYPE_PRODUCT.cs" />
+    <Compile Include="StatisticWorkSpace\Converter\ChartLabelConverter.cs" />
+    <Compile Include="StatisticWorkSpace\Converter\ChartValueConverter.cs" />
+    <Compile Include="StatisticWorkSpace\Converter\MoneyConverter.cs" />
     <Compile Include="StatisticWorkSpace\Converter\TimeConverter.cs" />
     <Compile Include="StatisticWorkSpace\StatisticEnum.cs" />
     <Compile Include="StatisticWorkSpace\StatisticModel.cs" />
