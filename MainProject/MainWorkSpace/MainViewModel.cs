@@ -67,7 +67,11 @@ namespace MainProject.MainWorkSpace
 
             using (var db = new mainEntities())
             {
-                ListType = new ObservableCollection<TYPE_PRODUCT>(db.TYPE_PRODUCT.ToList());
+                var l = new List<TYPE_PRODUCT>();
+                l.Add(new TYPE_PRODUCT() { Type = "Tất cả" });
+                l.AddRange(db.TYPE_PRODUCT.ToList());
+
+                ListType = new ObservableCollection<TYPE_PRODUCT>(l);
             }
         }
         #endregion
