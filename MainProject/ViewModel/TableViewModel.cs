@@ -62,8 +62,14 @@ namespace MainProject
                 }
 
                 ListTable = new ObservableCollection<TABLECUSTOM>(Tablecustoms);
+                ListFloor = new ObservableCollection<int>();
 
-                ListFloor = new ObservableCollection<int> ((List<int>)db.TABLES.Select(t => t.Floor));
+                var list = db.TABLES.Select(f => f.Floor).Distinct();
+
+                foreach( int f in list)
+                {
+                    ListFloor.Add(f);
+                }    
             }
         }
         #endregion
