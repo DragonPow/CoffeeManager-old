@@ -423,7 +423,7 @@ namespace MainProject.ViewModel
                 }
                 else
                 {
-                    var p = db.PRODUCTs.Where(pro => ((pro.TYPE_PRODUCT.ElementAt(0).Type == Type.Type) && (pro.DELETED == 0)));
+                    var p = db.PRODUCTs.Where(pro => ((pro.TYPE_PRODUCT.FirstOrDefault().Type == Type.Type) && (pro.DELETED == 0)));
                     if (p == null) return;
                     listproduct = new ObservableCollection<PRODUCT>(p.ToList());
                 }
