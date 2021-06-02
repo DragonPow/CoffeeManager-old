@@ -417,7 +417,7 @@ namespace MainProject.ViewModel
 
                 ObservableCollection<PRODUCT> listproduct = new ObservableCollection<PRODUCT>();
 
-                if (Type.Type == "Tất cả")
+                if (Type.Type.Contains("Tất cả"))
                 {
                     listproduct = new ObservableCollection<PRODUCT>(db.PRODUCTs.Where(p => (p.DELETED == 0)).ToList());
                 }
