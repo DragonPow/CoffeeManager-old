@@ -30,6 +30,9 @@ namespace MainProject.Model
                         TYPE_PRODUCT.Add(new TYPE_PRODUCT());
                     }
                     TYPE_PRODUCT[0].Type = value;
+
+                    // thêm Id 
+
                     OnPropertyChanged();
                 }
             }

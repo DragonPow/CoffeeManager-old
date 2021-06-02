@@ -39,6 +39,7 @@ namespace MainProject.ViewModel
 
         private ICommand _LoadAddProview;
         private ICommand _AddProduct;
+        private ICommand _CancelAddProduct;
         private ICommand _ExitAddProview;
 
         
@@ -127,14 +128,36 @@ namespace MainProject.ViewModel
             using (var db = new mainEntities())
             {
                 {
+                    long id = (db.TYPE_PRODUCT.Where(t => (t.Type == Newproduct.product.MainType)).FirstOrDefault()).ID;
+                    Newproduct.product.TYPE_PRODUCT[0] = new TYPE_PRODUCT() { Type = Newproduct.product.MainType, ID = id };
+
                     db.PRODUCTs.Add(Newproduct.product);
 
                     db.SaveChanges();
                 }
             }
 
-
             ListPoduct.Add(Newproduct);
+        }
+
+            public ICommand CancelAddProduct_Command
+        {
+            get
+            {
+                if (_CancelAddProduct == null)
+                {
+                    _CancelAddProduct = new RelayingCommand<Object>(a => CancelAddProduct(a));
+                }
+                return _CancelAddProduct;
+            }
+        }
+
+
+        public void CancelAddProduct(object a)
+        {
+
+            Newproduct = null;
+            /* close Addproductview*/
         }
 
         public ICommand ExitAddProductView_Command
