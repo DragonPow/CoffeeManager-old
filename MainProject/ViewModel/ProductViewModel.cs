@@ -1,7 +1,6 @@
 ﻿
 using MainProject.Model;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Drawing;
 using System.IO;
@@ -16,7 +15,7 @@ using System.Windows.Input;
 
 namespace MainProject.ViewModel
 {
-    class MainViewl : BaseViewModel
+    class ProductViewModel : BaseViewModel
     {
         #region Field
 
@@ -73,9 +72,9 @@ namespace MainProject.ViewModel
 
         #region Init
 
-        public MainViewl()
+        public ProductViewModel()
         {
-            Type.Type = "Tất cả";
+            Type= new TYPE_PRODUCT() { Type =" Tất cả"} ;
             Newproduct = new CUSTOMPRODUCT() { product = new PRODUCT() { DELETED = 0, Image = null } };
         }
 
