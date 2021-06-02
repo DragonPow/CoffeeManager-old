@@ -26,20 +26,27 @@ namespace MainProject.ViewModel
         CUSTOMPRODUCT _Newproduct;
 
         TableViewModel _Tableviewmodel;
-
-        private ICommand _AddProduct;
+        
         private ICommand _DeletePro;
+
         private ICommand _SearchByName;
         private ICommand _SearchByType;
+
+
         private ICommand _LoadViewUpdateProduct;
-        private ICommand _OpenViewDetailProduct;
         private ICommand _UpdateProduct;
-        private ICommand _LoadAddProview;
-        private ICommand _ExitAddProview;
         private ICommand _ExitUpdateProduct;
+
+        private ICommand _LoadAddProview;
+        private ICommand _AddProduct;
+        private ICommand _ExitAddProview;
+
+        
         private ICommand _ExitDetailProduct;
-        private ICommand _AddImageProduct;
+        private ICommand _OpenViewDetailProduct;
         private ICommand _AddDetailProToTableCommand;
+
+        private ICommand _AddImageProduct;
 
         #endregion
 
@@ -74,7 +81,7 @@ namespace MainProject.ViewModel
 
         public ProductViewModel()
         {
-            Type= new TYPE_PRODUCT() { Type =" Tất cả"} ;
+            Type= new TYPE_PRODUCT() { Type ="Tất cả"} ;
             Newproduct = new CUSTOMPRODUCT() { product = new PRODUCT() { DELETED = 0, Image = null } };
         }
 
@@ -98,6 +105,7 @@ namespace MainProject.ViewModel
 
         public void Loadaddproview()
         {
+            Newproduct = new CUSTOMPRODUCT() { product = new PRODUCT() { DELETED = 0, Image = null } };
             //open view Add_pro(a)
         }
 
@@ -147,6 +155,7 @@ namespace MainProject.ViewModel
 
         public void Exitaddproview(Object a)
         {
+            Newproduct = null;
             //Exit view Add_pro(a)
 
         }
@@ -348,20 +357,20 @@ namespace MainProject.ViewModel
             //open view Add_pro(a)
         }
 
-        public ICommand AddImageProductCommand
+        public ICommand AddUpdateImageProductCommand
         {
             get
             {
                 if (_AddImageProduct == null)
                 {
-                    _AddImageProduct = new RelayingCommand<Object>(a => AddImageProduct());
+                    _AddImageProduct = new RelayingCommand<Object>(a => Add_Update_ImageProduct());
                 }
                 return _AddImageProduct;
             }
         }
 
 
-        public void AddImageProduct()
+        public void Add_Update_ImageProduct()
         {
             string path = "";
 
@@ -372,10 +381,17 @@ namespace MainProject.ViewModel
 
             if (openFile.ShowDialog() == DialogResult.OK)
             {
-                Newproduct = new CUSTOMPRODUCT() { product = new PRODUCT() { DELETED = 0, Image = null } };
                 path = openFile.FileName;
-                Newproduct.product.Image = converImgToByte(path);
-                Newproduct.Image_product= byteArrayToImage(Newproduct.product.Image);
+                if (Newproduct == null)
+                {
+                    ListPoduct.ElementAt(IndexCurrentProduct).product.Image = converImgToByte(path);
+                    ListPoduct.ElementAt(IndexCurrentProduct).Image_product = byteArrayToImage(ListPoduct.ElementAt(IndexCurrentProduct).product.Image);
+                }   
+                else
+                {
+                    Newproduct.product.Image = converImgToByte(path);
+                    Newproduct.Image_product = byteArrayToImage(Newproduct.product.Image);
+                }                    
             }                    
         }
 
