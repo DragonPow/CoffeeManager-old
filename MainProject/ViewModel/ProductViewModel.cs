@@ -16,13 +16,13 @@ using System.Windows.Input;
 
 namespace MainProject.ViewModel
 {
-    class ProductViewModel : BaseViewModel
+    class MainViewl : BaseViewModel
     {
         #region Field
 
         private ObservableCollection<CUSTOMPRODUCT> _ListProduct;
         private int _IndexCurrentproduct;
-        private string _Type;
+        private TYPE_PRODUCT _Type;
         string _SearchProduct;
         CUSTOMPRODUCT _Newproduct;
 
@@ -65,17 +65,17 @@ namespace MainProject.ViewModel
             } 
         }
 
-        public string SearchProduct { get => _SearchProduct; set { if (_SearchProduct != value) { _Type = value; OnPropertyChanged(); } } }
-        public string Type { get => _Type; set { if (_Type != value) { _Type = value; OnPropertyChanged(); LoadProductByType(); } } }
+        public string SearchProduct { get => _SearchProduct; set { if (_SearchProduct != value) { _SearchProduct = value; OnPropertyChanged(); } } }
+        public TYPE_PRODUCT Type { get => _Type; set { if (_Type != value) { _Type = value; OnPropertyChanged(); LoadProductByType(); } } }
 
         public TableViewModel Tableviewmodel { get => _Tableviewmodel; set { if (_Tableviewmodel != value) { _Tableviewmodel = value; OnPropertyChanged(); } } }
         #endregion
 
         #region Init
 
-        public ProductViewModel()
+        public MainViewl()
         {
-            Type = "Tất cả";
+            Type.Type = "Tất cả";
             Newproduct = new CUSTOMPRODUCT() { product = new PRODUCT() { DELETED = 0, Image = null } };
         }
 
@@ -238,7 +238,7 @@ namespace MainProject.ViewModel
             ObservableCollection<PRODUCT> listproduct;
             using (var db = new mainEntities())
             {
-                var listpro = db.PRODUCTs.Where(p => (p.TYPE_PRODUCT.ElementAt(0).Type == Type && p.DELETED == 0));
+                var listpro = db.PRODUCTs.Where(p => (p.TYPE_PRODUCT.ElementAt(0).Type == Type.Type && p.DELETED == 0));
                 if (listpro == null) return;
                 listproduct = new ObservableCollection<PRODUCT>(listpro.ToList());
             }
@@ -418,13 +418,13 @@ namespace MainProject.ViewModel
 
                 ObservableCollection<PRODUCT> listproduct = new ObservableCollection<PRODUCT>();
 
-                if (Type == "Tất cả")
+                if (Type.Type == "Tất cả")
                 {
                     listproduct = new ObservableCollection<PRODUCT>(db.PRODUCTs.Where(p => (p.DELETED == 0)).ToList());
                 }
                 else
                 {
-                    var p = db.PRODUCTs.Where(pro => ((pro.TYPE_PRODUCT.ElementAt(0).Type == Type) && (pro.DELETED == 0)));
+                    var p = db.PRODUCTs.Where(pro => ((pro.TYPE_PRODUCT.ElementAt(0).Type == Type.Type) && (pro.DELETED == 0)));
                     if (p == null) return;
                     listproduct = new ObservableCollection<PRODUCT>(p.ToList());
                 }
