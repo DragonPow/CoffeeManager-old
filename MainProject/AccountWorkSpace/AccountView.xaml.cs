@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MainProject.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -24,6 +25,15 @@ namespace MainProject.AccountWorkSpace
         {
             InitializeComponent();
             Console.WriteLine("AccountView is created");
+            txt_pass.PasswordChanged += Txt_pass_PasswordChanged;
+        }
+
+        private void Txt_pass_PasswordChanged(object sender, RoutedEventArgs e)
+        {
+            if (DataContext!=null)
+            {
+                ((EmployeeViewModel)this.DataContext).New_Infor_Employee.Password = txt_pass.Password;
+            }
         }
     }
 }

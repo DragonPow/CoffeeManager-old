@@ -25,7 +25,7 @@ namespace MainProject
 
             ////Testing Startup
             TestingView view = new TestingView();
-            ProductViewModel viewModel = new ProductViewModel();
+            EmployeeViewModel viewModel = new EmployeeViewModel();
             ////End testing Startup
             ///
 
