@@ -47,7 +47,7 @@
                         Width="200"
                         Height="160"
                         Background="Transparent"
-                        Command="{Binding AddImageProductCommand}">
+                        Command="{Binding AddUpdateImageProductCommand}">
                     <Grid>
                         <Image Stretch="Uniform"
                                Source="{Binding Newproduct.product.Image}" />
