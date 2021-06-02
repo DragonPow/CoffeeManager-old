@@ -8,6 +8,7 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using MainProject.MainWorkSpace;
 using MainProject.ViewModel;
 
 namespace MainProject
@@ -24,8 +25,8 @@ namespace MainProject
             base.OnStartup(e);
 
             ////Testing Startup
-            TestingView view = new TestingView();
-            ProductViewModel viewModel = new ProductViewModel();
+            TestView view = new TestView();
+            MainViewModel viewModel = new MainViewModel();
             ////End testing Startup
             ///
 
@@ -36,7 +37,7 @@ namespace MainProject
 
             LoadInitApp();
             view.DataContext = viewModel;
-            //view.ShowDialog();
+            view.ShowDialog();
         }
 
         private void LoadInitApp()

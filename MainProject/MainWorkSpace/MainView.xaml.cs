@@ -25,5 +25,10 @@ namespace MainProject.MainWorkSpace
             InitializeComponent();
             Console.WriteLine("MainView is created");
         }
+
+        private void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }
