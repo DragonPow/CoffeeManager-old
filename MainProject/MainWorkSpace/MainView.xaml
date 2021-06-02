@@ -65,8 +65,10 @@
 
                 </Grid>
             </materialDesign:ColorZone>
-            <TabControl TabStripPlacement="Bottom" 
-                        ItemsSource="{Binding Path=ListType}"
+            <TabControl TabStripPlacement="Bottom"
+                        DockPanel.Dock="Bottom"
+                        ItemsSource="{Binding ListType}"
+                        SelectedItem="{Binding CurrentType}"
                         Style="{StaticResource MaterialDesignNavigatilRailTabControl}"
                          materialDesign:ColorZoneAssist.Mode="PrimaryMid">
                 <TabControl.ItemTemplate>
@@ -94,10 +96,11 @@
                 </TabControl.ItemContainerStyle>
                 <TabControl.ContentTemplate>
                     <DataTemplate>
-                        <Prod:ProdView DataContext="{Binding ElementName=Productviewmodel, Path=DataContext}"/>
+                       
                     </DataTemplate>
                 </TabControl.ContentTemplate>
             </TabControl>
+            <Prod:ProdView DataContext="{Binding Productviewmodel}"/>
         </DockPanel>
     </Grid>
 </UserControl>
