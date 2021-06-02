@@ -18,6 +18,7 @@
             <Setter Property="FontWeight" Value="Bold"/>
         </Style>
         <Style x:Key="labelStyle" TargetType="Label">
+            <Setter Property="Margin" Value="5,5,5,5"/>
             <Setter Property="FontSize" Value="15"/>
             <Setter Property="FontWeight" Value="Bold"/>
         </Style>
@@ -37,30 +38,32 @@
             Background="DarkGray"
             >
             <Label
-                Margin="5,0" Style="{StaticResource labelStyle}"
+                Style="{StaticResource labelStyle}"
                 >
                 Thống kê theo:
             </Label>
             <ComboBox
+                x:Name="cbxStatisticMode"
                 SelectedIndex="0"
+                SelectionChanged="cbxStatisticMode_SelectionChanged"
                 Margin="5,0,5,0"
                 >
                 <ComboBoxItem Content="Ngày trong tuần"/>
                 <ComboBoxItem Content="Tuần trong tháng"/>
                 <ComboBoxItem Content="Tháng trong năm"/>
             </ComboBox>
-            <Viewbox 
-                Margin="5,5,5,0"
-                Height="200" Stretch="UniformToFill"
-                >
-                <Calendar
-                    SelectedDatesChanged="Calendar_SelectedDatesChanged"
-                    materialDesign:CalendarAssist.IsHeaderVisible="False" SelectionMode="SingleRange"
-                    FontSize="14" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" FirstDayOfWeek="Monday" 
-                />
-            </Viewbox>
             <Label
-                Margin="5,0" Style="{StaticResource labelStyle}"
+                Style="{StaticResource labelStyle}"
+                >
+                Chọn thời gian:
+            </Label>
+            <DatePicker
+                x:Name="txtDatePicker" Margin="5,0"
+                >
+            </DatePicker>
+            
+            <Label
+                Style="{StaticResource labelStyle}"
                 >
                 Sản phẩm:
             </Label>
@@ -74,7 +77,7 @@
             </ComboBox>
 
             <Button
-                materialDesign:ButtonAssist.CornerRadius="10"
+                x:Name="btnSubmit" materialDesign:ButtonAssist.CornerRadius="10"
                 Margin="15,35,15,0" VerticalContentAlignment="Center" VerticalAlignment="Bottom"
                 >
                 Thống Kê
@@ -99,7 +102,7 @@
                 BorderBrush="Black" IsReadOnly="True" CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False" CanUserResizeRows="False"
                 HorizontalGridLinesBrush="Gray" VerticalGridLinesBrush="LightGray" GridLinesVisibility="All"
                 materialDesign:DataGridAssist.CornerRadius="2" AutoGenerateColumns="False"
-                ItemsSource="{Binding Path=ListModel}" 
+                ItemsSource="{Binding Path=ListModel, Mode=OneWay}" 
                 >
                 <DataGrid.Columns>
                     <DataGridTemplateColumn 
@@ -107,7 +110,7 @@
                         Width="Auto" IsReadOnly="True" CanUserResize="False">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding Path=Title}"></TextBlock>
+                                <TextBlock Text="{Binding Path=Title, Mode=OneWay}"></TextBlock>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
@@ -132,12 +135,12 @@
             <charting:CartesianChart 
                 DockPanel.Dock="Top" x:Name="chartRevenue" >
                 <charting:CartesianChart.Series>
-                    <charting:ColumnSeries Values="{Binding Path=ListModel, Converter={StaticResource chartValueConverter}}"/>
+                    <charting:ColumnSeries Values="{Binding Path=ListModel, Mode=OneWay, Converter={StaticResource chartValueConverter}}"/>
 
                 </charting:CartesianChart.Series>
                 <charting:CartesianChart.AxisX>
                     <charting:Axis 
-                        x:Name="chartRevenueAxisX" Labels="{Binding Path=ListModel, Converter={StaticResource chartLabelConverterAxisX}}"/>
+                        x:Name="chartRevenueAxisX" Labels="{Binding Path=ListModel, Mode=OneWay, Converter={StaticResource chartLabelConverterAxisX}}"/>
                 </charting:CartesianChart.AxisX>
                 <charting:CartesianChart.AxisY>
                     <charting:Axis 

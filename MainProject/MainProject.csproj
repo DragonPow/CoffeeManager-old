@@ -187,6 +187,8 @@
     <Compile Include="StatisticWorkSpace\Converter\ChartValueConverter.cs" />
     <Compile Include="StatisticWorkSpace\Converter\MoneyConverter.cs" />
     <Compile Include="StatisticWorkSpace\Converter\TimeConverter.cs" />
+    <Compile Include="StatisticWorkSpace\DatabaseController_Statistic.cs" />
+    <Compile Include="StatisticWorkSpace\DatePickerAssist.cs" />
     <Compile Include="StatisticWorkSpace\StatisticEnum.cs" />
     <Compile Include="StatisticWorkSpace\StatisticModel.cs" />
     <Compile Include="ViewModel\BillViewModel.cs" />
