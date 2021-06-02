@@ -292,6 +292,8 @@ namespace MainProject.ViewModel
         }
         public void Pay()
         {
+            if (CurrentTable.ListPro == null) return;
+
             CurrentTable.ListPro = Currentlistdetailpro;
 
             BillViewModel billviewmodel = new BillViewModel();
