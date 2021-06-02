@@ -129,9 +129,6 @@ namespace MainProject.ViewModel
                 {
                     db.PRODUCTs.Add(Newproduct.product);
 
-                    int d = db.TYPE_PRODUCT.Where(t => ( t.Type == Newproduct.product.TYPE_PRODUCT.ElementAt(0).Type)).Count();
-                    if (d == 0) db.TYPE_PRODUCT.Add(new TYPE_PRODUCT() { Type =  Newproduct.product.TYPE_PRODUCT.ElementAt(0).Type });
-
                     db.SaveChanges();
                 }
             }
