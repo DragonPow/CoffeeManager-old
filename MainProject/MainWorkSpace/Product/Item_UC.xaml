@@ -5,9 +5,12 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:local="clr-namespace:MainProject.MainWorkSpace.Product"
-             xmlns:Main="clr-namespace:MainProject.MainWorkSpace"
+             xmlns:MainWS="clr-namespace:MainProject.MainWorkSpace"
+             xmlns:Main="clr-namespace:MainProject"
+             d:DataContext="{d:DesignInstance Type=Main:DetailPro}"
              mc:Ignorable="d" 
              d:DesignHeight="45" d:DesignWidth="350" Background="Transparent">
+    
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="9*"/>
@@ -17,15 +20,15 @@
         <Border BorderThickness="0,0,0,1" BorderBrush="Gray" Grid.ColumnSpan="3"></Border>
         <TextBlock Grid.Column="0" Text="1" Foreground="Gray" HorizontalAlignment="Left" Visibility="Hidden" ></TextBlock>
         <StackPanel Grid.Column="0" VerticalAlignment="Center">
-            <TextBlock Text="{Binding Name, FallbackValue='Trà sữa trân chân'}" Grid.Column="0" 
+            <TextBlock Text="{Binding Pro.Name, FallbackValue='Trà sữa trân châu'}" Grid.Column="0" 
                        HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10 0" 
                        Foreground="#BD8722" FontSize="16"/>
-            <TextBlock Grid.Column="0" Text="{Binding DataContext, FallbackValue='Trân chân đường đen'}"
+            <TextBlock Grid.Column="0" Text="{Binding Pro.Detail, FallbackValue='Trân châu đường đen'}"
                        HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10 0" 
                        Foreground="#958360" FontSize="12" FontWeight="Light" FontStyle="Italic"></TextBlock>
         </StackPanel>
-        <Main:NumericUpdown Grid.Column="1" Height="20" Width="auto" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="0,5"></Main:NumericUpdown>
-        <TextBlock Grid.Column="2" Text="{Binding Price, FallbackValue='25,000đ', StringFormat='{}{0:N0} đ'}" 
+        <MainWS:NumericUpdown DataContext="{Binding}" Grid.Column="1" Height="20" Width="auto" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="0,5"></MainWS:NumericUpdown>
+        <TextBlock Grid.Column="2" Text="{Binding Pro.Price, FallbackValue='25,000đ', StringFormat='{}{0:N0} đ'}" 
                    HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Right" 
                    Foreground="Gray" FontWeight="Light" FontStyle="Italic" 
                    FontSize="16"></TextBlock>

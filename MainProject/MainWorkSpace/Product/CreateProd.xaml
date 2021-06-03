@@ -28,6 +28,7 @@
             <Button Background="Transparent"
                     BorderBrush="Transparent"
                     Margin="10"
+                    Command="{Binding ExitAddProductView_Command}"
                     HorizontalAlignment="Right">
                 <materialDesign:PackIcon Kind="Close"
                                          Width="25"
@@ -47,7 +48,7 @@
                         Width="200"
                         Height="160"
                         Background="Transparent"
-                        Command="{Binding AddImageProductCommand}">
+                        Command="{Binding AddUpdateImageProductCommand}">
                     <Grid>
                         <Image Stretch="Uniform"
                                Source="{Binding Newproduct.product.Image}" />
@@ -99,7 +100,7 @@
                             Style="{StaticResource MaterialDesignOutlinedButton}"
                             ToolTip="MaterialDesignOutlinedButton"
                             Content="Hủy"
-                            Command="{Binding ExitUpdateProduct_Command}"
+                            Command="{Binding CancelAddProduct_Command}"
                             Foreground="{StaticResource MainColor}"
                             BorderBrush="#31CA62"
                             FontSize="20"

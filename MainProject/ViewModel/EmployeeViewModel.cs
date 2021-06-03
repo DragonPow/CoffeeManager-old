@@ -33,11 +33,9 @@ namespace MainProject.ViewModel
 
         ICommand _RequestEditEmployeeCommand;
         ICommand _Click_Add_New_Employee;
-        ICommand _Add_New_EMployee;
 
         ICommand _Cancel;
 
-        ICommand _Click_Update_Employee;
         ICommand _UpDate_Add_EMployee;
 
         ICommand _Delete_EMployee;

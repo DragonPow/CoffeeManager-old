@@ -8,6 +8,7 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using MainProject.MainWorkSpace;
 using MainProject.ViewModel;
 
 namespace MainProject
@@ -24,8 +25,8 @@ namespace MainProject
             base.OnStartup(e);
 
             ////Testing Startup
-            TestingView view = new TestingView();
-            EmployeeViewModel viewModel = new EmployeeViewModel();
+            TestView view = new TestView();
+            MainViewModel viewModel = new MainViewModel();
             ////End testing Startup
             ///
 

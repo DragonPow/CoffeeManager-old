@@ -27,9 +27,12 @@ namespace MainProject.Model
                     }
                     if (TYPE_PRODUCT.Count==0)
                     {
-                        TYPE_PRODUCT.Add(new Model.TYPE_PRODUCT());
+                        TYPE_PRODUCT.Add(new TYPE_PRODUCT());
                     }
                     TYPE_PRODUCT[0].Type = value;
+
+                    // thêm Id 
+
                     OnPropertyChanged();
                 }
             }

@@ -1,7 +1,6 @@
 ﻿
 using MainProject.Model;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Drawing;
 using System.IO;
@@ -22,25 +21,33 @@ namespace MainProject.ViewModel
 
         private ObservableCollection<CUSTOMPRODUCT> _ListProduct;
         private int _IndexCurrentproduct;
-        private string _Type;
+        private TYPE_PRODUCT _Type;
         string _SearchProduct;
         CUSTOMPRODUCT _Newproduct;
 
         TableViewModel _Tableviewmodel;
-
-        private ICommand _AddProduct;
+        
         private ICommand _DeletePro;
+
         private ICommand _SearchByName;
         private ICommand _SearchByType;
+
+
         private ICommand _LoadViewUpdateProduct;
-        private ICommand _OpenViewDetailProduct;
         private ICommand _UpdateProduct;
-        private ICommand _LoadAddProview;
-        private ICommand _ExitAddProview;
         private ICommand _ExitUpdateProduct;
+
+        private ICommand _LoadAddProview;
+        private ICommand _AddProduct;
+        private ICommand _CancelAddProduct;
+        private ICommand _ExitAddProview;
+
+        
         private ICommand _ExitDetailProduct;
-        private ICommand _AddImageProduct;
+        private ICommand _OpenViewDetailProduct;
         private ICommand _AddDetailProToTableCommand;
+
+        private ICommand _AddImageProduct;
 
         #endregion
 
@@ -65,8 +72,8 @@ namespace MainProject.ViewModel
             } 
         }
 
-        public string SearchProduct { get => _SearchProduct; set { if (_SearchProduct != value) { _Type = value; OnPropertyChanged(); } } }
-        public string Type { get => _Type; set { if (_Type != value) { _Type = value; OnPropertyChanged(); } } }
+        public string SearchProduct { get => _SearchProduct; set { if (_SearchProduct != value) { _SearchProduct = value; OnPropertyChanged(); } } }
+        public TYPE_PRODUCT Type { get => _Type; set { if (_Type != value) { _Type = value; OnPropertyChanged(); LoadProductByType(); } } }
 
         public TableViewModel Tableviewmodel { get => _Tableviewmodel; set { if (_Tableviewmodel != value) { _Tableviewmodel = value; OnPropertyChanged(); } } }
         #endregion
@@ -75,26 +82,7 @@ namespace MainProject.ViewModel
 
         public ProductViewModel()
         {
-            using (var db = new mainEntities())
-            {
-                if (Type == null) return;
-
-                ObservableCollection<PRODUCT> listproduct = null;
-
-                if (Type == "Tất cả")
-                {
-                    listproduct = new ObservableCollection<PRODUCT>(db.PRODUCTs.Where(p => (p.DELETED == 0)).ToList());
-                }
-                else
-                {
-                    listproduct = new ObservableCollection<PRODUCT>(db.PRODUCTs.Where(p => (( p.TYPE_PRODUCT.ElementAt(0).Type == Type) && (p.DELETED == 0))).ToList());
-                }   
-                
-                foreach (var p in listproduct)
-                {
-                    ListPoduct.Add(new CUSTOMPRODUCT(p));
-                }
-            }
+            Type= new TYPE_PRODUCT() { Type ="Tất cả"} ;
             Newproduct = new CUSTOMPRODUCT() { product = new PRODUCT() { DELETED = 0, Image = null } };
         }
 
@@ -118,6 +106,7 @@ namespace MainProject.ViewModel
 
         public void Loadaddproview()
         {
+            Newproduct = new CUSTOMPRODUCT() { product = new PRODUCT() { DELETED = 0, Image = null } };
             //open view Add_pro(a)
         }
 
@@ -139,17 +128,36 @@ namespace MainProject.ViewModel
             using (var db = new mainEntities())
             {
                 {
-                    db.PRODUCTs.Add(Newproduct.product);
+                    long id = (db.TYPE_PRODUCT.Where(t => (t.Type == Newproduct.product.MainType)).FirstOrDefault()).ID;
+                    Newproduct.product.TYPE_PRODUCT[0] = new TYPE_PRODUCT() { Type = Newproduct.product.MainType, ID = id };
 
-                    int d = db.TYPE_PRODUCT.Where(t => ( t.Type == Newproduct.product.TYPE_PRODUCT.ElementAt(0).Type)).Count();
-                    if (d == 0) db.TYPE_PRODUCT.Add(new TYPE_PRODUCT() { Type =  Newproduct.product.TYPE_PRODUCT.ElementAt(0).Type });
+                    db.PRODUCTs.Add(Newproduct.product);
 
                     db.SaveChanges();
                 }
             }
 
-
             ListPoduct.Add(Newproduct);
+        }
+
+            public ICommand CancelAddProduct_Command
+        {
+            get
+            {
+                if (_CancelAddProduct == null)
+                {
+                    _CancelAddProduct = new RelayingCommand<Object>(a => CancelAddProduct(a));
+                }
+                return _CancelAddProduct;
+            }
+        }
+
+
+        public void CancelAddProduct(object a)
+        {
+
+            Newproduct = null;
+            /* close Addproductview*/
         }
 
         public ICommand ExitAddProductView_Command
@@ -167,6 +175,7 @@ namespace MainProject.ViewModel
 
         public void Exitaddproview(Object a)
         {
+            Newproduct = null;
             //Exit view Add_pro(a)
 
         }
@@ -257,7 +266,7 @@ namespace MainProject.ViewModel
             ObservableCollection<PRODUCT> listproduct;
             using (var db = new mainEntities())
             {
-                var listpro = db.PRODUCTs.Where(p => (p.TYPE_PRODUCT.ElementAt(0).Type == Type && p.DELETED == 0));
+                var listpro = db.PRODUCTs.Where(p => (p.TYPE_PRODUCT.ElementAt(0).Type == Type.Type && p.DELETED == 0));
                 if (listpro == null) return;
                 listproduct = new ObservableCollection<PRODUCT>(listpro.ToList());
             }
@@ -368,20 +377,20 @@ namespace MainProject.ViewModel
             //open view Add_pro(a)
         }
 
-        public ICommand AddImageProductCommand
+        public ICommand AddUpdateImageProductCommand
         {
             get
             {
                 if (_AddImageProduct == null)
                 {
-                    _AddImageProduct = new RelayingCommand<Object>(a => AddImageProduct());
+                    _AddImageProduct = new RelayingCommand<Object>(a => Add_Update_ImageProduct());
                 }
                 return _AddImageProduct;
             }
         }
 
 
-        public void AddImageProduct()
+        public void Add_Update_ImageProduct()
         {
             string path = "";
 
@@ -392,10 +401,17 @@ namespace MainProject.ViewModel
 
             if (openFile.ShowDialog() == DialogResult.OK)
             {
-                Newproduct = new CUSTOMPRODUCT() { product = new PRODUCT() { DELETED = 0, Image = null } };
                 path = openFile.FileName;
-                Newproduct.product.Image = converImgToByte(path);
-                Newproduct.Image_product= byteArrayToImage(Newproduct.product.Image);
+                if (Newproduct == null)
+                {
+                    ListPoduct.ElementAt(IndexCurrentProduct).product.Image = converImgToByte(path);
+                    ListPoduct.ElementAt(IndexCurrentProduct).Image_product = byteArrayToImage(ListPoduct.ElementAt(IndexCurrentProduct).product.Image);
+                }   
+                else
+                {
+                    Newproduct.product.Image = converImgToByte(path);
+                    Newproduct.Image_product = byteArrayToImage(Newproduct.product.Image);
+                }                    
             }                    
         }
 
@@ -414,9 +430,9 @@ namespace MainProject.ViewModel
 
          public void AddDetailProToTable()
          {
-            Tableviewmodel.CurrentTable.Total += (long) ListPoduct.ElementAt(IndexCurrentProduct).product.Price;
+            Tableviewmodel.TotalCurrentTable += (long) ListPoduct.ElementAt(IndexCurrentProduct).product.Price;
 
-            foreach ( var p in Tableviewmodel.CurrentTable.ListPro)
+            foreach ( var p in Tableviewmodel.Currentlistdetailpro)
             {
                 if (p.Pro == ListPoduct.ElementAt(IndexCurrentProduct).product)
                 {
@@ -424,10 +440,37 @@ namespace MainProject.ViewModel
                     return;
                 }
             }
-           
-             Tableviewmodel.CurrentTable.ListPro.Add(new DetailPro(ListPoduct.ElementAt(IndexCurrentProduct).product));
+
+            Tableviewmodel.Currentlistdetailpro.Add(new DetailPro(ListPoduct.ElementAt(IndexCurrentProduct).product));
          }
         #endregion
+
+        private void LoadProductByType()
+        {
+            using (var db = new mainEntities())
+            {
+                if (Type == null) return;
+
+                ObservableCollection<PRODUCT> listproduct = new ObservableCollection<PRODUCT>();
+
+                if (Type.Type.Contains("Tất cả"))
+                {
+                    listproduct = new ObservableCollection<PRODUCT>(db.PRODUCTs.Where(p => (p.DELETED == 0)).ToList());
+                }
+                else
+                {
+                    var p = db.PRODUCTs.Where(pro => ((pro.TYPE_PRODUCT.FirstOrDefault().Type == Type.Type) && (pro.DELETED == 0)));
+                    if (p == null) return;
+                    listproduct = new ObservableCollection<PRODUCT>(p.ToList());
+                }
+
+                ListPoduct = new ObservableCollection<CUSTOMPRODUCT>();
+                foreach (var p in listproduct)
+                {
+                    ListPoduct.Add(new CUSTOMPRODUCT(p));
+                }
+            }
+        }
 
         private string ConvertToUnSign(string input)
         {

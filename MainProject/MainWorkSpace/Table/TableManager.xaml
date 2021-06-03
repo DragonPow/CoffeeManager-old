@@ -6,10 +6,14 @@
              xmlns:local="clr-namespace:MainProject.MainWorkSpace.Table"
              xmlns:MainWorkSpace="clr-namespace:MainProject.MainWorkSpace"
              xmlns:Model="clr-namespace:MainProject.Model"
+             xmlns:ViewModel="clr-namespace:MainProject.ViewModel"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d"
-             DataContext="TableListViewModel"
+             d:DataContext="{d:DesignInstance Type=ViewModel:TableViewModel}" 
              d:DesignHeight="630" d:DesignWidth="900" Background="White">
+    <UserControl.DataContext>
+        <ViewModel:TableViewModel/>
+    </UserControl.DataContext>
     <DockPanel>
         <Grid Height="45"
               DockPanel.Dock="Top"
@@ -34,24 +38,14 @@
             <Button BorderBrush="Transparent"
                     Style="{StaticResource MaterialDesignOutlinedButton}"
                     ToolTip="MaterialDesignOutlinedButton"
-                    Content="SỬA" 
+                    Content="XÓA TẦNG" 
                     FontSize="20" 
                     Foreground="#E6FFED"
                     HorizontalAlignment="Right"
                     VerticalAlignment="Center"
-                    Visibility="Visible"/>
-            <Button Height="40" 
-                    Width="80" 
-                    BorderBrush="Transparent"
-                    Style="{StaticResource MaterialDesignOutlinedButton}"
-                    ToolTip="MaterialDesignOutlinedButton"
-                    Content="LƯU" 
-                    FontSize="20" 
-                    Background="#E6FFED" 
-                    Foreground="#2BC48A"
-                    HorizontalAlignment="Right"
-                    Margin="10 0"
-                    Visibility="Hidden"/>
+                    Visibility="Visible"
+                    Command="{Binding DeleteFloorCommand}"/>
+          
         </Grid>
         <!--Floors here-->
         <Grid DockPanel.Dock="Top" Margin="20">
@@ -59,17 +53,39 @@
                 <ColumnDefinition Width="8*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <ComboBox x:Name="OutlinedComboBox"
-                      Style="{StaticResource MaterialDesignOutlinedComboBox}"
-                      materialDesign:HintAssist.Hint="Tên khu vực"
-                      FontSize="18"
+            <Grid Margin="10,0">
+                <Border BorderThickness="2"
+                BorderBrush="Gray"
+                CornerRadius="5" Grid.Column="1"/>
+                <TextBlock Text="Tầng" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="20" Margin="20,0"/>
+                <ComboBox 
+                      Width="50"
+                      FontSize="20"
                       Foreground="#9393A1"
                       BorderBrush="#737373"
+                      BorderThickness="0"
                       Margin="10 0"
-                      ItemsSource="{Binding ShortStringList}"/>
-            <local:Plus_UC Height="61"
-                           Grid.Column="1"
-                           Margin="10 0"/>
+                      HorizontalAlignment="Right"
+                    HorizontalContentAlignment="Right"
+                    VerticalContentAlignment="Center"
+                      ItemsSource="{Binding ListFloor}"
+                      SelectedItem="{Binding CurrentFloors}"/>
+            </Grid>
+         
+            <Border BorderThickness="2"
+                BorderBrush="Gray"
+                CornerRadius="5" Grid.Column="1" >
+                <Button Width="Auto" Height="auto"  Background="Transparent" BorderBrush="Transparent"
+                        Command="{Binding AddFloorCommand}">
+                    <materialDesign:PackIcon Kind="Plus"
+                                 Foreground="Gray"
+                                 HorizontalAlignment="Center"
+                                 VerticalAlignment="Center"
+                                 Width="50"
+                                 Height="50"/>
+                </Button>
+                
+            </Border>
         </Grid>
         <Grid DockPanel.Dock="Bottom">
             <Canvas x:Name="InfoCanvas">
@@ -85,7 +101,7 @@
                         BorderBrush="{DynamicResource MainColor}"
                         Style="{StaticResource MaterialDesignFloatingActionButton}"
                         ToolTip="MaterialDesignFloatingActionButton"
-                        Command="{Binding InsertTable}"
+                        Command="{Binding InsertTableCommand}"
                         Canvas.Bottom="20"
                         Canvas.Right="20">
                     <materialDesign:PackIcon Kind="Plus"
