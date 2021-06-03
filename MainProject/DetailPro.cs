@@ -1,12 +1,20 @@
 ﻿using MainProject.Model;
-
+using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.IO;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 namespace MainProject
 {
     public class DetailPro: BaseViewModel
     {
         private int _quantity;
         private PRODUCT pro;
-
+        public DetailPro()
+        {
+        }
         public int Quantity 
         {
             get => _quantity;
