@@ -113,7 +113,7 @@ namespace MainProject.ViewModel
         public void Loadaddproview()
         {
 
-            Newproduct = new CUSTOMPRODUCT() { product = new PRODUCT() { DELETED = 0, Image = null, TYPE_PRODUCT = new ObservableCollection<TYPE_PRODUCT>() } };
+            Newproduct = new CUSTOMPRODUCT() { product = new PRODUCT() { DELETED = 0, Image = null, TYPE_PRODUCT = new TYPE_PRODUCT() } };
             //open view Add_pro(a)
         }
 
@@ -138,7 +138,7 @@ namespace MainProject.ViewModel
                     TYPE_PRODUCT type= db.TYPE_PRODUCT.Where(t => (t.Type == Type_in_Combobox_AddPro)).FirstOrDefault();
                 
                     if (type == null) return;
-                    Newproduct.product.TYPE_PRODUCT = new ObservableCollection<TYPE_PRODUCT>() { type };                
+                    Newproduct.product.TYPE_PRODUCT = type;                
 
                     db.PRODUCTs.Add(Newproduct.product);
 
@@ -275,7 +275,7 @@ namespace MainProject.ViewModel
             ObservableCollection<PRODUCT> listproduct;
             using (var db = new mainEntities())
             {
-                var listpro = db.PRODUCTs.Where(p => (p.TYPE_PRODUCT.ElementAt(0).Type == Type.Type && p.DELETED == 0));
+                var listpro = db.PRODUCTs.Where(p => (p.TYPE_PRODUCT.Type == Type.Type && p.DELETED == 0));
                 if (listpro == null) return;
                 listproduct = new ObservableCollection<PRODUCT>(listpro.ToList());
             }
@@ -468,7 +468,7 @@ namespace MainProject.ViewModel
                 }
                 else
                 {
-                    var p = db.PRODUCTs.Where(pro => ((pro.TYPE_PRODUCT.FirstOrDefault().Type == Type.Type) && (pro.DELETED == 0)));
+                    var p = db.PRODUCTs.Where(pro => ((pro.TYPE_PRODUCT.Type == Type.Type) && (pro.DELETED == 0)));
                     if (p == null) return;
                     listproduct = new ObservableCollection<PRODUCT>(p.ToList());
                 }
