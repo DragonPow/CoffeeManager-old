@@ -5,15 +5,36 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:local="clr-namespace:MainProject.MainWorkSpace.Product"
+             xmlns:ViewModel="clr-namespace:MainProject.ViewModel"
              mc:Ignorable="d" 
+             d:DataContext="{d:DesignInstance Type=ViewModel:ProductViewModel}"
              d:DesignHeight="480" d:DesignWidth="600">
-    <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" 
+    <ScrollViewer
+        HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" 
                       materialDesign:ScrollBarAssist.ThumbHeight="50" 
                       materialDesign:ScrollBarAssist.ThumbWidth="5" 
                       materialDesign:ScrollBarAssist.ThumbCornerRadius="10">
-        <WrapPanel>
-            <local:Pro_UC Margin="2"></local:Pro_UC>
-            <local:AddProd_UC Margin="2"></local:AddProd_UC>
-    </WrapPanel>
+        <ItemsControl ItemsSource="{Binding ListPoduct}">
+            <ItemsControl.Resources>
+            </ItemsControl.Resources>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Button
+                            Command="{Binding AddDetailProToTableCommand}"
+                            Width="Auto" Height="Auto"
+                            Background="Transparent"
+                            BorderBrush="Transparent"
+                            Padding="0"
+                            Margin="2">
+                        <local:Pro_UC DataContext="{Binding}"/>
+                    </Button>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel Orientation="Horizontal"></WrapPanel>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+        </ItemsControl>
     </ScrollViewer>
 </UserControl>

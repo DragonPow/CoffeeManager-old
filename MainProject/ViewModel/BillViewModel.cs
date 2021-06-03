@@ -202,7 +202,7 @@ namespace MainProject.MainWorkSpace.Bill
             using (var db = new mainEntities())
             {
                
-                var t = db.VOUCHERs.Where(v => (v.CODE == CodeDiscount && v.DELETED == 0)).FirstOrDefault();
+                var t = db.VOUCHERs.Where(v => (v.CODE == CodeDiscount && v.DELETED == 0 && v.BeginTime <= DateTime.Now && v.EndTime >= DateTime.Now)).FirstOrDefault();
                 if ( t!= null || CodeDiscount == "")
                 {
                     if (CodeDiscount != "")
@@ -211,7 +211,7 @@ namespace MainProject.MainWorkSpace.Bill
                         CurrentBill.VOUCHER = t;
                         Discount = (int)(CurrentTable.Total * t.Percent) / 100;
 
-                    }   
+                    }    
                     
                     CurrentBill.ID_Tables = CurrentTable.table.ID;                 
                     CurrentBill.TotalPrice = CurrentTable.Total - Discount;
@@ -221,6 +221,7 @@ namespace MainProject.MainWorkSpace.Bill
 
                     CurrentTable.ListPro = null;
                     CurrentTable.Total = 0;
+                    CodeDiscount = "";
                     
                     view.Close();
                                     

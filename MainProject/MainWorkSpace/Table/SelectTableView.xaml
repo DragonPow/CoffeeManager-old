@@ -4,51 +4,43 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:local="clr-namespace:MainProject.MainWorkSpace.Table"
+             xmlns:ViewModel="clr-namespace:MainProject.ViewModel"
              mc:Ignorable="d"
+             d:DataContext="{d:DesignInstance Type=ViewModel:TableViewModel}"
              xmlns:dragablz="clr-namespace:Dragablz;assembly=Dragablz"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              d:DesignHeight="520" d:DesignWidth="900" Background="White">
-    <Grid>
-        <Grid VerticalAlignment="Top" Height="50">
-            <Border BorderBrush="#737373" 
-                    BorderThickness="2"/>
-            <materialDesign:ColorZone Mode="PrimaryMid" 
-                                      Height="50" 
-                                      Background="{DynamicResource MainColor}" 
-                                      Foreground="White">
-                <StackPanel Orientation="Horizontal"
-                            Margin="4,0">
+    <DockPanel>
+        <TabControl TabStripPlacement="Top"  
+                    DockPanel.Dock="Top"
+                        ItemsSource="{Binding ListFloor}"
+                        SelectedItem="{Binding CurrentFloors}"
+                        Style="{StaticResource MaterialDesignNavigatilRailTabControl}"
+                         materialDesign:ColorZoneAssist.Mode="PrimaryMid">
+            <TabControl.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Tầng "/>
+                        <TextBlock Text="{Binding}"/>
+                    </StackPanel>
+                </DataTemplate>
+            </TabControl.ItemTemplate>
+
+            <TabControl.ItemContainerStyle>
+                <Style TargetType="TabItem"
+                       BasedOn="{StaticResource MaterialDesignNavigationRailTabItem}">
+                    <Setter Property="Width"
+                            Value="120" />
+                    <Setter Property="Height"
+                            Value="Auto" />
+                </Style>
+            </TabControl.ItemContainerStyle>
+            <TabControl.ContentTemplate>
+                <DataTemplate>
                     
-                    <RadioButton Style="{StaticResource MaterialDesignTabRadioButton}"
-                                 Margin="4"
-                                 Content="TẦNG 1"
-                                 FontSize="16"/>
-                    <RadioButton Style="{StaticResource MaterialDesignTabRadioButton}"
-                                 Margin="4"
-                                 Content="TẦNG 2"
-                                 FontSize="16"/>
-                </StackPanel>
-            </materialDesign:ColorZone>
-        </Grid>
-        <Grid VerticalAlignment="Stretch" 
-              Margin="0,55,0,0">
-            <Border Grid.Row="1"
-                    BorderThickness="1 0 1 1"
-                    Padding="16">
-                <Grid>
-                    <Grid Visibility="{Binding IsChecked, ElementName=rbTab1, Converter={StaticResource BooleanToVisibilityConverter}}">
-                        <TextBlock Text="This is tab page 1 content" 
-                                   FontSize="16" 
-                                   FontWeight="Medium"/>
-                    </Grid>
-                    <Grid Visibility="{Binding IsChecked, ElementName=rbTab2, Converter={StaticResource BooleanToVisibilityConverter}}">
-                        <local:TableView/>
-                    </Grid>
-                    <Grid Visibility="{Binding IsChecked, ElementName=rbTab3, Converter={StaticResource BooleanToVisibilityConverter}}">
-                        <local:TableView/>
-                    </Grid>
-                </Grid>
-            </Border>
-        </Grid>
-    </Grid>
+                </DataTemplate>
+            </TabControl.ContentTemplate>
+        </TabControl>
+        <local:TableView DataContext="{Binding}"></local:TableView>
+    </DockPanel>
 </UserControl>

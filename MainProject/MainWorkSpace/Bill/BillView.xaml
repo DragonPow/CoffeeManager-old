@@ -13,7 +13,7 @@
         x:Name="MainWindow">
     <StackPanel Orientation="Vertical">
         <!--Bill title-->
-        <TextBlock Text="{Binding StoreName, FallbackValue=Tên cửa hàng}"
+        <TextBlock Text="{Binding StoreName, FallbackValue='Tên cửa hàng'}"
                    FontSize="50"
                    FontWeight="Bold"
                    HorizontalAlignment="Center"

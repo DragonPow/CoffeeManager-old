@@ -8,12 +8,13 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows.Input;
 
-namespace MainProject
+namespace MainProject.ViewModel
 {
    public  class TableViewModel : BaseViewModel
     {
         #region Field
         private ObservableCollection<TABLECUSTOM> _ListTable;
+        private ObservableCollection<int> _ListFloor;
         private int _Currentfloors;
         private TABLECUSTOM _CurrentTable;
         private DetailPro _CurrentDetailPro;
@@ -32,6 +33,9 @@ namespace MainProject
         private ICommand _DeleteTableCommand;
         private ICommand _InsertTableCommand;
         private ICommand _UpdateStatusTableCommand;
+
+        private ICommand _AddFloor;
+        private ICommand _DeleteFloor;
 
 
         #endregion
@@ -59,7 +63,14 @@ namespace MainProject
                 }
 
                 ListTable = new ObservableCollection<TABLECUSTOM>(Tablecustoms);
+                ListFloor = new ObservableCollection<int>();
 
+                var list = db.TABLES.Select(f => f.Floor).Distinct();
+
+                foreach( int f in list)
+                {
+                    ListFloor.Add(f);
+                }    
             }
         }
         #endregion
@@ -81,6 +92,18 @@ namespace MainProject
                 } 
             } 
         }
+        public ObservableCollection<int> ListFloor
+        {
+            get => _ListFloor;
+            set
+            {
+                if (_ListFloor != value)
+                {
+                    _ListFloor = value; OnPropertyChanged();
+                }
+            }
+        }
+
         public int CurrentFloors
         {
             get => _Currentfloors;
@@ -269,6 +292,8 @@ namespace MainProject
         }
         public void Pay()
         {
+            if (CurrentTable.ListPro == null) return;
+
             CurrentTable.ListPro = Currentlistdetailpro;
 
             BillViewModel billviewmodel = new BillViewModel();
