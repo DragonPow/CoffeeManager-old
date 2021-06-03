@@ -66,19 +66,19 @@
                           ItemsSource="{Binding Source={x:Static model:TYPE_PRODUCT.Instance}, Path=ListType}"
                           SelectedItem="{Binding Type_in_Combobox_AddPro}"
                           FontSize="16"
-                          
-                          
                           MaxWidth="500"
                           Margin="100,5" />
                 <TextBox Style="{StaticResource MaterialDesignOutlinedTextBox}"
                          materialDesign:HintAssist.Hint="Giá"
                          Text="{Binding Newproduct.product.Price}"
                          FontSize="16"
+                         materialDesign:TextFieldAssist.SuffixText="đ"
                          MaxWidth="500"
                          Margin="100,5" />
                 <TextBox Style="{StaticResource MaterialDesignOutlinedTextBox}"
                          materialDesign:HintAssist.Hint="Mô tả"
                          Text="{Binding Newproduct.product.Detail}"
+                         materialDesign:TextFieldAssist.SuffixText="0/30"
                          TextWrapping="Wrap"
                          MaxWidth="500"
                          Margin="100,5" />

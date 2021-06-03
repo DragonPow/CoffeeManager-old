@@ -22,7 +22,7 @@ namespace MainProject.StatisticWorkSpace
                         dt.Amount
                     }).Join(productName == null
                             ?db.PRODUCTs
-                            :db.PRODUCTs.Where(pd => (!pd.DELETED.HasValue || pd.DELETED.Value == 0) && pd.Name == productName)
+                            :db.PRODUCTs.Where(pd => (pd.DELETED == 0) && pd.Name == productName)
                             , r => r.PD_ID, pd => pd.ID,
                     (r, pd) => new
                     {
@@ -43,16 +43,16 @@ namespace MainProject.StatisticWorkSpace
                             {
                                 TimeMin = date,
                                 TimeMax = date.AddDays(1).AddSeconds(-1),
-                                Revenue = group.Revenue.Value,
-                                Amount = group.Amount.Value
+                                Revenue = group.Revenue,
+                                Amount = group.Amount
                             };
                             dictionary.Add(date, model);
                         }
                         else
                         {
                             var model = dictionary[date];
-                            model.Revenue += group.Revenue.Value;
-                            model.Amount += group.Amount.Value;
+                            model.Revenue += group.Revenue;
+                            model.Amount += group.Amount;
                         }
                     }
                 }
@@ -73,7 +73,7 @@ namespace MainProject.StatisticWorkSpace
                         dt.Amount
                     }).Join(productName == null
                             ? db.PRODUCTs
-                            : db.PRODUCTs.Where(pd => (!pd.DELETED.HasValue || pd.DELETED.Value == 0) && pd.Name == productName)
+                            : db.PRODUCTs.Where(pd => (pd.DELETED == 0) && pd.Name == productName)
                             , r => r.PD_ID, pd => pd.ID,
                     (r, pd) => new
                     {
@@ -95,8 +95,8 @@ namespace MainProject.StatisticWorkSpace
                             {
                                 TimeMin = date,
                                 TimeMax = date.AddDays(7).AddSeconds(-1),
-                                Revenue = group.Revenue.Value,
-                                Amount = group.Amount.Value
+                                Revenue = group.Revenue,
+                                Amount = group.Amount
                             };
                             if (model.TimeMax > maxDate) { model.TimeMax = maxDate; }
                             else if (model.TimeMin < minDate) { model.TimeMin = minDate; }
@@ -105,8 +105,8 @@ namespace MainProject.StatisticWorkSpace
                         else
                         {
                             var model = dictionary[date];
-                            model.Revenue += group.Revenue.Value;
-                            model.Amount += group.Amount.Value;
+                            model.Revenue += group.Revenue;
+                            model.Amount += group.Amount;
                         }
                     }
                 }
@@ -127,7 +127,7 @@ namespace MainProject.StatisticWorkSpace
                         dt.Amount
                     }).Join(productName == null
                             ? db.PRODUCTs
-                            : db.PRODUCTs.Where(pd => (!pd.DELETED.HasValue || pd.DELETED.Value == 0) && pd.Name == productName)
+                            : db.PRODUCTs.Where(pd => (pd.DELETED == 0) && pd.Name == productName)
                             , r => r.PD_ID, pd => pd.ID,
                     (r, pd) => new
                     {
@@ -148,16 +148,16 @@ namespace MainProject.StatisticWorkSpace
                             {
                                 TimeMin = date,
                                 TimeMax = date.AddMonths(1).AddSeconds(-1),
-                                Revenue = group.Revenue.Value,
-                                Amount = group.Amount.Value
+                                Revenue = group.Revenue,
+                                Amount = group.Amount
                             };
                             dictionary.Add(date, model);
                         }
                         else
                         {
                             var model = dictionary[date];
-                            model.Revenue += group.Revenue.Value;
-                            model.Amount += group.Amount.Value;
+                            model.Revenue += group.Revenue;
+                            model.Amount += group.Amount;
                         }
                     }
                 }
@@ -170,7 +170,7 @@ namespace MainProject.StatisticWorkSpace
             using (mainEntities db = new mainEntities())
             {
                 List<string> rs = new List<string>();
-                var data = db.PRODUCTs.Where(pd => (!pd.DELETED.HasValue) || pd.DELETED.Value == 0);
+                var data = db.PRODUCTs.Where(pd => pd.DELETED == 0);
                 foreach (var pd in data)
                 {
                     rs.Add(pd.Name);
@@ -183,7 +183,7 @@ namespace MainProject.StatisticWorkSpace
         {
             using (mainEntities db = new mainEntities())
             {
-                var data = db.PRODUCTs.Where(pd => ((!pd.DELETED.HasValue) || pd.DELETED.Value == 0) && pd.Name == name).FirstOrDefault();
+                var data = db.PRODUCTs.Where(pd => (pd.DELETED == 0) && pd.Name == name).FirstOrDefault();
                 return data;
             }
         }
