@@ -7,27 +7,24 @@
              xmlns:local="clr-namespace:MainProject.MainWorkSpace.Product"
              xmlns:ViewModel="clr-namespace:MainProject.ViewModel"
              mc:Ignorable="d"
+             x:Name="ProductView"
              d:DataContext="{d:DesignInstance Type=ViewModel:ProductViewModel}"
              d:DesignHeight="480"
              d:DesignWidth="600">
-    <UserControl.Resources>
-        <CollectionViewSource x:Key="ClickPro" Source="{Binding AddDetailProToTableCommand}"/>
-    </UserControl.Resources>
-    <ScrollViewer
-        HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" 
-                      materialDesign:ScrollBarAssist.ThumbWidth="2"  >
+    <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+                  VerticalScrollBarVisibility="Auto"
+                  materialDesign:ScrollBarAssist.ThumbWidth="2">
         <ItemsControl ItemsSource="{Binding ListPoduct}">
-            <ItemsControl.Resources>
-            </ItemsControl.Resources>
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <Button Command="{Binding Source={StaticResource ClickPro}}"
-                            Width="Auto" Height="Auto"
+                    <Button Command="{Binding DataContext.AddDetailProToTableCommand, ElementName=ProductView}"
+                            Width="Auto"
+                            Height="Auto"
                             Background="Transparent"
                             BorderBrush="Transparent"
                             Padding="0"
                             Margin="2">
-                        <local:Pro_UC DataContext="{Binding}"/>
+                        <local:Pro_UC DataContext="{Binding}" />
                     </Button>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
