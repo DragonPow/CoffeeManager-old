@@ -87,6 +87,17 @@
                     FontSize="16"
                     Margin="100,5"
                     MaxWidth="500"/>
+                <Button Command="{Binding DeleteProduct_Command}"
+                             Grid.Column="1"
+                              Height="50"
+                              Style="{StaticResource MaterialDesignOutlinedButton}"
+                              ToolTip="MaterialDesignOutlinedButton"
+                              Content="Xóa sản phẩm"
+                              Foreground="Red"
+                              BorderBrush="Red"
+                              FontSize="20"
+                              Margin="150,40,150,20"
+                              MaxWidth="400"/>
 
 
             </StackPanel>

@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace MainProject.MainWorkSpace.Product
 {
     /// <summary>
-    /// Interaction logic for AddProd_UC.xaml
+    /// Interaction logic for SelectPro.xaml
     /// </summary>
-    public partial class AddProd_UC : UserControl
+    public partial class SelectPro : UserControl
     {
-        public AddProd_UC()
+        public SelectPro()
         {
             InitializeComponent();
         }
