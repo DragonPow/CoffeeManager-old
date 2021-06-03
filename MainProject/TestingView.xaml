@@ -9,7 +9,7 @@
         Title="TestingView" 
         Width="900" Height="450">
     <Window.Resources>
-        <view:StatisticViewModel x:Key="viewModel"/>
+        <view:StatisticViewModel x:Key="viewModel" />
     </Window.Resources>
     <view:StatisticView DataContext="{StaticResource viewModel}"/>
 </Window>

@@ -32,6 +32,28 @@ namespace MainProject.StatisticWorkSpace
             if (index < 0 && index >= Enum.GetValues(typeof(StatisticMode)).Length) return;
             currentMode = (StatisticMode)index;
         }
+        string OPTION_ALL_PRODUCT = "Tất cả sản phẩm";
+        public List<string> OptionListForProduct
+        {
+            get
+            {
+                var dbController = new DatabaseController_Statistic();
+                var rs =  dbController.getProductNames();
+                rs.Insert(0, OPTION_ALL_PRODUCT);
+                return rs;
+            }
+        }
+        public String SelectedOptionProduct { get; set; }
+
+        public long TotalRevenue
+        {
+            get
+            {
+                long rs = 0;
+                foreach (var model in ListModel) { rs += model.Revenue; }
+                return rs;
+            }
+        }
 
         public Func<double, string> formaterLabelAxisY { get; set; }
         private String getMoneyLabel(int money)
@@ -43,174 +65,48 @@ namespace MainProject.StatisticWorkSpace
                 money /= 1000; 
                 i++;
             }
+            if (money < 1000) { return money.ToString(); }
             double rs = money / 1000d;
-
             return String.Format("{0:0.#}", rs) + prefix[i];
         }
 
-        public void setTimeRange(DateTime minDate, DateTime maxDate)
+        public void ClearData()
+        {
+            listModel.Clear();
+            OnPropertyChanged(nameof(ListModel));
+        }
+
+        public void SetTimeRange(DateTime minDate, DateTime maxDate)
         {
             listModel.Clear();
 
             List<StatisticModel> data = null;
+            DatabaseController_Statistic dbController = new DatabaseController_Statistic();
+            string option = (SelectedOptionProduct != OPTION_ALL_PRODUCT) ? SelectedOptionProduct : null;
+
             switch (CurrentMode)
             {
                 case StatisticMode.DayOfWeek:
-                    data = statisticByDay(minDate, maxDate);
+                    data = dbController.statisticByDay(minDate, maxDate, option);
                     break;
                 case StatisticMode.WeekOfMonth:
-                    data = statisticByWeek(minDate, maxDate);
+                    data = dbController.statisticByWeek(minDate, maxDate, option);
                     break;
                 case StatisticMode.MonthOfYear:
-                    data = statisticByMonth(minDate, maxDate);
+                    data = dbController.statisticByMonth(minDate, maxDate, option);
                     break;
             }
 
             foreach (var model in data)
             {
+                model.Label = CreateLabel(model);
+                model.Title = CreateTitle(model);
                 ListModel.Add(model);
             }
-
             OnPropertyChanged(nameof(ListModel));
         }
 
-        public List<StatisticModel> statisticByDay(DateTime minDate, DateTime maxDate)
-        {
-            using (mainEntities db = new mainEntities())
-            {
-                var data = db.BILLs.Where(b => b.CheckoutDay >= minDate && b.CheckoutDay <= maxDate)
-                    .Join(db.DETAILBILLs, b => b.ID, dt => dt.ID_Bill,
-                    (b, dt) => new
-                    {
-                        PD_ID = dt.ID_Product,
-                        Date = b.CheckoutDay,
-                        Amount = dt.Amount
-                    }).Join(db.PRODUCTs, r => r.PD_ID, pd => pd.ID,
-                    (r, pd) => new
-                    {
-                        pd.Name,
-                        Revenue = pd.Price * r.Amount,
-                        r.Date
-                    });
-                Dictionary<DateTime, StatisticModel> dictionary = new Dictionary<DateTime, StatisticModel>();
-                foreach (var group in data)
-                {
-                    if (group.Date.HasValue)
-                    {
-                        DateTime date = new DateTime(group.Date.Value.Year, group.Date.Value.Month, group.Date.Value.Day, 0, 0, 0);
-                        if (!dictionary.ContainsKey(date))
-                        {
-                            var model = new StatisticModel();
-                            model.TimeMin = date;
-                            model.TimeMax = date.AddDays(1).AddSeconds(-1);
-                            model.Revenue = group.Revenue.Value;
-                            model.Label = GetLabel(model);
-                            model.Title = GetLabel(model);
-                            dictionary.Add(date, model);
-                        }
-                        else
-                        {
-                            var model = dictionary[date];
-                            model.Revenue += group.Revenue.Value;
-                        }
-                    }
-                }
-                return dictionary.Values.ToList();
-            }
-        }
-
-        public List<StatisticModel> statisticByWeek(DateTime minDate, DateTime maxDate)
-        {
-            using (mainEntities db = new mainEntities())
-            {
-                var data = db.BILLs.Where(b => b.CheckoutDay >= minDate && b.CheckoutDay <= maxDate)
-                    .Join(db.DETAILBILLs, b => b.ID, dt => dt.ID_Bill,
-                    (b, dt) => new
-                    {
-                        PD_ID = dt.ID_Product,
-                        Date = b.CheckoutDay,
-                        Amount = dt.Amount
-                    }).Join(db.PRODUCTs, r => r.PD_ID, pd => pd.ID,
-                    (r, pd) => new
-                    {
-                        pd.Name,
-                        Revenue = pd.Price * r.Amount,
-                        r.Date
-                    });
-                Dictionary<DateTime, StatisticModel> dictionary = new Dictionary<DateTime, StatisticModel>();
-                foreach (var group in data)
-                {
-                    if (group.Date.HasValue)
-                    {
-                        DateTime date = new DateTime(group.Date.Value.Year, group.Date.Value.Month, group.Date.Value.Day, 0, 0, 0);
-                        while (date.DayOfWeek != DayOfWeek.Monday) { date = date.AddDays(-1); }
-                        if (!dictionary.ContainsKey(date))
-                        {
-                            var model = new StatisticModel();
-                            model.TimeMin = date;
-                            model.TimeMax = date.AddDays(7).AddSeconds(-1);
-                            model.Revenue = group.Revenue.Value;
-                            model.Label = GetLabel(model);
-                            model.Title = GetLabel(model);
-                            dictionary.Add(date, model);
-                        }
-                        else
-                        {
-                            var model = dictionary[date];
-                            model.Revenue += group.Revenue.Value;
-                        }
-                    }
-                }
-                return dictionary.Values.ToList();
-            }
-        }
-
-        public List<StatisticModel> statisticByMonth(DateTime minDate, DateTime maxDate)
-        {
-            using (mainEntities db = new mainEntities())
-            {
-                var data = db.BILLs.Where(b => b.CheckoutDay >= minDate && b.CheckoutDay <= maxDate)
-                    .Join(db.DETAILBILLs, b => b.ID, dt => dt.ID_Bill,
-                    (b, dt) => new
-                    {
-                        PD_ID = dt.ID_Product,
-                        Date = b.CheckoutDay,
-                        Amount = dt.Amount
-                    }).Join(db.PRODUCTs, r => r.PD_ID, pd => pd.ID,
-                    (r, pd) => new
-                    {
-                        pd.Name,
-                        Revenue = pd.Price * r.Amount,
-                        r.Date
-                    });
-                Dictionary<DateTime, StatisticModel> dictionary = new Dictionary<DateTime, StatisticModel>();
-                foreach (var group in data)
-                {
-                    if (group.Date.HasValue)
-                    {
-                        DateTime date = new DateTime(group.Date.Value.Year, group.Date.Value.Month, 1, 0, 0, 0);
-                        if (!dictionary.ContainsKey(date))
-                        {
-                            var model = new StatisticModel();
-                            model.TimeMin = date;
-                            model.TimeMax = date.AddMonths(1).AddSeconds(-1);
-                            model.Revenue = group.Revenue.Value;
-                            model.Label = GetLabel(model);
-                            model.Title = GetLabel(model);
-                            dictionary.Add(date, model);
-                        }
-                        else
-                        {
-                            var model = dictionary[date];
-                            model.Revenue += group.Revenue.Value;
-                        }
-                    }
-                }
-                return dictionary.Values.ToList();
-            }
-        }
-
-        public String GetLabel(StatisticModel model)
+        public String CreateLabel(StatisticModel model)
         {
             String rs = "<Error>";
             switch (CurrentMode)
@@ -219,8 +115,28 @@ namespace MainProject.StatisticWorkSpace
                     rs = GetDayOfWeek(model.TimeMin.DayOfWeek);
                     break;
                 case StatisticMode.WeekOfMonth:
-                    rs = String.Format("{0} - {1} năm {2}", model.TimeMin.ToString("dd/MM"),
-                        model.TimeMax.ToString("dd/MM"), model.TimeMin.Year.ToString());
+                    rs = String.Format("{0} - {1}"
+                        , model.TimeMin.ToString("dd/MM")
+                        , model.TimeMax.ToString("dd/MM"));
+                    break;
+                case StatisticMode.MonthOfYear:
+                    rs = String.Format("Tháng {0}", model.TimeMin.Month.ToString());
+                    break;
+            }
+            return rs;
+        }
+
+        public String CreateTitle(StatisticModel model)
+        {
+            String rs = "<Error>";
+            switch (CurrentMode)
+            {
+                case StatisticMode.DayOfWeek:
+                    rs =  String.Format("{0} ({1})", GetDayOfWeek(model.TimeMin.DayOfWeek), model.TimeMin.ToString("dd/MM"));
+                    break;
+                case StatisticMode.WeekOfMonth:
+                    rs = String.Format("Tuần {0} - {1}", model.TimeMin.ToString("dd/MM"),
+                        model.TimeMax.ToString("dd/MM"));
                     break;
                 case StatisticMode.MonthOfYear:
                     rs = String.Format("Tháng {0}", model.TimeMin.ToString("MM/yyyy"));
@@ -259,17 +175,28 @@ namespace MainProject.StatisticWorkSpace
             return rs;
         }
 
+        
         public StatisticViewModel()
         {
             listModel = new ObservableCollection<StatisticModel>
             {
-                new StatisticModel(){ Label = "Label1", Revenue = 10000},
-                new StatisticModel(){ Label = "Label2", Revenue = 110000},
-                new StatisticModel(){ Label = "Label3", Revenue = 70000},
-                new StatisticModel(){ Label = "Label4", Revenue = 60000},
-                new StatisticModel(){ Label = "Label5", Revenue = 30000}
+                new StatisticModel(){ Label = "Label1", Revenue = 10000, Amount=2},
+                new StatisticModel(){ Label = "Label2", Revenue = 110000, Amount=20},
+                new StatisticModel(){ Label = "Label3", Revenue = 70000, Amount=12},
+                new StatisticModel(){ Label = "Label4", Revenue = 60000, Amount=6},
+                new StatisticModel(){ Label = "Label5", Revenue = 30000, Amount=8}
             };
+            SelectedOptionProduct = OPTION_ALL_PRODUCT;
             formaterLabelAxisY = val => getMoneyLabel((int)val);
+            this.PropertyChanged += StatisticViewModel_PropertyChanged;
+        }
+
+        private void StatisticViewModel_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName.Equals(nameof(ListModel)))
+            {
+                OnPropertyChanged(nameof(TotalRevenue));
+            }
         }
     }
 }

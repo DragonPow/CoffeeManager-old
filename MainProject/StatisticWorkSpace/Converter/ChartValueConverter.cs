@@ -12,14 +12,25 @@ namespace MainProject.StatisticWorkSpace.Converter
 {
     class ChartValueConverter : IValueConverter
     {
+        public string PropertyName { get; set; }
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             if (value is ObservableCollection<StatisticModel> list)
             {
                 ChartValues<int> rs = new ChartValues<int>();
-                foreach (var model in list)
+                if (PropertyName == "Revenue")
                 {
-                    rs.Add(model.Revenue);
+                    foreach (var model in list)
+                    {
+                        rs.Add(model.Revenue);
+                    }
+                }
+                else if (PropertyName == "Amount")
+                {
+                    foreach (var model in list)
+                    {
+                        rs.Add(model.Amount);
+                    }
                 }
                 return rs;
             }

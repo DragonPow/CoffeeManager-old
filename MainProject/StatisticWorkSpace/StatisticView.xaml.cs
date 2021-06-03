@@ -56,6 +56,7 @@ namespace MainProject.StatisticWorkSpace
         {
             DateTime today = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 0, 0, 1);
             cbxStatisticMode_SelectionChanged(cbxStatisticMode, null);
+            txtDatePicker.DisplayDateEnd = today;
             txtDatePicker.SelectedDate = today;
 
         }
@@ -64,30 +65,64 @@ namespace MainProject.StatisticWorkSpace
         {
             if (txtDatePicker.SelectedDate != null)
             {
-                DateTime minDate = DateTime.Now;
-                DateTime maxDate = DateTime.Now;
                 DateTime selectedDate = (DateTime)txtDatePicker.SelectedDate;
-                switch (cbxStatisticMode.SelectedIndex)
-                {
-                    case 0:
-                        selectWeek(selectedDate,out minDate,out maxDate);
-                        break;
-                    case 1:
-                        selectMonth(selectedDate, out minDate, out maxDate);
-                        break;
-                    case 2:
-                        selectYear(selectedDate, out minDate, out maxDate);
-                        break;
-                }
-                Console.WriteLine("Statistic range {0} - {1}", minDate.ToShortDateString(), maxDate.ToShortDateString());
                 StatisticViewModel viewModel = DataContext as StatisticViewModel;
                 if(viewModel != null)
                 {
-                    viewModel.setTimeRange(minDate, maxDate);
+                    // Task in main thread 
+                    var button = sender as Button;
+                    button.Content = "Đổi cài đặt";
+                    foreach (Control child in (button.Parent as Panel).Children)
+                    {
+                        if (!(child == button)){ child.IsEnabled = false; }
+                    }
+                    button.Click -= BtnSubmit_Click;
+                    button.Click += BtnEdit_Click1;
+
+                    // Calculate from another thread
+                    Application.Current.Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.SystemIdle,
+                        new Action<StatisticViewModel, DateTime, int>(CalculateFromDB), viewModel, selectedDate, cbxStatisticMode.SelectedIndex);
                 }
             }
         }
 
+        private void CalculateFromDB(StatisticViewModel viewModel, DateTime selectedDate, int selectedMode)
+        {
+            DateTime minDate = DateTime.Now;
+            DateTime maxDate = DateTime.Now;
+            switch (selectedMode)
+            {
+                case 0:
+                    selectWeek(selectedDate, out minDate, out maxDate);
+                    break;
+                case 1:
+                    selectMonth(selectedDate, out minDate, out maxDate);
+                    break;
+                case 2:
+                    selectYear(selectedDate, out minDate, out maxDate);
+                    break;
+            }
+
+            Console.WriteLine("Statistic range {0} - {1}", minDate.ToShortDateString(), maxDate.ToShortDateString());
+            viewModel.SetTimeRange(minDate, maxDate);
+        }
+
+        private void BtnEdit_Click1(object sender, RoutedEventArgs e)
+        {
+            var button = sender as Button;
+            button.Content = "Thống kê";
+            foreach (Control child in (button.Parent as Panel).Children)
+            {
+                if (!(child == button)) { child.IsEnabled = true; }
+            }
+            button.Click -= BtnEdit_Click1;
+            button.Click += BtnSubmit_Click;
+            var viewModel = DataContext as StatisticViewModel;
+            if (viewModel != null)
+            {
+                viewModel.ClearData();
+            }
+        }
 
         void selectWeek(DateTime date, out DateTime minDate, out DateTime maxDate)
         {
@@ -113,10 +148,10 @@ namespace MainProject.StatisticWorkSpace
             //Console.WriteLine(String.Format("Selected Month : {0} - {1}", minDate.ToShortDateString(), maxDate.ToShortDateString()));
         }
 
-        string[] mDateFormat_Week = new string[] { "7 ngày từ ", "dd/MM/yyyy", null };
+        string[] mDateFormat_Week = new string[] { "Một tuần từ ", "dd/MM/yyyy", null };
         public string[] MyDateFormat_Week => mDateFormat_Week;
-        string[] mDateFormat_Month = new string[] { "Tháng ", "MM/yyyy", null };
-        string[] mDateFormat_Year = new string[] { "Năm ", "yyyy", null };
+        string[] mDateFormat_Month = new string[] { "Cả tháng ", "MM/yyyy", null };
+        string[] mDateFormat_Year = new string[] { "Cả năm ", "yyyy", null };
 
         private void cbxStatisticMode_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -141,6 +176,11 @@ namespace MainProject.StatisticWorkSpace
                         txtDatePicker.SetValue(DatePickerDateFormat.DateFormatProperty, mDateFormat_Year);
                         break;
                 }
+            }
+            var viewModel = DataContext as StatisticViewModel;
+            if (viewModel != null)
+            {
+                viewModel.SetCurrentMode(comboBox.SelectedIndex);
             }
         }
 

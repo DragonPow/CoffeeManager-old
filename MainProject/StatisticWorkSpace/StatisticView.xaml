@@ -23,19 +23,20 @@
             <Setter Property="FontWeight" Value="Bold"/>
         </Style>
         <conver:MoneyConverter x:Key="moneyConverter"/>
-        <conver:ChartValueConverter x:Key="chartValueConverter"/>
+        <conver:ChartValueConverter x:Key="chartValueConverter" PropertyName="Revenue"/>
+        <conver:ChartValueConverter x:Key="chartValueConverter_bill" PropertyName="Amount"/>
         <conver:ChartLabelConverter x:Key="chartLabelConverterAxisX" Axis="X"/>
-        <conver:ChartLabelConverter x:Key="chartLabelConverterAxisY" Axis="Y"/>
     </UserControl.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="200"/>
-            <ColumnDefinition Width="300"/>
-            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="5"/>
+            <ColumnDefinition Width="5*"/>
         </Grid.ColumnDefinitions>
         <StackPanel
             Grid.Column="0"
-            Background="DarkGray"
+            Background="DarkGray" x:Name="stackPanelSetting"
             >
             <Label
                 Style="{StaticResource labelStyle}"
@@ -61,7 +62,7 @@
                 x:Name="txtDatePicker" Margin="5,0"
                 >
             </DatePicker>
-            
+
             <Label
                 Style="{StaticResource labelStyle}"
                 >
@@ -69,11 +70,9 @@
             </Label>
             <ComboBox
                 SelectedIndex="0"
-                Margin="5,0,5,0"
+                Margin="5,0,5,0" ItemsSource="{Binding Path=OptionListForProduct, Mode=OneWay}" 
+                SelectedValue="{Binding Path=SelectedOptionProduct, Mode=OneWayToSource}"
                 >
-                <ComboBoxItem Content="Tất cả sản phẩm"/>
-                <ComboBoxItem Content="Sản phẩm 1"/>
-                <ComboBoxItem Content="Sản phẩm 2"/>
             </ComboBox>
 
             <Button
@@ -94,20 +93,22 @@
             <Grid
                 DockPanel.Dock="Bottom">
                 <Label HorizontalAlignment="Left" Style="{StaticResource labelStyle}">Tổng doanh thu</Label>
-                <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center">5.000.000đ</TextBlock>
+                <TextBlock 
+                    HorizontalAlignment="Right" VerticalAlignment="Center" 
+                           Text="{Binding Path=TotalRevenue, Mode=OneWay, Converter={StaticResource moneyConverter}}" FontWeight="Bold"/>
             </Grid>
             <DataGrid
                 DockPanel.Dock="Top"
-                SelectionMode="Single"
-                BorderBrush="Black" IsReadOnly="True" CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False" CanUserResizeRows="False"
+                SelectionMode="Single" CanUserSortColumns="True"
+                BorderBrush="Black" CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False" CanUserResizeRows="False"
                 HorizontalGridLinesBrush="Gray" VerticalGridLinesBrush="LightGray" GridLinesVisibility="All"
                 materialDesign:DataGridAssist.CornerRadius="2" AutoGenerateColumns="False"
                 ItemsSource="{Binding Path=ListModel, Mode=OneWay}" 
                 >
                 <DataGrid.Columns>
                     <DataGridTemplateColumn 
-                        Header="Thời gian" HeaderStyle="{StaticResource headerStyle}"
-                        Width="Auto" IsReadOnly="True" CanUserResize="False">
+                        Header="Thời gian" HeaderStyle="{StaticResource headerStyle}" CanUserSort="True"
+                        Width="Auto" IsReadOnly="True" CanUserResize="True">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{Binding Path=Title, Mode=OneWay}"></TextBlock>
@@ -116,7 +117,7 @@
                     </DataGridTemplateColumn>
                     <DataGridTemplateColumn 
                         Header="Doanh thu" HeaderStyle="{StaticResource headerStyle}"
-                        Width="*" IsReadOnly="True">
+                        Width="*" IsReadOnly="True" CanUserResize="True">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{Binding Path=Revenue, Mode=OneWay, 
@@ -128,25 +129,59 @@
             </DataGrid>
 
         </DockPanel>
-        <DockPanel
-            Grid.Column="2"
+        <GridSplitter Grid.Column="2" Background="Red" VerticalAlignment="Stretch"/>
+        <Grid
+            Grid.Column="3"
             Margin="5,5,5,5">
-            <Label DockPanel.Dock="Top" Style="{StaticResource labelStyle}">Biểu đồ </Label>
-            <charting:CartesianChart 
-                DockPanel.Dock="Top" x:Name="chartRevenue" >
-                <charting:CartesianChart.Series>
-                    <charting:ColumnSeries Values="{Binding Path=ListModel, Mode=OneWay, Converter={StaticResource chartValueConverter}}"/>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="3"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <DockPanel Grid.Row="0">
+                <Label DockPanel.Dock="Top" Style="{StaticResource labelStyle}">Biểu đồ doanh thu</Label>
+                <charting:CartesianChart 
+                    DockPanel.Dock="Bottom" x:Name="chartRevenue" >
+                    <charting:CartesianChart.Series >
+                        <charting:ColumnSeries 
+                            Fill="Blue"
+                            Title="Doanh thu" Values="{Binding Path=ListModel, Mode=OneWay, Converter={StaticResource chartValueConverter}}"/>
 
-                </charting:CartesianChart.Series>
-                <charting:CartesianChart.AxisX>
-                    <charting:Axis 
-                        x:Name="chartRevenueAxisX" Labels="{Binding Path=ListModel, Mode=OneWay, Converter={StaticResource chartLabelConverterAxisX}}"/>
-                </charting:CartesianChart.AxisX>
-                <charting:CartesianChart.AxisY>
-                    <charting:Axis 
-                        x:Name="chartRevenueAxisY" LabelFormatter="{Binding Path=formaterLabelAxisY}"/>
-                </charting:CartesianChart.AxisY>
-            </charting:CartesianChart>
-        </DockPanel>
+                    </charting:CartesianChart.Series>
+                    <charting:CartesianChart.AxisX>
+                        <charting:Axis
+                            x:Name="chartRevenueAxisX" ShowLabels="True" 
+                            Labels="{Binding Path=ListModel, Mode=OneWay, Converter={StaticResource chartLabelConverterAxisX}}"/>
+                    </charting:CartesianChart.AxisX>
+                    <charting:CartesianChart.AxisY>
+                        <charting:Axis 
+                            x:Name="chartRevenueAxisY" LabelFormatter="{Binding Path=formaterLabelAxisY}"/>
+                    </charting:CartesianChart.AxisY>
+                </charting:CartesianChart>
+            </DockPanel>
+            <GridSplitter Grid.Row="1" Background="Gray" HorizontalAlignment="Stretch" Margin="5,0"></GridSplitter>
+            <DockPanel Grid.Row="2">
+                <Label DockPanel.Dock="Top"  Style="{StaticResource labelStyle}">Biểu đồ lượt mua</Label>
+                <charting:CartesianChart 
+                    DockPanel.Dock="Top" x:Name="chartBill" >
+                    <charting:CartesianChart.Series >
+                        <charting:ColumnSeries 
+                            Fill="YellowGreen" Title="Lượt mua"
+                            Values="{Binding Path=ListModel, Mode=OneWay, Converter={StaticResource chartValueConverter_bill}}"/>
+
+                    </charting:CartesianChart.Series>
+                    <charting:CartesianChart.AxisX>
+                        <charting:Axis
+                            x:Name="chartBillAxisX" ShowLabels="True" 
+                            Labels="{Binding Path=ListModel, Mode=OneWay, Converter={StaticResource chartLabelConverterAxisX}}"/>
+                    </charting:CartesianChart.AxisX>
+                    <charting:CartesianChart.AxisY>
+                        <charting:Axis 
+                            x:Name="chartBillAxisY" LabelFormatter="{Binding Path=formaterLabelAxisY}"/>
+                    </charting:CartesianChart.AxisY>
+                </charting:CartesianChart>
+            </DockPanel>
+            
+        </Grid>
     </Grid>
 </UserControl>

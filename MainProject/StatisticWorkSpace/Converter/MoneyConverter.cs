@@ -21,10 +21,10 @@ namespace MainProject.StatisticWorkSpace.Converter
             if (!targetType.Equals(typeof(String))) { throw new NotImplementedException(); }
 
             String rs = "Cannot convert";
-            if (value is int money)
+            long money;
+            if (long.TryParse(value.ToString(),out money))
             {
                 rs = money.ToString("N0")+currency;
-                
             }
             return rs;
         }
