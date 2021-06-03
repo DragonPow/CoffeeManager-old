@@ -12,9 +12,7 @@ namespace MainProject
     {
         private int _quantity;
         private PRODUCT pro;
-        public DetailPro()
-        {
-        }
+
         public int Quantity 
         {
             get => _quantity;
@@ -41,8 +39,13 @@ namespace MainProject
             }
         }
 
-          
-        public DetailPro(PRODUCT pro, int quan = 0)
+        public long TotalPrice { get => Pro.Price * Quantity; }
+        
+        public DetailPro()
+        {
+            Pro.PropertyChanged += (s, e) => OnPropertyChanged("TotalPrice"); 
+        }
+        public DetailPro(PRODUCT pro, int quan = 0) : base()
         {
             this.Pro = pro;
             this.Quantity = quan;

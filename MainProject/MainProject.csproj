@@ -142,6 +142,8 @@
     <Compile Include="Model\BILL.cs">
       <DependentUpon>MainModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\CustomModel\BILL.cs" />
+    <Compile Include="Model\CustomModel\DETAILBILL.cs" />
     <Compile Include="Model\CustomModel\EMPLOYEE.cs" />
     <Compile Include="Model\CustomModel\PRODUCT.cs" />
     <Compile Include="Model\CustomModel\POSITION_EMPLOYEE.cs" />
