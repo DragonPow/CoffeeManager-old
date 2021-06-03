@@ -25,14 +25,11 @@ namespace MainProject.Model
                         throw new NullReferenceException("TYPE_PRODUCT of PRODUCT is null");
                         return;
                     }
-                    if (TYPE_PRODUCT.Count==0)
+                    if (TYPE_PRODUCT.Count == 0)
                     {
                         TYPE_PRODUCT.Add(new TYPE_PRODUCT());
                     }
-                    TYPE_PRODUCT[0].Type = value;
-
-                    // thêm Id 
-
+                    TYPE_PRODUCT[0].Type = value;       
                     OnPropertyChanged();
                 }
             }

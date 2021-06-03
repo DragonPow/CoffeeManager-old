@@ -23,6 +23,8 @@ namespace MainProject.ViewModel
         private int _IndexCurrentproduct;
         private TYPE_PRODUCT _Type;
         string _SearchProduct;
+        string _Type_in_Combobox_AddPro;
+        TYPE_PRODUCT _Type_in_Combobox_AddProduct;
         CUSTOMPRODUCT _Newproduct;
 
         TableViewModel _Tableviewmodel;
@@ -67,12 +69,15 @@ namespace MainProject.ViewModel
                 { 
                     _Newproduct = value; 
                     OnPropertyChanged(); 
-                    if (value.product.Image != null) _Newproduct.Image_product = byteArrayToImage(value.product.Image);  
+                    if (value.product.Image != null) Newproduct.Image_product = byteArrayToImage(value.product.Image);  
                 } 
             } 
         }
 
         public string SearchProduct { get => _SearchProduct; set { if (_SearchProduct != value) { _SearchProduct = value; OnPropertyChanged(); } } }
+        public string Type_in_Combobox_AddPro { get => _Type_in_Combobox_AddPro; set { if (_Type_in_Combobox_AddPro != value) { _Type_in_Combobox_AddPro= value; OnPropertyChanged(); } } }
+
+        public TYPE_PRODUCT Type_in_Combobox_AddProduct { get => _Type_in_Combobox_AddProduct; set { if (_Type_in_Combobox_AddProduct != value) { _Type_in_Combobox_AddProduct = value; OnPropertyChanged(); } } }
         public TYPE_PRODUCT Type { get => _Type; set { if (_Type != value) { _Type = value; OnPropertyChanged(); LoadProductByType(); } } }
 
         public TableViewModel Tableviewmodel { get => _Tableviewmodel; set { if (_Tableviewmodel != value) { _Tableviewmodel = value; OnPropertyChanged(); } } }
@@ -82,8 +87,9 @@ namespace MainProject.ViewModel
 
         public ProductViewModel()
         {
-            Type= new TYPE_PRODUCT() { Type ="Tất cả"} ;
-            Newproduct = new CUSTOMPRODUCT() { product = new PRODUCT() { DELETED = 0, Image = null } };
+            Newproduct = new CUSTOMPRODUCT() { product = new PRODUCT() { DELETED = 0, Image = null, TYPE_PRODUCT = new ObservableCollection<TYPE_PRODUCT>() } };
+                    /* lát phải xóa dòng trên đầu nhó*/
+            Type = new TYPE_PRODUCT() { Type ="Tất cả"} ;
         }
 
         #endregion
@@ -106,7 +112,8 @@ namespace MainProject.ViewModel
 
         public void Loadaddproview()
         {
-            Newproduct = new CUSTOMPRODUCT() { product = new PRODUCT() { DELETED = 0, Image = null } };
+
+            Newproduct = new CUSTOMPRODUCT() { product = new PRODUCT() { DELETED = 0, Image = null, TYPE_PRODUCT = new ObservableCollection<TYPE_PRODUCT>() } };
             //open view Add_pro(a)
         }
 
@@ -128,8 +135,10 @@ namespace MainProject.ViewModel
             using (var db = new mainEntities())
             {
                 {
-                    long id = (db.TYPE_PRODUCT.Where(t => (t.Type == Newproduct.product.MainType)).FirstOrDefault()).ID;
-                    Newproduct.product.TYPE_PRODUCT[0] = new TYPE_PRODUCT() { Type = Newproduct.product.MainType, ID = id };
+                    TYPE_PRODUCT type= db.TYPE_PRODUCT.Where(t => (t.Type == Type_in_Combobox_AddPro)).FirstOrDefault();
+                
+                    if (type == null) return;
+                    Newproduct.product.TYPE_PRODUCT = new ObservableCollection<TYPE_PRODUCT>() { type };                
 
                     db.PRODUCTs.Add(Newproduct.product);
 

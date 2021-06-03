@@ -475,6 +475,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Resources\add-image-icon-png-14.jpg" />
     <Resource Include="Resources\iconfinder_17_330399.png" />
     <Resource Include="Resources\Mask Group.png" />
     <Resource Include="Resources\freetable.png" />
