@@ -204,11 +204,7 @@ namespace MainProject.StatisticWorkSpace
         {
             listModel = new List<StatisticModel>
             {
-                new StatisticModel(){ Label = "Label1", Revenue = 10000, Amount=2},
-                new StatisticModel(){ Label = "Label2", Revenue = 110000, Amount=20},
-                new StatisticModel(){ Label = "Label3", Revenue = 70000, Amount=12},
-                new StatisticModel(){ Label = "Label4", Revenue = 60000, Amount=6},
-                new StatisticModel(){ Label = "Label5", Revenue = 30000, Amount=8}
+                
             };
             foreach (var model in ListModel) { model.Label = CreateLabel(model); model.Title = CreateTitle(model); }
             SelectedOptionProduct = OPTION_ALL_PRODUCT;
