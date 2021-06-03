@@ -21,13 +21,13 @@ namespace MainProject.StatisticWorkSpace
             switch (mode)
             {
                 case StatisticMode.DayOfWeek:
-                    rs = "Ngày trong tuần";
+                    rs = "Từng ngày trong tuần";
                     break;
                 case StatisticMode.WeekOfMonth:
-                    rs = "Tuần trong tháng";
+                    rs = "Từng tuần trong tháng";
                     break;
                 case StatisticMode.MonthOfYear:
-                    rs = "Tháng trong năm";
+                    rs = "Từng tháng trong năm";
                     break;
             }
             return rs;

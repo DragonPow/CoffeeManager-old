@@ -7,9 +7,8 @@
              xmlns:conver="clr-namespace:MainProject.StatisticWorkSpace.Converter"
              xmlns:charting="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-             mc:Ignorable="d" 
-             Background="White" FontSize="13"
-             d:DesignHeight="450" d:DesignWidth="950" 
+             mc:Ignorable="d"  FontSize="13"
+             d:DesignHeight="450" d:DesignWidth="950"  Background="GhostWhite"
              d:DataContext="{d:DesignInstance Type=local:StatisticViewModel,IsDesignTimeCreatable=True}">
     <UserControl.Resources>
         <Style x:Key="headerStyle" TargetType="Control">
@@ -30,8 +29,7 @@
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="200"/>
-            <ColumnDefinition Width="3*"/>
-            <ColumnDefinition Width="5"/>
+            <ColumnDefinition Width="250"/>
             <ColumnDefinition Width="5*"/>
         </Grid.ColumnDefinitions>
         <StackPanel
@@ -47,11 +45,8 @@
                 x:Name="cbxStatisticMode"
                 SelectedIndex="0"
                 SelectionChanged="cbxStatisticMode_SelectionChanged"
-                Margin="5,0,5,0"
+                Margin="5,0,5,0" ItemsSource="{Binding Path=ListStatisticModes}" materialDesign:HintAssist.Hint="Nhấp để chọn"
                 >
-                <ComboBoxItem Content="Ngày trong tuần"/>
-                <ComboBoxItem Content="Tuần trong tháng"/>
-                <ComboBoxItem Content="Tháng trong năm"/>
             </ComboBox>
             <Label
                 Style="{StaticResource labelStyle}"
@@ -59,7 +54,7 @@
                 Chọn thời gian:
             </Label>
             <DatePicker
-                x:Name="txtDatePicker" Margin="5,0"
+                x:Name="txtDatePicker" Margin="5,0" materialDesign:HintAssist.Hint="Nhấp để chọn"
                 >
             </DatePicker>
 
@@ -69,8 +64,8 @@
                 Sản phẩm:
             </Label>
             <ComboBox
-                SelectedIndex="0"
-                Margin="5,0,5,0" ItemsSource="{Binding Path=OptionListForProduct, Mode=OneWay}" 
+                SelectedIndex="0" materialDesign:HintAssist.Hint="Nhấp để chọn"
+                Margin="5,0,5,0" ItemsSource="{Binding Path=ListOptionForProduct, Mode=OneWay}" 
                 SelectedValue="{Binding Path=SelectedOptionProduct, Mode=OneWayToSource}"
                 >
             </ComboBox>
@@ -84,7 +79,7 @@
 
         </StackPanel>
         <DockPanel
-            Grid.Column="1"
+            Grid.Column="1" Background="GhostWhite"
             Margin="5,5">
             <Label 
                 DockPanel.Dock="Top" Style="{StaticResource labelStyle}">
@@ -92,26 +87,27 @@
             </Label>
             <Grid
                 DockPanel.Dock="Bottom">
-                <Label HorizontalAlignment="Left" Style="{StaticResource labelStyle}">Tổng doanh thu</Label>
+                <Label HorizontalAlignment="Left" Margin="0" Style="{StaticResource labelStyle}">Tổng doanh thu</Label>
                 <TextBlock 
-                    HorizontalAlignment="Right" VerticalAlignment="Center" 
+                    HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="14" Margin="5"
                            Text="{Binding Path=TotalRevenue, Mode=OneWay, Converter={StaticResource moneyConverter}}" FontWeight="Bold"/>
             </Grid>
             <DataGrid
                 DockPanel.Dock="Top"
-                SelectionMode="Single" CanUserSortColumns="True"
-                BorderBrush="Black" CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False" CanUserResizeRows="False"
+                SelectionMode="Single" SelectionUnit="FullRow" CanUserSortColumns="True" Margin="2,0"
+                CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False" CanUserResizeRows="False"
                 HorizontalGridLinesBrush="Gray" VerticalGridLinesBrush="LightGray" GridLinesVisibility="All"
+                BorderThickness="1" BorderBrush="Gray"
                 materialDesign:DataGridAssist.CornerRadius="2" AutoGenerateColumns="False"
                 ItemsSource="{Binding Path=ListModel, Mode=OneWay}" 
                 >
                 <DataGrid.Columns>
                     <DataGridTemplateColumn 
-                        Header="Thời gian" HeaderStyle="{StaticResource headerStyle}" CanUserSort="True"
+                        Header="Thời gian" HeaderStyle="{StaticResource headerStyle}"
                         Width="Auto" IsReadOnly="True" CanUserResize="True">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding Path=Title, Mode=OneWay}"></TextBlock>
+                                <TextBlock  Text="{Binding Path=Title, Mode=OneWay}" Foreground="#DD000000"></TextBlock>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
@@ -129,18 +125,18 @@
             </DataGrid>
 
         </DockPanel>
-        <GridSplitter Grid.Column="2" Background="Red" VerticalAlignment="Stretch"/>
         <Grid
-            Grid.Column="3"
-            Margin="5,5,5,5">
+            Grid.Column="2" Background="GhostWhite"
+            Margin="0,5,5,5">
             <Grid.RowDefinitions>
                 <RowDefinition Height="2*"/>
                 <RowDefinition Height="3"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            <DockPanel Grid.Row="0">
+            <DockPanel Grid.Row="0" >
                 <Label DockPanel.Dock="Top" Style="{StaticResource labelStyle}">Biểu đồ doanh thu</Label>
                 <charting:CartesianChart 
+                    Background="White" Margin="2,0,2,5"
                     DockPanel.Dock="Bottom" x:Name="chartRevenue" >
                     <charting:CartesianChart.Series >
                         <charting:ColumnSeries 
@@ -163,6 +159,7 @@
             <DockPanel Grid.Row="2">
                 <Label DockPanel.Dock="Top"  Style="{StaticResource labelStyle}">Biểu đồ lượt mua</Label>
                 <charting:CartesianChart 
+                    Background="White" Margin="2,0,2,0"
                     DockPanel.Dock="Top" x:Name="chartBill" >
                     <charting:CartesianChart.Series >
                         <charting:ColumnSeries 

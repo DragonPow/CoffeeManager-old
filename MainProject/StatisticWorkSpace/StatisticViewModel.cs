@@ -21,8 +21,20 @@ namespace MainProject.StatisticWorkSpace
             }
         }
 
-        ObservableCollection<StatisticModel> listModel;
-        public ObservableCollection<StatisticModel> ListModel { get => listModel; }
+        List<StatisticModel> listModel;
+        public List<StatisticModel> ListModel { get => listModel; }
+        public void SetListModel(List<StatisticModel> list)
+        {
+            ListModel.Clear();
+            foreach (var model in list)
+            {
+                model.Label = CreateLabel(model);
+                model.Title = CreateTitle(model);
+            }
+            list.Sort((m1, m2) => DateTime.Compare(m1.TimeMin, m2.TimeMin));
+            listModel = list;
+            OnPropertyChanged(nameof(ListModel));
+        }
 
         StatisticMode currentMode = StatisticMode.DayOfWeek;
         public StatisticMode CurrentMode => currentMode;
@@ -33,7 +45,7 @@ namespace MainProject.StatisticWorkSpace
             currentMode = (StatisticMode)index;
         }
         string OPTION_ALL_PRODUCT = "Tất cả sản phẩm";
-        public List<string> OptionListForProduct
+        public List<string> ListOptionForProduct
         {
             get
             {
@@ -44,6 +56,19 @@ namespace MainProject.StatisticWorkSpace
             }
         }
         public String SelectedOptionProduct { get; set; }
+
+        public List<string> ListStatisticModes
+        {
+            get
+            {
+                var rs = new List<string>();
+                foreach (StatisticMode e in Enum.GetValues(typeof(StatisticMode)))
+                {
+                    rs.Add(StatisticEnum.GetString(e));
+                }
+                return rs;
+            }
+        }
 
         public long TotalRevenue
         {
@@ -78,8 +103,6 @@ namespace MainProject.StatisticWorkSpace
 
         public void SetTimeRange(DateTime minDate, DateTime maxDate)
         {
-            listModel.Clear();
-
             List<StatisticModel> data = null;
             DatabaseController_Statistic dbController = new DatabaseController_Statistic();
             string option = (SelectedOptionProduct != OPTION_ALL_PRODUCT) ? SelectedOptionProduct : null;
@@ -96,14 +119,7 @@ namespace MainProject.StatisticWorkSpace
                     data = dbController.statisticByMonth(minDate, maxDate, option);
                     break;
             }
-
-            foreach (var model in data)
-            {
-                model.Label = CreateLabel(model);
-                model.Title = CreateTitle(model);
-                ListModel.Add(model);
-            }
-            OnPropertyChanged(nameof(ListModel));
+            SetListModel(data);
         }
 
         public String CreateLabel(StatisticModel model)
@@ -135,8 +151,16 @@ namespace MainProject.StatisticWorkSpace
                     rs =  String.Format("{0} ({1})", GetDayOfWeek(model.TimeMin.DayOfWeek), model.TimeMin.ToString("dd/MM"));
                     break;
                 case StatisticMode.WeekOfMonth:
-                    rs = String.Format("Tuần {0} - {1}", model.TimeMin.ToString("dd/MM"),
+                    if (model.TimeMax.Day - model.TimeMin.Day < 6)
+                    {
+                        rs = String.Format("Ngày {0} - {1}", model.TimeMin.ToString("dd/MM"),
                         model.TimeMax.ToString("dd/MM"));
+                    }
+                    else
+                    {
+                        rs = String.Format("Tuần {0} - {1}", model.TimeMin.ToString("dd/MM"),
+                        model.TimeMax.ToString("dd/MM"));
+                    }
                     break;
                 case StatisticMode.MonthOfYear:
                     rs = String.Format("Tháng {0}", model.TimeMin.ToString("MM/yyyy"));
@@ -178,7 +202,7 @@ namespace MainProject.StatisticWorkSpace
         
         public StatisticViewModel()
         {
-            listModel = new ObservableCollection<StatisticModel>
+            listModel = new List<StatisticModel>
             {
                 new StatisticModel(){ Label = "Label1", Revenue = 10000, Amount=2},
                 new StatisticModel(){ Label = "Label2", Revenue = 110000, Amount=20},
@@ -186,6 +210,7 @@ namespace MainProject.StatisticWorkSpace
                 new StatisticModel(){ Label = "Label4", Revenue = 60000, Amount=6},
                 new StatisticModel(){ Label = "Label5", Revenue = 30000, Amount=8}
             };
+            foreach (var model in ListModel) { model.Label = CreateLabel(model); model.Title = CreateTitle(model); }
             SelectedOptionProduct = OPTION_ALL_PRODUCT;
             formaterLabelAxisY = val => getMoneyLabel((int)val);
             this.PropertyChanged += StatisticViewModel_PropertyChanged;

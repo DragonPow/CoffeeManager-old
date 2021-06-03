@@ -15,21 +15,12 @@ namespace MainProject.StatisticWorkSpace.Converter
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value is ObservableCollection<StatisticModel> list)
+            if (value is List<StatisticModel> list)
             {
                 String[] rs = new string[list.Count];
                 for (int i = 0; i < list.Count; i++)
                 {
-                    switch(Axis)
-                    {
-                        case "X":
-                            rs[i] = list[i].Label;
-                            break;
-                        case "Y":
-                            rs[i] = (list[i].Revenue/1000).ToString() + "k";
-                            break;
-                    }
-
+                    rs[i] = list[i].Label;
                 }
                 return rs;
             }

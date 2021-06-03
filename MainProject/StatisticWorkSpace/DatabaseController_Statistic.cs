@@ -19,7 +19,7 @@ namespace MainProject.StatisticWorkSpace
                     {
                         PD_ID = dt.ID_Product,
                         Date = b.CheckoutDay,
-                        Amount = dt.Amount
+                        dt.Amount
                     }).Join(productName == null
                             ?db.PRODUCTs
                             :db.PRODUCTs.Where(pd => (!pd.DELETED.HasValue || pd.DELETED.Value == 0) && pd.Name == productName)
@@ -39,17 +39,20 @@ namespace MainProject.StatisticWorkSpace
                         DateTime date = new DateTime(group.Date.Value.Year, group.Date.Value.Month, group.Date.Value.Day, 0, 0, 0);
                         if (!dictionary.ContainsKey(date))
                         {
-                            var model = new StatisticModel();
-                            model.TimeMin = date;
-                            model.TimeMax = date.AddDays(1).AddSeconds(-1);
-                            model.Revenue = group.Revenue.Value;
-                            model.Amount = group.Amount.Value;
+                            var model = new StatisticModel
+                            {
+                                TimeMin = date,
+                                TimeMax = date.AddDays(1).AddSeconds(-1),
+                                Revenue = group.Revenue.Value,
+                                Amount = group.Amount.Value
+                            };
                             dictionary.Add(date, model);
                         }
                         else
                         {
                             var model = dictionary[date];
                             model.Revenue += group.Revenue.Value;
+                            model.Amount += group.Amount.Value;
                         }
                     }
                 }
@@ -67,7 +70,7 @@ namespace MainProject.StatisticWorkSpace
                     {
                         PD_ID = dt.ID_Product,
                         Date = b.CheckoutDay,
-                        Amount = dt.Amount
+                        dt.Amount
                     }).Join(productName == null
                             ? db.PRODUCTs
                             : db.PRODUCTs.Where(pd => (!pd.DELETED.HasValue || pd.DELETED.Value == 0) && pd.Name == productName)
@@ -85,20 +88,25 @@ namespace MainProject.StatisticWorkSpace
                     if (group.Date.HasValue)
                     {
                         DateTime date = new DateTime(group.Date.Value.Year, group.Date.Value.Month, group.Date.Value.Day, 0, 0, 0);
-                        while (date.DayOfWeek != DayOfWeek.Monday) { date = date.AddDays(-1); }
+                        while (date.DayOfWeek != DayOfWeek.Monday) { date = date.AddDays(-1);}
                         if (!dictionary.ContainsKey(date))
                         {
-                            var model = new StatisticModel();
-                            model.TimeMin = date;
-                            model.TimeMax = date.AddDays(7).AddSeconds(-1);
-                            model.Revenue = group.Revenue.Value;
-                            model.Amount = group.Amount.Value;
+                            var model = new StatisticModel
+                            {
+                                TimeMin = date,
+                                TimeMax = date.AddDays(7).AddSeconds(-1),
+                                Revenue = group.Revenue.Value,
+                                Amount = group.Amount.Value
+                            };
+                            if (model.TimeMax > maxDate) { model.TimeMax = maxDate; }
+                            else if (model.TimeMin < minDate) { model.TimeMin = minDate; }
                             dictionary.Add(date, model);
                         }
                         else
                         {
                             var model = dictionary[date];
                             model.Revenue += group.Revenue.Value;
+                            model.Amount += group.Amount.Value;
                         }
                     }
                 }
@@ -116,7 +124,7 @@ namespace MainProject.StatisticWorkSpace
                     {
                         PD_ID = dt.ID_Product,
                         Date = b.CheckoutDay,
-                        Amount = dt.Amount
+                        dt.Amount
                     }).Join(productName == null
                             ? db.PRODUCTs
                             : db.PRODUCTs.Where(pd => (!pd.DELETED.HasValue || pd.DELETED.Value == 0) && pd.Name == productName)
@@ -136,17 +144,20 @@ namespace MainProject.StatisticWorkSpace
                         DateTime date = new DateTime(group.Date.Value.Year, group.Date.Value.Month, 1, 0, 0, 0);
                         if (!dictionary.ContainsKey(date))
                         {
-                            var model = new StatisticModel();
-                            model.TimeMin = date;
-                            model.TimeMax = date.AddMonths(1).AddSeconds(-1);
-                            model.Revenue = group.Revenue.Value;
-                            model.Amount = group.Amount.Value;
+                            var model = new StatisticModel
+                            {
+                                TimeMin = date,
+                                TimeMax = date.AddMonths(1).AddSeconds(-1),
+                                Revenue = group.Revenue.Value,
+                                Amount = group.Amount.Value
+                            };
                             dictionary.Add(date, model);
                         }
                         else
                         {
                             var model = dictionary[date];
                             model.Revenue += group.Revenue.Value;
+                            model.Amount += group.Amount.Value;
                         }
                     }
                 }
@@ -179,6 +190,7 @@ namespace MainProject.StatisticWorkSpace
 
         public void createTemplateData()
         {
+            DateTime start = DateTime.Now;
             DateTime minDate = new DateTime(2021, 1, 1, 0, 0, 0);
             DateTime maxDate = new DateTime(2021, 6, 3, 23, 59, 59);
             TimeSpan step = new TimeSpan(6, 0, 0, 0, 0);
@@ -191,18 +203,22 @@ namespace MainProject.StatisticWorkSpace
                 var transaction = db.Database.BeginTransaction();
                 for (DateTime date = minDate; date < maxDate; date += step)
                 {
-                    var bill = new BILL();
-                    bill.CheckoutDay = date;
-                    bill.TotalPrice = 0;
+                    var bill = new BILL
+                    {
+                        CheckoutDay = date,
+                        TotalPrice = 0
+                    };
 
                     var listPDs = new List<long>(productIDs);
                     int count = random.Next(3) + 1;
                     for (int i = 0; i < count; i++)
                     {
-                        var dt = new DETAILBILL();
                         int temp = random.Next(listPDs.Count);
-                        dt.ID_Product = listPDs[temp];
-                        dt.Amount = random.Next(4) + 1;
+                        var dt = new DETAILBILL
+                        {
+                            ID_Product = listPDs[temp],
+                            Amount = random.Next(4) + 1
+                        };
                         bill.DETAILBILLs.Add(dt);
                         listPDs.RemoveAt(temp);
                     }
@@ -224,6 +240,8 @@ namespace MainProject.StatisticWorkSpace
                     Console.WriteLine(e.Message);
                 }
             }
+            TimeSpan timeSpan = DateTime.Now - start;
+            Console.WriteLine("TIMER: Done task in {0}s", timeSpan.ToString("hh:mm:ss"));
         }
     }
 }
