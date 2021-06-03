@@ -21,10 +21,10 @@ namespace MainProject.Model
         }
     
         public long ID { get; set; }
-        public Nullable<int> Floor { get; set; }
+        public int Floor { get; set; }
         public Nullable<long> ID_Status { get; set; }
         public Nullable<int> DELETED { get; set; }
-        public Nullable<int> Number { get; set; }
+        public int Number { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ObservableCollection<BILL> BILLs { get; set; }
