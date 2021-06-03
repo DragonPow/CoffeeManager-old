@@ -186,7 +186,6 @@ namespace MainProject.ViewModel
         {
             Newproduct = null;
             //Exit view Add_pro(a)
-
         }
 
 

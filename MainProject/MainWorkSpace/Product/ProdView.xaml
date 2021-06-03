@@ -21,8 +21,7 @@
             </ItemsControl.Resources>
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <Button
-                            Command="{Binding Source={StaticResource ClickPro}}"
+                    <Button Command="{Binding Source={StaticResource ClickPro}}"
                             Width="Auto" Height="Auto"
                             Background="Transparent"
                             BorderBrush="Transparent"
