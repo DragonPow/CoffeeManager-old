@@ -87,7 +87,7 @@ namespace MainProject.ViewModel
 
         public ProductViewModel()
         {
-            Newproduct = new CUSTOMPRODUCT() { product = new PRODUCT() { DELETED = 0, Image = null, TYPE_PRODUCT = new ObservableCollection<TYPE_PRODUCT>() } };
+           /* Newproduct = new CUSTOMPRODUCT() { product = new PRODUCT() { DELETED = 0, Image = null, TYPE_PRODUCT = new ObservableCollection<TYPE_PRODUCT>() } };*/
                     /* lát phải xóa dòng trên đầu nhó*/
             Type = new TYPE_PRODUCT() { Type ="Tất cả"} ;
         }
@@ -414,12 +414,12 @@ namespace MainProject.ViewModel
                 if (Newproduct == null)
                 {
                     ListPoduct.ElementAt(IndexCurrentProduct).product.Image = converImgToByte(path);
-                    ListPoduct.ElementAt(IndexCurrentProduct).Image_product = byteArrayToImage(ListPoduct.ElementAt(IndexCurrentProduct).product.Image);
+                   /* ListPoduct.ElementAt(IndexCurrentProduct).Image_product = byteArrayToImage(ListPoduct.ElementAt(IndexCurrentProduct).product.Image);*/
                 }   
                 else
                 {
                     Newproduct.product.Image = converImgToByte(path);
-                    Newproduct.Image_product = byteArrayToImage(Newproduct.product.Image);
+                   /* Newproduct.Image_product = byteArrayToImage(Newproduct.product.Image);*/
                 }                    
             }                    
         }
