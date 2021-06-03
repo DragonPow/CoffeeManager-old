@@ -134,6 +134,7 @@
     </Compile>
     <Compile Include="CUSTOMPRODUCT.cs" />
     <Compile Include="DetailPro.cs" />
+    <Compile Include="HelperClass\WindowService.cs" />
     <Compile Include="HistoryWorkSpace\HistoryViewModel.cs" />
     <Compile Include="MainWorkSpace\Bill\BillView.xaml.cs">
       <DependentUpon>BillView.xaml</DependentUpon>

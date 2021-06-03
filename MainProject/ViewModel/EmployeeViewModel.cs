@@ -7,11 +7,13 @@ using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace MainProject.ViewModel
 {
-    public enum ModeAccountView {
+    public enum ModeAccountView
+    {
         normal = 1,
         edit = 2,
         add = 3,
@@ -24,10 +26,8 @@ namespace MainProject.ViewModel
         EMPLOYEE _New_Infor_Employee;
         bool _IsPassword;
         bool _IsConfirmPassword;
-        //bool _Is_Add_New_Employee;
-        //bool _isEditMode;
-        ModeAccountView _modeView;
 
+        ModeAccountView _modeView;
         string _PassWord;
         string _Confirm_Password;
 
@@ -56,7 +56,6 @@ namespace MainProject.ViewModel
             {
                 ListEmployee = new ObservableCollection<EMPLOYEE>(db.EMPLOYEEs.Include("POSITION_EMPLOYEE").Where(e => ((e.DELETED == 0))).ToList());
                 ClearCurrentEmployee();
-                IsPassword = IsConfirmPassword = true;
                 ModeView = ListEmployee.Count == 0 ? ModeAccountView.add : ModeAccountView.normal;
             }
         }
@@ -96,22 +95,41 @@ namespace MainProject.ViewModel
             }
         }
         public string PassWord { get => _PassWord; set { if (_PassWord != value) { _PassWord = value; OnPropertyChanged(); } } }
-        public string Confirm_Password { get => _Confirm_Password; set { if (_Confirm_Password != value) { _Confirm_Password = value; OnPropertyChanged(); } } }
-        public bool IsPassword { get => _IsPassword; set { if (_IsPassword != value) { _IsPassword = value; OnPropertyChanged(); } } }
-        public bool IsConfirmPassword { get => _IsConfirmPassword; set { if (_IsConfirmPassword != value) { _IsConfirmPassword = value; OnPropertyChanged(); } } }
+        public string Confirm_Password
+        {
+            get => _Confirm_Password;
+            set
+            {
+                if (_Confirm_Password != value)
+                {
+                    _Confirm_Password = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        public bool IsPassword
+        {
+            get => OldPassWord == New_Infor_Employee.Password;
+        }
+        public bool IsConfirmPassword
+        {
+            get => PassWord == Confirm_Password;
+        }
 
         public ModeAccountView ModeView
         {
             get => _modeView;
             set
             {
-                if (value!=_modeView)
+                if (value != _modeView)
                 {
                     _modeView = value;
                     OnPropertyChanged();
                 }
             }
         }
+
+        public string OldPassWord { get; set; }
 
         #endregion
 
@@ -166,7 +184,7 @@ namespace MainProject.ViewModel
         private void Click_Add_New_Employee()
         {
             if (ModeView != ModeAccountView.add) New_Infor_Employee = new EMPLOYEE() { POSITION_EMPLOYEE = new POSITION_EMPLOYEE() };
-            
+
             //ID_CurrentEmployee = New_Infor_Employee.ID;
 
             //ListEmployee.Add(new EMPLOYEE() { DELETED = 0 });
@@ -287,7 +305,7 @@ namespace MainProject.ViewModel
 
         public void Load_View_Change_Pass_Employee()
         {
-            //Show view ChangePass
+            WindowService.Instance.OpenWindow(this, new ChangedPassword());
         }
 
         public ICommand Change_Pass_Employee_Command
@@ -306,30 +324,29 @@ namespace MainProject.ViewModel
         {
             using (var db = new mainEntities())
             {
-                var e = db.EMPLOYEEs.Where(employee => (employee.Password == PassWord && New_Infor_Employee.ID == employee.ID && New_Infor_Employee.DELETED == 0)).FirstOrDefault();
-
-                if (e == null)
+                if (!IsPassword)
                 {
-                    IsPassword = false;
+                    WindowService.Instance.OpenMessageBox("Nhập sai mật khẩu", "Lỗi tài khoản", System.Windows.MessageBoxImage.Error);
                     return;
                 }
-
-                IsPassword = true;
-
-                if (Confirm_Password != PassWord)
+                else if(!IsConfirmPassword)
                 {
-                    IsConfirmPassword = false;
+                    WindowService.Instance.OpenMessageBox("Mật khẩu xác nhận phải giống với mật khẩu mới", "Lỗi mật khẩu", System.Windows.MessageBoxImage.Error);
                     return;
                 }
+                else
+                {
+                    var e = db.EMPLOYEEs.Where(employee => (New_Infor_Employee.ID == employee.ID && New_Infor_Employee.DELETED == 0)).FirstOrDefault();
+                    e.Password = PassWord;
+                    db.SaveChanges();
+                    New_Infor_Employee.Password = PassWord;
 
-                IsConfirmPassword = true;
+                    OldPassWord = PassWord = Confirm_Password = null;
 
-                e.Password = PassWord;
-                db.SaveChanges();
-
-                New_Infor_Employee.Password = PassWord;
-
-                //close view changePass
+                    //Request close window
+                    Window window = WindowService.Instance.FindWindowbyTag("ChangePassword").First();
+                    window.Close();
+                }
             }
         }
 
@@ -337,7 +354,7 @@ namespace MainProject.ViewModel
         {
             get
             {
-                if (_RequestEditEmployeeCommand==null)
+                if (_RequestEditEmployeeCommand == null)
                 {
                     _RequestEditEmployeeCommand = new RelayingCommand<Object>(a => RequestEditEmployee());
                 }

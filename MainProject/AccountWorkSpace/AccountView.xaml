@@ -37,8 +37,7 @@
                            VerticalAlignment="Center"
                            FontSize="18"
                            Margin="10,0,0,0"
-                           Foreground="White">
-                </TextBlock>
+                           Foreground="White" />
             </Grid>
             <ScrollViewer Grid.Row="1"
                           VerticalScrollBarVisibility="Auto">
