@@ -41,7 +41,8 @@ namespace MainProject
             }
         }
 
-          
+        public long Total { get => Pro.Price * Quantity; }
+        
         public DetailPro(PRODUCT pro, int quan = 1)
         {
             this.Pro = pro;

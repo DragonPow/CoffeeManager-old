@@ -25,8 +25,8 @@ namespace MainProject
             base.OnStartup(e);
 
             ////Testing Startup
-            TestView view = new TestView();
-            MainViewModel viewModel = new MainViewModel();
+            BillView view = new BillView();
+            BillViewModel viewModel = new BillViewModel();
             ////End testing Startup
             ///
 

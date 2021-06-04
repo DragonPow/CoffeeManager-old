@@ -5,11 +5,13 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
         xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
         xmlns:local="clr-namespace:MainProject.MainWorkSpace.Bill"
+        xmlns:viewmodel="clr-namespace:MainProject.ViewModel"
         mc:Ignorable="d"
         MinWidth="600"
         MaxWidth="800"
         ResizeMode="NoResize"
         SizeToContent="WidthAndHeight"
+        d:DataContext="{d:DesignInstance Type=local:BillViewModel}"
         x:Name="MainWindow">
     <StackPanel Orientation="Vertical">
         <!--Bill title-->
@@ -47,16 +49,16 @@
 
                 <TextBlock Grid.Row="0" Grid.Column="0">
                     <Run>Thời gian</Run>
-                    <Run Text="{Binding TimeCheckout, StringFormat=': {0:hh:mm, dd/MM/yyyy}',
+                    <Run Text="{Binding CurrentBill.CheckoutDay, StringFormat=': {0:hh:mm, dd/MM/yyyy}',
                                 Mode=OneWay}"/>
                 </TextBlock>
                 <TextBlock Grid.Row="1" Grid.Column="0">
                     <Run>Bàn</Run>
-                    <Run Text="{Binding CurrentBill.Table.ID, StringFormat=': {0}'}"/>
+                    <Run Text="{Binding CurrentTable.table.Number, StringFormat=': {0}'}"/>
                 </TextBlock>
                 <TextBlock Grid.Row="0" Grid.Column="1">
                     <Run>Mã số hóa đơn</Run>
-                    <Run Text="{Binding ID, StringFormat=': {0}', Mode=OneWay}"/>
+                    <Run Text="{Binding BillCode, StringFormat=': {0}', Mode=OneWay}"/>
                 </TextBlock>
                 <TextBlock Grid.Row="1" Grid.Column="1">
                     <Run>Số điện thoại</Run>
@@ -72,7 +74,7 @@
         <!--Information of table checkout-->
         <Grid Margin="40 20">
             <Grid.RowDefinitions>
-                <RowDefinition/>
+                <RowDefinition Height="Auto"/>
                 <RowDefinition/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
@@ -80,9 +82,13 @@
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <local:Bill_ProductTable DataContext="{Binding CurrentBill.DETAILBILLs}"
-                                     Grid.ColumnSpan="2"
-                                     x:Name="TableLines"/>
+            <Border Grid.ColumnSpan="2"
+                    BorderThickness="1"
+                    BorderBrush="Black"
+                    Margin="-1">
+                <local:Bill_ProductTable DataContext="{Binding CurrentTable}"
+                                         x:Name="TableLines" />
+            </Border>
             <TextBlock Text="Ưu đãi" Grid.Row="1" 
                        VerticalAlignment="Center"
                        FontSize="18"
@@ -102,7 +108,7 @@
                        FontSize="20"
                        HorizontalAlignment="Right"/>
             <!--Thiếu converer-->
-            <TextBlock Text="{Binding TableCheckout.TotalPrice, FallbackValue='0,000 đ', 
+            <TextBlock Text="{Binding Total, FallbackValue='0,000 đ', 
                                 StringFormat='{}{0:N0} đ', NotifyOnTargetUpdated=True}"
                        FontWeight="Bold"
                        Grid.Row="2"
