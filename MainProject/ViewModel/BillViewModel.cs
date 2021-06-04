@@ -19,7 +19,7 @@ namespace MainProject.MainWorkSpace.Bill
         private long _Total;
         private TABLECUSTOM _Current_table;
 
-        private ObservableCollection<DETAILBILL> _ListDetailBill;
+        private ObservableCollection<DETAILBILL> _ListDetailBill;      
         //StoreInfor : namestore, phone, address
 
         private ICommand _PaymentCommand;
@@ -52,13 +52,12 @@ namespace MainProject.MainWorkSpace.Bill
         }
         public int BillCode
         {
-            get
-            {
-                using (var db = new mainEntities())
-                {
-                    return db.BILLs.Count() + 1;
-                }
-            }
+            get {
+                    using (var db = new mainEntities())
+                    {
+                        return db.BILLs.Count() + 1;
+                    }               
+                 }
         }
         public long Total
         {
@@ -109,7 +108,7 @@ namespace MainProject.MainWorkSpace.Bill
                 {
                     _ListDetailBill = value;
                     OnPropertyChanged();
-
+                   
                 }
             }
         }
@@ -153,27 +152,9 @@ namespace MainProject.MainWorkSpace.Bill
         #region Constructors
         public BillViewModel()
         {
-            //testing
-            CurrentTable = new TABLECUSTOM();
-            for (int i = 0; i < 5; i++)
-            {
-                CurrentTable.ListPro.Add(new DetailPro()
-                {
-                    Pro = new PRODUCT() { Name = "Cafe den da khong duong", Price = 10000, DELETED = 0 },
-                    Quantity = 2
-                });
-            }
-            CurrentTable.table = new TABLE()
-            {
-                DELETED = 0,
-                Floor = 1,
-                Number = 1,
-                ID_Status = 1
-            };
-            //end testing
             CurrentBill = new BILL();
 
-            foreach (var p in CurrentTable.ListPro)
+            foreach( var p in CurrentTable.ListPro)
             {
                 CurrentBill.DETAILBILLs.Add(new DETAILBILL() { PRODUCT = p.Pro, Amount = p.Quantity });
             }
@@ -181,8 +162,8 @@ namespace MainProject.MainWorkSpace.Bill
             CurrentBill.TABLE = CurrentTable.table;
             Discount = 0;
             CurrentBill.CheckoutDay = DateTime.Now;
-            Total = CurrentTable.Total;
-        }
+            Total = CurrentTable.Total;          
+         }
 
         public BillViewModel(BILL bill)
         {
@@ -192,26 +173,25 @@ namespace MainProject.MainWorkSpace.Bill
 
         private void Payment(BillView view)
         {
-            CurrentTable.ListPro.Add(new DetailPro());
-            //using (var db = new mainEntities())
-            //{
+            using (var db = new mainEntities())
+            {
 
-            //    if (CodeDiscount != "" && Discount == 0)
-            //    {
+                if (CodeDiscount != "" && Discount == 0)
+                {
+                  
+                }                    
+                   
+                    CurrentBill.ID_Tables = CurrentTable.table.ID;                 
+                   
+                    db.BILLs.Add(CurrentBill);
 
-            //    }
-
-            //    CurrentBill.ID_Tables = CurrentTable.table.ID;
-
-            //    db.BILLs.Add(CurrentBill);
-
-            //    CurrentTable.ListPro = null;
-            //    CurrentTable.Total = 0;
-
-            //    view.Close();
-
-            //    //Xuất đơn ra PDF                                
-            //}
+                    CurrentTable.ListPro = null;
+                    CurrentTable.Total = 0;
+                  
+                    view.Close();
+                                    
+                    //Xuất đơn ra PDF                                
+            }
         }
         private void LoadDiscount()
         {
