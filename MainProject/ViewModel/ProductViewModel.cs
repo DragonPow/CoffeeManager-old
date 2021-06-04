@@ -447,7 +447,6 @@ namespace MainProject.ViewModel
             Tableviewmodel.TotalCurrentTable += (long) ListPoduct.ElementAt(IndexCurrentProduct).Price;
 
             if (Tableviewmodel.Currentlistdetailpro != null)
-
             {
                 foreach (var p in Tableviewmodel.Currentlistdetailpro)
                 {
