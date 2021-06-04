@@ -14,7 +14,7 @@ using System.Windows.Input;
 
 
 namespace MainProject.ViewModel
-{
+{ 
     class ProductViewModel : BaseViewModel
     {
         #region Field
@@ -63,7 +63,7 @@ namespace MainProject.ViewModel
         public ObservableCollection<PRODUCT> ListPoduct { get => _ListProduct; set { if (value != _ListProduct) { _ListProduct = value; OnPropertyChanged(); } } }
 
         public int IndexCurrentProduct { get => _IndexCurrentproduct; set { if (_IndexCurrentproduct != value) { _IndexCurrentproduct = value; OnPropertyChanged(); } } }
-
+     
         public PRODUCT Newproduct 
         { 
             get => _Newproduct; 
@@ -451,7 +451,7 @@ namespace MainProject.ViewModel
             {
                 foreach (var p in Tableviewmodel.Currentlistdetailpro)
                 {
-                    if (p.Pro == ListPoduct.ElementAt(IndexCurrentProduct))
+                    if (p.Pro.ID == ListPoduct.ElementAt(IndexCurrentProduct).ID)
                     {
                         ++p.Quantity;
                         return;

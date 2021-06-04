@@ -198,7 +198,7 @@ namespace MainProject.ViewModel
         public void Plus()
         {
             CurrentDetailPro.Quantity++;
-            TotalCurrentTable += (long) _CurrentDetailPro.Pro.Price;
+            TotalCurrentTable += (long) CurrentDetailPro.Pro.Price;
 
         }
         public ICommand MinusDetailProQuantityCommand
@@ -216,8 +216,11 @@ namespace MainProject.ViewModel
         public void Minus()
         {
             if (CurrentDetailPro.Quantity < 1) return;
+
             CurrentDetailPro.Quantity--;
-            TotalCurrentTable -= (int) _CurrentDetailPro.Pro.Price;
+            TotalCurrentTable -=  CurrentDetailPro.Pro.Price;
+
+            if (CurrentDetailPro.Quantity == 0) Currentlistdetailpro.Remove(CurrentDetailPro);
         }
 
         public ICommand ClickQuantityDetailProCommand
