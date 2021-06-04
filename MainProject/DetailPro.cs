@@ -10,8 +10,8 @@ namespace MainProject
 {
     public class DetailPro: BaseViewModel
     {
-        private int _quantity;
-        private PRODUCT pro;
+        private int _quantity = 0;
+        private PRODUCT pro ;
         public DetailPro()
         {
         }
@@ -42,7 +42,7 @@ namespace MainProject
         }
 
           
-        public DetailPro(PRODUCT pro, int quan = 0)
+        public DetailPro(PRODUCT pro, int quan = 1)
         {
             this.Pro = pro;
             this.Quantity = quan;
