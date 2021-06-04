@@ -118,6 +118,7 @@ namespace MainProject.ViewModel
         {
 
             Newproduct =new PRODUCT() { DELETED = 0, Image = null, TYPE_PRODUCT = new ObservableCollection<TYPE_PRODUCT>() } ;
+
             //open view Add_pro(a)
         }
 
@@ -143,6 +144,7 @@ namespace MainProject.ViewModel
                 
                     if (type == null) return;
                     Newproduct.TYPE_PRODUCT = new ObservableCollection<TYPE_PRODUCT>() { type };                
+
 
                     db.PRODUCTs.Add(Newproduct);
 
@@ -190,7 +192,6 @@ namespace MainProject.ViewModel
         {
             Newproduct = null;
             //Exit view Add_pro(a)
-
         }
 
 
@@ -278,7 +279,7 @@ namespace MainProject.ViewModel
             ObservableCollection<PRODUCT> listproduct;
             using (var db = new mainEntities())
             {
-                var listpro = db.PRODUCTs.Where(p => (p.TYPE_PRODUCT.ElementAt(0).Type == Type.Type && p.DELETED == 0));
+                var listpro = db.PRODUCTs.Where(p => (p.TYPE_PRODUCT.Type == Type.Type && p.DELETED == 0));
                 if (listpro == null) return;
                 listproduct = new ObservableCollection<PRODUCT>(listpro.ToList());
             }
@@ -510,7 +511,7 @@ namespace MainProject.ViewModel
                 if (_CancelAddProduct == null)
                 {
                     _CancelAddProduct = new RelayingCommand<Object>(a => CancelAddProduct(a));
-                }
+
                 return _CancelAddProduct;
             }
         }

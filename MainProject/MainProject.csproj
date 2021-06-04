@@ -162,7 +162,6 @@
       <DependentUpon>MainModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\CustomModel\EMPLOYEE.cs" />
-    <Compile Include="Model\CustomModel\PRODUCT.cs" />
     <Compile Include="Model\CustomModel\POSITION_EMPLOYEE.cs" />
     <Compile Include="Model\CustomModel\STATUS_TABLE.cs" />
     <Compile Include="Model\CustomModel\TYPE_PRODUCT.cs" />
@@ -193,9 +192,7 @@
     <Compile Include="Model\VOUCHER.cs">
       <DependentUpon>MainModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\CustomModel\POSITION_EMPLOYEE.cs" />
-    <Compile Include="Model\CustomModel\STATUS_TABLE.cs" />
-    <Compile Include="Model\CustomModel\TYPE_PRODUCT.cs" />
+
     <Compile Include="StatisticWorkSpace\Converter\ChartLabelConverter.cs" />
     <Compile Include="StatisticWorkSpace\Converter\ChartValueConverter.cs" />
     <Compile Include="StatisticWorkSpace\Converter\MoneyConverter.cs" />
