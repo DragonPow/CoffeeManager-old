@@ -27,6 +27,7 @@ namespace MainProject.ViewModel
         private ICommand _DeleteDetailPro;
 
         private ICommand _OpenViewChooseTable;
+        private ICommand _CloseViewChooseTable;
 
         private ICommand _PayCommand;
 
@@ -258,11 +259,27 @@ namespace MainProject.ViewModel
             //Show Tab SelectedTableView
         }
 
-       
+        public ICommand CloseViewChooseTableCommand
+        {
+            get
+            {
+                if (_CloseViewChooseTable == null)
+                {
+                    _CloseViewChooseTable = new RelayingCommand<Object>(a => CloseChooseTable());
+                }
+                return _CloseViewChooseTable;
+            }
+        }
 
-        
+        public void CloseChooseTable()
+        {
+          
+            //Show Tab SelectedTableView
+        }
 
-        // Xóa detailPro đã chọn
+
+
+      
 
         public ICommand DeleteDetailProCommand
         {
@@ -293,7 +310,12 @@ namespace MainProject.ViewModel
         }
         public void Pay()
         {
-            if (CurrentTable.ListPro == null) return;
+            if (CurrentTable == null)
+            {
+                WindowService.Instance.OpenMessageBox("Chưa chọn bàn", "Lỗi", System.Windows.MessageBoxImage.Error);
+                return;
+            }
+
 
             CurrentTable.ListPro = Currentlistdetailpro;
 

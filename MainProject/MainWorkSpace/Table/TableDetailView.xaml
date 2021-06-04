@@ -34,7 +34,7 @@
                       materialDesign:ScrollBarAssist.ThumbCornerRadius="10"
                       HorizontalScrollBarVisibility="Auto">
             <!--The Panel contains list product-->
-            <ItemsControl x:Name="ItemView" ItemsSource="{Binding Currentlistdetailpro, UpdateSourceTrigger=PropertyChanged}">
+            <ItemsControl x:Name="ItemView" ItemsSource="{Binding Currentlistdetailpro, UpdateSourceTrigger=PropertyChanged}" >
                 <ItemsControl.Resources>
                 </ItemsControl.Resources>
                 <ItemsControl.ItemTemplate>
