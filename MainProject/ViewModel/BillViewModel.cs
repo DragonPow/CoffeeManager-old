@@ -162,7 +162,7 @@ namespace MainProject.MainWorkSpace.Bill
                     Pro = new PRODUCT() { Name = "Cafe den da khong duong", Price = 10000, DELETED = 0 },
                     Quantity = 2,
                 });
-                CurrentTable.Total += 2 * 10000;
+                CurrentTable.Total += CurrentTable.ListPro.ElementAt(i).Quantity * CurrentTable.ListPro.ElementAt(i).Pro.Price;
             }
             CurrentTable.table = new TABLE()
             {
@@ -193,26 +193,22 @@ namespace MainProject.MainWorkSpace.Bill
 
         private void Payment(BillView view)
         {
-            CurrentTable.ListPro.Add(new DetailPro());
-            //using (var db = new mainEntities())
-            //{
+           /* CurrentTable.ListPro.Add(new DetailPro());*/
+            
+            using (var db = new mainEntities())
+            { 
+                CurrentBill.ID_Tables = CurrentTable.table.ID;
 
-            //    if (CodeDiscount != "" && Discount == 0)
-            //    {
+                db.BILLs.Add(CurrentBill);
 
-            //    }
+                CurrentTable.ListPro = null;
+                CurrentTable.Total = 0;
+                db.SaveChanges();
 
-            //    CurrentBill.ID_Tables = CurrentTable.table.ID;
+                view.Close();
 
-            //    db.BILLs.Add(CurrentBill);
-
-            //    CurrentTable.ListPro = null;
-            //    CurrentTable.Total = 0;
-
-            //    view.Close();
-
-            //    //Xuất đơn ra PDF                                
-            //}
+                //Xuất đơn ra PDF                                
+            }
         }
         private void LoadDiscount()
         {
