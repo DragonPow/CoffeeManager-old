@@ -97,9 +97,7 @@ namespace MainProject.StatisticWorkSpace
 
         public void ClearData()
         {
-            listModel.Clear();
-            listModel = new List<StatisticModel>();
-            OnPropertyChanged(nameof(ListModel));
+            SetListModel(new List<StatisticModel>());
         }
 
         public void SetTimeRange(DateTime minDate, DateTime maxDate)
@@ -113,6 +111,7 @@ namespace MainProject.StatisticWorkSpace
                 case StatisticMode.DayOfWeek:
                     data = dbController.statisticByDay(minDate, maxDate, option);
                     break;
+                case StatisticMode.DayOfMonth:
                 case StatisticMode.WeekOfMonth:
                     data = dbController.statisticByWeek(minDate, maxDate, option);
                     break;
@@ -130,6 +129,9 @@ namespace MainProject.StatisticWorkSpace
             {
                 case StatisticMode.DayOfWeek:
                     rs = GetDayOfWeek(model.TimeMin.DayOfWeek);
+                    break;
+                case StatisticMode.DayOfMonth:
+                    rs = model.TimeMin.ToString("dd/MM");
                     break;
                 case StatisticMode.WeekOfMonth:
                     rs = String.Format("{0} - {1}"
@@ -150,6 +152,9 @@ namespace MainProject.StatisticWorkSpace
             {
                 case StatisticMode.DayOfWeek:
                     rs =  String.Format("{0} ({1})", GetDayOfWeek(model.TimeMin.DayOfWeek), model.TimeMin.ToString("dd/MM"));
+                    break;
+                case StatisticMode.DayOfMonth:
+                    rs = String.Format("Ngày {0}", model.TimeMin.ToString("dd/MM"));
                     break;
                 case StatisticMode.WeekOfMonth:
                     if (model.TimeMax.Day - model.TimeMin.Day < 6)

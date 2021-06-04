@@ -57,8 +57,7 @@ namespace MainProject.StatisticWorkSpace
             DateTime today = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 0, 0, 1);
             cbxStatisticMode_SelectionChanged(cbxStatisticMode, null);
             txtDatePicker.DisplayDateEnd = today;
-            txtDatePicker.SelectedDate = today;
-
+            txtDatePicker.SelectedDate = today.AddDays(-6);
         }
 
         private void BtnSubmit_Click(object sender, RoutedEventArgs e)
@@ -80,7 +79,7 @@ namespace MainProject.StatisticWorkSpace
                     button.Click += BtnEdit_Click1;
 
                     // Calculate from another thread
-                    Application.Current.Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.SystemIdle,
+                    Application.Current.Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Input,
                         new Action<StatisticViewModel, DateTime, int>(CalculateFromDB), viewModel, selectedDate, cbxStatisticMode.SelectedIndex);
                 }
             }
@@ -90,17 +89,18 @@ namespace MainProject.StatisticWorkSpace
         {
             DateTime minDate = DateTime.Now;
             DateTime maxDate = DateTime.Now;
-            switch (selectedMode)
+
+            if (selectedMode == 0)
             {
-                case 0:
-                    selectWeek(selectedDate, out minDate, out maxDate);
-                    break;
-                case 1:
-                    selectMonth(selectedDate, out minDate, out maxDate);
-                    break;
-                case 2:
-                    selectYear(selectedDate, out minDate, out maxDate);
-                    break;
+                selectWeek(selectedDate, out minDate, out maxDate);
+            }
+            else if (selectedMode == 1 || selectedMode == 2)
+            {
+                selectMonth(selectedDate, out minDate, out maxDate);
+            }
+            else // Last element
+            {
+                selectYear(selectedDate, out minDate, out maxDate);
             }
 
             Console.WriteLine("Statistic range {0} - {1}", minDate.ToShortDateString(), maxDate.ToShortDateString());
@@ -158,24 +158,25 @@ namespace MainProject.StatisticWorkSpace
             ComboBox comboBox = (ComboBox)sender;
             if (txtDatePicker != null)
             {
-                switch (comboBox.SelectedIndex)
+                if (comboBox.SelectedIndex == 0)
                 {
-                    case 0:
-                        txtDatePicker.SetValue(DatePickerYearOfDecade.IsYearDecadeProperty, false);
-                        txtDatePicker.SetValue(DatePickerMonthOfYear.IsMonthYearProperty, false);
-                        txtDatePicker.SetValue(DatePickerDateFormat.DateFormatProperty, mDateFormat_Week);
-                        break;
-                    case 1:
-                        txtDatePicker.SetValue(DatePickerYearOfDecade.IsYearDecadeProperty, false);
-                        txtDatePicker.SetValue(DatePickerMonthOfYear.IsMonthYearProperty, true);
-                        txtDatePicker.SetValue(DatePickerDateFormat.DateFormatProperty, mDateFormat_Month);
-                        break;
-                    case 2:
-                        txtDatePicker.SetValue(DatePickerYearOfDecade.IsYearDecadeProperty, true);
-                        txtDatePicker.SetValue(DatePickerMonthOfYear.IsMonthYearProperty, false);
-                        txtDatePicker.SetValue(DatePickerDateFormat.DateFormatProperty, mDateFormat_Year);
-                        break;
+                    txtDatePicker.SetValue(DatePickerYearOfDecade.IsYearDecadeProperty, false);
+                    txtDatePicker.SetValue(DatePickerMonthOfYear.IsMonthYearProperty, false);
+                    txtDatePicker.SetValue(DatePickerDateFormat.DateFormatProperty, mDateFormat_Week);
                 }
+                else if (comboBox.SelectedIndex == 1 || comboBox.SelectedIndex == 2)
+                {
+                    txtDatePicker.SetValue(DatePickerYearOfDecade.IsYearDecadeProperty, false);
+                    txtDatePicker.SetValue(DatePickerMonthOfYear.IsMonthYearProperty, true);
+                    txtDatePicker.SetValue(DatePickerDateFormat.DateFormatProperty, mDateFormat_Month);
+                }
+                else // Last element
+                {
+                    txtDatePicker.SetValue(DatePickerYearOfDecade.IsYearDecadeProperty, true);
+                    txtDatePicker.SetValue(DatePickerMonthOfYear.IsMonthYearProperty, false);
+                    txtDatePicker.SetValue(DatePickerDateFormat.DateFormatProperty, mDateFormat_Year);
+                }
+                
             }
             var viewModel = DataContext as StatisticViewModel;
             if (viewModel != null)
