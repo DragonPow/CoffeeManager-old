@@ -68,5 +68,21 @@
                 </StackPanel>
             </ScrollViewer>
         </Grid>
+        <DockPanel Grid.Column="1">
+            <Grid DockPanel.Dock="Bottom"
+                  Height="100">
+                <Button Grid.Column="1"
+                        Height="50"
+                        Width="150"
+                        Content="Lưu thay đổi"
+                        Foreground="Green"
+                        Background="White"
+                        BorderBrush="Red"
+                        FontSize="20"
+                        Margin="10">
+                </Button>
+            </Grid>
+            <StackPanel x:Name="Option_setting"></StackPanel>
+        </DockPanel>
     </Grid>
 </Page>
