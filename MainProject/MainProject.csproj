@@ -143,7 +143,6 @@
     <Compile Include="AccountWorkSpace\ChangedPassword.xaml.cs">
       <DependentUpon>ChangedPassword.xaml</DependentUpon>
     </Compile>
-    <Compile Include="CUSTOMPRODUCT.cs" />
     <Compile Include="DetailPro.cs" />
     <Compile Include="HelperClass\WindowService.cs" />
     <Compile Include="HistoryWorkSpace\HistoryViewModel.cs" />
@@ -194,7 +193,6 @@
     <Compile Include="Model\VOUCHER.cs">
       <DependentUpon>MainModel.tt</DependentUpon>
     </Compile>
-    
     <Compile Include="Model\CustomModel\POSITION_EMPLOYEE.cs" />
     <Compile Include="Model\CustomModel\STATUS_TABLE.cs" />
     <Compile Include="Model\CustomModel\TYPE_PRODUCT.cs" />
@@ -206,7 +204,6 @@
     <Compile Include="StatisticWorkSpace\DatePickerAssist.cs" />
     <Compile Include="StatisticWorkSpace\StatisticEnum.cs" />
     <Compile Include="StatisticWorkSpace\StatisticModel.cs" />
-    
     <Compile Include="ViewModel\BillViewModel.cs" />
     <Compile Include="MainWorkSpace\Bill\Bill_ProductTable.xaml.cs">
       <DependentUpon>Bill_ProductTable.xaml</DependentUpon>
