@@ -225,7 +225,7 @@ namespace MainProject.MainWorkSpace.Bill
                 if (t != null && !IsDiscount)
                 {
                     CurrentBill.ID_Voucher = t.ID;
-                    CurrentBill.VOUCHER = t;
+                   // CurrentBill.VOUCHER = t;
                     Discount = (int)(CurrentTable.Total * t.Percent) / 100;
                     Total -= Discount;
                     IsDiscount = true;
@@ -235,6 +235,7 @@ namespace MainProject.MainWorkSpace.Bill
                         Total = CurrentTable.Total;
                         CurrentBill.ID_Voucher = null;
                         CurrentBill.VOUCHER = null;
+                        CodeDiscount = "";
                         Discount = 0;
                        
                     WindowService.Instance.OpenMessageBox("Nhập sai mã!", "Lỗi", System.Windows.MessageBoxImage.Error);
