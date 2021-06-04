@@ -318,6 +318,7 @@ namespace MainProject.ViewModel
 
 
             CurrentTable.ListPro = Currentlistdetailpro;
+            CurrentTable.Total = TotalCurrentTable;
 
             BillViewModel billviewmodel = new BillViewModel();
             billviewmodel.CurrentTable = CurrentTable;
