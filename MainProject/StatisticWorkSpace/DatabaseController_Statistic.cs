@@ -19,6 +19,7 @@ namespace MainProject.StatisticWorkSpace
                     {
                         PD_ID = dt.ID_Product,
                         Date = b.CheckoutDay,
+                        b.VOUCHER,
                         dt.Amount
                     }).Join(productName == null
                             ?db.PRODUCTs
@@ -29,33 +30,34 @@ namespace MainProject.StatisticWorkSpace
                         pd.Name,
                         Revenue = pd.Price * r.Amount,
                         r.Amount,
+                        r.VOUCHER,
                         r.Date
                     });
                 Dictionary<DateTime, StatisticModel> dictionary = new Dictionary<DateTime, StatisticModel>();
+
                 foreach (var group in data)
                 {
-                    if (group.Date.HasValue)
+                    float voucher = 1f;
+                    if (group.VOUCHER != null) { voucher = group.VOUCHER.Percent / 100f; }
+                    DateTime date = new DateTime(group.Date.Value.Year, group.Date.Value.Month, group.Date.Value.Day, 0, 0, 0);
+                    StatisticModel model;
+                    if (!dictionary.ContainsKey(date))
                     {
-                        DateTime date = new DateTime(group.Date.Value.Year, group.Date.Value.Month, group.Date.Value.Day, 0, 0, 0);
-                        if (!dictionary.ContainsKey(date))
+                        model = new StatisticModel
                         {
-                            var model = new StatisticModel
-                            {
-                                TimeMin = date,
-                                TimeMax = date.AddDays(1).AddSeconds(-1),
-                                Revenue = group.Revenue,
-                                Amount = group.Amount
-                            };
-                            dictionary.Add(date, model);
-                        }
-                        else
-                        {
-                            var model = dictionary[date];
-                            model.Revenue += group.Revenue;
-                            model.Amount += group.Amount;
-                        }
+                            TimeMin = date,
+                            TimeMax = date.AddDays(1).AddSeconds(-1),
+                            Revenue = 0,
+                            Amount = 0
+                        };
+                        dictionary.Add(date, model);
                     }
+
+                    model = dictionary[date];
+                    model.Revenue += (int)(group.Revenue * voucher);
+                    model.Amount += group.Amount;
                 }
+
                 return dictionary.Values.ToList();
             }
         }
@@ -70,6 +72,7 @@ namespace MainProject.StatisticWorkSpace
                     {
                         PD_ID = dt.ID_Product,
                         Date = b.CheckoutDay,
+                        b.VOUCHER,
                         dt.Amount
                     }).Join(productName == null
                             ? db.PRODUCTs
@@ -80,35 +83,34 @@ namespace MainProject.StatisticWorkSpace
                         pd.Name,
                         Revenue = pd.Price * r.Amount,
                         r.Amount,
+                        r.VOUCHER,
                         r.Date
                     });
                 Dictionary<DateTime, StatisticModel> dictionary = new Dictionary<DateTime, StatisticModel>();
                 foreach (var group in data)
                 {
-                    if (group.Date.HasValue)
+                    float voucher = 1f;
+                    if (group.VOUCHER != null) { voucher = group.VOUCHER.Percent / 100f; }
+                    DateTime date = new DateTime(group.Date.Value.Year, group.Date.Value.Month, group.Date.Value.Day, 0, 0, 0);
+                    while (date.DayOfWeek != DayOfWeek.Monday) { date = date.AddDays(-1); }
+                    StatisticModel model;
+                    if (!dictionary.ContainsKey(date))
                     {
-                        DateTime date = new DateTime(group.Date.Value.Year, group.Date.Value.Month, group.Date.Value.Day, 0, 0, 0);
-                        while (date.DayOfWeek != DayOfWeek.Monday) { date = date.AddDays(-1);}
-                        if (!dictionary.ContainsKey(date))
+                        model = new StatisticModel
                         {
-                            var model = new StatisticModel
-                            {
-                                TimeMin = date,
-                                TimeMax = date.AddDays(7).AddSeconds(-1),
-                                Revenue = group.Revenue,
-                                Amount = group.Amount
-                            };
-                            if (model.TimeMax > maxDate) { model.TimeMax = maxDate; }
-                            else if (model.TimeMin < minDate) { model.TimeMin = minDate; }
-                            dictionary.Add(date, model);
-                        }
-                        else
-                        {
-                            var model = dictionary[date];
-                            model.Revenue += group.Revenue;
-                            model.Amount += group.Amount;
-                        }
+                            TimeMin = date,
+                            TimeMax = date.AddDays(7).AddSeconds(-1),
+                            Revenue = group.Revenue,
+                            Amount = group.Amount
+                        };
+                        if (model.TimeMax > maxDate) { model.TimeMax = maxDate; }
+                        else if (model.TimeMin < minDate) { model.TimeMin = minDate; }
+                        dictionary.Add(date, model);
                     }
+                    model = dictionary[date];
+                    model.Revenue += (int)(group.Revenue * voucher);
+                    model.Amount += group.Amount;
+
                 }
                 return dictionary.Values.ToList();
             }
@@ -124,6 +126,7 @@ namespace MainProject.StatisticWorkSpace
                     {
                         PD_ID = dt.ID_Product,
                         Date = b.CheckoutDay,
+                        b.VOUCHER,
                         dt.Amount
                     }).Join(productName == null
                             ? db.PRODUCTs
@@ -134,32 +137,30 @@ namespace MainProject.StatisticWorkSpace
                         pd.Name,
                         Revenue = pd.Price * r.Amount,
                         r.Amount,
+                        r.VOUCHER,
                         r.Date
                     });
                 Dictionary<DateTime, StatisticModel> dictionary = new Dictionary<DateTime, StatisticModel>();
                 foreach (var group in data)
                 {
-                    if (group.Date.HasValue)
+                    float voucher = 1f;
+                    if (group.VOUCHER != null) { voucher = group.VOUCHER.Percent / 100f; }
+                    DateTime date = new DateTime(group.Date.Value.Year, group.Date.Value.Month, 1, 0, 0, 0);
+                    StatisticModel model;
+                    if (!dictionary.ContainsKey(date))
                     {
-                        DateTime date = new DateTime(group.Date.Value.Year, group.Date.Value.Month, 1, 0, 0, 0);
-                        if (!dictionary.ContainsKey(date))
+                        model = new StatisticModel
                         {
-                            var model = new StatisticModel
-                            {
-                                TimeMin = date,
-                                TimeMax = date.AddMonths(1).AddSeconds(-1),
-                                Revenue = group.Revenue,
-                                Amount = group.Amount
-                            };
-                            dictionary.Add(date, model);
-                        }
-                        else
-                        {
-                            var model = dictionary[date];
-                            model.Revenue += group.Revenue;
-                            model.Amount += group.Amount;
-                        }
+                            TimeMin = date,
+                            TimeMax = date.AddMonths(1).AddSeconds(-1),
+                            Revenue = group.Revenue,
+                            Amount = group.Amount
+                        };
+                        dictionary.Add(date, model);
                     }
+                    model = dictionary[date];
+                    model.Revenue += (int)(group.Revenue * voucher);
+                    model.Amount += group.Amount;
                 }
                 return dictionary.Values.ToList();
             }

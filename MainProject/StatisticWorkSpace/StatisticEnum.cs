@@ -9,8 +9,9 @@ namespace MainProject.StatisticWorkSpace
     public enum StatisticMode
     {
         DayOfWeek = 0,
-        WeekOfMonth = 1,
-        MonthOfYear = 2
+        DayOfMonth = 1,
+        WeekOfMonth = 2,
+        MonthOfYear = 3
     }
 
     public static class StatisticEnum
@@ -22,6 +23,9 @@ namespace MainProject.StatisticWorkSpace
             {
                 case StatisticMode.DayOfWeek:
                     rs = "Từng ngày trong tuần";
+                    break;
+                case StatisticMode.DayOfMonth:
+                    rs = "Từng ngày trong tháng";
                     break;
                 case StatisticMode.WeekOfMonth:
                     rs = "Từng tuần trong tháng";
