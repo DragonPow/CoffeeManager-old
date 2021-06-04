@@ -241,7 +241,7 @@ namespace MainProject.StatisticWorkSpace
                 }
             }
             TimeSpan timeSpan = DateTime.Now - start;
-            Console.WriteLine("TIMER: Done task in {0}s", timeSpan.ToString("hh:mm:ss"));
+            Console.WriteLine("TIMER: Done task in {0}s", timeSpan.ToString());
         }
     }
 }

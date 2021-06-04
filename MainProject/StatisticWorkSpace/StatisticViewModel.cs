@@ -98,6 +98,7 @@ namespace MainProject.StatisticWorkSpace
         public void ClearData()
         {
             listModel.Clear();
+            listModel = new List<StatisticModel>();
             OnPropertyChanged(nameof(ListModel));
         }
 
