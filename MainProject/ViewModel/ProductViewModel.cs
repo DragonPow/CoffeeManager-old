@@ -1,4 +1,5 @@
 ﻿
+using MainProject.MainWorkSpace.Product;
 using MainProject.Model;
 using System;
 using System.Collections.ObjectModel;
@@ -120,7 +121,7 @@ namespace MainProject.ViewModel
 
             Newproduct =new PRODUCT() { DELETED = 0, Image = null, TYPE_PRODUCT = new TYPE_PRODUCT() } ;
 
-            //open view Add_pro(a)
+            WindowService.Instance.OpenWindow(this, new CreateProd());
         }
 
         public ICommand AddProduct_Command_Command
@@ -173,7 +174,6 @@ namespace MainProject.ViewModel
         {
 
             Newproduct = null;
-            /* close Addproductview*/
         }
 
         public ICommand ExitAddProductView_Command
@@ -371,7 +371,7 @@ namespace MainProject.ViewModel
 
         public void OpenViewDetail()
         {
-            //open new View detail product
+            WindowService.Instance.OpenWindow(this, new ProdDetail());
         }
         public ICommand ExitDetailProduct
         {
@@ -418,13 +418,11 @@ namespace MainProject.ViewModel
                 path = openFile.FileName;
                 if (Newproduct == null)
                 {
-                    ListPoduct.ElementAt(IndexCurrentProduct).Image = converImgToByte(path);
-                   /* ListPoduct.ElementAt(IndexCurrentProduct).Image_product = byteArrayToImage(ListPoduct.ElementAt(IndexCurrentProduct).product.Image);*/
+                    ListPoduct.ElementAt(IndexCurrentProduct).Image = converImgToByte(path);                
                 }   
                 else
                 {
                     Newproduct.Image = converImgToByte(path);
-                   /* Newproduct.Image_product = byteArrayToImage(Newproduct.product.Image);*/
                 }                    
             }                    
         }
@@ -478,6 +476,7 @@ namespace MainProject.ViewModel
 
         public void OpenViewEditCategory(object a)
         {
+
             using (var db = new mainEntities())
             {
                 if ( Type_In_Edit_CATEGORY == null) return;
@@ -489,8 +488,9 @@ namespace MainProject.ViewModel
                 ListPoduct = new ObservableCollection<PRODUCT>(l);
             }
 
+            WindowService.Instance.OpenWindow(this, new EditType());
 
-            }
+        }
         /*public ICommand CancelAddProduct_Command
         {
             get
