@@ -7,6 +7,7 @@
              xmlns:local="clr-namespace:MainProject.MainWorkSpace.Product"
              xmlns:ViewModel="clr-namespace:MainProject.ViewModel"
              mc:Ignorable="d" 
+             Tag="Edit category"
              d:DataContext="{d:DesignInstance Type=ViewModel:ProductViewModel}"
              d:DesignHeight="650" d:DesignWidth="700">
     <DockPanel>

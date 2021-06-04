@@ -225,7 +225,6 @@ namespace MainProject.MainWorkSpace.Bill
                 if (t != null && !IsDiscount)
                 {
                     CurrentBill.ID_Voucher = t.ID;
-                   // CurrentBill.VOUCHER = t;
                     Discount = (int)(CurrentTable.Total * t.Percent) / 100;
                     Total -= Discount;
                     IsDiscount = true;
