@@ -160,8 +160,9 @@ namespace MainProject.MainWorkSpace.Bill
                 CurrentTable.ListPro.Add(new DetailPro()
                 {
                     Pro = new PRODUCT() { Name = "Cafe den da khong duong", Price = 10000, DELETED = 0 },
-                    Quantity = 2
+                    Quantity = 2,
                 });
+                CurrentTable.Total += 2 * 10000;
             }
             CurrentTable.table = new TABLE()
             {
