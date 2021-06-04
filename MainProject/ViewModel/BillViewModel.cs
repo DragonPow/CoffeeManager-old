@@ -18,6 +18,7 @@ namespace MainProject.MainWorkSpace.Bill
         private int _Discount;
         private long _Total;
         private TABLECUSTOM _Current_table;
+        bool IsDiscount = false;
 
         private ObservableCollection<DETAILBILL> _ListDetailBill;
         //StoreInfor : namestore, phone, address
@@ -212,24 +213,31 @@ namespace MainProject.MainWorkSpace.Bill
         }
         private void LoadDiscount()
         {
+
+            if (IsDiscount) {
+                WindowService.Instance.OpenMessageBox("Đã sử dụng mã khác!", "Lỗi", System.Windows.MessageBoxImage.Error);
+                return;
+            }
             using (var db = new mainEntities())
             {
 
                 var t = db.VOUCHERs.Where(v => (v.CODE == CodeDiscount && v.DELETED == 0 && v.BeginTime <= DateTime.Now && v.EndTime >= DateTime.Now)).FirstOrDefault();
-                if (t != null)
+                if (t != null && !IsDiscount)
                 {
                     CurrentBill.ID_Voucher = t.ID;
                     CurrentBill.VOUCHER = t;
                     Discount = (int)(CurrentTable.Total * t.Percent) / 100;
                     Total -= Discount;
+                    IsDiscount = true;
                 }
                 else
                 {
-                    Total = CurrentTable.Total;
-                    CurrentBill.ID_Voucher = null;
-                    CurrentBill.VOUCHER = null;
-                    Discount = 0;
-                    WindowService.Instance.OpenMessageBox("Nhập sai mã code", "Lỗi", System.Windows.MessageBoxImage.Error);
+                        Total = CurrentTable.Total;
+                        CurrentBill.ID_Voucher = null;
+                        CurrentBill.VOUCHER = null;
+                        Discount = 0;
+                       
+                    WindowService.Instance.OpenMessageBox("Nhập sai mã!", "Lỗi", System.Windows.MessageBoxImage.Error);
                 }
             }
         }
