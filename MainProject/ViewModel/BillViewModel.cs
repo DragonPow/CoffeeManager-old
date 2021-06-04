@@ -62,7 +62,13 @@ namespace MainProject.MainWorkSpace.Bill
         public long Total
         {
             get { return _Total; }
-            set { _Total = value; }
+            set { 
+                if ( _Total != value)
+                {
+                    _Total = value;
+                    OnPropertyChanged();
+                }    
+                }
         }
 
         public string CodeDiscount
