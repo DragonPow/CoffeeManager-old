@@ -6,23 +6,24 @@
              xmlns:main="clr-namespace:MainProject"
              xmlns:local="clr-namespace:MainProject.MainWorkSpace.Product"
              mc:Ignorable="d"
-             d:DataContext="{d:DesignInstance Type=main:CUSTOMPRODUCT}"
              Height="120"
              Width="150">
+    
     <Border BorderThickness="1"
             BorderBrush="Gray">
         <Grid>
 
-            <Image Source="{Binding product.Image}"
+            <Image Source="{Binding Image}"
                    Stretch="Fill"
                    Margin="0,0,0,10" />
             <TextBlock FontSize="15"
                        HorizontalAlignment="Stretch"
                        VerticalAlignment="Bottom"
-                       Text="{Binding product.Name}"
+                       Text="{Binding Name}"
                        Cursor="None"
                        TextAlignment="Center"
                        Padding="5"
+                       Foreground="Black"
                        FontWeight="DemiBold">
                 <TextBlock.Background>
                     <LinearGradientBrush EndPoint="0.5,1"

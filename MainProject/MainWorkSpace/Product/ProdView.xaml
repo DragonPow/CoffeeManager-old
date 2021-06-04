@@ -11,28 +11,26 @@
              d:DataContext="{d:DesignInstance Type=ViewModel:ProductViewModel}"
              d:DesignHeight="480"
              d:DesignWidth="600">
-    <ScrollViewer HorizontalScrollBarVisibility="Disabled"
-                  VerticalScrollBarVisibility="Auto"
-                  materialDesign:ScrollBarAssist.ThumbWidth="2">
-        <ItemsControl ItemsSource="{Binding ListPoduct}">
-            <ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <Button Command="{Binding DataContext.AddDetailProToTableCommand, ElementName=ProductView}"
+    <ListView ItemsSource="{Binding ListPoduct}"
+                  SelectedItem="{Binding IndexCurrentProduct,Mode=TwoWay}"
+                  ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+        <ListView.ItemsPanel>
+            <ItemsPanelTemplate>
+                <WrapPanel Orientation="Horizontal"></WrapPanel>
+            </ItemsPanelTemplate>
+        </ListView.ItemsPanel>
+        <ListView.ItemTemplate>
+            <DataTemplate>
+                <Button Command="{Binding DataContext.AddDetailProToTableCommand, ElementName=ProductView}"
                             Width="Auto"
                             Height="Auto"
                             Background="Transparent"
                             BorderBrush="Transparent"
                             Padding="0"
                             Margin="2">
-                        <local:Pro_UC DataContext="{Binding}" />
-                    </Button>
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
-            <ItemsControl.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <WrapPanel Orientation="Horizontal"></WrapPanel>
-                </ItemsPanelTemplate>
-            </ItemsControl.ItemsPanel>
-        </ItemsControl>
-    </ScrollViewer>
+                    <local:Pro_UC DataContext="{Binding}" />
+                </Button>
+            </DataTemplate>
+        </ListView.ItemTemplate>
+    </ListView>
 </UserControl>
