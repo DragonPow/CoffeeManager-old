@@ -10,8 +10,9 @@ namespace MainProject
 {
     public class DetailPro: BaseViewModel
     {
-        private int _quantity = 0;
-        private PRODUCT pro ;
+
+        private int _quantity = 1;
+        private PRODUCT pro;
         public DetailPro()
         {
         }
