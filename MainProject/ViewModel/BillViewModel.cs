@@ -15,7 +15,6 @@ namespace MainProject.MainWorkSpace.Bill
 
         private BILL _CurrentBill;
         private string _CodeDiscount;
-        private DateTime _Time;
         private int _BillCode;
         private int _Discount;
         private TABLECUSTOM _Current_table;
@@ -46,19 +45,6 @@ namespace MainProject.MainWorkSpace.Bill
             }
         }
 
-        public DateTime Time
-        {
-            get { return _Time; }
-            set
-            {
-                if (value != _Time)
-                {
-                    _Time = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
-
         public int Discount
         {
             get { return _Discount; }
@@ -68,7 +54,8 @@ namespace MainProject.MainWorkSpace.Bill
                 {
                     _Discount = value;
                     OnPropertyChanged();
-                }
+
+                 }
             }
         }
         public int BillCode
@@ -79,7 +66,6 @@ namespace MainProject.MainWorkSpace.Bill
                 if (value != _BillCode)
                 {
                     _BillCode = value;
-                    OnPropertyChanged();
                 }
             }
         }
@@ -93,9 +79,30 @@ namespace MainProject.MainWorkSpace.Bill
                 {
                     _CodeDiscount = value;
                     OnPropertyChanged();
+
+                    using (var db = new mainEntities())
+                    {
+
+                        var t = db.VOUCHERs.Where(v => (v.CODE == value && v.DELETED == 0 && v.BeginTime <= DateTime.Now && v.EndTime >= DateTime.Now)).FirstOrDefault();
+                        if (t != null)
+                        {
+                            CurrentBill.ID_Voucher = t.ID;
+                            CurrentBill.VOUCHER = t;
+                            Discount = (int)(CurrentTable.Total * t.Percent) / 100;
+                            CurrentBill.TotalPrice -= Discount;
+                        }
+                        else
+                        {
+                            CurrentBill.TotalPrice = CurrentTable.Total;
+                            CurrentBill.ID_Voucher = null;
+                            CurrentBill.VOUCHER = null;
+                            Discount = 0;
+                        }
+                    }
                 }
             }
         }
+
 
         public long TotalPrice
         {
@@ -131,7 +138,6 @@ namespace MainProject.MainWorkSpace.Bill
                 }
             }
         }
-       
 
         #endregion
 
@@ -183,7 +189,9 @@ namespace MainProject.MainWorkSpace.Bill
 
             CurrentBill.TABLE = CurrentTable.table;
             Discount = 0;
-            Time = DateTime.Now;
+            CurrentBill.CheckoutDay = DateTime.Now;
+            CurrentBill.TotalPrice = CurrentTable.Total;
+
             using (var db = new mainEntities())
             {
                 BillCode = db.BILLs.Count() + 1;
@@ -201,36 +209,23 @@ namespace MainProject.MainWorkSpace.Bill
         {
             using (var db = new mainEntities())
             {
-               
-                var t = db.VOUCHERs.Where(v => (v.CODE == CodeDiscount && v.DELETED == 0 && v.BeginTime <= DateTime.Now && v.EndTime >= DateTime.Now)).FirstOrDefault();
-                if ( t!= null || CodeDiscount == "")
-                {
-                    if (CodeDiscount != "")
-                    {
-                        CurrentBill.ID_Voucher = t.ID;
-                        CurrentBill.VOUCHER = t;
-                        Discount = (int)(CurrentTable.Total * t.Percent) / 100;
 
-                    }    
-                    
+                if (CodeDiscount != "" && Discount == 0)
+                {
+                    WindowService.Instance.OpenMessageBox("Nhập sai mã code", "Lỗi", System.Windows.MessageBoxImage.Error);
+                    return;
+                }                    
+                   
                     CurrentBill.ID_Tables = CurrentTable.table.ID;                 
-                    CurrentBill.TotalPrice = CurrentTable.Total - Discount;
-                    CurrentBill.CheckoutDay = Time;
                    
                     db.BILLs.Add(CurrentBill);
 
                     CurrentTable.ListPro = null;
                     CurrentTable.Total = 0;
-                    CodeDiscount = "";
-                    
+                  
                     view.Close();
                                     
-                    //Xuất đơn ra PDF
-                }
-                else
-                {
-                    //open messegnbox thông báo lỗi sai mã voucher
-                }                    
+                    //Xuất đơn ra PDF                                
             }
         }
         private void LoadDiscount()
