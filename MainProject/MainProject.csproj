@@ -172,6 +172,12 @@
     <Compile Include="Model\CustomModel\POSITION_EMPLOYEE.cs" />
     <Compile Include="Model\CustomModel\STATUS_TABLE.cs" />
     <Compile Include="Model\CustomModel\TYPE_PRODUCT.cs" />
+    <Compile Include="SettingWorkSpace\Overview.xaml.cs">
+      <DependentUpon>Overview.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SettingWorkSpace\SettingView.xaml.cs">
+      <DependentUpon>SettingView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewModel\BillViewModel.cs" />
     <Compile Include="MainWorkSpace\Bill\Bill_ProductTable.xaml.cs">
       <DependentUpon>Bill_ProductTable.xaml</DependentUpon>
@@ -393,6 +399,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="MainWorkSpace\Table\TableView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SettingWorkSpace\Overview.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SettingWorkSpace\SettingView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
