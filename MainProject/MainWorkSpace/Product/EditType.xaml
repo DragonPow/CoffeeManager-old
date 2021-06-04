@@ -26,7 +26,7 @@
         <StackPanel DockPanel.Dock="Bottom" Background="White">
             <TextBox Style="{StaticResource MaterialDesignOutlinedTextBox}"
                          materialDesign:HintAssist.Hint="Tên danh mục"
-                         Text="{Binding Newproduct.product.Name}"
+                         Text="{Binding Newproduct.Name}"
                          FontSize="16"
                          Margin="100,30"
                          MaxWidth="500" />

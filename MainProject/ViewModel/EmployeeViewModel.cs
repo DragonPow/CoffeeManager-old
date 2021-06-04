@@ -262,9 +262,6 @@ namespace MainProject.ViewModel
             ClearCurrentEmployee();
         }
 
-
-
-
         public ICommand Cancel_Command
         {
             get
