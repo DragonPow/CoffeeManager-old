@@ -8,6 +8,7 @@
              xmlns:MainWS="clr-namespace:MainProject.MainWorkSpace"
              xmlns:Main="clr-namespace:MainProject"
              d:DataContext="{d:DesignInstance Type=Main:DetailPro}"
+             x:Name="Item"
              mc:Ignorable="d"
              d:DesignHeight="45"
              d:DesignWidth="350"
@@ -52,7 +53,7 @@
                               Width="auto"
                               HorizontalAlignment="Stretch"
                               VerticalAlignment="Center"
-                              Margin="0,5"></MainWS:NumericUpdown>
+                              Margin="0,5" ></MainWS:NumericUpdown>
         <TextBlock Grid.Column="2"
                    Text="{Binding Pro.Price, FallbackValue='25,000đ', StringFormat='{}{0:N0} đ'}"
                    HorizontalAlignment="Center"
