@@ -87,8 +87,9 @@ namespace MainProject.ViewModel
             { 
                 if (_Currentlistdetailpro != value) 
                 { 
-                    _Currentlistdetailpro = value; OnPropertyChanged();
-                    _CurrentTable.ListPro = value;
+                    _Currentlistdetailpro = value; 
+                    OnPropertyChanged();
+                   
                 } 
             } 
         }

@@ -94,6 +94,7 @@ namespace MainProject.ViewModel
            /* Newproduct = new CUSTOMPRODUCT() { product = new PRODUCT() { DELETED = 0, Image = null, TYPE_PRODUCT = new ObservableCollection<TYPE_PRODUCT>() } };*/
                     /* lát phải xóa dòng trên đầu nhó*/
             Type = new TYPE_PRODUCT() { Type ="Tất cả"} ;
+
         }
 
         #endregion
@@ -117,7 +118,7 @@ namespace MainProject.ViewModel
         public void Loadaddproview()
         {
 
-            Newproduct =new PRODUCT() { DELETED = 0, Image = null, TYPE_PRODUCT = new ObservableCollection<TYPE_PRODUCT>() } ;
+            Newproduct =new PRODUCT() { DELETED = 0, Image = null, TYPE_PRODUCT = new TYPE_PRODUCT() } ;
 
             //open view Add_pro(a)
         }
@@ -143,7 +144,7 @@ namespace MainProject.ViewModel
                     TYPE_PRODUCT type= db.TYPE_PRODUCT.Where(t => (t.Type == Type_in_Combobox_AddPro)).FirstOrDefault();
                 
                     if (type == null) return;
-                    Newproduct.TYPE_PRODUCT = new ObservableCollection<TYPE_PRODUCT>() { type };                
+                    Newproduct.TYPE_PRODUCT = type ;                
 
 
                     db.PRODUCTs.Add(Newproduct);
@@ -445,14 +446,20 @@ namespace MainProject.ViewModel
          {
             Tableviewmodel.TotalCurrentTable += (long) ListPoduct.ElementAt(IndexCurrentProduct).Price;
 
-            foreach ( var p in Tableviewmodel.Currentlistdetailpro)
+            if (Tableviewmodel.Currentlistdetailpro != null)
+
             {
-                if (p.Pro == ListPoduct.ElementAt(IndexCurrentProduct))
+                foreach (var p in Tableviewmodel.Currentlistdetailpro)
                 {
-                    ++p.Quantity;
-                    return;
+                    if (p.Pro == ListPoduct.ElementAt(IndexCurrentProduct))
+                    {
+                        ++p.Quantity;
+                        return;
+                    }
                 }
             }
+            else Tableviewmodel.Currentlistdetailpro = new ObservableCollection<DetailPro>();
+
 
             Tableviewmodel.Currentlistdetailpro.Add(new DetailPro(ListPoduct.ElementAt(IndexCurrentProduct)));
          }
@@ -476,7 +483,7 @@ namespace MainProject.ViewModel
             {
                 if ( Type_In_Edit_CATEGORY == null) return;
 
-                var l = db.PRODUCTs.Where(p => ((p.TYPE_PRODUCT.FirstOrDefault().Type == Type_In_Edit_CATEGORY.Type || p.TYPE_PRODUCT.FirstOrDefault().Type == "") && p.DELETED == 0)).ToList();
+                var l = db.PRODUCTs.Where(p => ((p.TYPE_PRODUCT.Type == Type_In_Edit_CATEGORY.Type || p.TYPE_PRODUCT.Type == "") && p.DELETED == 0)).ToList();
 
                 if (l == null) return;
 
@@ -537,7 +544,7 @@ namespace MainProject.ViewModel
                 }
                 else
                 {
-                    var p = db.PRODUCTs.Where(pro => ((pro.TYPE_PRODUCT.FirstOrDefault().Type == Type) && (pro.DELETED == 0)));
+                    var p = db.PRODUCTs.Where(pro => ((pro.TYPE_PRODUCT.Type == Type) && (pro.DELETED == 0)));
                     if (p == null) return;
                     ListPoduct = new ObservableCollection<PRODUCT>(p.ToList());
                 }
