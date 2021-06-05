@@ -25,8 +25,8 @@ namespace MainProject
             base.OnStartup(e);
 
             ////Testing Startup
-            BillView view = new BillView();
-            BillViewModel viewModel = new BillViewModel();
+            TestView view = new TestView();
+            MainViewModel viewModel = new MainViewModel();
             ////End testing Startup
             ///
 
@@ -36,7 +36,7 @@ namespace MainProject
             //End main Startup
 
             //LoadInitApp();
-            view.DataContext = viewModel;
+            view.DataContext = viewModel.Productviewmodel;
             view.Show();
             //view.ShowDialog();
         }
