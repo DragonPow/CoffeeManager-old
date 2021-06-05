@@ -260,7 +260,7 @@ namespace MainProject.ViewModel
         public void OpenChooseTable( )
         {
             SelectTableView v = new SelectTableView();
-            WindowService.Instance.OpenWindow(this, new TableManager());
+            WindowService.Instance.OpenWindow(this, v);
         }
 
         public ICommand CloseViewChooseTableCommand
@@ -277,7 +277,7 @@ namespace MainProject.ViewModel
 
         public void CloseChooseTable()
         {
-            Window window = WindowService.Instance.FindWindowbyTag("Table Manager").First();
+            Window window = WindowService.Instance.FindWindowbyTag("Selected Table").First();
             window.Close();
         }
 
@@ -324,8 +324,8 @@ namespace MainProject.ViewModel
             CurrentTable.ListPro = Currentlistdetailpro;
             CurrentTable.Total = TotalCurrentTable;
 
-            BillViewModel billviewmodel = new BillViewModel();
-            billviewmodel.CurrentTable = CurrentTable;
+            BillViewModel billviewmodel = new BillViewModel( CurrentTable);
+        /*    billviewmodel.CurrentTable = CurrentTable;*/
 
             BillView billView = new BillView();
             billView.DataContext = billviewmodel;

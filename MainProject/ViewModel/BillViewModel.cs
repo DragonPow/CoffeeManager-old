@@ -154,25 +154,11 @@ namespace MainProject.MainWorkSpace.Bill
         #region Constructors
         public BillViewModel()
         {
-            //testing
-            CurrentTable = new TABLECUSTOM();
-            for (int i = 0; i < 5; i++)
-            {
-                CurrentTable.ListPro.Add(new DetailPro()
-                {
-                    Pro = new PRODUCT() { Name = "Cafe den da khong duong", Price = 10000, DELETED = 0 },
-                    Quantity = 2,
-                });
-                CurrentTable.Total += CurrentTable.ListPro.ElementAt(i).Quantity * CurrentTable.ListPro.ElementAt(i).Pro.Price;
-            }
-            CurrentTable.table = new TABLE()
-            {
-                DELETED = 0,
-                Floor = 1,
-                Number = 1,
-                ID_Status = 1
-            };
-            //end testing
+        }
+            public BillViewModel( TABLECUSTOM Table)
+        {
+            CurrentTable = Table;
+
             CurrentBill = new BILL();
 
             foreach (var p in CurrentTable.ListPro)
