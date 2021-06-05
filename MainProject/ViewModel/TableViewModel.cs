@@ -42,7 +42,7 @@ namespace MainProject.ViewModel
         private ICommand _AddFloor;
         private ICommand _DeleteFloor;
 
-        public string TableName = "Bàn: ";
+        private string _TableName = "Bàn: ";
           
 
         #endregion
@@ -209,6 +209,20 @@ namespace MainProject.ViewModel
                 if (_ListTable != value)
                 {
                     _ListTable = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+       
+            public string TableName
+            {
+            get => _TableName;            
+            set
+            {
+                if (_TableName != value)
+                {
+                    _TableName = value;
                     OnPropertyChanged();
                 }
             }
