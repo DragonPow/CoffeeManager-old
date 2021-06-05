@@ -12,7 +12,7 @@
              d:DesignHeight="480"
              d:DesignWidth="600">
     <ListView ItemsSource="{Binding ListPoduct}"
-                  SelectedItem="{Binding IndexCurrentProduct,Mode=TwoWay}"
+                  SelectedIndex="{Binding IndexCurrentProduct,Mode=TwoWay}"
                   ScrollViewer.HorizontalScrollBarVisibility="Disabled">
         <ListView.ItemsPanel>
             <ItemsPanelTemplate>
@@ -21,15 +21,8 @@
         </ListView.ItemsPanel>
         <ListView.ItemTemplate>
             <DataTemplate>
-                <Button Command="{Binding DataContext.AddDetailProToTableCommand, ElementName=ProductView}"
-                            Width="Auto"
-                            Height="Auto"
-                            Background="Transparent"
-                            BorderBrush="Transparent"
-                            Padding="0"
-                            Margin="2">
-                    <local:Pro_UC DataContext="{Binding}" />
-                </Button>
+
+                <local:Pro_UC DataContext="{Binding}" />
             </DataTemplate>
         </ListView.ItemTemplate>
     </ListView>
