@@ -4,44 +4,37 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:MainProject.MainWorkSpace.Table"
+             xmlns:ViewModel="clr-namespace:MainProject.ViewModel"
              mc:Ignorable="d" 
              x:Name="Table_Manager"
              xmlns:test="clr-namespace:MainProject"
              d:DesignHeight="480" d:DesignWidth="700">
+    <UserControl.DataContext>
+        <ViewModel:TableViewModel/>
+    </UserControl.DataContext>
     <ScrollViewer HorizontalScrollBarVisibility="Disabled"
                   VerticalScrollBarVisibility="Auto">
-        <ItemsControl ItemsSource="{Binding ListTable}">
-            <ItemsControl.Resources>
-                <!--<DataTemplate DataType="{x:Type local:FreeTable_UC}">
-                    <local:FreeTable_UC DataContext="{Binding }"/>
-                </DataTemplate>
-                <DataTemplate DataType="{x:Type local:AlreadyTable_UC}">
-                    <local:AlreadyTable_UC DataContext="{Binding }"/>
-                </DataTemplate>-->
-            </ItemsControl.Resources>
-            <ItemsControl.ItemTemplate>
+        <ListView ItemsSource="{Binding ListTable}"
+                  SelectedItem="{Binding CurrentTable}">
+            <ListView.ItemTemplate>
                 <DataTemplate>
-                    <Button DataContext="{Binding table}" 
-                            Command="{Binding DataContext.ClickTableCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
-                            Width="Auto" Height="Auto"
-                            Background="Transparent"
-                            BorderBrush="Transparent">
-                        <local:FreeTable_UC DataContext="{Binding}"/>
-                    </Button>
-                  
+                    <local:FreeTable_UC DataContext="{Binding}">
+                        
+                    </local:FreeTable_UC>
+
                 </DataTemplate>
-            </ItemsControl.ItemTemplate>
-            <ItemsControl.ItemsPanel>
+            </ListView.ItemTemplate>
+            <ListView.ItemsPanel>
                 <ItemsPanelTemplate>
                     <WrapPanel Orientation="Horizontal"></WrapPanel>
-                    <!--<StackPanel Orientation="Horizontal"/>-->
+
                 </ItemsPanelTemplate>
-            </ItemsControl.ItemsPanel>
+            </ListView.ItemsPanel>
             <!--<ItemsControl.ItemContainerStyle>
             <Style TargetType="ItemsPresenter">
                 <Setter Property="Margin" Value="10"/>
             </Style>
         </ItemsControl.ItemContainerStyle>-->
-        </ItemsControl>
+        </ListView>
     </ScrollViewer>
 </UserControl>
