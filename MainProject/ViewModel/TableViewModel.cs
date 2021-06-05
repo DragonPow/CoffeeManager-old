@@ -22,6 +22,8 @@ namespace MainProject.ViewModel
         private ObservableCollection<DetailPro> _Currentlistdetailpro;
         private long _TotalCurrentTable;
 
+        private BillViewModel _Billviewmodel;
+
         private ICommand _plusQuantityDetailProCommand;
         private ICommand _minusQuantityDetailProCommand;
         private ICommand _ClickQuantityDetailProCommand;        
@@ -39,6 +41,8 @@ namespace MainProject.ViewModel
         private ICommand _AddFloor;
         private ICommand _DeleteFloor;
 
+        public string TableName = "Bàn: ";
+          
 
         #endregion
 
@@ -81,6 +85,18 @@ namespace MainProject.ViewModel
 
         #region Properties
 
+        public BillViewModel Billviewmodel
+        {
+            get => _Billviewmodel;
+            set
+            {
+                if (_Billviewmodel != value)
+                {
+                    _Billviewmodel = value;
+                    OnPropertyChanged();              
+                }
+            }
+        }
         public long TotalCurrentTable { get => _TotalCurrentTable; set { if (_TotalCurrentTable != value) { _TotalCurrentTable = value; OnPropertyChanged(); } } }
         public ObservableCollection<DetailPro> Currentlistdetailpro 
         { 
@@ -146,7 +162,7 @@ namespace MainProject.ViewModel
                 {
                     _CurrentTable = value;
                     OnPropertyChanged();
-                   
+                    if ( value != null) TableName = "Bàn: " + value.table.Number.ToString();
                 }
             }
       
@@ -324,13 +340,19 @@ namespace MainProject.ViewModel
             CurrentTable.ListPro = Currentlistdetailpro;
             CurrentTable.Total = TotalCurrentTable;
 
-            BillViewModel billviewmodel = new BillViewModel( CurrentTable);
-        /*    billviewmodel.CurrentTable = CurrentTable;*/
-
+            Billviewmodel = new BillViewModel(CurrentTable);
+            
             BillView billView = new BillView();
-            billView.DataContext = billviewmodel;
+            billView.DataContext = Billviewmodel;
 
-            billView.Show();
+            billView.ShowDialog();
+
+            if (Billviewmodel.IsClose)
+            {
+                CurrentTable = null;
+                Currentlistdetailpro = new ObservableCollection<DetailPro>();
+            }
+
         }
 
 
