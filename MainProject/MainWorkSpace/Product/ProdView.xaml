@@ -12,7 +12,8 @@
              d:DesignHeight="480"
              d:DesignWidth="600">
     <ListView ItemsSource="{Binding ListPoduct}"
-                  SelectedIndex="{Binding IndexCurrentProduct,Mode=TwoWay}"
+                  SelectedIndex="{Binding IndexCurrentproductInMainView,Mode=TwoWay}"
+                  
                   ScrollViewer.HorizontalScrollBarVisibility="Disabled">
         <ListView.ItemsPanel>
             <ItemsPanelTemplate>
