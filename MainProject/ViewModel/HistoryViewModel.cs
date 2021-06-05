@@ -112,8 +112,7 @@ namespace MainProject.ViewModel
         public void Load_Detail_Bill()
         {
             BillView view = new BillView();
-            view.DataContext = CurrentBill;
-
+            view.DataContext = new BillViewModel() { Total = (long)CurrentBill.TotalPrice, CurrentBill = CurrentBill, CodeDiscount = CurrentBill.VOUCHER.CODE, Discount = ( (int)CurrentBill.TotalPrice*CurrentBill.VOUCHER.Percent/ ( 100 - CurrentBill.VOUCHER.Percent)) };
             view.Show();
 
         }
@@ -133,9 +132,11 @@ namespace MainProject.ViewModel
         {
             using (var db = new mainEntities())
             {
+               var list = db.BILLs.Where(b => (b.CheckoutDay >= BeginTime && b.CheckoutDay <= EndTime)).OrderBy(b => b.ID).Skip(NumberPage - 1).Take(Number_Bill_in_Page).ToList();
 
-                ListBill = new ObservableCollection<BILL>(db.BILLs.Where(b => (b.ID < NumberPage * Number_Bill_in_Page && b.ID >= (NumberPage - 1) * (Number_Bill_in_Page) && b.CheckoutDay >= BeginTime && b.CheckoutDay <=EndTime)).ToList());
+                if (list == null) return;
 
+                ListBill = new ObservableCollection<BILL>(list);
             }
         }
     }
