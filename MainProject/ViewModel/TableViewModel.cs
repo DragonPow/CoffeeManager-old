@@ -95,7 +95,13 @@ namespace MainProject.ViewModel
                 {
                     _Isbringtohome = value;
                     OnPropertyChanged();
-
+                    if ( value == true)
+                    {
+                        TableName = "Mang về";
+                        CurrentTable = null;
+                    }
+                    else
+                         if (CurrentTable == null) TableName = "Chọn bàn >";
                 }
             }
         }
@@ -176,7 +182,13 @@ namespace MainProject.ViewModel
                 {
                     _CurrentTable = value;
                     OnPropertyChanged();
-                    if ( value != null) TableName = "Bàn: " + value.table.Number.ToString();
+                    if (value != null)
+                    {
+                        TableName = "Bàn: " + value.table.Number.ToString();
+                        Isbringtohome = false;
+                    }
+                    else
+                         if (!Isbringtohome) TableName = "Chọn bàn >";
                 }
             }
       
@@ -372,6 +384,11 @@ namespace MainProject.ViewModel
                 }
             }
 
+            if (Currentlistdetailpro == null || Currentlistdetailpro.Count == 0 )
+            {
+                WindowService.Instance.OpenMessageBox("Chưa có món được chọn!", "Lỗi", System.Windows.MessageBoxImage.Error);
+                return;
+            }                
 
             CurrentTable.ListPro = Currentlistdetailpro;
             CurrentTable.Total = TotalCurrentTable;
