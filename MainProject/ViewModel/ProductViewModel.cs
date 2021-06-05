@@ -192,6 +192,7 @@ namespace MainProject.ViewModel
         {
 
             Newproduct = null;
+
         }
 
         public ICommand ExitAddProductView_Command
@@ -313,7 +314,7 @@ namespace MainProject.ViewModel
 
         public void LoadViewUpdate()
         {
-            //open viewUpdatate
+             WindowService.Instance.OpenWindow(this, new CreateProd());
         }
 
         public ICommand UpdateProduct_Command
