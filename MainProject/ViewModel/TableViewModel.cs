@@ -39,6 +39,11 @@ namespace MainProject.ViewModel
         private ICommand _AddFloor;
         private ICommand _DeleteFloor;
 
+<<<<<<< Updated upstream
+=======
+        private string _TableName = "Chọn bàn";
+          
+>>>>>>> Stashed changes
 
         #endregion
 
