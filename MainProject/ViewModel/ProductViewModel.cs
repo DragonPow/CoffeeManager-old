@@ -77,7 +77,7 @@ namespace MainProject.ViewModel
                 {
                     _IndexCurrentproductInMainView = value;
                     OnPropertyChanged();
-                    AddDetailProToTable();
+                     AddDetailProToTable();
                 } 
             } 
         }
@@ -459,6 +459,8 @@ namespace MainProject.ViewModel
 
          public void AddDetailProToTable()
          {
+            if (IndexCurrentproductInMainView >= ListPoduct.Count || IndexCurrentproductInMainView < 0) return;
+
             Tableviewmodel.TotalCurrentTable += (long) ListPoduct.ElementAt(IndexCurrentproductInMainView).Price;
 
             if (Tableviewmodel.Currentlistdetailpro != null)
