@@ -180,6 +180,7 @@ namespace MainProject.MainWorkSpace.Bill
         {
  
             CurrentBill.ID_Tables = CurrentTable.table.ID;
+            CurrentBill.TotalPrice = Total;
 
             using (var db = new mainEntities())
             { 
@@ -218,7 +219,6 @@ namespace MainProject.MainWorkSpace.Bill
                         Total = CurrentTable.Total;
                         CurrentBill.ID_Voucher = null;
                         CodeDiscount = "";
-
                         Discount = 0;
                        
                     WindowService.Instance.OpenMessageBox("Nhập sai mã!", "Lỗi", System.Windows.MessageBoxImage.Error);

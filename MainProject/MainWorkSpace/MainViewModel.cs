@@ -21,11 +21,11 @@ namespace MainProject.MainWorkSpace
         private TableViewModel _Tableviewmodel;
         private ObservableCollection<TYPE_PRODUCT> _ListType;
         private TYPE_PRODUCT _CurrentType;
+        private TYPE_PRODUCT _Type_In_Edit_CATEGORY;
 
         private const PackIconKind _iconDisplay = PackIconKind.Home;
 
-      
-
+       
         #endregion
 
         #region  propertities
@@ -55,6 +55,8 @@ namespace MainProject.MainWorkSpace
             }
         }
 
+        public TYPE_PRODUCT Type_In_Edit_CATEGORY { get => _Type_In_Edit_CATEGORY; set { if (_Type_In_Edit_CATEGORY != value) { _Type_In_Edit_CATEGORY = value; OnPropertyChanged(); Productviewmodel.Type_In_Edit_CATEGORY = value ; } } }
+
 
         #endregion
 
@@ -78,7 +80,7 @@ namespace MainProject.MainWorkSpace
 
         #region Command
 
-
+     
         #endregion
     }
 }

@@ -21,6 +21,7 @@ namespace MainProject.ViewModel
         private DetailPro _CurrentDetailPro;
         private ObservableCollection<DetailPro> _Currentlistdetailpro;
         private long _TotalCurrentTable;
+        private bool _Isbringtohome;
 
         private BillViewModel _Billviewmodel;
 
@@ -71,7 +72,7 @@ namespace MainProject.ViewModel
                 ListTable = new ObservableCollection<TABLECUSTOM>(Tablecustoms);
                 ListFloor = new ObservableCollection<int>();
 
-                var list = db.TABLES.Select(f => f.Floor).Distinct();
+                var list = db.TABLES.Where( f => f.Floor != 0).Select(f => f.Floor ).Distinct();
 
                 foreach( int f in list)
                 {
@@ -85,6 +86,19 @@ namespace MainProject.ViewModel
 
         #region Properties
 
+        public bool Isbringtohome
+        {
+            get => _Isbringtohome;
+            set
+            {
+                if (_Isbringtohome != value)
+                {
+                    _Isbringtohome = value;
+                    OnPropertyChanged();
+
+                }
+            }
+        }
         public BillViewModel Billviewmodel
         {
             get => _Billviewmodel;
@@ -330,10 +344,18 @@ namespace MainProject.ViewModel
         }
         public void Pay()
         {
-            if (CurrentTable == null)
+            if (CurrentTable == null && !Isbringtohome)
             {
                 WindowService.Instance.OpenMessageBox("Chưa chọn bàn", "Lỗi", System.Windows.MessageBoxImage.Error);
                 return;
+            }
+
+            if ( Isbringtohome)
+            {
+                using (var db = new mainEntities())
+                {
+                    CurrentTable = new TABLECUSTOM() { table = db.TABLES.Where(t => t.ID == 0).FirstOrDefault() };
+                }
             }
 
 
