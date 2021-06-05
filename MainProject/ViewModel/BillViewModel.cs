@@ -20,6 +20,8 @@ namespace MainProject.MainWorkSpace.Bill
         private TABLECUSTOM _Current_table;
         bool IsDiscount = false;
 
+        public bool IsClose = false ;
+
         private ObservableCollection<DETAILBILL> _ListDetailBill;
         //StoreInfor : namestore, phone, address
 
@@ -42,6 +44,7 @@ namespace MainProject.MainWorkSpace.Bill
                 {
                     _CurrentBill = value;
                     OnPropertyChanged();
+
                 }
             }
         }
@@ -64,13 +67,13 @@ namespace MainProject.MainWorkSpace.Bill
         public long Total
         {
             get { return _Total; }
-            set { 
-                if ( _Total != value)
+            set {
+                if (_Total != value)
                 {
                     _Total = value;
                     OnPropertyChanged();
-                }    
                 }
+            }
         }
 
         public string CodeDiscount
@@ -154,48 +157,43 @@ namespace MainProject.MainWorkSpace.Bill
         #region Constructors
         public BillViewModel()
         {
-        }
-            public BillViewModel( TABLECUSTOM Table)
-        {
-            CurrentTable = Table;
-
             CurrentBill = new BILL();
-
+        } 
+         public BillViewModel( TABLECUSTOM Table)
+        {
+            CurrentBill = new BILL();
+            CurrentTable = Table;
+               
             foreach (var p in CurrentTable.ListPro)
             {
-                CurrentBill.DETAILBILLs.Add(new DETAILBILL() { PRODUCT = p.Pro, Amount = p.Quantity });
+                CurrentBill.DETAILBILLs.Add(new DETAILBILL() { Amount = p.Quantity, ID_Product = p.Pro.ID});             
             }
-
-            CurrentBill.TABLE = CurrentTable.table;
+            
             Discount = 0;
             CurrentBill.CheckoutDay = DateTime.Now;
             Total = CurrentTable.Total;
         }
 
-        public BillViewModel(BILL bill)
-        {
-            CurrentBill = bill;
-        }
         #endregion
 
         private void Payment(BillView view)
         {
-           /* CurrentTable.ListPro.Add(new DetailPro());*/
-            
+ 
+            CurrentBill.ID_Tables = CurrentTable.table.ID;
+
             using (var db = new mainEntities())
             { 
-                CurrentBill.ID_Tables = CurrentTable.table.ID;
-
-                db.BILLs.Add(CurrentBill);
-
-                CurrentTable.ListPro = null;
-                CurrentTable.Total = 0;
-                db.SaveChanges();
-
-                view.Close();
-
-                //Xuất đơn ra PDF                                
+                db.BILLs.Add(CurrentBill);                
+                db.SaveChanges();                                            
             }
+
+            CurrentTable.ListPro = null;
+            CurrentTable.Total = 0;
+            IsClose = true;
+
+            view.Close();
+
+            //Xuất đơn ra PDF  
         }
         private void LoadDiscount()
         {
@@ -219,8 +217,8 @@ namespace MainProject.MainWorkSpace.Bill
                 {
                         Total = CurrentTable.Total;
                         CurrentBill.ID_Voucher = null;
-                        CurrentBill.VOUCHER = null;
                         CodeDiscount = "";
+
                         Discount = 0;
                        
                     WindowService.Instance.OpenMessageBox("Nhập sai mã!", "Lỗi", System.Windows.MessageBoxImage.Error);
