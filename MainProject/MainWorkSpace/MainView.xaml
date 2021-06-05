@@ -10,6 +10,7 @@
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d"
              Background="White"
+             x:Name="Main_View"
              d:DataContext="{d:DesignInstance Type=local:MainViewModel}"
              d:DesignHeight="630"
              d:DesignWidth="1150">
@@ -21,7 +22,7 @@
             <ColumnDefinition Width="7*"/>
             <ColumnDefinition Width="3*"/>
         </Grid.ColumnDefinitions>
-        <Table:TableDetailView DataContext="{Binding Tableviewmodel}" Grid.Column="1" Margin="5,0,0,0"/>
+        <Table:TableDetailView DataContext="{Binding Tableviewmodel}" Grid.Column="1" Margin="5,0,0,0" />
 
         <DockPanel>
             <materialDesign:ColorZone DockPanel.Dock="Top"
@@ -47,7 +48,8 @@
                                 <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
                             <Button VerticalAlignment="Center"
-                                Style="{DynamicResource MaterialDesignToolButton}">
+                                Style="{DynamicResource MaterialDesignToolButton}"
+                                    Command="{Binding DataContext.SearchByName_Command, ElementName=Main_View}">
                                 <materialDesign:PackIcon
                                   Kind="Search"
                                   Opacity=".56" />
