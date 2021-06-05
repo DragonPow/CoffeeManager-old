@@ -403,6 +403,7 @@ namespace MainProject.ViewModel
             {
                 CurrentTable = null;
                 Currentlistdetailpro = new ObservableCollection<DetailPro>();
+                TotalCurrentTable = 0;
             }
 
         }
