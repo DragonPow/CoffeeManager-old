@@ -68,7 +68,7 @@ namespace MainProject.MainWorkSpace
             using (var db = new mainEntities())
             {
                 var l = new List<TYPE_PRODUCT>();
-                l.Add(new TYPE_PRODUCT() { Type = "Tất cả" });
+             
                 l.AddRange(db.TYPE_PRODUCT.Distinct().ToList());
 
                 ListType = new ObservableCollection<TYPE_PRODUCT>(l);

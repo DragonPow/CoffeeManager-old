@@ -111,7 +111,7 @@ namespace MainProject.ViewModel
         {
            /* Newproduct = new CUSTOMPRODUCT() { product = new PRODUCT() { DELETED = 0, Image = null, TYPE_PRODUCT = new ObservableCollection<TYPE_PRODUCT>() } };*/
                     /* lát phải xóa dòng trên đầu nhó*/
-            Type = new TYPE_PRODUCT() { Type ="Tất cả"} ;
+           /* Type = new TYPE_PRODUCT() { Type ="Tất cả"} ;*/
 
         }
 
