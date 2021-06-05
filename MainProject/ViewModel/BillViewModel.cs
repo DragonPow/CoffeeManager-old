@@ -38,7 +38,7 @@ namespace MainProject.MainWorkSpace.Bill
             {
                 return _CurrentBill;
             }
-            private set
+             set
             {
                 if (value != _CurrentBill)
                 {
