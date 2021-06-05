@@ -23,13 +23,11 @@
         <ListView.ItemTemplate>
             <DataTemplate>
                 <local:Pro_UC DataContext="{Binding}" >
-                    <local:Pro_UC DataContext="{Binding}" >
-                        <i:Interaction.Triggers>
-                            <i:EventTrigger EventName="PreviewMouseLeftButtonUp">
-                                <i:InvokeCommandAction Command="{Binding DataContext.AddDetailProToTableCommand, ElementName=ProductView}"/>
-                            </i:EventTrigger>
-                        </i:Interaction.Triggers>
-                    </local:Pro_UC>
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="PreviewMouseLeftButtonUp">
+                            <i:InvokeCommandAction Command="{Binding DataContext.AddDetailProToTableCommand, ElementName=ProductView}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
                 </local:Pro_UC>
             </DataTemplate>
         </ListView.ItemTemplate>

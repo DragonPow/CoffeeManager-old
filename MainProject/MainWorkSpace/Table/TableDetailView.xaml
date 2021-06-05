@@ -60,13 +60,9 @@
             <Border BorderBrush="Gray" BorderThickness="0,1,0,1" Grid.ColumnSpan="2"/>
             <CheckBox
                 Height="25"
-                  Style="{StaticResource MaterialDesignFilterChipAccentCheckBox}"
-<<<<<<< Updated upstream
-                  IsChecked="True"
-=======
-                  IsChecked="{Binding Isbringtohome,Mode=TwoWay}"
->>>>>>> Stashed changes
-                  VerticalAlignment="Center" Margin="10,0"
+                Style="{StaticResource MaterialDesignFilterChipAccentCheckBox}"
+                IsChecked="{Binding Isbringtohome}"
+                VerticalAlignment="Center" Margin="10,0"
                 Background="{StaticResource MainColor}"
                 Foreground="Green">
                 Mang đi

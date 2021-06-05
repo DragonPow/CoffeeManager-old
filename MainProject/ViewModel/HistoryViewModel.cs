@@ -16,7 +16,7 @@ namespace MainProject.ViewModel
         private ObservableCollection<BILL> _ListBill;
         private BILL _CurrentBill;
         private int _NumberPage;
-        private int Number_Bill_in_Page = 20;
+        public static int Number_Bill_in_Page = 20;
 
         private DateTime _BeginTime;
         private DateTime _EndTime;
@@ -94,6 +94,18 @@ namespace MainProject.ViewModel
         public HistoryViewModel()
         {
             LoadBillByNumberPage();
+            for (int i=1;i<10;i++)
+            {
+                ListBill.Add(new BILL()
+                {
+                    ID = 10,
+                    CheckoutDay = new DateTime(2021, i, i),
+                    TotalPrice = i * 100,
+                    TABLE = new TABLE() { Number = i }
+                });
+            }
+            _NumberPage = 1;
+
         }
         #endregion
 
@@ -112,8 +124,7 @@ namespace MainProject.ViewModel
         public void Load_Detail_Bill()
         {
             BillView view = new BillView();
-            view.DataContext = CurrentBill;
-
+            view.DataContext = new BillViewModel() { Total = (long)CurrentBill.TotalPrice, CurrentBill = CurrentBill, CodeDiscount = CurrentBill.VOUCHER.CODE, Discount = ( (int)CurrentBill.TotalPrice*CurrentBill.VOUCHER.Percent/ ( 100 - CurrentBill.VOUCHER.Percent)) };
             view.Show();
 
         }
@@ -133,9 +144,11 @@ namespace MainProject.ViewModel
         {
             using (var db = new mainEntities())
             {
+               var list = db.BILLs.Where(b => (b.CheckoutDay >= BeginTime && b.CheckoutDay <= EndTime)).OrderBy(b => b.ID).Skip(NumberPage - 1).Take(Number_Bill_in_Page).ToList();
 
-                ListBill = new ObservableCollection<BILL>(db.BILLs.Where(b => (b.ID < NumberPage * Number_Bill_in_Page && b.ID >= (NumberPage - 1) * (Number_Bill_in_Page) && b.CheckoutDay >= BeginTime && b.CheckoutDay <=EndTime)).ToList());
+                if (list == null) return;
 
+                ListBill = new ObservableCollection<BILL>(list);
             }
         }
     }
