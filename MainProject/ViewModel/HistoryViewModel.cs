@@ -16,7 +16,7 @@ namespace MainProject.ViewModel
         private ObservableCollection<BILL> _ListBill;
         private BILL _CurrentBill;
         private int _NumberPage;
-        private int Number_Bill_in_Page = 20;
+        public static int Number_Bill_in_Page = 20;
 
         private DateTime _BeginTime;
         private DateTime _EndTime;
@@ -94,6 +94,18 @@ namespace MainProject.ViewModel
         public HistoryViewModel()
         {
             LoadBillByNumberPage();
+            for (int i=1;i<10;i++)
+            {
+                ListBill.Add(new BILL()
+                {
+                    ID = 10,
+                    CheckoutDay = new DateTime(2021, i, i),
+                    TotalPrice = i * 100,
+                    TABLE = new TABLE() { Number = i }
+                });
+            }
+            _NumberPage = 1;
+
         }
         #endregion
 

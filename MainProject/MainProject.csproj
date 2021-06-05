@@ -145,6 +145,10 @@
     </Compile>
     <Compile Include="DetailPro.cs" />
     <Compile Include="HelperClass\WindowService.cs" />
+    <Compile Include="HistoryWorkSpace\Converter\IdexConverter.cs" />
+    <Compile Include="HistoryWorkSpace\HistoryListItemView.xaml.cs">
+      <DependentUpon>HistoryListItemView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="HistoryWorkSpace\HistoryViewModel.cs" />
     <Compile Include="MainWorkSpace\Bill\BillView.xaml.cs">
       <DependentUpon>BillView.xaml</DependentUpon>
@@ -192,7 +196,6 @@
     <Compile Include="Model\VOUCHER.cs">
       <DependentUpon>MainModel.tt</DependentUpon>
     </Compile>
-
     <Compile Include="StatisticWorkSpace\Converter\ChartLabelConverter.cs" />
     <Compile Include="StatisticWorkSpace\Converter\ChartValueConverter.cs" />
     <Compile Include="StatisticWorkSpace\Converter\MoneyConverter.cs" />
@@ -329,6 +332,10 @@
     <Page Include="AccountWorkSpace\ChangedPassword.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="HistoryWorkSpace\HistoryListItemView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>

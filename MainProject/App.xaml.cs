@@ -25,8 +25,9 @@ namespace MainProject
             base.OnStartup(e);
 
             ////Testing Startup
-            BillView view = new BillView();
-            BillViewModel viewModel = new BillViewModel();
+            //WindowService.Instance.OpenWindow(new HistoryViewModel(), new HistoryWorkSpace.HistoryView());
+            TestingView view = new TestingView();
+            HistoryViewModel viewModel = new HistoryViewModel();
             ////End testing Startup
             ///
 
