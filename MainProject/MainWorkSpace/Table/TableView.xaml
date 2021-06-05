@@ -28,6 +28,7 @@
                             BorderBrush="Transparent">
                         <local:FreeTable_UC DataContext="{Binding}"/>
                     </Button>
+                  
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
             <ItemsControl.ItemsPanel>

@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Windows;
 using System.Windows.Input;
 
 namespace MainProject.ViewModel
@@ -145,7 +146,7 @@ namespace MainProject.ViewModel
                 {
                     _CurrentTable = value;
                     OnPropertyChanged();
-                  
+                   
                 }
             }
       
@@ -259,7 +260,7 @@ namespace MainProject.ViewModel
         public void OpenChooseTable( )
         {
             SelectTableView v = new SelectTableView();
-            //Show Tab SelectedTableView
+            WindowService.Instance.OpenWindow(this, new TableManager());
         }
 
         public ICommand CloseViewChooseTableCommand
@@ -276,8 +277,8 @@ namespace MainProject.ViewModel
 
         public void CloseChooseTable()
         {
-          
-            //Show Tab SelectedTableView
+            Window window = WindowService.Instance.FindWindowbyTag("Table Manager").First();
+            window.Close();
         }
 
 

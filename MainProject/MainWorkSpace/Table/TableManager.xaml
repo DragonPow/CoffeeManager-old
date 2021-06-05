@@ -9,6 +9,7 @@
              xmlns:ViewModel="clr-namespace:MainProject.ViewModel"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d"
+             Tag="Table Manager "
              d:DataContext="{d:DesignInstance Type=ViewModel:TableViewModel}" 
              d:DesignHeight="630" d:DesignWidth="900" Background="White">
     <UserControl.DataContext>
@@ -90,7 +91,9 @@
         <Grid DockPanel.Dock="Bottom">
             <Canvas x:Name="InfoCanvas">
                 <!--Table view here-->
+               
                 <local:TableView BorderBrush="#9393A1"
+                               
                                  BorderThickness="2"
                                  DataContext="{Binding}"
                                  Canvas.Left="0" Canvas.Top="0"
