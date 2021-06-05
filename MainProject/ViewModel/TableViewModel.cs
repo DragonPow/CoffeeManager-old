@@ -66,7 +66,9 @@ namespace MainProject.ViewModel
                 ListTable = new ObservableCollection<TABLECUSTOM>(Tablecustoms);
                 ListFloor = new ObservableCollection<int>();
 
-                var list = db.TABLES.Select(f => f.Floor).Distinct();
+                var list = db.TABLES.Select(f => f.Floor).Distinct().ToList();
+
+                if (list == null || list.Count() == 0) return;
 
                 foreach( int f in list)
                 {
@@ -259,7 +261,7 @@ namespace MainProject.ViewModel
         public void OpenChooseTable( )
         {
             SelectTableView v = new SelectTableView();
-            //Show Tab SelectedTableView
+            WindowService.Instance.OpenWindow(this, new TableManager());
         }
 
         public ICommand CloseViewChooseTableCommand
