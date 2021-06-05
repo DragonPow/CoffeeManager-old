@@ -20,6 +20,9 @@ namespace MainProject.MainWorkSpace.Bill
         private TABLECUSTOM _Current_table;
         bool IsDiscount = false;
 
+        long _GiveMoney;
+        long _Refund;
+
         public bool IsClose = false ;
 
         private ObservableCollection<DETAILBILL> _ListDetailBill;

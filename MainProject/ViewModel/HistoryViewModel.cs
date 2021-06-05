@@ -16,6 +16,7 @@ namespace MainProject.ViewModel
         private ObservableCollection<BILL> _ListBill;
         private BILL _CurrentBill;
         private int _NumberPage;
+        private int _NumberAllpage;
         public static int Number_Bill_in_Page = 20;
 
         private DateTime _BeginTime;
@@ -63,6 +64,16 @@ namespace MainProject.ViewModel
                     LoadBillByNumberPage();
                 }
             }
+        }
+        public int NumberAllPage
+        {
+            get 
+            {
+                using ( var db = new mainEntities ())
+                {
+                    return ((db.BILLs.Count()/ Number_Bill_in_Page) + (db.BILLs.Count() % Number_Bill_in_Page != 0? 1 : 0)) ;
+                }    
+            }            
         }
         public DateTime BeginTime
         {
