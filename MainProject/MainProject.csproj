@@ -523,6 +523,8 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\unnamed.png" />
+    <None Include="Resources\Empty_Image.png" />
     <Resource Include="Resources\add-image-icon-png-14.jpg" />
     <Resource Include="Resources\iconfinder_17_330399.png" />
     <Resource Include="Resources\Mask Group.png" />

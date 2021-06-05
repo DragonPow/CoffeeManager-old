@@ -52,12 +52,12 @@
                         Command="{Binding AddUpdateImageProductCommand}">
                     <Grid Height="160" Width="200">
                         <Image Stretch="UniformToFill"
-                                   Source="{Binding Newproduct.product.Image}" />
+                                   Source="{Binding Newproduct.Image}" />
                     </Grid>
                 </Button>
                 <TextBox Style="{StaticResource MaterialDesignOutlinedTextBox}"
                          materialDesign:HintAssist.Hint="Tên mặt hàng"
-                         Text="{Binding Newproduct.product.Name}"
+                         Text="{Binding Newproduct.Name}"
                          FontSize="16"
                          Margin="100,5"
                          MaxWidth="500" />
@@ -70,14 +70,14 @@
                           Margin="100,5" />
                 <TextBox Style="{StaticResource MaterialDesignOutlinedTextBox}"
                          materialDesign:HintAssist.Hint="Giá"
-                         Text="{Binding Newproduct.product.Price}"
+                         Text="{Binding Newproduct.Price}"
                          FontSize="16"
                          materialDesign:TextFieldAssist.SuffixText="đ"
                          MaxWidth="500"
                          Margin="100,5" />
                 <TextBox Style="{StaticResource MaterialDesignOutlinedTextBox}"
                          materialDesign:HintAssist.Hint="Mô tả"
-                         Text="{Binding Newproduct.product.Detail}"
+                         Text="{Binding Newproduct.Detail}"
                          materialDesign:TextFieldAssist.SuffixText="0/30"
                          TextWrapping="Wrap"
                          MaxWidth="500"

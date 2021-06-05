@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using MainProject.MainWorkSpace;
 using MainProject.ViewModel;
+using MainProject.MainWorkSpace.Product;
 
 namespace MainProject
 {
@@ -35,7 +36,7 @@ namespace MainProject
             //ApplicationViewModel viewModel = new ApplicationViewModel();
             //End main Startup
 
-            //LoadInitApp();
+            LoadInitApp();
             view.DataContext = viewModel.Productviewmodel;
             view.Show();
             //view.ShowDialog();
