@@ -136,7 +136,7 @@ namespace MainProject.ViewModel
         public void Loadaddproview()
         {
 
-            Newproduct =new PRODUCT() { DELETED = 0, Image = null, TYPE_PRODUCT = new TYPE_PRODUCT() } ;
+            Newproduct =new PRODUCT() { DELETED = 0, Image = imageToByteArray( Properties.Resources.Empty_Image), TYPE_PRODUCT = new TYPE_PRODUCT() } ;
 
             WindowService.Instance.OpenWindow(this, new CreateProd());
         }
@@ -171,7 +171,8 @@ namespace MainProject.ViewModel
                 }
             }
 
-            ListPoduct.Add(Newproduct);
+
+           ListPoduct.Add(Newproduct);
         }
 
         public ICommand CancelAddProduct_Command
@@ -255,29 +256,18 @@ namespace MainProject.ViewModel
 
         public void SearchName()
         {
-            ObservableCollection<PRODUCT> listproduct;
-            if (SearchProduct == "")
+            using (var db = new mainEntities())
             {
-                using (var db = new mainEntities())
-                {
-                    listproduct = new ObservableCollection<PRODUCT>(db.PRODUCTs.ToList());
-                }
-            }
-            else
-            {
-                using (var db = new mainEntities())
-                {
-                    var listpro = db.PRODUCTs.Where(p => (ConvertToUnSign(p.Name).ToLower().Contains(ConvertToUnSign(SearchProduct).ToLower()) && p.DELETED == 0));
-                    if (listpro == null) return;
-                    listproduct = new ObservableCollection<PRODUCT>(listpro.ToList());
-                }
-            }
+                Type = db.TYPE_PRODUCT.Where(t => t.ID == 0).FirstOrDefault();
 
-            foreach (PRODUCT p in listproduct)
-            {
-                ListPoduct.Add(p);
+                var listpro = db.PRODUCTs.Where(p => (ConvertToUnSign(p.Name).ToLower().Contains(ConvertToUnSign(SearchProduct).ToLower()) && p.DELETED == 0));
+                if (listpro == null)
+                {
+                    ListPoduct = new ObservableCollection<PRODUCT>();
+                    return;
+                }    
+                ListPoduct = new ObservableCollection<PRODUCT>(listpro.ToList());
             }
-
 
         }
 
@@ -423,6 +413,7 @@ namespace MainProject.ViewModel
 
         public void Add_Update_ImageProduct()
         {
+          
             string path = "";
 
             OpenFileDialog openFile = new OpenFileDialog();
@@ -691,6 +682,13 @@ namespace MainProject.ViewModel
             {
                 return System.Drawing.Image.FromStream(ms);
             }
+        }
+
+        public byte[] imageToByteArray(Image imageIn)
+        {
+            MemoryStream ms = new MemoryStream();
+            imageIn.Save(ms, System.Drawing.Imaging.ImageFormat.Gif);
+            return ms.ToArray();
         }
     }
 }
