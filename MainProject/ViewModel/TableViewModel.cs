@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Windows;
 using System.Windows.Input;
 
 namespace MainProject.ViewModel
@@ -20,6 +21,9 @@ namespace MainProject.ViewModel
         private DetailPro _CurrentDetailPro;
         private ObservableCollection<DetailPro> _Currentlistdetailpro;
         private long _TotalCurrentTable;
+        private bool _Isbringtohome;
+
+        private BillViewModel _Billviewmodel;
 
         private ICommand _plusQuantityDetailProCommand;
         private ICommand _minusQuantityDetailProCommand;
@@ -38,6 +42,8 @@ namespace MainProject.ViewModel
         private ICommand _AddFloor;
         private ICommand _DeleteFloor;
 
+        private string _TableName = "Bàn: ";
+          
 
         #endregion
 
@@ -66,7 +72,7 @@ namespace MainProject.ViewModel
                 ListTable = new ObservableCollection<TABLECUSTOM>(Tablecustoms);
                 ListFloor = new ObservableCollection<int>();
 
-                var list = db.TABLES.Select(f => f.Floor).Distinct();
+                var list = db.TABLES.Where( f => f.Floor != 0).Select(f => f.Floor ).Distinct();
 
                 foreach( int f in list)
                 {
@@ -80,6 +86,31 @@ namespace MainProject.ViewModel
 
         #region Properties
 
+        public bool Isbringtohome
+        {
+            get => _Isbringtohome;
+            set
+            {
+                if (_Isbringtohome != value)
+                {
+                    _Isbringtohome = value;
+                    OnPropertyChanged();
+
+                }
+            }
+        }
+        public BillViewModel Billviewmodel
+        {
+            get => _Billviewmodel;
+            set
+            {
+                if (_Billviewmodel != value)
+                {
+                    _Billviewmodel = value;
+                    OnPropertyChanged();              
+                }
+            }
+        }
         public long TotalCurrentTable { get => _TotalCurrentTable; set { if (_TotalCurrentTable != value) { _TotalCurrentTable = value; OnPropertyChanged(); } } }
         public ObservableCollection<DetailPro> Currentlistdetailpro 
         { 
@@ -145,7 +176,7 @@ namespace MainProject.ViewModel
                 {
                     _CurrentTable = value;
                     OnPropertyChanged();
-                  
+                    if ( value != null) TableName = "Bàn: " + value.table.Number.ToString();
                 }
             }
       
@@ -178,6 +209,20 @@ namespace MainProject.ViewModel
                 if (_ListTable != value)
                 {
                     _ListTable = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+       
+            public string TableName
+            {
+            get => _TableName;            
+            set
+            {
+                if (_TableName != value)
+                {
+                    _TableName = value;
                     OnPropertyChanged();
                 }
             }
@@ -259,7 +304,7 @@ namespace MainProject.ViewModel
         public void OpenChooseTable( )
         {
             SelectTableView v = new SelectTableView();
-            //Show Tab SelectedTableView
+            WindowService.Instance.OpenWindow(this, v);
         }
 
         public ICommand CloseViewChooseTableCommand
@@ -276,8 +321,8 @@ namespace MainProject.ViewModel
 
         public void CloseChooseTable()
         {
-          
-            //Show Tab SelectedTableView
+            Window window = WindowService.Instance.FindWindowbyTag("Selected Table").First();
+            window.Close();
         }
 
 
@@ -313,23 +358,37 @@ namespace MainProject.ViewModel
         }
         public void Pay()
         {
-            if (CurrentTable == null)
+            if (CurrentTable == null && !Isbringtohome)
             {
                 WindowService.Instance.OpenMessageBox("Chưa chọn bàn", "Lỗi", System.Windows.MessageBoxImage.Error);
                 return;
+            }
+
+            if ( Isbringtohome)
+            {
+                using (var db = new mainEntities())
+                {
+                    CurrentTable = new TABLECUSTOM() { table = db.TABLES.Where(t => t.ID == 0).FirstOrDefault() };
+                }
             }
 
 
             CurrentTable.ListPro = Currentlistdetailpro;
             CurrentTable.Total = TotalCurrentTable;
 
-            BillViewModel billviewmodel = new BillViewModel();
-            billviewmodel.CurrentTable = CurrentTable;
-
+            Billviewmodel = new BillViewModel(CurrentTable);
+            
             BillView billView = new BillView();
-            billView.DataContext = billviewmodel;
+            billView.DataContext = Billviewmodel;
 
-            billView.Show();
+            billView.ShowDialog();
+
+            if (Billviewmodel.IsClose)
+            {
+                CurrentTable = null;
+                Currentlistdetailpro = new ObservableCollection<DetailPro>();
+            }
+
         }
 
 
