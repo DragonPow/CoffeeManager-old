@@ -21,6 +21,7 @@
                     <local:FreeTable_UC DataContext="{Binding}">
                         
                     </local:FreeTable_UC>
+
                 </DataTemplate>
             </ListView.ItemTemplate>
             <ListView.ItemsPanel>
