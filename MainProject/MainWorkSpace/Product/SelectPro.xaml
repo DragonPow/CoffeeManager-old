@@ -7,6 +7,8 @@
              xmlns:ViewModel="clr-namespace:MainProject.ViewModel"
              mc:Ignorable="d" 
              Background="White"
+             d:DataContext="{d:DesignInstance Type=ViewModel:ProductViewModel}"
+             x:Name="Select_Item"
              d:DesignHeight="100" d:DesignWidth="500">
 
     <Grid>
@@ -24,7 +26,8 @@
             HorizontalAlignment="Center" 
             VerticalAlignment="Center"
             IsChecked="False" 
-            Margin="10"/>
+            Margin="10"
+            Command="{Binding DataContext.ClickCheckboxSelectedPro_Command, ElementName=Select_Item}"/>
         <Image Source="{Binding Image}" Grid.Column="1" Stretch="Fill" Height="40" Width="50"></Image>
         <StackPanel Grid.Column="2" VerticalAlignment="Center" Margin="10,0">
             <TextBlock Text="{Binding Name, FallbackValue='Trà sữa trân châu'}" Grid.Column="0" 

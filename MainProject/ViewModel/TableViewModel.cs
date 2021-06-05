@@ -42,8 +42,7 @@ namespace MainProject.ViewModel
         private ICommand _AddFloor;
         private ICommand _DeleteFloor;
 
-        private string _TableName = "Bàn: ";
-          
+        private string _TableName = "Chọn bàn";
 
         #endregion
 
