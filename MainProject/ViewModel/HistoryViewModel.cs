@@ -144,7 +144,7 @@ namespace MainProject.ViewModel
         {
             using (var db = new mainEntities())
             {
-               var list = db.BILLs.Where(b => (b.CheckoutDay >= BeginTime && b.CheckoutDay <= EndTime)).OrderBy(b => b.ID).Skip(NumberPage - 1).Take(Number_Bill_in_Page).ToList();
+               var list = db.BILLs.Where(b => (b.CheckoutDay >= BeginTime && b.CheckoutDay <= EndTime)).OrderBy(b => b.ID).Skip(NumberPage).Take(Number_Bill_in_Page).ToList();
 
                 if (list == null) return;
 

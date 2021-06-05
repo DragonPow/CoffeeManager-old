@@ -27,6 +27,7 @@ namespace MainProject.MainWorkSpace.Bill
 
         private ICommand _PaymentCommand;
         private ICommand _CheckDiscountCommand;
+        private int _BillCode;
 
         #endregion
 
@@ -61,6 +62,13 @@ namespace MainProject.MainWorkSpace.Bill
                 using (var db = new mainEntities())
                 {
                     return db.BILLs.Count() + 1;
+                }
+            } 
+            set
+            {
+                if ( _BillCode != value)
+                {
+                    _BillCode = value;
                 }
             }
         }
