@@ -77,7 +77,7 @@ namespace MainProject.ViewModel
                 {
                     _IndexCurrentproductInMainView = value;
                     OnPropertyChanged();
-                     AddDetailProToTable();
+                    // AddDetailProToTable();
                 } 
             } 
         }
