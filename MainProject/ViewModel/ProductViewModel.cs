@@ -23,6 +23,7 @@ namespace MainProject.ViewModel
 
         private ObservableCollection<PRODUCT> _ListProduct;
         private int _IndexCurrentproduct;
+        private int _IndexCurrentproductInMainView;
         private TYPE_PRODUCT _Type;
         private TYPE_PRODUCT _Type_In_Edit_CATEGORY;
         string _SearchProduct;
@@ -67,7 +68,20 @@ namespace MainProject.ViewModel
         public ObservableCollection<PRODUCT> ListPoduct { get => _ListProduct; set { if (value != _ListProduct) { _ListProduct = value; OnPropertyChanged(); } } }
 
         public int IndexCurrentProduct { get => _IndexCurrentproduct; set { if (_IndexCurrentproduct != value) { _IndexCurrentproduct = value; OnPropertyChanged(); } } }
-     
+        public int IndexCurrentproductInMainView 
+        {
+            get => _IndexCurrentproductInMainView;
+            set 
+            {
+                if (_IndexCurrentproductInMainView != value)
+                {
+                    _IndexCurrentproductInMainView = value;
+                    OnPropertyChanged();
+                    AddDetailProToTable();
+                } 
+            } 
+        }
+
         public PRODUCT Newproduct 
         { 
             get => _Newproduct; 
@@ -445,13 +459,13 @@ namespace MainProject.ViewModel
 
          public void AddDetailProToTable()
          {
-            Tableviewmodel.TotalCurrentTable += (long) ListPoduct.ElementAt(IndexCurrentProduct).Price;
+            Tableviewmodel.TotalCurrentTable += (long) ListPoduct.ElementAt(IndexCurrentproductInMainView).Price;
 
             if (Tableviewmodel.Currentlistdetailpro != null)
             {
                 foreach (var p in Tableviewmodel.Currentlistdetailpro)
                 {
-                    if (p.Pro.ID == ListPoduct.ElementAt(IndexCurrentProduct).ID)
+                    if (p.Pro.ID == ListPoduct.ElementAt(IndexCurrentproductInMainView).ID)
                     {
                         ++p.Quantity;
                         return;
@@ -461,7 +475,7 @@ namespace MainProject.ViewModel
             else Tableviewmodel.Currentlistdetailpro = new ObservableCollection<DetailPro>();
 
 
-            Tableviewmodel.Currentlistdetailpro.Add(new DetailPro(ListPoduct.ElementAt(IndexCurrentProduct)));
+            Tableviewmodel.Currentlistdetailpro.Add(new DetailPro(ListPoduct.ElementAt(IndexCurrentproductInMainView)));
          }
         #endregion
         public ICommand OpenViewEditCategory_Command
