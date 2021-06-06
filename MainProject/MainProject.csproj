@@ -156,6 +156,9 @@
       <DependentUpon>HistoryListItemView.xaml</DependentUpon>
     </Compile>
     <Compile Include="HistoryWorkSpace\HistoryViewModel.cs" />
+    <Compile Include="HistoryWorkSpace\NumericUpDown.xaml.cs">
+      <DependentUpon>NumericUpDown.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MainWorkSpace\Bill\BillView.xaml.cs">
       <DependentUpon>BillView.xaml</DependentUpon>
     </Compile>
@@ -349,6 +352,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="HistoryWorkSpace\HistoryListItemView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="HistoryWorkSpace\NumericUpDown.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
